@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.net;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +23,9 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.IOWriteUtil;
+import com.feilong.core.net.URLUtil;
 import com.feilong.core.util.Validator;
+import com.feilong.io.IOWriteUtil;
 
 /**
  * The Class URLUtil.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.net;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
@@ -24,6 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.CharsetType;
+import com.feilong.core.net.HttpMethodType;
+import com.feilong.net.ConnectionConfig;
+import com.feilong.net.HttpRequest;
+import com.feilong.net.URLConnectionUtil;
 
 /**
  * The Class URLConnectionUtilTest.

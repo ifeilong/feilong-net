@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.net;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,11 +31,12 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.InputStreamUtil;
-import com.feilong.core.io.ReaderUtil;
 import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.Validator;
+import com.feilong.io.InputStreamUtil;
+import com.feilong.io.ReaderUtil;
 
 /**
  * {@link java.net.HttpURLConnection}工具类(支持代理 {@link java.net.Proxy}).
