@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.net.HttpMethodType;
+import com.feilong.core.net.URLUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.Validator;
 import com.feilong.io.InputStreamUtil;
@@ -81,7 +82,7 @@ import com.feilong.io.ReaderUtil;
  * 不过JDK5+ URL增加了一个新的方法 {@link URL#openConnection(Proxy)},这样就可以直接设置代理地址了,代码如下：
  * 
  * <pre>
- * URL url = new URL("http://www.javatang.com");
+ * URL url = URLUtil.newURL("http://www.javatang.com");
  * <span style="color:green">// 设置代理服务</span>
  * SocketAddress add = new InetSocketAddress("120.0.0.1", "1080");
  * Proxy proxy = new Proxy(Proxy.Type.SOCKS , add);
@@ -366,7 +367,7 @@ public final class URLConnectionUtil{
     private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
         ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
-        URL url = new URL(httpRequest.getUri());
+        URL url = URLUtil.newURL(httpRequest.getUri());
 
         Proxy proxy = getProxy(useConnectionConfig.getProxyAddress(), useConnectionConfig.getProxyPort());
 
