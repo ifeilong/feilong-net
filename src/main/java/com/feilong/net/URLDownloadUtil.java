@@ -20,11 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
-import com.feilong.core.util.Validator;
 import com.feilong.io.IOWriteUtil;
 
 /**
@@ -67,12 +67,8 @@ public final class URLDownloadUtil{
      * 
      */
     public static void download(String urlString,String directoryName) throws IOException{
-        if (Validator.isNullOrEmpty(urlString)){
-            throw new NullPointerException("urlString can't be null/empty!");
-        }
-        if (Validator.isNullOrEmpty(directoryName)){
-            throw new NullPointerException("directoryName can't be null/empty!");
-        }
+        Validate.notEmpty(urlString, "urlString can't be null/empty!");
+        Validate.notEmpty(directoryName, "directoryName can't be null/empty!");
 
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 

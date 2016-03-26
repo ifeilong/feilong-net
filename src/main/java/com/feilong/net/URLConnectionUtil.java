@@ -28,6 +28,7 @@ import java.net.URLConnection;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -296,9 +297,7 @@ public final class URLConnectionUtil{
      * @return {@link java.net.HttpURLConnection}
      */
     private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        if (Validator.isNullOrEmpty(httpRequest)){
-            throw new NullPointerException("httpRequest can't be null/empty!");
-        }
+        Validate.notNull(httpRequest, "httpRequest can't be null!");
 
         ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         try{
