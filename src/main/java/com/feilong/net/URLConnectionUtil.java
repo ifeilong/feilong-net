@@ -32,13 +32,13 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.UncheckedIOException;
+import com.feilong.core.Validator;
 import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.net.URLUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.util.Validator;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.io.ReaderUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * {@link java.net.HttpURLConnection}工具类(支持代理 {@link java.net.Proxy}).
