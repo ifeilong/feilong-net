@@ -17,8 +17,8 @@ package com.feilong.net;
 
 import java.util.Map;
 
-import com.feilong.core.lang.CharsetType;
-import com.feilong.core.net.HttpMethodType;
+import com.feilong.core.CharsetType;
+import com.feilong.core.HttpMethodType;
 import com.feilong.core.net.ParamUtil;
 
 /**
