@@ -340,7 +340,7 @@ public final class URLConnectionUtil{
         httpURLConnection.setDoOutput(HttpMethodType.POST == httpMethodType);
 
         //**********************************************
-        //设置默认的UA， 你可以使用headerMap来覆盖
+        //设置默认的UA, 你可以使用headerMap来覆盖
         httpURLConnection.setRequestProperty("User-Agent", HttpRequest.DEFAULT_USER_AGENT);
         //**********************************************
 
