@@ -20,7 +20,6 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.feilong.io.SpecialFolder;
-import com.feilong.net.URLDownloadUtil;
 
 /**
  *
