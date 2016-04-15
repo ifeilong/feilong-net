@@ -109,13 +109,13 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <td>以后就可以使用conn.getOutputStream().write()<br>
  * get请求用不到conn.getOutputStream(),因为参数直接追加在地址后面,因此默认是false<br>
  * post请求(比如:文件上传)需要往服务区传输大量的数据,这些数据是放在http的body里面的,因此需要在建立连接以后,往服务端写数据<br>
- * URL连接可用于输出.如果打算使用URL连接进行输出,则将DoOutput标志设置为true；如果不打算使用,则设置为 false.默认值为 false.</td>
+ * URL连接可用于输出.如果打算使用URL连接进行输出,则将DoOutput标志设置为true;如果不打算使用,则设置为 false.默认值为 false.</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>httpUrlConnection.setDoInput(true);</td>
  * <td>以后就可以使用conn.getInputStream().read(); <br>
  * 因为总是使用conn.getInputStream()获取服务端的响应,因此默认值是true<br>
- * URL连接可用于输入.如果打算使用URL连接进行输入,则将DoInput标志设置为true；如果不打算使用,则设置为 false.默认值为 true. </td>
+ * URL连接可用于输入.如果打算使用URL连接进行输入,则将DoInput标志设置为true;如果不打算使用,则设置为 false.默认值为 true. </td>
  * </tr>
  * </table>
  * 
