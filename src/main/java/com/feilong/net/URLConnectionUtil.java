@@ -204,12 +204,12 @@ public final class URLConnectionUtil{
      *            connectionConfig
      * @return the response body as string
      * @see #getInputStream(String, ConnectionConfig)
-     * @see InputStreamUtil#inputStream2String(InputStream, String)
+     * @see InputStreamUtil#toString(InputStream, String)
      */
     public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         InputStream inputStream = getInputStream(urlString, useConnectionConfig);
-        return InputStreamUtil.inputStream2String(inputStream, useConnectionConfig.getContentCharset());
+        return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
     }
 
@@ -222,13 +222,13 @@ public final class URLConnectionUtil{
      *            the connection config
      * @return the response body as string
      * @see #getInputStream(HttpRequest, ConnectionConfig)
-     * @see InputStreamUtil#inputStream2String(InputStream, String)
+     * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.0
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         InputStream inputStream = getInputStream(httpRequest, connectionConfig);
-        return InputStreamUtil.inputStream2String(inputStream, useConnectionConfig.getContentCharset());
+        return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
     }
 
