@@ -51,6 +51,51 @@ public class HttpRequest{
     private Map<String, String> headerMap;
 
     /**
+     * The Constructor.
+     * 
+     * @since 1.5.4
+     */
+    public HttpRequest(){
+        super();
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param uri
+     *            the uri
+     * @param paramMap
+     *            the param map
+     * @param httpMethodType
+     *            the http method type
+     * @since 1.5.4
+     */
+    public HttpRequest(String uri, Map<String, String> paramMap, HttpMethodType httpMethodType){
+        super();
+        this.uri = uri;
+        this.paramMap = paramMap;
+        this.httpMethodType = httpMethodType;
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param uri
+     *            the uri
+     * @param paramMap
+     *            the param map
+     * @param httpMethodType
+     *            the http method type
+     * @since 1.5.4
+     */
+    public HttpRequest(String uri, Map<String, String> paramMap, String httpMethodType){
+        super();
+        this.uri = uri;
+        this.paramMap = paramMap;
+        this.httpMethodType = HttpMethodType.getByMethodValueIgnoreCase(httpMethodType);
+    }
+
+    /**
      * 完整的请求路径.
      * 
      * @return the full encoded url
