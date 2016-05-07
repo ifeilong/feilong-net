@@ -73,7 +73,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 在JDK5-如果在URLHttpConnection中使用代理服务器的话,只要在URL.openConnection()之前加入以下代码就可以:
  * </p>
  * 
- * <pre>
+ * <pre class="code">
  * Properties properties = System.getProperties();
  * properties.put(&quot;http.proxyHost&quot;, &quot;120.0.0.1&quot;);
  * properties.put(&quot;http.proxyPort&quot;, &quot;1080&quot;);
@@ -81,7 +81,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * 不过JDK5+ URL增加了一个新的方法 {@link URL#openConnection(Proxy)},这样就可以直接设置代理地址了,代码如下:
  * 
- * <pre>
+ * <pre class="code">
  * URL url = URLUtil.newURL("http://www.javatang.com");
  * <span style="color:green">// 设置代理服务</span>
  * SocketAddress add = new InetSocketAddress("120.0.0.1", "1080");
