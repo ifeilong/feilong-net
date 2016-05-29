@@ -25,7 +25,6 @@ import com.feilong.core.net.ParamUtil;
  * http 请求信息.
  *
  * @author feilong
- * @version 1.2.0 2015年5月23日 上午12:43:38
  * @see "org.apache.http.HttpRequest"
  * @since 1.2.0
  */

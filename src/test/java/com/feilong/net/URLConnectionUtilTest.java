@@ -30,7 +30,6 @@ import com.feilong.core.HttpMethodType;
  * The Class URLConnectionUtilTest.
  *
  * @author feilong
- * @version 1.0 Sep 27, 2013 10:55:18 AM
  */
 public class URLConnectionUtilTest{
 

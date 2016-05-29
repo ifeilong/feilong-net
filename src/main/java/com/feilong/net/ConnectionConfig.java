@@ -22,7 +22,6 @@ import com.feilong.core.TimeInterval;
  * 链接参数.
  * 
  * @author feilong
- * @version 1.3.0 2015年7月29日 上午12:31:58
  * @since 1.3.0
  */
 public final class ConnectionConfig{

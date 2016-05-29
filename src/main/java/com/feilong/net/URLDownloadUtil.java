@@ -31,7 +31,6 @@ import com.feilong.io.IOWriteUtil;
  * The Class URLUtil.
  *
  * @author feilong
- * @version 1.5.1 2016年3月26日 下午4:19:58
  * @since 1.5.1
  */
 public final class URLDownloadUtil{

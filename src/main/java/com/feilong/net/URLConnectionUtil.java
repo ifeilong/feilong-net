@@ -137,7 +137,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0 Sep 26, 2013 11:10:59 AM
  * @see java.net.HttpURLConnection
  * @see java.net.URLConnection
  * @see "org.springframework.http.client.SimpleClientHttpRequestFactory"
