@@ -66,8 +66,8 @@ public final class URLDownloadUtil{
      * 
      */
     public static void download(String urlString,String directoryName) throws IOException{
-        Validate.notEmpty(urlString, "urlString can't be null/empty!");
-        Validate.notEmpty(directoryName, "directoryName can't be null/empty!");
+        Validate.notBlank(urlString, "urlString can't be null/empty!");
+        Validate.notBlank(directoryName, "directoryName can't be null/empty!");
 
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
