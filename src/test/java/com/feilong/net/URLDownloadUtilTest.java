@@ -23,7 +23,7 @@ import com.feilong.io.SpecialFolder;
 
 /**
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public class URLDownloadUtilTest{

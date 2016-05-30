@@ -136,7 +136,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </p>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.net.HttpURLConnection
  * @see java.net.URLConnection
  * @see "org.springframework.http.client.SimpleClientHttpRequestFactory"

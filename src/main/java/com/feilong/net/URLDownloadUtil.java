@@ -30,7 +30,7 @@ import com.feilong.io.IOWriteUtil;
 /**
  * The Class URLUtil.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.1
  */
 public final class URLDownloadUtil{

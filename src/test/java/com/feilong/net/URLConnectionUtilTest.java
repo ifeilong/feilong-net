@@ -29,7 +29,7 @@ import com.feilong.core.HttpMethodType;
 /**
  * The Class URLConnectionUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class URLConnectionUtilTest{
 
