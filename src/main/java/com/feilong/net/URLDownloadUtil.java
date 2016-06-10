@@ -28,7 +28,7 @@ import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOWriteUtil;
 
 /**
- * The Class URLUtil.
+ * The Class URLDownloadUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.1
@@ -36,7 +36,7 @@ import com.feilong.io.IOWriteUtil;
 public final class URLDownloadUtil{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLDownloadUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URLDownloadUtil(){
@@ -78,7 +78,6 @@ public final class URLDownloadUtil{
         String fileName = file.getName();
 
         IOWriteUtil.write(inputStream, directoryName, fileName);
-
         LOGGER.info("end download,url:[{}],directoryName:[{}]", urlString, directoryName);
     }
 }
