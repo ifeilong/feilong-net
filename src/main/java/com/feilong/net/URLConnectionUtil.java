@@ -22,12 +22,12 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -206,7 +206,7 @@ public final class URLConnectionUtil{
      * @see InputStreamUtil#toString(InputStream, String)
      */
     public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
-        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(urlString, useConnectionConfig);
         return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
@@ -225,7 +225,7 @@ public final class URLConnectionUtil{
      * @since 1.5.0
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(httpRequest, connectionConfig);
         return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
@@ -299,7 +299,7 @@ public final class URLConnectionUtil{
     private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
 
-        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
         try{
             HttpURLConnection httpURLConnection = openConnection(httpRequest, useConnectionConfig);
             prepareConnection(httpURLConnection, httpRequest, useConnectionConfig);
@@ -364,7 +364,8 @@ public final class URLConnectionUtil{
      * @since 1.2.0
      */
     private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
-        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
+
         LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
         URL url = URLUtil.newURL(httpRequest.getUri());
 
@@ -396,10 +397,7 @@ public final class URLConnectionUtil{
      * @see java.net.InetSocketAddress#InetSocketAddress(String, int)
      */
     private static Proxy getProxy(String proxyAddress,Integer proxyPort){
-        if (Validator.isNotNullOrEmpty(proxyAddress) && Validator.isNotNullOrEmpty(proxyPort)){
-            SocketAddress socketAddress = new InetSocketAddress(proxyAddress, proxyPort);
-            return new Proxy(Proxy.Type.HTTP, socketAddress);
-        }
-        return null;
+        return Validator.isNotNullOrEmpty(proxyAddress) && Validator.isNotNullOrEmpty(proxyPort)
+                        ? new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyAddress, proxyPort)) : null;
     }
 }
