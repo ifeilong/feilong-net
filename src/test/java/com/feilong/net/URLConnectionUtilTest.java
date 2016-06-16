@@ -55,7 +55,6 @@ public class URLConnectionUtilTest{
      */
     @Test
     public void getResponseBodyAsString2(){
-
         ConnectionConfig connectionConfig = new ConnectionConfig();
         connectionConfig.setContentCharset(CharsetType.UTF8);
 
