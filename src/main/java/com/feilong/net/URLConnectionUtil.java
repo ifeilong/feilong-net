@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -32,7 +31,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.InputStreamUtil;
@@ -281,7 +279,7 @@ public final class URLConnectionUtil{
             // connection errors will not be released quickly enough and can cause a too many open files error.
             IOUtils.close(httpURLConnection); // Close the HTTP connection (if applicable). 
 
-            throw new UncheckedIOException(e);
+            throw new UncheckedHttpException(e);
         }
     }
 
@@ -303,10 +301,8 @@ public final class URLConnectionUtil{
             HttpURLConnection httpURLConnection = openConnection(httpRequest, useConnectionConfig);
             prepareConnection(httpURLConnection, httpRequest, useConnectionConfig);
             return httpURLConnection;
-        }catch (MalformedURLException e){
-            throw new UncheckedIOException(e);
         }catch (IOException e){
-            throw new UncheckedIOException(e);
+            throw new UncheckedHttpException(e);
         }
     }
 
