@@ -35,7 +35,7 @@ public class URLDownloadUtilTest{
      *             Signals that an I/O exception has occurred.
      */
     @Test
-    public void down() throws IOException{
+    public void down(){
         String url = "http://www.kenwen.com/egbk/31/31186/4395342.txt";
         String directoryName = SpecialFolder.getDesktop();
         URLDownloadUtil.download(url, directoryName);
