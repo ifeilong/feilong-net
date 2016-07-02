@@ -46,7 +46,7 @@ public class URLConnectionUtilTest{
         ConnectionConfig connectionConfig = new ConnectionConfig();
         connectionConfig.setContentCharset(CharsetType.GBK);
 
-        LOGGER.info(URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig));
+        LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig));
     }
 
     /**
@@ -65,7 +65,7 @@ public class URLConnectionUtilTest{
         paramMap.put("name", "jinxin");
         request.setParamMap(paramMap);
 
-        LOGGER.info(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
+        LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
     }
 
     /**
@@ -73,6 +73,6 @@ public class URLConnectionUtilTest{
      */
     @Test
     public void getResponseBodyAsString1(){
-        LOGGER.info("" + (null instanceof HttpURLConnection));
+        LOGGER.debug("" + (null instanceof HttpURLConnection));
     }
 }
