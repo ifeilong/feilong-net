@@ -71,7 +71,7 @@ public final class URLDownloadUtil{
 
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
-        URL url = URLUtil.newURL(urlString);
+        URL url = URLUtil.toURL(urlString);
 
         InputStream inputStream = null;
         try{

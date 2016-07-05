@@ -362,7 +362,7 @@ public final class URLConnectionUtil{
         ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
 
         LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
-        URL url = URLUtil.newURL(httpRequest.getUri());
+        URL url = URLUtil.toURL(httpRequest.getUri());
 
         Proxy proxy = getProxy(useConnectionConfig.getProxyAddress(), useConnectionConfig.getProxyPort());
 
