@@ -16,6 +16,7 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
+		<!-- 用于 IOUtils.close -->
 		<dependency>
 			<groupId>com.feilong.platform</groupId>
 			<artifactId>feilong-io</artifactId>
