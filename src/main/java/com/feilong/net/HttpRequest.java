@@ -17,8 +17,9 @@ package com.feilong.net;
 
 import java.util.Map;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.net.ParamUtil;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * http 请求信息.
@@ -99,7 +100,7 @@ public class HttpRequest{
      * @return the full encoded url
      */
     public String getFullEncodedUrl(){
-        return ParamUtil.addParameterSingleValueMap(uri, paramMap, CharsetType.UTF8);
+        return ParamUtil.addParameterSingleValueMap(uri, paramMap, UTF8);
     }
 
     /**

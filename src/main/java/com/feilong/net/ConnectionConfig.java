@@ -15,8 +15,9 @@
  */
 package com.feilong.net;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * 链接参数.
@@ -61,7 +62,7 @@ public final class ConnectionConfig{
     private int     readTimeout    = TimeInterval.MILLISECOND_PER_MINUTE;
 
     /** 内容的字符集. */
-    private String  contentCharset = CharsetType.UTF8;
+    private String  contentCharset = UTF8;
 
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).

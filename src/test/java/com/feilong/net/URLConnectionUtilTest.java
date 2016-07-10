@@ -15,15 +15,17 @@
  */
 package com.feilong.net;
 
+import static com.feilong.net.HttpMethodType.POST;
+
 import java.net.HttpURLConnection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
+import static com.feilong.core.CharsetType.GBK;
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class URLConnectionUtilTest.
@@ -44,7 +46,7 @@ public class URLConnectionUtilTest{
         templateFile = "http://www.suimeng.com/files/article/html/76/76841/";
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(CharsetType.GBK);
+        connectionConfig.setContentCharset(GBK);
 
         LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig));
     }
@@ -55,15 +57,12 @@ public class URLConnectionUtilTest{
     @Test
     public void getResponseBodyAsString2(){
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(CharsetType.UTF8);
+        connectionConfig.setContentCharset(UTF8);
 
         HttpRequest request = new HttpRequest();
         request.setUri("http://www.baidu.com/");
-        request.setHttpMethodType(HttpMethodType.POST);
-
-        Map<String, String> paramMap = new HashMap<String, String>();
-        paramMap.put("name", "jinxin");
-        request.setParamMap(paramMap);
+        request.setHttpMethodType(POST);
+        request.setParamMap(toMap("name", "jinxin"));
 
         LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
     }
