@@ -15,6 +15,7 @@
  */
 package com.feilong.net;
 
+import static com.feilong.net.HttpMethodType.GET;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -22,7 +23,6 @@ import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.lang.EnumUtil;
-import com.feilong.net.HttpMethodType;
 
 /**
  * The Class HttpMethodTypeTest.
@@ -37,9 +37,9 @@ public class HttpMethodTypeTest{
      */
     @Test
     public void name(){
-        assertEquals(HttpMethodType.GET, HttpMethodType.valueOf("GET"));
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
-        assertEquals(HttpMethodType.GET, HttpMethodType.getByMethodValueIgnoreCase("Get"));
+        assertEquals(GET, HttpMethodType.valueOf("GET"));
+        assertEquals(GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
+        assertEquals(GET, HttpMethodType.getByMethodValueIgnoreCase("Get"));
     }
 
     /**

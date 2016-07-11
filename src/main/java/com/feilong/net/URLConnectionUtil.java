@@ -15,6 +15,8 @@
  */
 package com.feilong.net;
 
+import static com.feilong.net.HttpMethodType.POST;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -322,16 +324,14 @@ public final class URLConnectionUtil{
      */
     private static void prepareConnection(HttpURLConnection httpURLConnection,HttpRequest httpRequest,ConnectionConfig useConnectionConfig)
                     throws IOException{
-        HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
-
         //一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
         httpURLConnection.setConnectTimeout(useConnectionConfig.getConnectTimeout());
         httpURLConnection.setReadTimeout(useConnectionConfig.getReadTimeout());
 
-        httpURLConnection.setRequestMethod(httpMethodType.getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
+        httpURLConnection.setRequestMethod(httpRequest.getHttpMethodType().getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
 
         //设置是否向httpUrlConnection输出,如果是post请求,参数要放在http正文内,因此需要设为true,默认是false
-        httpURLConnection.setDoOutput(HttpMethodType.POST == httpMethodType);
+        httpURLConnection.setDoOutput(POST == httpRequest.getHttpMethodType());
 
         //**********************************************
         //设置默认的UA, 你可以使用headerMap来覆盖

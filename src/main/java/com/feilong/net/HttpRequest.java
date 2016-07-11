@@ -15,6 +15,8 @@
  */
 package com.feilong.net;
 
+import static com.feilong.net.HttpMethodType.GET;
+
 import java.util.Map;
 
 import com.feilong.core.net.ParamUtil;
@@ -41,7 +43,7 @@ public class HttpRequest{
     private String              uri;
 
     /** 请求method 类型,默认 {@link HttpMethodType#GET}. */
-    private HttpMethodType      httpMethodType     = HttpMethodType.GET;
+    private HttpMethodType      httpMethodType     = GET;
 
     /** 请求参数. */
     private Map<String, String> paramMap;
