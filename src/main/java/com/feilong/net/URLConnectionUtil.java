@@ -33,11 +33,12 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * {@link java.net.HttpURLConnection}工具类(支持代理 {@link java.net.Proxy}).
@@ -368,7 +369,7 @@ public final class URLConnectionUtil{
 
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类的子类HttpURLConnection,
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
-        if (Validator.isNotNullOrEmpty(proxy)){
+        if (isNotNullOrEmpty(proxy)){
             LOGGER.debug("use proxy:{}", proxy.toString());
             return (HttpURLConnection) url.openConnection(proxy);
         }
@@ -392,7 +393,7 @@ public final class URLConnectionUtil{
      * @see java.net.InetSocketAddress#InetSocketAddress(String, int)
      */
     private static Proxy getProxy(String proxyAddress,Integer proxyPort){
-        return Validator.isNotNullOrEmpty(proxyAddress) && Validator.isNotNullOrEmpty(proxyPort)
+        return isNotNullOrEmpty(proxyAddress) && isNotNullOrEmpty(proxyPort)
                         ? new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyAddress, proxyPort)) : null;
     }
 }
