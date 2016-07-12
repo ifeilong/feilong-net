@@ -18,6 +18,7 @@ package com.feilong.net;
 import com.feilong.core.TimeInterval;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 
 /**
  * 链接参数.
@@ -47,7 +48,7 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int     connectTimeout = TimeInterval.MILLISECOND_PER_MINUTE;
+    private int     connectTimeout = MILLISECOND_PER_MINUTE;
 
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
@@ -59,7 +60,7 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int     readTimeout    = TimeInterval.MILLISECOND_PER_MINUTE;
+    private int     readTimeout    = MILLISECOND_PER_MINUTE;
 
     /** 内容的字符集. */
     private String  contentCharset = UTF8;
