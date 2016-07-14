@@ -3,12 +3,19 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.8.0</version>
+		<version>1.8.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>feilong-net</artifactId>
 	<name>feilong-net</name>
 	<description>feilong-net</description>
+
+	<!-- 软件配置管理，如cvs 和svn -->
+	<scm>
+		<url>https://github.com/venusdrogon/feilong-platform.git</url>
+		<connection>scm:git:git@github.com:venusdrogon/feilong-platform.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:venusdrogon/feilong-platform.git</developerConnection>
+	</scm>
 
 	<dependencies>
 		<dependency>
