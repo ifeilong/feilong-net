@@ -16,6 +16,7 @@
 package com.feilong.net;
 
 import static com.feilong.net.HttpMethodType.POST;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +29,6 @@ import java.net.URLConnection;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -206,7 +206,7 @@ public final class URLConnectionUtil{
      * @see InputStreamUtil#toString(InputStream, String)
      */
     public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
-        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
+        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(urlString, useConnectionConfig);
         return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
@@ -225,7 +225,7 @@ public final class URLConnectionUtil{
      * @since 1.5.0
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
+        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(httpRequest, connectionConfig);
         return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
@@ -299,7 +299,7 @@ public final class URLConnectionUtil{
     private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
 
-        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
+        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
         try{
             HttpURLConnection httpURLConnection = openConnection(httpRequest, useConnectionConfig);
             prepareConnection(httpURLConnection, httpRequest, useConnectionConfig);
@@ -360,7 +360,7 @@ public final class URLConnectionUtil{
      * @since 1.2.0
      */
     private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
-        ConnectionConfig useConnectionConfig = ObjectUtils.defaultIfNull(connectionConfig, new ConnectionConfig());
+        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
 
         LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
         URL url = URLUtil.toURL(httpRequest.getUri());
