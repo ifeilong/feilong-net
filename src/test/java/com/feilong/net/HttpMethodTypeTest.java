@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.lang.EnumUtil;
 
 /**
@@ -45,7 +45,7 @@ public class HttpMethodTypeTest{
     /**
      * Name2.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test(expected = BeanOperationException.class)
     public void name2(){
         assertNotEquals(HttpMethodType.GET, HttpMethodType.getByMethodValueIgnoreCase("Get1"));
     }
