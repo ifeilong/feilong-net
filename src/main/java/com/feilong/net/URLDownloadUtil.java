@@ -16,7 +16,6 @@
 package com.feilong.net;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -25,10 +24,8 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class URLDownloadUtil.
@@ -72,17 +69,10 @@ public final class URLDownloadUtil{
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
         URL url = URLUtil.toURL(urlString);
-
-        InputStream inputStream = null;
+        InputStream inputStream = URLUtil.openStream(url);
         try{
-            inputStream = url.openStream();
-
             IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
             LOGGER.info("end download,url:[{}],directoryName:[{}]", urlString, directoryName);
-        }catch (IOException e){
-            String message = Slf4jUtil.format("can not download:[{}] to directoryName:[{}]", urlString, directoryName);
-            LOGGER.error(message, e);
-            throw new UncheckedIOException(message, e);
         }finally{
             IOUtils.closeQuietly(inputStream);
         }
