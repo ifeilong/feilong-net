@@ -48,9 +48,16 @@ public final class URLDownloadUtil{
     /**
      * 将网络文件下载到文件夹.
      * 
-     * <p>
-     * 取到网络文件的文件名 原样下载到目标文件夹.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>取到网络文件的文件名 原样下载到目标文件夹</li>
+     * <li>如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * <li>如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * </ol>
+     * </blockquote>
      *
      * @param urlString
      *            网络任意文件<br>
@@ -60,7 +67,6 @@ public final class URLDownloadUtil{
      * @see IOWriteUtil#write(InputStream, String, String)
      * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File)
      * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File, int, int)
-     * 
      */
     public static void download(String urlString,String directoryName){
         Validate.notBlank(urlString, "urlString can't be null/empty!");
