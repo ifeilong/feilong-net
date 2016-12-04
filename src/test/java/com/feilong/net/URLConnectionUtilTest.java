@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.CharsetType.GBK;
-import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
@@ -54,7 +53,7 @@ public class URLConnectionUtilTest{
     @Test
     public void getResponseBodyAsString2(){
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(UTF8);
+        connectionConfig.setContentCharset(GBK);
 
         HttpRequest request = new HttpRequest();
         request.setUri("http://www.baidu.com/");
