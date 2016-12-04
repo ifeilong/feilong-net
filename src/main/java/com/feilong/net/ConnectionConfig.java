@@ -41,10 +41,14 @@ public final class ConnectionConfig{
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
@@ -53,10 +57,14 @@ public final class ConnectionConfig{
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
@@ -68,12 +76,16 @@ public final class ConnectionConfig{
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      *
-     * @return the connectTimeout
+     * @return the 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位)
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
     public int getConnectTimeout(){
@@ -83,10 +95,14 @@ public final class ConnectionConfig{
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      *
      * @param connectTimeout
      *            the connectTimeout to set
@@ -99,12 +115,16 @@ public final class ConnectionConfig{
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      *
-     * @return the readTimeout
+     * @return the 将读超时设置为指定的超时值,以毫秒为单位
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
     public int getReadTimeout(){
@@ -114,10 +134,14 @@ public final class ConnectionConfig{
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
-     * <p>
-     * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
      *
      * @param readTimeout
      *            the readTimeout to set
