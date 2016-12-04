@@ -37,9 +37,6 @@ public class URLConnectionUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URLConnectionUtilTest.class);
 
-    /**
-     * 获得 response body as string.
-     */
     @Test
     public void getResponseBodyAsString(){
         String templateFile = "http://10.8.25.80:6666/template.csv?sign=123456";
