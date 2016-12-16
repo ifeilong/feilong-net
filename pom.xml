@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.9.7-SNAPSHOT</version>
+		<version>1.10.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>feilong-net</artifactId>
@@ -18,6 +18,12 @@
 	</scm>
 
 	<dependencies>
+		<!-- feilong-tools-jsonlib -->
+		<dependency>
+			<groupId>com.feilong.platform.tools</groupId>
+			<artifactId>feilong-tools-jsonlib</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
