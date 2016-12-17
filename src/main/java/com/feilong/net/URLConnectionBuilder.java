@@ -133,7 +133,10 @@ class URLConnectionBuilder{
      * @since 1.2.0
      */
     private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
-        LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
+        }
+
         URL url = URLUtil.toURL(httpRequest.getUri());
 
         Proxy proxy = getProxy(connectionConfig.getProxyAddress(), connectionConfig.getProxyPort());
