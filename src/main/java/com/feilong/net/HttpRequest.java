@@ -48,8 +48,16 @@ public class HttpRequest{
     /** 请求参数. */
     private Map<String, String> paramMap;
 
-    /** 请求头 信息. */
+    /** 请求头信息. */
     private Map<String, String> headerMap;
+
+    /**
+     * 请求正文,比如 webservice 可以传递 xml/json数据体.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/HTTP_message_body">HTTP_message_body</a>
+     * @since 1.10.0
+     */
+    private String              requestBody;
 
     /**
      * The Constructor.
@@ -181,4 +189,26 @@ public class HttpRequest{
         this.headerMap = headerMap;
     }
 
+    /**
+     * 获得 请求正文,比如 webservice 可以传递 xml/json数据体.
+     *
+     * @return the requestBody
+     * @see <a href="https://en.wikipedia.org/wiki/HTTP_message_body">HTTP_message_body</a>
+     * @since 1.10.0
+     */
+    public String getRequestBody(){
+        return requestBody;
+    }
+
+    /**
+     * 设置 请求正文,比如 webservice 可以传递 xml/json数据体.
+     *
+     * @param requestBody
+     *            the requestBody to set
+     * @see <a href="https://en.wikipedia.org/wiki/HTTP_message_body">HTTP_message_body</a>
+     * @since 1.10.0
+     */
+    public void setRequestBody(String requestBody){
+        this.requestBody = requestBody;
+    }
 }

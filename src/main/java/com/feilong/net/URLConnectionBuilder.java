@@ -19,6 +19,8 @@ import static com.feilong.net.HttpMethodType.POST;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -35,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.net.URLUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
@@ -102,21 +105,36 @@ class URLConnectionBuilder{
         httpURLConnection.setConnectTimeout(useConnectionConfig.getConnectTimeout());
         httpURLConnection.setReadTimeout(useConnectionConfig.getReadTimeout());
 
+        //********************************************************************
+
         httpURLConnection.setRequestMethod(httpRequest.getHttpMethodType().getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
 
         //设置是否向httpUrlConnection输出,如果是post请求,参数要放在http正文内,因此需要设为true,默认是false
         httpURLConnection.setDoOutput(POST == httpRequest.getHttpMethodType());
 
-        //**********************************************
+        //********************************************************************
+
+        //do with RequestProperty
         //设置默认的UA, 你可以使用headerMap来覆盖
         httpURLConnection.setRequestProperty("User-Agent", HttpRequest.DEFAULT_USER_AGENT);
-        //**********************************************
 
         Map<String, String> headerMap = httpRequest.getHeaderMap();
         if (null != headerMap){
             for (Map.Entry<String, String> entry : headerMap.entrySet()){
                 httpURLConnection.setRequestProperty(entry.getKey(), entry.getValue());
             }
+        }
+
+        //********************************************************************
+        //since 1.10.0
+        //do with RequestBody
+        String requestBody = httpRequest.getRequestBody();
+        if (isNotNullOrEmpty(requestBody)){
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, UTF8);
+            outputStreamWriter.write(requestBody);
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
         }
     }
 
