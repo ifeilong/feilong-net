@@ -69,14 +69,4 @@ public enum HttpMethodType{
     public String getMethod(){
         return method;
     }
-
-    /**
-     * Sets the method.
-     * 
-     * @param method
-     *            the method to set
-     */
-    public void setMethod(String method){
-        this.method = method;
-    }
 }
