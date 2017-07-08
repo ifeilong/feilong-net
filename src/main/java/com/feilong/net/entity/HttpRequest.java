@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net;
+package com.feilong.net.entity;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.net.HttpMethodType.GET;
 
 import java.util.Map;
 
 import com.feilong.core.net.ParamUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
+import com.feilong.net.HttpMethodType;
 
 /**
  * http 请求信息.
@@ -39,6 +39,7 @@ public class HttpRequest{
      */
     public static final String  DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21";
 
+    //---------------------------------------------------------------
     /** 请求的uri地址. */
     private String              uri;
 
@@ -59,6 +60,8 @@ public class HttpRequest{
      */
     private String              requestBody;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      * 
@@ -66,6 +69,18 @@ public class HttpRequest{
      */
     public HttpRequest(){
         super();
+    }
+
+    /**
+     * Instantiates a new http request.
+     *
+     * @param uri
+     *            the uri
+     * @since 1.10.4
+     */
+    public HttpRequest(String uri){
+        super();
+        this.uri = uri;
     }
 
     /**
@@ -103,6 +118,8 @@ public class HttpRequest{
         this.paramMap = paramMap;
         this.httpMethodType = HttpMethodType.getByMethodValueIgnoreCase(httpMethodType);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 完整的请求路径.

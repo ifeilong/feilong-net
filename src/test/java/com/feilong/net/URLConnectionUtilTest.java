@@ -15,6 +15,8 @@
  */
 package com.feilong.net;
 
+import static com.feilong.core.CharsetType.GBK;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.net.HttpMethodType.POST;
 
 import java.net.HttpURLConnection;
@@ -23,8 +25,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.feilong.core.CharsetType.GBK;
-import static com.feilong.core.bean.ConvertUtil.toMap;
+import com.feilong.net.entity.ConnectionConfig;
+import com.feilong.net.entity.HttpRequest;
 
 /**
  * The Class URLConnectionUtilTest.
@@ -47,6 +49,12 @@ public class URLConnectionUtilTest{
         LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig));
     }
 
+    @Test
+    public void testGetResponseCode(){
+        String templateFile = "http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.apache.httpcomponents%22";
+        LOGGER.debug("" + URLConnectionUtil.getResponseCode(templateFile, null));
+    }
+
     /**
      * 获得 response body as string2.
      */
@@ -59,6 +67,32 @@ public class URLConnectionUtilTest{
         request.setUri("http://www.baidu.com/");
         request.setHttpMethodType(POST);
         request.setParamMap(toMap("name", "jinxin"));
+
+        LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
+    }
+
+    @Test
+    public void getResponseBodyAsString23(){
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setContentCharset(GBK);
+
+        HttpRequest request = new HttpRequest();
+        request.setUri("http://localhost:8222/requestbody");
+        request.setHttpMethodType(POST);
+        request.setRequestBody("aaaaa");
+
+        LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
+    }
+
+    @Test
+    public void getResponseBodyAsString233(){
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setContentCharset(GBK);
+
+        HttpRequest request = new HttpRequest();
+        request.setUri("http://localhost:8222/requestbody");
+        request.setHttpMethodType(POST);
+        request.setRequestBody("aaaaa");
 
         LOGGER.debug(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
     }

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net;
-
-import com.feilong.core.TimeInterval;
+package com.feilong.net.entity;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
+
+import com.feilong.core.TimeInterval;
 
 /**
  * 链接参数.
@@ -72,6 +72,8 @@ public final class ConnectionConfig{
 
     /** 内容的字符集. */
     private String  contentCharset = UTF8;
+
+    //---------------------------------------------------------------
 
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).

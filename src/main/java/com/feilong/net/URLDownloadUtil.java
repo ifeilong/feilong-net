@@ -45,6 +45,8 @@ public final class URLDownloadUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将网络文件下载到文件夹.
      * 

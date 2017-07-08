@@ -18,7 +18,7 @@ package com.feilong.net;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * The Class UncheckedHttpException.
+ * Un checked HttpException.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.3

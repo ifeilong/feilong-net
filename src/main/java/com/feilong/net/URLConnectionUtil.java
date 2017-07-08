@@ -15,6 +15,7 @@
  */
 package com.feilong.net;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.BufferedReader;
@@ -24,11 +25,21 @@ import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.util.MapUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.io.ReaderUtil;
+import com.feilong.net.entity.ConnectionConfig;
+import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.handler.URLConnectionBuilder;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * {@link java.net.HttpURLConnection}工具类(支持代理 {@link java.net.Proxy}).
@@ -134,12 +145,83 @@ import com.feilong.io.ReaderUtil;
  */
 public final class URLConnectionUtil{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLConnectionUtil.class);
+
     /** Don't let anyone instantiate this class. */
     private URLConnectionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得响应码.
+     *
+     * @param urlString
+     *            the url string
+     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.10.4
+     */
+    public static int getResponseCode(String urlString){
+        Validate.notBlank(urlString, "urlString can't be blank!");
+
+        return getResponseCode(urlString, null);
+    }
+
+    /**
+     * 获得响应码.
+     *
+     * @param urlString
+     *            the url string
+     * @param connectionConfig
+     *            the connection config
+     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.10.4
+     */
+    public static int getResponseCode(String urlString,ConnectionConfig connectionConfig){
+        Validate.notBlank(urlString, "urlString can't be blank!");
+
+        HttpRequest httpRequest = new HttpRequest(urlString);
+        return getResponseCode(httpRequest, connectionConfig);
+    }
+
+    /**
+     * 获得响应码.
+     *
+     * @param httpRequest
+     *            the http request
+     * @param connectionConfig
+     *            the connection config
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.4
+     */
+    public static int getResponseCode(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+        Validate.notNull(httpRequest, "httpRequest can't be null!");
+
+        HttpURLConnection httpURLConnection = (HttpURLConnection) URLConnectionBuilder.build(httpRequest, connectionConfig);
+        try{
+
+            Map<String, List<String>> requestProperties = httpURLConnection.getRequestProperties();
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(JsonUtil.format(requestProperties));
+            }
+
+            Map<String, List<String>> headerFields = httpURLConnection.getHeaderFields();
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(headerFields, toArray((String) null))));
+            }
+
+            return httpURLConnection.getResponseCode();
+        }catch (IOException e){
+            throw new UncheckedHttpException(e);
+        }
+    }
+    //---------------------------------------------------------------
 
     /**
      * Read line with proxy.
@@ -174,10 +256,13 @@ public final class URLConnectionUtil{
      *
      * @param urlString
      *            the url string
-     * @return the response body as string
+     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getResponseBodyAsString(String, ConnectionConfig)
      */
     public static String getResponseBodyAsString(String urlString){
+        Validate.notBlank(urlString, "urlString can't be blank!");
+
         return getResponseBodyAsString(urlString, null);
     }
 
@@ -188,14 +273,16 @@ public final class URLConnectionUtil{
      *            the url string
      * @param connectionConfig
      *            connectionConfig
-     * @return the response body as string
+     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getInputStream(String, ConnectionConfig)
      * @see InputStreamUtil#toString(InputStream, String)
      */
     public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
-        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
-        InputStream inputStream = getInputStream(urlString, useConnectionConfig);
-        return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
+        Validate.notBlank(urlString, "urlString can't be blank!");
+
+        HttpRequest httpRequest = new HttpRequest(urlString);
+        return getResponseBodyAsString(httpRequest, connectionConfig);
 
     }
 
@@ -206,27 +293,35 @@ public final class URLConnectionUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return the response body as string
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getInputStream(HttpRequest, ConnectionConfig)
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.0
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+        Validate.notNull(connectionConfig, "connectionConfig can't be null!");
+
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(httpRequest, connectionConfig);
+
         return InputStreamUtil.toString(inputStream, useConnectionConfig.getContentCharset());
 
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 input stream.
      *
      * @param urlString
      *            the url string
-     * @return the input stream
+     * @return 如果 <code>urlString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>urlString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getInputStream(String, ConnectionConfig)
      */
     public static InputStream getInputStream(String urlString){
+        Validate.notBlank(urlString, "urlString can't be blank!");
+
         return getInputStream(urlString, null);
     }
 
@@ -241,8 +336,7 @@ public final class URLConnectionUtil{
      * @see #getInputStream(HttpRequest, ConnectionConfig)
      */
     public static InputStream getInputStream(String urlString,ConnectionConfig connectionConfig){
-        HttpRequest httpRequest = new HttpRequest();
-        httpRequest.setUri(urlString);
+        HttpRequest httpRequest = new HttpRequest(urlString);
         return getInputStream(httpRequest, connectionConfig);
     }
 
@@ -253,12 +347,14 @@ public final class URLConnectionUtil{
      *            the http request
      * @param connectionConfig
      *            the connection config
-     * @return the input stream
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.springframework.core.io.UrlResource#getInputStream()"
      * @since 1.2.0
      */
     public static InputStream getInputStream(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        URLConnection urlConnection = URLConnectionBuilder.buildURLConnection(httpRequest, connectionConfig);
+        Validate.notNull(httpRequest, "httpRequest can't be null!");
+
+        URLConnection urlConnection = URLConnectionBuilder.build(httpRequest, connectionConfig);
         try{
             return urlConnection.getInputStream();
         }catch (IOException e){
@@ -268,7 +364,6 @@ public final class URLConnectionUtil{
             // per Java's documentation, this is not necessary, and precludes keepalives. However in practise,
             // connection errors will not be released quickly enough and can cause a too many open files error.
             IOUtils.close(urlConnection); // Close the HTTP connection (if applicable). 
-
             throw new UncheckedHttpException(e);
         }
     }
