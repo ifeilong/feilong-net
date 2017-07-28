@@ -299,8 +299,6 @@ public final class URLConnectionUtil{
      * @since 1.5.0
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        Validate.notNull(connectionConfig, "connectionConfig can't be null!");
-
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
         InputStream inputStream = getInputStream(httpRequest, connectionConfig);
 
