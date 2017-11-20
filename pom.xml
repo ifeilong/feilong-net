@@ -6,9 +6,12 @@
 		<version>1.10.6-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>feilong-net</artifactId>
-	<name>feilong-net</name>
-	<description>feilong-net</description>
+	<groupId>com.feilong.net</groupId>
+	<artifactId>parent</artifactId>
+
+	<name>feilong-net-parent</name>
+	<description>feilong-net-parent</description>
+	<packaging>pom</packaging>
 
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<scm>
@@ -25,7 +28,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.feilong.platform</groupId>
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
@@ -52,4 +55,12 @@
 			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
 		</dependency>
 	</dependencies>
+
+
+	<modules>
+		<module>feilong-net-api</module>
+		<module>feilong-net-httpclient3</module>
+		<module>feilong-net-httpclient4</module>
+		<module>feilong-net-urlconnection</module>
+	</modules>
 </project>

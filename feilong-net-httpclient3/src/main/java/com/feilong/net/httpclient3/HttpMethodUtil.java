@@ -1,0 +1,355 @@
+/*
+ * Copyright (C) 2008 feilong
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.feilong.net.httpclient3;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.net.entity.HttpRequest.DEFAULT_USER_AGENT;
+import static org.apache.commons.httpclient.params.HttpMethodParams.RETRY_HANDLER;
+import static org.apache.commons.httpclient.params.HttpMethodParams.USER_AGENT;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.HostConfiguration;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpClientParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.lang3.NotImplementedException;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.net.HttpMethodType;
+import com.feilong.net.UncheckedHttpException;
+import com.feilong.tools.jsonlib.JsonUtil;
+
+/**
+ * The Class HttpMethodUtil.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.5.4
+ */
+public final class HttpMethodUtil{
+
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpMethodUtil.class);
+
+    /** Don't let anyone instantiate this class. */
+    private HttpMethodUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Package and.
+     *
+     * @param httpClientConfig
+     *            the http client config
+     * @return the http method
+     * @since 1.5.4
+     */
+    public static HttpMethod buildHttpMethod(HttpClientConfig httpClientConfig){
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("[httpClientConfig]:{}", JsonUtil.format(httpClientConfig));
+        }
+
+        HttpMethod httpMethod = buildHttpMethod(
+                        httpClientConfig.getUri(),
+                        httpClientConfig.getParamMap(),
+                        httpClientConfig.getHttpMethodType());
+
+        HttpMethodParams httpMethodParams = httpMethod.getParams();
+        // TODO
+        httpMethodParams.setParameter(USER_AGENT, DEFAULT_USER_AGENT);
+
+        // 使用系统提供的默认的恢复策略
+        httpMethodParams.setParameter(RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
+        //httpMethod.getParams().setContentCharset(charSet);
+
+        httpMethod = executeMethod(httpMethod, httpClientConfig);
+        return httpMethod;
+    }
+
+    /**
+     * 返回信息LOGGER.
+     *
+     * @param httpMethod
+     *            the http method
+     * @param httpClientConfig
+     *            the http client config
+     * @return the http method response attribute map for log
+     */
+    public static Map<String, Object> getHttpMethodResponseAttributeMapForLog(HttpMethod httpMethod,HttpClientConfig httpClientConfig){
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        Object statusCode = null;
+        try{
+            statusCode = httpMethod.getStatusCode();
+        }catch (Exception e){
+            statusCode = e.getClass().getName() + " " + e.getMessage();
+        }
+
+        String statusText = null;
+        try{
+            statusText = httpMethod.getStatusText();
+        }catch (Exception e){
+            statusText = e.getClass().getName() + " " + e.getMessage();
+        }
+
+        map.put("httpMethod.getRequestHeaders()-->map", NameValuePairUtil.toMap(httpMethod.getRequestHeaders()));
+
+        map.put("httpMethod.getStatusCode()", statusCode);
+        map.put("httpMethod.getStatusText()", statusText);
+        map.put("httpMethod.getStatusLine()", "" + httpMethod.getStatusLine());
+
+        map.put("httpMethod.getResponseHeaders()-->map", NameValuePairUtil.toMap(httpMethod.getResponseHeaders()));
+
+        map.put("httpMethod.getResponseFooters()", httpMethod.getResponseFooters());
+        map.put("httpClientConfig", httpClientConfig);
+        return map;
+    }
+
+    /**
+     * 设置 uri and params.
+     *
+     * @param uri
+     *            the uri
+     * @param params
+     *            the params
+     * @param httpMethodType
+     *            the http method type
+     * @return the http method
+     * @since 1.0.9
+     */
+    private static HttpMethod buildHttpMethod(String uri,Map<String, String> params,HttpMethodType httpMethodType){
+        NameValuePair[] nameValuePairs = isNullOrEmpty(params) ? null : NameValuePairUtil.fromMap(params);
+        switch (httpMethodType) {
+            case GET: // 使用get方法
+                return buildGetMethod(uri, nameValuePairs);
+
+            case POST: // 使用post方法
+                return buildPostMethod(uri, nameValuePairs);
+            default:
+                throw new UnsupportedOperationException("httpMethod:[" + httpMethodType + "] not support!");
+        }
+    }
+
+    /**
+     * Builds the post method.
+     *
+     * @param uri
+     *            the uri
+     * @param nameValuePairs
+     *            the name value pairs
+     * @return the http method
+     * @since 1.5.4
+     */
+    private static HttpMethod buildPostMethod(String uri,NameValuePair[] nameValuePairs){
+        PostMethod postMethod = new PostMethod(uri);
+
+        if (isNotNullOrEmpty(nameValuePairs)){
+            postMethod.setRequestBody(nameValuePairs);
+        }
+        return postMethod;
+    }
+
+    /**
+     * Builds the get method.
+     *
+     * @param uri
+     *            the uri
+     * @param nameValuePairs
+     *            the name value pairs
+     * @return the http method
+     * @since 1.5.4
+     */
+    private static HttpMethod buildGetMethod(String uri,NameValuePair[] nameValuePairs){
+        //TODO 暂时还不支持 uri中含有参数且  nameValuePairs也有值的情况
+        if (isNotNullOrEmpty(nameValuePairs) && StringUtils.contains(uri, "?")){
+            throw new NotImplementedException("not implemented!");
+        }
+
+        GetMethod getMethod = new GetMethod(uri);
+        if (isNotNullOrEmpty(nameValuePairs)){
+            getMethod.setQueryString(nameValuePairs);
+        }
+        return getMethod;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * (底层方法)use httpState to create httpmethod.
+     *
+     * @param httpMethod
+     *            the http method
+     * @param httpClientConfig
+     *            the http client config
+     * @return the http method
+     */
+    private static HttpMethod executeMethod(HttpMethod httpMethod,HttpClientConfig httpClientConfig){
+        //默认使用的是 SimpleHttpConnectionManager
+
+        //TODO 研究下  MultiThreadedHttpConnectionManager
+        HttpClient httpClient = new HttpClient();
+
+        // 认证
+        setAuthentication(httpMethod, httpClientConfig, httpClient);
+
+        // 代理
+        setProxy(httpClientConfig, httpClient);
+
+        try{
+            if (LOGGER.isDebugEnabled()){
+                // String[] excludes = new String[] { "defaults" };
+                // HttpClientParams httpClientParams = httpClient.getParams();
+                //
+                // LOGGER.debug("[httpClient.getParams()]:{}", JsonUtil.format(httpClientParams, excludes));
+                //
+                // HttpMethodParams httpMethodParams = httpMethod.getParams();
+                // LOGGER.debug("[httpMethod.getParams()]:{}", JsonUtil.format(httpMethodParams, excludes));
+
+                Map<String, Object> map = getHttpMethodRequestAttributeMapForLog(httpMethod);
+                String[] excludes = new String[] { "values", "elements"
+                        // "rawAuthority",
+                        // "rawCurrentHierPath",
+                        // "rawPath",
+                        // "rawPathQuery",
+                        // "rawQuery",
+                        // "rawScheme",
+                        // "rawURI",
+                        // "rawURIReference",
+                        // "rawUserinfo",
+                        // "rawFragment",
+                        // "rawHost",
+                        // "rawName",
+                        // "protocol",
+                        // "defaults",
+                        // "class"
+                };
+                LOGGER.debug(JsonUtil.format(map, excludes));
+            }
+
+            // 执行该方法后服务器返回的状态码
+            // 该状态码能表示出该方法执行是否成功、需要认证或者页面发生了跳转 (默认状态下GetMethod的实例是自动处理跳转的)
+            int statusCode = httpClient.executeMethod(httpMethod);
+            if (statusCode != HttpStatus.SC_OK){
+                LOGGER.warn("statusCode is:[{}]", statusCode);
+            }
+
+        }catch (Exception e){
+            //SSL证书过期
+            //PKIX path validation failed: java.security.cert.CertPathValidatorException: timestamp check failed
+            Map<String, Object> map = getHttpMethodResponseAttributeMapForLog(httpMethod, httpClientConfig);
+            LOGGER.error(e.getClass().getName() + " HttpMethodResponseAttributeMapForLog:" + JsonUtil.format(map), e);
+            throw new UncheckedHttpException(e);
+        }
+        return httpMethod;
+    }
+
+    /**
+     * 设置 proxy.
+     * 
+     * @param httpClientConfig
+     *            the http client config
+     * @param httpClient
+     *            the http client
+     */
+    // TODO未测试
+    private static void setProxy(HttpClientConfig httpClientConfig,HttpClient httpClient){
+        // 设置代理
+        String hostName = httpClientConfig.getProxyAddress();
+        if (isNotNullOrEmpty(hostName)){
+            HostConfiguration hostConfiguration = httpClient.getHostConfiguration();
+            hostConfiguration.setProxy(hostName, httpClientConfig.getProxyPort());
+        }
+    }
+
+    /**
+     * 设置 authentication.
+     * 
+     * @param httpMethod
+     *            the http method
+     * @param httpClientConfig
+     *            the http client config
+     * @param httpClient
+     *            the http client
+     */
+    private static void setAuthentication(HttpMethod httpMethod,HttpClientConfig httpClientConfig,HttpClient httpClient){
+        UsernamePasswordCredentials usernamePasswordCredentials = httpClientConfig.getUsernamePasswordCredentials();
+        // 设置认证
+        if (isNotNullOrEmpty(usernamePasswordCredentials)){
+            httpMethod.setDoAuthentication(true);
+
+            AuthScope authScope = AuthScope.ANY;
+            Credentials credentials = usernamePasswordCredentials;
+
+            httpClient.getState().setCredentials(authScope, credentials);
+
+            // 1.1抢先认证(Preemptive Authentication)
+            // 在这种模式时,HttpClient会主动将basic认证应答信息传给服务器,即使在某种情况下服务器可能返回认证失败的应答,
+            // 这样做主要是为了减少连接的建立.
+
+            HttpClientParams httpClientParams = new HttpClientParams();
+            httpClientParams.setAuthenticationPreemptive(true);
+            httpClient.setParams(httpClientParams);
+        }
+    }
+
+    /**
+     * 请求信息LOGGER.
+     * 
+     * @param httpMethod
+     *            the http method
+     * @return the http method attribute map for log
+     */
+    private static Map<String, Object> getHttpMethodRequestAttributeMapForLog(HttpMethod httpMethod){
+        Map<String, Object> map = new LinkedHashMap<>();
+        try{
+            map.put("httpMethod.getName()", httpMethod.getName());
+            map.put("httpMethod.getURI()", httpMethod.getURI().toString());
+            map.put("httpMethod.getPath()", httpMethod.getPath());
+            map.put("httpMethod.getQueryString()", httpMethod.getQueryString());
+
+            map.put("httpMethod.getRequestHeaders()", httpMethod.getRequestHeaders());
+
+            map.put("httpMethod.getDoAuthentication()", httpMethod.getDoAuthentication());
+            map.put("httpMethod.getFollowRedirects()", httpMethod.getFollowRedirects());
+            map.put("httpMethod.getHostAuthState()", httpMethod.getHostAuthState().toString());
+
+            // HttpMethodParams httpMethodParams = httpMethod.getParams();
+            // map.put("httpMethod.getParams()", httpMethodParams);
+            map.put("httpMethod.getProxyAuthState()", httpMethod.getProxyAuthState().toString());
+
+        }catch (Exception e){
+            LOGGER.error(e.getClass().getName(), e);
+        }
+        return map;
+    }
+}
