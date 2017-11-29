@@ -21,12 +21,18 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import com.feilong.core.TimeInterval;
 
 /**
- * 链接参数.
+ * 链接的一些参数,比如超时时间,代理等等.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.3.0
  */
 public final class ConnectionConfig{
+
+    /** Static instance. */
+    // the static instance works for all types
+    public static final ConnectionConfig INSTANCE       = new ConnectionConfig();
+
+    //---------------------------------------------------------------
 
     /**
      * HTTP标准规范中定义的认证模式的用户名.
@@ -41,7 +47,7 @@ public final class ConnectionConfig{
      * 
      * @since 1.10.6
      */
-    private String  userName;
+    private String                       userName;
 
     /**
      * HTTP标准规范中定义的认证模式的密码.
@@ -54,19 +60,19 @@ public final class ConnectionConfig{
      * 
      * @since 1.10.6
      */
-    private String  password;
+    private String                       password;
 
     //---------------------------------------------------------------
 
     /** 代理地址. */
-    private String  proxyAddress;
+    private String                       proxyAddress;
 
     /**
      * 代理端口 <br>
      * A valid port value is between 0 ~ 65535. <br>
      * A port number of zero will let the system pick up an ephemeral port in a bind operation.
      */
-    private Integer proxyPort;
+    private Integer                      proxyPort;
 
     //---------------------------------------------------------------
 
@@ -84,7 +90,7 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int     connectTimeout = MILLISECOND_PER_MINUTE;
+    private int                          connectTimeout = MILLISECOND_PER_MINUTE;
 
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
@@ -100,12 +106,12 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int     readTimeout    = MILLISECOND_PER_MINUTE;
+    private int                          readTimeout    = MILLISECOND_PER_MINUTE;
 
     //---------------------------------------------------------------
 
     /** 内容的字符集. */
-    private String  contentCharset = UTF8;
+    private String                       contentCharset = UTF8;
 
     //---------------------------------------------------------------
 

@@ -32,7 +32,7 @@ public enum HttpMethodType{
     /** post方式. */
     POST("post");
 
-    // *********************************************************************
+    //---------------------------------------------------------------
 
     /** The method. */
     private String method;
@@ -48,7 +48,18 @@ public enum HttpMethodType{
     }
 
     /**
-     * Gets the by method value ignore case.
+     * Gets the method.
+     * 
+     * @return the method
+     */
+    public String getMethod(){
+        return method;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 传入一个 字符串的 HTTP method,比如 get,得到 {@link HttpMethodType#GET}.
      *
      * @param methodValue
      *            the method value
@@ -59,14 +70,5 @@ public enum HttpMethodType{
     public static HttpMethodType getByMethodValueIgnoreCase(String methodValue){
         String propertyName = "method";
         return EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, propertyName, methodValue);
-    }
-
-    /**
-     * Gets the method.
-     * 
-     * @return the method
-     */
-    public String getMethod(){
-        return method;
     }
 }
