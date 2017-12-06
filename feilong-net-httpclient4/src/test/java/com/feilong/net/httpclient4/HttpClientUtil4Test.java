@@ -29,7 +29,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.net.entity.HttpRequest;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -38,26 +37,17 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class HttpClientUtilTest{
+public class HttpClientUtil4Test{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil4Test.class);
 
     @Test
     public void testGetResponseBodyAsString(){
-        HttpRequest httpRequest = new HttpRequest();
-        httpRequest.setUri("http://sitemanager.underarmour.tw/brand-uastory.css");
+        String uri = "https://stage.adidas.com.cn/item/BA8900";
+        //uri = "https://www.adidas.com.cn/error-traffic-control";
+        uri = "http://127.0.0.1:8084";
 
-        String post = HttpClientUtil.getResponseBodyAsString(httpRequest);
-        LOGGER.debug(post);
-    }
-
-    @Test
-    public void testGetResponseBodyAsString1(){
-        HttpRequest httpRequest = new HttpRequest();
-        httpRequest.setUri("https://www.adidas.com.cn");
-
-        String post = HttpClientUtil.getResponseBodyAsString(httpRequest);
-        LOGGER.debug(post);
+        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri));
     }
 
     @Test

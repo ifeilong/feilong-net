@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
+import com.feilong.net.httpclient3.builder.HttpMethodUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**

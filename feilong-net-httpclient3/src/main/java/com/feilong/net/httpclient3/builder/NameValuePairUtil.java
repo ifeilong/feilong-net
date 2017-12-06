@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient3;
+package com.feilong.net.httpclient3.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static java.util.Collections.emptyMap;

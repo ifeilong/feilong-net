@@ -15,42 +15,23 @@
  */
 package com.feilong.net.httpclient4.builder;
 
-import java.io.IOException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import com.feilong.net.UncheckedHttpException;
-
 /**
- * 专门发送请求 <code>httpUriRequest</code> ,得到返回的 {@link HttpEntity}.
+ * HttpClient 构造器.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
-public class HttpEntityBuilder{
+class HttpClientBuilder{
 
-    /**
-     * 获得 response entity.
-     *
-     * @param httpUriRequest
-     *            the http uri request
-     * @return the response entity
-     * @see org.apache.http.impl.client.HttpClients#createDefault()
-     */
-    public static HttpEntity execute(HttpUriRequest httpUriRequest){
-        try{
-            HttpClient httpClient = buildHttpClient();
-
-            HttpResponse httpResponse = httpClient.execute(httpUriRequest);
-            return httpResponse.getEntity();
-        }catch (IOException e){
-            throw new UncheckedHttpException(e);
-        }
+    /** Don't let anyone instantiate this class. */
+    private HttpClientBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
     //---------------------------------------------------------------
@@ -60,9 +41,14 @@ public class HttpEntityBuilder{
      *
      * @return the closeable http client
      */
-    private static CloseableHttpClient buildHttpClient(){
-
+    static HttpClient build(){
         //TODO 处理 https
-        return HttpClients.createDefault();
+        CloseableHttpClient createDefault = HttpClients.createDefault();
+
+        //        org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
+        //        customHttpClientBuilder.setSSLContext(sslContext);
+        //        customHttpClientBuilder.setConnectionManager(connManager);
+        //        CloseableHttpClient httpClient = customHttpClientBuilder.build();
+        return createDefault;
     }
 }

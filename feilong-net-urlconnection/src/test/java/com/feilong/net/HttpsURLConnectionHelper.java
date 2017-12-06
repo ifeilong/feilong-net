@@ -15,10 +15,10 @@
  */
 package com.feilong.net;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -26,9 +26,8 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.X509TrustManager;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
+import com.feilong.net.ssl.TrustAnyTrustManager;
 
 /**
  * 
@@ -138,25 +137,9 @@ class HttpsURLConnectionHelper{
         SSLContext sslContext = SSLContext.getInstance(tlsProtocol);
 
         KeyManager[] keyManagers = null;
-        sslContext.init(keyManagers, toArray(new TrustAnyTrustManager()), new java.security.SecureRandom());
+        sslContext.init(keyManagers, toArray(TrustAnyTrustManager.INSTANCE), new java.security.SecureRandom());
 
         return sslContext.getSocketFactory();
-    }
-
-    private static class TrustAnyTrustManager implements X509TrustManager{
-
-        @Override
-        public void checkClientTrusted(X509Certificate[] chain,String authType) throws CertificateException{
-        }
-
-        @Override
-        public void checkServerTrusted(X509Certificate[] chain,String authType) throws CertificateException{
-        }
-
-        @Override
-        public X509Certificate[] getAcceptedIssuers(){
-            return new X509Certificate[] {};
-        }
     }
 
     private static class TrustAnyHostnameVerifier implements HostnameVerifier{

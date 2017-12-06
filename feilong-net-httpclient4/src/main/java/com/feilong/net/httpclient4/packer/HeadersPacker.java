@@ -19,9 +19,12 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 
 import java.util.Map;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.net.entity.HttpRequest;
 
 /**
  * 专门用来封装请求头 {@link org.apache.http.HttpMessage#setHeader(String, String)}.
@@ -29,10 +32,12 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
-public class HeadersPacker{
+public final class HeadersPacker{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HeadersPacker.class);
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 headers.
@@ -44,7 +49,7 @@ public class HeadersPacker{
      */
     public static void setHeaders(HttpUriRequest httpUriRequest,Map<String, String> headerMap){
         if (isNullOrEmpty(headerMap)){
-            LOGGER.debug("input param [headerMap] is null or empty ,skip!");
+            LOGGER.trace("input [headerMap] is null or empty ,skip!");
             return;
         }
 
@@ -58,5 +63,15 @@ public class HeadersPacker{
                 LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
             }
         }
+    }
+
+    /**
+     * 设置默认头.
+     * 
+     * @param httpUriRequest
+     */
+    public static void setDefaultHeader(HttpUriRequest httpUriRequest){
+        httpUriRequest.setHeader(HttpHeaders.USER_AGENT, HttpRequest.DEFAULT_USER_AGENT);
+        //httpUriRequest.setHeader("Connection", "keep-alive");
     }
 }

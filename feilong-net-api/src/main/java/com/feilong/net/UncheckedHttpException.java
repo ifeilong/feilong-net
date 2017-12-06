@@ -28,6 +28,8 @@ public final class UncheckedHttpException extends RuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new http client exception.
      *

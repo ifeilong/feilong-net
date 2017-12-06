@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient3;
+package com.feilong.net.httpclient3.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.net.entity.HttpRequest.DEFAULT_USER_AGENT;
 import static org.apache.commons.httpclient.params.HttpMethodParams.RETRY_HANDLER;
 import static org.apache.commons.httpclient.params.HttpMethodParams.USER_AGENT;
@@ -30,20 +29,15 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.lang3.NotImplementedException;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
+import com.feilong.net.httpclient3.HttpClientConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -79,10 +73,8 @@ public final class HttpMethodUtil{
             LOGGER.debug("[httpClientConfig]:{}", JsonUtil.format(httpClientConfig));
         }
 
-        HttpMethod httpMethod = buildHttpMethod(
-                        httpClientConfig.getUri(),
-                        httpClientConfig.getParamMap(),
-                        httpClientConfig.getHttpMethodType());
+        HttpMethod httpMethod = HttpMethodBuilder
+                        .buildHttpMethod(httpClientConfig.getUri(), httpClientConfig.getParamMap(), httpClientConfig.getHttpMethodType());
 
         HttpMethodParams httpMethodParams = httpMethod.getParams();
         // TODO
@@ -133,73 +125,6 @@ public final class HttpMethodUtil{
         map.put("httpMethod.getResponseFooters()", httpMethod.getResponseFooters());
         map.put("httpClientConfig", httpClientConfig);
         return map;
-    }
-
-    /**
-     * 设置 uri and params.
-     *
-     * @param uri
-     *            the uri
-     * @param params
-     *            the params
-     * @param httpMethodType
-     *            the http method type
-     * @return the http method
-     * @since 1.0.9
-     */
-    private static HttpMethod buildHttpMethod(String uri,Map<String, String> params,HttpMethodType httpMethodType){
-        NameValuePair[] nameValuePairs = isNullOrEmpty(params) ? null : NameValuePairUtil.fromMap(params);
-        switch (httpMethodType) {
-            case GET: // 使用get方法
-                return buildGetMethod(uri, nameValuePairs);
-
-            case POST: // 使用post方法
-                return buildPostMethod(uri, nameValuePairs);
-            default:
-                throw new UnsupportedOperationException("httpMethod:[" + httpMethodType + "] not support!");
-        }
-    }
-
-    /**
-     * Builds the post method.
-     *
-     * @param uri
-     *            the uri
-     * @param nameValuePairs
-     *            the name value pairs
-     * @return the http method
-     * @since 1.5.4
-     */
-    private static HttpMethod buildPostMethod(String uri,NameValuePair[] nameValuePairs){
-        PostMethod postMethod = new PostMethod(uri);
-
-        if (isNotNullOrEmpty(nameValuePairs)){
-            postMethod.setRequestBody(nameValuePairs);
-        }
-        return postMethod;
-    }
-
-    /**
-     * Builds the get method.
-     *
-     * @param uri
-     *            the uri
-     * @param nameValuePairs
-     *            the name value pairs
-     * @return the http method
-     * @since 1.5.4
-     */
-    private static HttpMethod buildGetMethod(String uri,NameValuePair[] nameValuePairs){
-        //TODO 暂时还不支持 uri中含有参数且  nameValuePairs也有值的情况
-        if (isNotNullOrEmpty(nameValuePairs) && StringUtils.contains(uri, "?")){
-            throw new NotImplementedException("not implemented!");
-        }
-
-        GetMethod getMethod = new GetMethod(uri);
-        if (isNotNullOrEmpty(nameValuePairs)){
-            getMethod.setQueryString(nameValuePairs);
-        }
-        return getMethod;
     }
 
     //---------------------------------------------------------------

@@ -15,19 +15,15 @@
  */
 package com.feilong.net.httpclient4.builder;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.Validate;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.net.HttpMethodType;
+import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.httpclient4.builder.httpurirequest.HttpUriRequestFactory;
 import com.feilong.net.httpclient4.packer.HeadersPacker;
-import com.feilong.net.httpclient4.packer.ParametersPacker;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -36,21 +32,32 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
-public class HttpUriRequestBuilder{
+public final class HttpUriRequestBuilder{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUriRequestBuilder.class);
 
+    /** Don't let anyone instantiate this class. */
+    private HttpUriRequestBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
-     * 基于 httpRequest 构造 {@link HttpUriRequest}.
+     * 基于 <code>httpRequest</code> 和 <code>connectionConfig</code> 构造 {@link HttpUriRequest}.
      *
      * @param httpRequest
      *            the http request
+     * @param connectionConfig
+     *            the connection config
      * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>httpRequest Uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>httpRequest Uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
-    public static HttpUriRequest build(HttpRequest httpRequest){
+    public static HttpUriRequest build(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
 
         String uri = httpRequest.getUri();
@@ -61,83 +68,14 @@ public class HttpUriRequestBuilder{
             LOGGER.debug("httpRequest info:[{}]", JsonUtil.format(httpRequest));
         }
 
-        HttpUriRequest httpUriRequest = HttpUriRequestBuilder.build(httpRequest, uri);
+        //---------------------------------------------------------------
 
+        HttpUriRequest httpUriRequest = HttpUriRequestFactory.buildHttpUriRequest(httpRequest, connectionConfig);
+
+        HeadersPacker.setDefaultHeader(httpUriRequest);
         HeadersPacker.setHeaders(httpUriRequest, httpRequest.getHeaderMap());
-        ParametersPacker.setParameters(httpUriRequest, httpRequest.getParamMap());
 
         return httpUriRequest;
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * 基于 httpRequest 和 uri 构造 {@link HttpUriRequest}.
-     * 
-     * <p>
-     * 暂时只支持 get 和post 方法
-     * </p>
-     *
-     * @param httpRequest
-     *            the http request
-     * @param uri
-     *            the uri
-     * @return the http uri request
-     */
-    private static HttpUriRequest build(HttpRequest httpRequest,String uri){
-        RequestConfig requestConfig = build();
-
-        HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
-        switch (httpMethodType) {
-            case GET:
-                return buildHttpGet(uri, requestConfig);
-            case POST:
-                return buildHttpPost(uri, requestConfig);
-            default:
-                throw new NotImplementedException(httpMethodType + " is not implemented!");
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Builds the http post.
-     *
-     * @param uri
-     *            the uri
-     * @param requestConfig
-     *            the request config
-     * @return the http uri request
-     */
-    private static HttpUriRequest buildHttpPost(String uri,RequestConfig requestConfig){
-        HttpPost httpPost = new HttpPost(uri);
-        /// HttpEntity entity = new StringEntity(requestBody, charset);
-        //httpPost.setEntity(entity);
-        httpPost.setConfig(requestConfig);
-        return httpPost;
-    }
-
-    /**
-     * Builds the http get.
-     *
-     * @param uri
-     *            the uri
-     * @param requestConfig
-     *            the request config
-     * @return the http uri request
-     */
-    private static HttpUriRequest buildHttpGet(String uri,RequestConfig requestConfig){
-        HttpGet httpGet = new HttpGet(uri);
-        httpGet.setConfig(requestConfig);
-        return httpGet;
-    }
-
-    /**
-     * Builds the.
-     *
-     * @return the request config
-     */
-    private static RequestConfig build(){
-        return RequestConfig.DEFAULT;
-    }
 }

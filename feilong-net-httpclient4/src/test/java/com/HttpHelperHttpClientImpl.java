@@ -3,15 +3,10 @@ package com;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.Set;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -25,10 +20,13 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.net.ssl.SSLContextBuilder;
+import com.feilong.net.ssl.SSLProtocol;
+
 /**
  * Created by xianze.zxz on 2016/10/6.
  */
-public class HttpHelperHttpClientImpl implements HttpHelper{
+public class HttpHelperHttpClientImpl{
 
     /** The Constant log. */
     private static final Logger        LOGGER     = LoggerFactory.getLogger(HttpHelperHttpClientImpl.class);
@@ -36,7 +34,6 @@ public class HttpHelperHttpClientImpl implements HttpHelper{
     //创建http client
     private static CloseableHttpClient httpClient = createHttpsClient();
 
-    @Override
     public String readToString(String url,Map<String, String> heads){
         try{
             HttpEntity httpEntity = readToHttpEntity(url, heads);
@@ -60,32 +57,14 @@ public class HttpHelperHttpClientImpl implements HttpHelper{
         return entity;
     }
 
-    public static CloseableHttpClient createHttpsClient(){
-        X509TrustManager x509mgr = new X509TrustManager(){
-
-            @Override
-            public void checkClientTrusted(X509Certificate[] xcs,String string){
-            }
-
-            @Override
-            public void checkServerTrusted(X509Certificate[] xcs,String string){
-            }
-
-            @Override
-            public X509Certificate[] getAcceptedIssuers(){
-                return null;
-            }
-        };
-        SSLConnectionSocketFactory sslsf = null;
-        try{
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, new TrustManager[] { x509mgr }, null);
-            sslsf = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        }catch (KeyManagementException e){
-            e.printStackTrace();
-        }catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        }
+    private static CloseableHttpClient createHttpsClient(){
+        SSLConnectionSocketFactory sslsf = buildSSLConnectionSocketFactory();
         return HttpClients.custom().setSSLSocketFactory(sslsf).build();
     }
+
+    private static SSLConnectionSocketFactory buildSSLConnectionSocketFactory(){
+        SSLContext sslContext = SSLContextBuilder.build(SSLProtocol.TLS);
+        return new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+    }
+
 }
