@@ -9,7 +9,7 @@ feilong-net
 
 ## 简介
 
-`封装了io操作的常用类`
+`封装了网络访问操作的常用类`
 
 ## Javadoc:
 在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-net/)
