@@ -15,7 +15,7 @@
  */
 package com.feilong.net.httpclient4.builder;
 
-import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -51,7 +51,9 @@ public final class HttpUriRequestExecuter{
         try{
             HttpClient httpClient = HttpClientBuilder.build();
             return httpClient.execute(httpUriRequest);
-        }catch (IOException e){
+        }catch (SocketTimeoutException e){
+            throw new UncheckedHttpException("SocketTimeout," + e.getMessage(), e);
+        }catch (Exception e){
             throw new UncheckedHttpException(e);
         }
     }

@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 import java.io.UnsupportedEncodingException;
@@ -25,6 +26,7 @@ import java.util.Map;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.entity.StringEntity;
 
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpRequest;
@@ -53,8 +55,24 @@ final class HttpEntityBuilder{
      * @return the http entity
      */
     static HttpEntity build(HttpRequest httpRequest){
-        Map<String, String> paramMap = httpRequest.getParamMap();
+        String requestBody = httpRequest.getRequestBody();
 
+        if (isNotNullOrEmpty(requestBody)){
+            return new StringEntity(requestBody, UTF8);
+        }
+
+        //---------------------------------------------------------------
+        return buildFormHttpEntity(httpRequest.getParamMap());
+    }
+
+    /**
+     * Builds the form http entity.
+     *
+     * @param paramMap
+     *            the param map
+     * @return the http entity
+     */
+    private static HttpEntity buildFormHttpEntity(Map<String, String> paramMap){
         if (isNullOrEmpty(paramMap)){
             return null;
         }
