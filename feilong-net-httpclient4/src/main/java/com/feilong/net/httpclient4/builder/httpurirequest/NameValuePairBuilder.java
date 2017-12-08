@@ -15,7 +15,7 @@
  */
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static java.util.Collections.emptyList;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ final class NameValuePairBuilder{
      * @see org.apache.http.message.BasicNameValuePair
      */
     static List<NameValuePair> build(Map<String, String> paramMap){
-        if (isNotNullOrEmpty(paramMap)){
+        if (isNullOrEmpty(paramMap)){
             return emptyList();
         }
 
