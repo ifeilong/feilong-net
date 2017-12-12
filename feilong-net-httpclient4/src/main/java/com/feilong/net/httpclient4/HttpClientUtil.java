@@ -23,7 +23,6 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +31,7 @@ import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
-import com.feilong.net.httpclient4.builder.HttpUriRequestBuilder;
-import com.feilong.net.httpclient4.builder.HttpUriRequestExecuter;
+import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -175,7 +173,7 @@ public final class HttpClientUtil{
 
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
-        HttpResponse httpResponse = execute(httpRequest, useConnectionConfig);
+        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
         StatusLine statusLine = httpResponse.getStatusLine();
 
         int statusCode = statusLine.getStatusCode();
@@ -461,7 +459,7 @@ public final class HttpClientUtil{
 
         //---------------------------------------------------------------
         Date beginDate = new Date();
-        HttpResponse httpResponse = execute(httpRequest, useConnectionConfig);
+        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
         com.feilong.net.entity.HttpResponse result = HttpResponseBuilder.build(beginDate, httpResponse);
 
         //---------------------------------------------------------------
@@ -782,7 +780,7 @@ public final class HttpClientUtil{
 
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
-        HttpResponse httpResponse = execute(httpRequest, connectionConfig);
+        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, connectionConfig);
         String resultString = HttpResponseUtil.getResultString(httpResponse);
 
         //---------------------------------------------------------------
@@ -796,19 +794,4 @@ public final class HttpClientUtil{
         return resultString;
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Execute.
-     *
-     * @param httpRequest
-     *            the http request
-     * @param connectionConfig
-     *            the connection config
-     * @return the http response
-     */
-    private static HttpResponse execute(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        HttpUriRequest httpUriRequest = HttpUriRequestBuilder.build(httpRequest, connectionConfig);
-        return HttpUriRequestExecuter.execute(httpUriRequest);
-    }
 }
