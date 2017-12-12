@@ -13,8 +13,7 @@
 
 	<properties>
 		<!-- http://hc.apache.org/downloads.cgi -->
-		<version.httpcomponents>4.5.3</version.httpcomponents>
-		<version.httpcore>4.5.3</version.httpcore>
+		<version.httpcomponents>4.5.4</version.httpcomponents>
 	</properties>
 
 	<dependencies>
