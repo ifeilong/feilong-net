@@ -13,11 +13,13 @@
 	<description>feilong-net-parent</description>
 	<packaging>pom</packaging>
 
-	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
+
+	<!-- 软件配置管理,如cvs 和svn -->
+	<!-- The scm url must start with 'scm:' -->
 	<scm>
-		<url>https://github.com/venusdrogon/feilong-platform.git</url>
-		<connection>scm:git:git@github.com:venusdrogon/feilong-platform.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:venusdrogon/feilong-platform.git</developerConnection>
+		<url>https://github.com/venusdrogon/feilong-net</url>
+		<connection>scm:git:https://github.com/venusdrogon/feilong-net</connection>
+		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-net.git</developerConnection>
 	</scm>
 
 	<dependencies>
