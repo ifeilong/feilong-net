@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.10.6</version>
+		<version>1.10.7-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.feilong.net</groupId>
@@ -23,10 +23,10 @@
 	</scm>
 
 	<dependencies>
-		<!-- feilong-tools-jsonlib -->
+		<!-- feilong-json-jsonlib -->
 		<dependency>
-			<groupId>com.feilong.platform.tools</groupId>
-			<artifactId>feilong-tools-jsonlib</artifactId>
+			<groupId>com.feilong.json</groupId>
+			<artifactId>feilong-json-jsonlib</artifactId>
 		</dependency>
 
 		<dependency>

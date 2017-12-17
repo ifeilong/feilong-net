@@ -4,13 +4,14 @@
 	<parent>
 		<groupId>com.feilong.net</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.10.6</version>
+		<version>1.10.7-SNAPSHOT</version>
 	</parent>
 
 
 	<artifactId>feilong-net-httpclient3</artifactId>
 	<name>feilong-net-httpclient3</name>
-	<description>feilong-net-httpclient3</description>
+
+	<description>httpclient3 util,Deprecated,pls use feilong-net-httpclient4</description>
 
 
 	<dependencies>
