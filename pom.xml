@@ -65,5 +65,6 @@
 		<module>feilong-net-httpclient4</module>
 		<module>feilong-net-urlconnection</module>
 		<module>feilong-net-jsoup</module>
+		<module>feilong-net-filetransfer</module>
 	</modules>
 </project>
