@@ -26,13 +26,13 @@ import org.apache.http.StatusLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
 import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * 基于 HttpClient4 的工具类.

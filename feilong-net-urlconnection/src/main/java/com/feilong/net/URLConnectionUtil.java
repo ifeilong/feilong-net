@@ -36,10 +36,10 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.io.ReaderUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.handler.URLConnectionBuilder;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * {@link java.net.HttpURLConnection}工具类(支持代理 {@link java.net.Proxy}).

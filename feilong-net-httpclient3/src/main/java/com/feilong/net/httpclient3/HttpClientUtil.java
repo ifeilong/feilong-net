@@ -21,10 +21,10 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.httpclient3.builder.HttpMethodUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * HttpClient相关工具类.

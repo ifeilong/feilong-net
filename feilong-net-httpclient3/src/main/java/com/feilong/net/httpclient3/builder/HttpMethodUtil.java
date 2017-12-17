@@ -36,9 +36,9 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.httpclient3.HttpClientConfig;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class HttpMethodUtil.

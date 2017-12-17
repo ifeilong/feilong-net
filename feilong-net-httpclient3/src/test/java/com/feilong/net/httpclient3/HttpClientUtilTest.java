@@ -29,10 +29,10 @@ import org.slf4j.LoggerFactory;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.coreextension.entity.BackWarnEntity;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.httpclient3.HttpClientConfig;
 import com.feilong.net.httpclient3.HttpClientUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class HttpClientUtilTest.
