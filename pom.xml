@@ -66,5 +66,6 @@
 		<module>feilong-net-urlconnection</module>
 		<module>feilong-net-jsoup</module>
 		<module>feilong-net-filetransfer</module>
+		<module>feilong-net-mail</module>
 	</modules>
 </project>
