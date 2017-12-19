@@ -30,7 +30,7 @@ public class GetResponseBodyAsStringTest{
 
     @Test
     public void testGetResponseBodyAsString(){
-        String urlString = "http://www.baidu.com";
+        String urlString = "https://www.baidu.com/";
         assertTrue(isNotNullOrEmpty(HttpClientUtil.getResponseBodyAsString(urlString)));
     }
 

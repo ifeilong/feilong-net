@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.mail;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.io.entity.FileType.FILE;
 import static org.apache.commons.lang3.SystemUtils.USER_HOME;
 
@@ -29,9 +31,6 @@ import org.junit.Test;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.tools.velocity.VelocityUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class MailSenderTest.
@@ -78,40 +77,46 @@ public class MailSenderTest extends BaseMailSenderTest{
     @Test
     public void sendMailWithAttach(){
         String templateInClassPath = "velocity/mailtest.vm";
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity = new FileInfoEntity();
 
         fileInfoEntity.setFileType(FILE);
         fileInfoEntity.setLastModified(new Date().getTime());
         fileInfoEntity.setName("nikestore_china_cancel20130910.csv");
         fileInfoEntity.setSize(25655L);
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity2 = new FileInfoEntity();
 
         fileInfoEntity2.setFileType(FILE);
         fileInfoEntity2.setLastModified(new Date().getTime());
         fileInfoEntity2.setName("nikestore_china_revenue20131022.csv");
         fileInfoEntity2.setSize(25655L);
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity3 = new FileInfoEntity();
         fileInfoEntity3.setFileType(FILE);
         fileInfoEntity3.setLastModified(new Date().getTime());
         fileInfoEntity3.setName("nikestore_china_return20131022.csv");
         fileInfoEntity3.setSize(25655L);
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity4 = new FileInfoEntity();
         fileInfoEntity4.setFileType(FILE);
         fileInfoEntity4.setLastModified(new Date().getTime());
         fileInfoEntity4.setName("nikestore_china_demand20130910.csv");
         fileInfoEntity4.setSize(25655L);
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
         List<FileInfoEntity> fileInfoEntityList = toList(fileInfoEntity, fileInfoEntity2, fileInfoEntity3, fileInfoEntity4);
 
-        // ******************************************************************************************
+        //---------------------------------------------------------------
         Map<String, Object> contextKeyValues = new HashMap<>();
         contextKeyValues.put("PREFIX_CONTENTID", DefaultMailSender.PREFIX_CONTENTID);
         contextKeyValues.put("fileInfoEntityList", fileInfoEntityList);
-        // ******************************************************************************************
+
+        //---------------------------------------------------------------
 
         String textContent = new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
         mailSenderConfig.setContent(textContent);

@@ -216,7 +216,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         return false;
     }
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 打开链接.
      *
@@ -322,7 +322,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @return true, if _down remote single file
      */
     protected abstract boolean downRemoteSingleFile(String remoteSingleFile,String filePath);
-    //*********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 不关闭链接删除 一组文件.

@@ -92,7 +92,8 @@ public final class DefaultMailSender extends AbstractMailSender{
             LOGGER.debug("mailSenderConfig:{}", JsonUtil.format(mailSenderConfig, new String[] { "attachList" }));
         }
 
-        // *****************************************************************************************
+        //---------------------------------------------------------------
+
         Message message = buildMessage(mailSenderConfig);
         setBody(message, mailSenderConfig);
 
@@ -177,10 +178,10 @@ public final class DefaultMailSender extends AbstractMailSender{
      * @since 1.10.2
      */
     static MimeMultipart buildContent(MailSenderConfig mailSenderConfig) throws MessagingException{
-        // ***********************************************************************
+
+        //---------------------------------------------------------------
         // 以HTML格式发送邮件 (不带附件的邮件)
 
-        // ******************************************************
         // MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
         MimeMultipart mimeMultipart = new MimeMultipart();
         mimeMultipart.addBodyPart(buildHtmlContentBody(mailSenderConfig));
@@ -235,7 +236,7 @@ public final class DefaultMailSender extends AbstractMailSender{
         }
 
         // MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
-        // ************************************************
+        //---------------------------------------------------------------
         System.setProperty("mail.mime.encodefilename", "true");
 
         // 用于组合文本和图片,"related"型的MimeMultipart对象  
@@ -325,7 +326,7 @@ public final class DefaultMailSender extends AbstractMailSender{
         // 支持 to cc bcc
         setRecipients(message, mailSenderConfig);
 
-        // ***************************************************************************
+        //---------------------------------------------------------------
         // 设置邮件消息的主题
         message.setSubject(mailSenderConfig.getSubject());
 

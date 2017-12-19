@@ -61,7 +61,7 @@ public class JobCrawler{
                 Enterprise enterprise = getEnterpriseInfo(enterpriseUrl);
                 list.add(enterprise);
             }
-            //************************************************************
+            //---------------------------------------------------------------
             for (Enterprise enterprise : list){
                 LOGGER.info(enterprise.getName());
                 LOGGER.info(enterprise.getEmail());

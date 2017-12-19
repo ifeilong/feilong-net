@@ -54,7 +54,7 @@ public abstract class FileTransferTest extends AbstractFileTransferTest{
      */
     protected abstract void sendLocalFileToRemote_dir_chinese() throws Exception;
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 删除一个普通文件/文件夹.
@@ -88,7 +88,7 @@ public abstract class FileTransferTest extends AbstractFileTransferTest{
      */
     protected abstract void deleteNotExist() throws Exception;
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得某特定文件夹下面 指定文件名相关信息.

@@ -22,7 +22,7 @@ package com.feilong.tools.net.filetransfer;
  */
 public abstract class FileTransferDownloadTest extends AbstractFileTransferTest{
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 下载单个文件.
@@ -40,7 +40,7 @@ public abstract class FileTransferDownloadTest extends AbstractFileTransferTest{
      */
     protected abstract void downloadDir() throws Exception;
 
-    //********************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Download null local absolute directory path.

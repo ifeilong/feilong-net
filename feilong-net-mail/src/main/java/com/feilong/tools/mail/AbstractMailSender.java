@@ -87,7 +87,8 @@ public abstract class AbstractMailSender implements MailSender{
         if (null != priority){
             message.addHeader(MailHeader.X_PRIORITY, priority.getLevelValue());
         }
-        // ***************************************************************************
+
+        //---------------------------------------------------------------
         // 是否需要回执
         if (mailSenderConfig.getIsNeedReturnReceipt()){
             message.setHeader(MailHeader.DISPOSITION_NOTIFICATION_TO, "1");
@@ -114,9 +115,9 @@ public abstract class AbstractMailSender implements MailSender{
         // 创建邮件的接收者地址,并设置到邮件消息中
         // Message.RecipientType.TO属性表示接收者的类型为TO
         setRecipients(message, Message.RecipientType.TO, mailSenderConfig.getTos());
-        // ************************cc 抄送***************************************************
+        //cc 抄送
         setRecipients(message, Message.RecipientType.CC, mailSenderConfig.getCcs());
-        // **********************bcc 密送*****************************************************
+        //bcc 密送
         setRecipients(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
     }
 

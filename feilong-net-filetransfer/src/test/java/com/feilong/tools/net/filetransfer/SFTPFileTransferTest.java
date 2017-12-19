@@ -74,7 +74,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
         fileTransfer.upload(remoteDirectory, batchLocalFileFullPaths);
     }
 
-    //**************************************************************************************
+    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 

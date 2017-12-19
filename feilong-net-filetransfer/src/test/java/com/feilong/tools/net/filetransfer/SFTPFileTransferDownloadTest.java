@@ -62,7 +62,7 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
     }
 
-    //*******************************************************************
+    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 

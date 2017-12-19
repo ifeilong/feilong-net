@@ -250,7 +250,7 @@ public final class URLConnectionUtil{
         return ReaderUtil.readLine(bufferedReader);
     }
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
     /**
      * Gets the response body as string(默认 {@link com.feilong.net.HttpMethodType#GET}请求).
      *

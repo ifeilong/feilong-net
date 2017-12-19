@@ -15,6 +15,9 @@
  */
 package com.feilong.tools.mail;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.util.List;
 
 import javax.mail.Folder;
@@ -33,9 +36,6 @@ import com.feilong.tools.mail.entity.MailReaderConfig;
 import com.feilong.tools.mail.exception.MailReaderException;
 import com.feilong.tools.mail.util.FolderUtil;
 import com.feilong.tools.mail.util.MessageUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class MailReaderUtil.
@@ -90,7 +90,7 @@ public class IMAPMailReader implements MailReader{
             store.connect(mailServerHost, userName, password);
 
             folder = getFolder(store);
-            //******************************************************************************
+            //---------------------------------------------------------------
             Message[] messages = getMessages(folder, searchTerm, newstIndex);
             return MessageUtil.toMailInfoList(messages);
         }catch (MessagingException e){

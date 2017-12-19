@@ -109,14 +109,14 @@ public final class URLConnectionBuilder{
         //---------------------------------------------------------------
         TimeoutPacker.packer(httpURLConnection, useConnectionConfig);
 
-        //********************************************************************
+        //---------------------------------------------------------------
         HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
         httpURLConnection.setRequestMethod(RequestMethodBuilder.build(httpMethodType));
 
         //设置是否向httpUrlConnection输出,如果是post请求,参数要放在http正文内,因此需要设为true,默认是false
         httpURLConnection.setDoOutput(POST == httpMethodType);
 
-        //********************************************************************
+        //---------------------------------------------------------------
         RequestHeadersPacker.pack(httpURLConnection, httpRequest.getHeaderMap());
 
         doWithRequestBody(httpURLConnection, httpRequest.getRequestBody());

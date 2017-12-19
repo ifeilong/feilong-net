@@ -75,7 +75,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /** The sftp file transfer config. */
     private SFTPFileTransferConfig sftpFileTransferConfig;
 
-    // ***********************************************************************
+    //---------------------------------------------------------------
 
     /** The channel sftp. */
     private ChannelSftp            channelSftp;
@@ -83,7 +83,8 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /** The session. */
     private Session                session;
 
-    // ***********************************************************************
+    //---------------------------------------------------------------
+
     /**
      * The type.
      * 

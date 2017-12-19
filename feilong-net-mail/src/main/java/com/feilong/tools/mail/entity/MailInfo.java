@@ -40,7 +40,7 @@ public class MailInfo{
     /** 收件人. */
     private String[] recipients;
 
-    //**************************************************************
+    //---------------------------------------------------------------
 
     /** The content type. */
     private String   contentType;

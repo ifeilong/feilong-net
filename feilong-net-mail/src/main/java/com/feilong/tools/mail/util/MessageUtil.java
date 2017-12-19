@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.mail.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -37,8 +39,6 @@ import com.feilong.io.FileUtil;
 import com.feilong.tools.mail.entity.MailInfo;
 import com.feilong.tools.mail.exception.MailException;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class MessageUtil.
@@ -72,7 +72,7 @@ public final class MessageUtil{
     public static final List<MailInfo> toMailInfoList(Message[] messages) throws MessagingException{
         int messagesLength = messages.length;
         LOGGER.info("messages length:[{}]", messagesLength);
-        //******************************************************
+        //---------------------------------------------------------------
         List<MailInfo> list = new ArrayList<>();
         for (int i = 0; i < messagesLength; ++i){
             Message message = messages[i];

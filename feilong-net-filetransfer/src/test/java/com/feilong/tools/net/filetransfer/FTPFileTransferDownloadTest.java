@@ -27,7 +27,8 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Autowired
     @Qualifier("ftpFileTransfer")
     private FileTransfer fileTransfer;
-    //*********************************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * 下载单个文件
@@ -51,7 +52,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
     }
 
-    //*******************************************************************
+    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 

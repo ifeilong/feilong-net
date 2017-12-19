@@ -74,7 +74,8 @@ public final class HttpURLConnectionOpener{
         // 每次调用此 URL 的协议处理程序的 openConnection 方法都打开一个新的连接.
         return (HttpURLConnection) url.openConnection();
     }
-    // ******************************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * 获得代理.
@@ -91,6 +92,7 @@ public final class HttpURLConnectionOpener{
      */
     private static Proxy getProxy(String proxyAddress,Integer proxyPort){
         return isNotNullOrEmpty(proxyAddress) && isNotNullOrEmpty(proxyPort)
-                        ? new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyAddress, proxyPort)) : null;
+                        ? new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyAddress, proxyPort))
+                        : null;
     }
 }
