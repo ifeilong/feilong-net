@@ -43,6 +43,7 @@ import com.feilong.net.httpclient4.builder.HttpResponseUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.http.client.methods.HttpUriRequest
  * @see "com.feilong.tools.net.httpclient3.HttpClientUtil"
+ * @see "org.springframework.http.client.HttpComponentsClientHttpResponse"
  * @see <a href="http://hc.apache.org/index.html">Apache HttpComponents</a>
  * @see <a href="https://wiki.apache.org/HttpComponents/QuickStart">QuickStart</a>
  * @since 1.10.6

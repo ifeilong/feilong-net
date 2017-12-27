@@ -34,16 +34,12 @@ public class PostTest{
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
-
         LOGGER.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";
-
-        String result = HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18"));
-        LOGGER.debug(result);
+        LOGGER.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
     }
-
 }

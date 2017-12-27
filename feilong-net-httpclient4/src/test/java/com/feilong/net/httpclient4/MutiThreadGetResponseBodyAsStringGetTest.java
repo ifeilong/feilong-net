@@ -35,7 +35,6 @@ public class MutiThreadGetResponseBodyAsStringGetTest{
 
     @Test
     public void testGetResponseBodyAsString11(){
-
         ThreadUtil.execute(new Runnable(){
 
             @Override

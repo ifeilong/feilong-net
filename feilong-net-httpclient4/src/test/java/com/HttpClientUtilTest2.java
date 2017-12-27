@@ -63,7 +63,6 @@ public class HttpClientUtilTest2{
      */
     @Test
     public void testHttpClientUtilTest2() throws ClientProtocolException,IOException{
-
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("http://targethost/homepage");
         CloseableHttpResponse response1 = httpclient.execute(httpGet);
