@@ -41,7 +41,7 @@ public class MutiThreadGetResponseBodyAsStringGetTest{
             @Override
             public void run(){
                 String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
-                LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, toMap("country", "china")));
+                LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
 
             }
         }, 20);

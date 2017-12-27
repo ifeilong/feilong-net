@@ -34,7 +34,7 @@ public class SleepGetTest{
     @Test
     public void testGetResponseBodyAsString11(){
         String uri = "http://127.0.0.1:8084/sleep?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, toMap("country", "china")));
+        LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
     }
 
 }

@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                GetResponseBodyAsStringTest.class,
+                GetTest.class,
                 GetResponseStatusCodeTest.class,
                 GetResponseTest.class,
         //                

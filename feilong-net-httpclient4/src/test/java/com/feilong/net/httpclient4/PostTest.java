@@ -16,13 +16,10 @@
 package com.feilong.net.httpclient4;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.net.httpclient4.HttpClientUtil.getResponseBodyAsString;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.net.HttpMethodType;
 
 /**
  *
@@ -38,14 +35,14 @@ public class PostTest{
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
 
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, HttpMethodType.GET));
+        LOGGER.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";
 
-        String result = getResponseBodyAsString(uri, toMap("name", "金鑫", "age", "18"), HttpMethodType.POST);
+        String result = HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18"));
         LOGGER.debug(result);
     }
 

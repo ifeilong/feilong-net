@@ -47,7 +47,7 @@ public class HttpClientUtil4Test{
         //uri = "https://www.adidas.com.cn/error-traffic-control";
         uri = "http://127.0.0.1:8084";
 
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri));
+        LOGGER.debug(HttpClientUtil.get(uri));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class HttpClientUtil4Test{
         //---------------------------------------------------------------
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("{},{}", HttpClientUtil.getResponseBodyAsString(uri), JsonUtil.format(headers));
+            LOGGER.debug("{},{}", HttpClientUtil.get(uri), JsonUtil.format(headers));
         }
 
         if (isNotNullOrEmpty(headers)){

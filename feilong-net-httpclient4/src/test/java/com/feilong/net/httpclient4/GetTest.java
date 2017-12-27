@@ -26,29 +26,29 @@ import org.junit.Test;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class GetResponseBodyAsStringTest{
+public class GetTest{
 
     @Test
     public void testGetResponseBodyAsString(){
         String urlString = "https://www.baidu.com/";
-        assertTrue(isNotNullOrEmpty(HttpClientUtil.getResponseBodyAsString(urlString)));
+        assertTrue(isNotNullOrEmpty(HttpClientUtil.get(urlString)));
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testGetResponseBodyAsStringNull(){
-        HttpClientUtil.getResponseBodyAsString((String) null);
+        HttpClientUtil.get((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetResponseBodyAsStringEmpty(){
-        HttpClientUtil.getResponseBodyAsString("");
+        HttpClientUtil.get("");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetResponseBodyAsStringBlank(){
-        HttpClientUtil.getResponseBodyAsString(" ");
+        HttpClientUtil.get(" ");
     }
 
 }

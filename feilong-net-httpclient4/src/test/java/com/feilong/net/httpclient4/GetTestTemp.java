@@ -27,33 +27,33 @@ import org.slf4j.LoggerFactory;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class GetResponseBodyAsStringGetTest{
+public class GetTestTemp{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetResponseBodyAsStringGetTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetTestTemp.class);
 
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
 
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri));
+        LOGGER.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri));
+        LOGGER.debug(HttpClientUtil.get(uri));
     }
 
     @Test
     public void testGetResponseBodyAsString11(){
         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, toMap("country", "china")));
+        LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
     }
 
     @Test
     public void testGetResponseBodyAsString121(){
         String uri = "http://127.0.0.1:8084";
-        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, toMap("country", "china")));
+        LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
     }
 
 }
