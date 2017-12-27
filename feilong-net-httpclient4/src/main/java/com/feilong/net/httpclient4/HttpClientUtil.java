@@ -15,6 +15,7 @@
  */
 package com.feilong.net.httpclient4;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Date;
@@ -26,13 +27,15 @@ import org.apache.http.StatusLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.jsonlib.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
 import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
-import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
 
 /**
  * 基于 HttpClient4 的工具类.
@@ -460,7 +463,7 @@ public final class HttpClientUtil{
         //---------------------------------------------------------------
         Date beginDate = new Date();
         HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
-        com.feilong.net.entity.HttpResponse result = HttpResponseBuilder.build(beginDate, httpResponse);
+        com.feilong.net.entity.HttpResponse resultResponse = HttpResponseBuilder.build(beginDate, httpResponse);
 
         //---------------------------------------------------------------
 
@@ -469,10 +472,12 @@ public final class HttpClientUtil{
                             "request:[{}],useConnectionConfig:[{}],response:[{}]",
                             JsonUtil.format(httpRequest),
                             JsonUtil.format(useConnectionConfig),
-                            JsonUtil.format(result));
+                            JsonUtil.format(
+                                            resultResponse,
+                                            new JavaToJsonConfig(toMap("resultString", new StringOverLengthJsonValueProcessor()))));
         }
 
-        return result;
+        return resultResponse;
     }
 
     //----------------------getResponseBodyAsString-----------------------------------------
@@ -789,7 +794,7 @@ public final class HttpClientUtil{
                             "request:[{}],useConnectionConfig:[{}],resultString:[{}]",
                             JsonUtil.format(httpRequest),
                             JsonUtil.format(useConnectionConfig),
-                            resultString);
+                            StringOverLengthJsonValueProcessor.format(resultString, 1000));
         }
         return resultString;
     }
