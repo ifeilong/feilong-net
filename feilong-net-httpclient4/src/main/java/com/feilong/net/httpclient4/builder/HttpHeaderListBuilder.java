@@ -16,9 +16,9 @@
 package com.feilong.net.httpclient4.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +63,7 @@ final class HttpHeaderListBuilder{
         }
 
         //---------------------------------------------------------------
-        List<HttpHeader> list = new ArrayList<>();
+        List<HttpHeader> list = newArrayList();
         for (Header header : allHeaders){
             list.add(new HttpHeader(header.getName(), header.getValue()));
         }

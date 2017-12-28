@@ -18,10 +18,10 @@ package com.feilong.tools.mail;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.DataHandler;
@@ -227,8 +227,8 @@ public final class DefaultMailSender extends AbstractMailSender{
         }
         // ***************以HTML格式发送邮件 带附件的邮件图片********************************************************
 
-        List<byte[]> attachList = new ArrayList<>();
-        List<String> attachFileNames = new ArrayList<>();
+        List<byte[]> attachList = newArrayList();
+        List<String> attachFileNames = newArrayList();
 
         for (String attachFilePath : attachFilePaths){
             attachFileNames.add(FilenameUtil.getFileName(attachFilePath));

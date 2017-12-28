@@ -15,6 +15,8 @@
  */
 package com.feilong.net.jsoup.top100;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,7 +25,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.jsoup.Jsoup;
@@ -72,7 +73,7 @@ public class Top100Mp3Downloader{
      * @return 键值对
      */
     private static Map<String, String> findIds(String url){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         try{
             URL u = URLUtil.toURL(url);
             Document doc = Jsoup.parse(u, 1000 * 10);

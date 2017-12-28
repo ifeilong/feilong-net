@@ -15,13 +15,18 @@
  */
 package com.feilong.net.jsoup.jinbaowang;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.DatePattern.TIMESTAMP;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,12 +43,6 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.net.jsoup.JsoupUtil;
 import com.feilong.net.jsoup.JsoupUtilException;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
-import static com.feilong.core.DatePattern.TIMESTAMP;
 
 /**
  * 进包网.
@@ -70,7 +69,7 @@ public class JinBaoWangCrawler{
      */
     public static void convertSkuCodeImagesToFile(Map<String, List<String>> skuCodeAndImagesMap,String directoryName){
         String columnTitles[] = { "code", "image" };
-        List<Object[]> dataList = new ArrayList<>();
+        List<Object[]> dataList = newArrayList();
         for (Map.Entry<String, List<String>> entry : skuCodeAndImagesMap.entrySet()){
             String code = entry.getKey();
             List<String> images = entry.getValue();
@@ -132,7 +131,7 @@ public class JinBaoWangCrawler{
         // 将内容以换行符转成数组
         String[] codeRows = StringUtil.split(content, "\r\n");
         if (isNotNullOrEmpty(codeRows)){
-            List<String> codeList = new ArrayList<>();
+            List<String> codeList = newArrayList();
             for (String codeRow : codeRows){
                 if (!codeRow.equals("商家编码") && isNotNullOrEmpty(codeRow)){
                     codeList.add(codeRow);
@@ -152,7 +151,7 @@ public class JinBaoWangCrawler{
      */
     public static Map<String, List<String>> getSkuCodeAndImagesMap(List<String> codes){
         Validate.notEmpty(codes, "codes can't be null/empty!");
-        Map<String, List<String>> skuCodeAndImages = new HashMap<>();
+        Map<String, List<String>> skuCodeAndImages = newHashMap();
         List<String> list = null;
         String skuDetailsRealUrl = null;
         for (String code : codes){
@@ -206,7 +205,7 @@ public class JinBaoWangCrawler{
             Document document = JsoupUtil.getDocument(skuDetailsRealUrl);
             if (null != document){
                 Elements elements = document.select("#goods-intro img");
-                List<String> list = new ArrayList<>();
+                List<String> list = newArrayList();
                 for (Element element : elements){
                     String url = element.attr("src");
                     list.add(url);

@@ -16,9 +16,9 @@
 package org.apache.http.auth;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpHost;
@@ -99,7 +99,7 @@ public class CredentialsTest{
         HttpHost targetHost = new HttpHost("pts.adidas.com.cn", 443, "https");
         HttpPost httpPost = new HttpPost("/j_spring_security_check");
 
-        List<NameValuePair> nameValuePairList = new ArrayList<>();
+        List<NameValuePair> nameValuePairList = newArrayList();
         nameValuePairList.add(new BasicNameValuePair("j_username", "xin.jin"));
         nameValuePairList.add(new BasicNameValuePair("j_password", "Aa123456"));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));

@@ -15,11 +15,11 @@
  */
 package com;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -79,7 +79,7 @@ public class HttpClientUtilTest2{
         }
 
         HttpPost httpPost = new HttpPost("http://targethost/login");
-        List<NameValuePair> nvps = new ArrayList<>();
+        List<NameValuePair> nvps = newArrayList();
         nvps.add(new BasicNameValuePair("username", "vip"));
         nvps.add(new BasicNameValuePair("password", "secret"));
         httpPost.setEntity(new UrlEncodedFormEntity(nvps));

@@ -16,10 +16,10 @@
 package com.feilong.net.httpclient3;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.net.HttpMethodType.GET;
 import static com.feilong.net.HttpMethodType.POST;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -31,8 +31,6 @@ import com.feilong.coreextension.entity.BackWarnEntity;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
-import com.feilong.net.httpclient3.HttpClientConfig;
-import com.feilong.net.httpclient3.HttpClientUtil;
 
 /**
  * The Class HttpClientUtilTest.
@@ -114,7 +112,7 @@ public class HttpClientUtilTest{
     public void getFLLogisticsTrack(){
         String uri = "http://firstlogistics.co.id/ws/demo/post/";
 
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = newHashMap();
 
         params.put("APPID", "EBDEMO01");
         params.put("ACCOUNT", "1300000430");
@@ -124,7 +122,7 @@ public class HttpClientUtilTest{
         uri = "http://117.102.249.96/ws/mpe/";
 
         uri = "http://117.102.249.96/ws/ecom/";
-        params = new HashMap<>();
+        params = newHashMap();
         params.put("APPID", "MP4PP01");
         params.put("ACCOUNT", "1300000430");
         params.put("FUNCTION", "track");
@@ -157,7 +155,7 @@ public class HttpClientUtilTest{
     public void checkTcashTransaction(){
         //		String uri = "http://202.3.208.89:11080/tcash-api/api/check/customer/transaction?refNum=290914112053368&userKey=testing&passKey=1234&signKey=1234";
         String uri = "http://202.3.208.89:11080/tcash-api/api/check/customer/transaction";
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = newHashMap();
 
         params.put("terminalId", "8021");
         params.put("refNum", "290914112053368");
@@ -179,7 +177,7 @@ public class HttpClientUtilTest{
     @Test
     public void testFund(){
         String uri = "http://www.howbuy.com/fund/ajax/board/index.htm?glrm=&keyword=&radio=2&orderField=jjjz&orderType=asc&cat=All&level=";
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = newHashMap();
 
         HttpClientConfig httpClientConfig = new HttpClientConfig(uri, params, POST);
 

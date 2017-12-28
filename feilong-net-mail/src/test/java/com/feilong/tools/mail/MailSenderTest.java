@@ -17,12 +17,12 @@ package com.feilong.tools.mail;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.FILE;
 import static org.apache.commons.lang3.SystemUtils.USER_HOME;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,7 +112,7 @@ public class MailSenderTest extends BaseMailSenderTest{
         List<FileInfoEntity> fileInfoEntityList = toList(fileInfoEntity, fileInfoEntity2, fileInfoEntity3, fileInfoEntity4);
 
         //---------------------------------------------------------------
-        Map<String, Object> contextKeyValues = new HashMap<>();
+        Map<String, Object> contextKeyValues = newHashMap();
         contextKeyValues.put("PREFIX_CONTENTID", DefaultMailSender.PREFIX_CONTENTID);
         contextKeyValues.put("fileInfoEntityList", fileInfoEntityList);
 

@@ -15,7 +15,8 @@
  */
 package com.feilong.tools.net.filetransfer.sftp;
 
-import java.util.LinkedHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -60,7 +61,7 @@ class SftpSessionUtil{
      * @return the map for log
      */
     static final Map<String, Object> getMapForLog(Session session){
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap();
 
         map.put("clientVersion", session.getClientVersion());
         map.put("serverVersion", session.getServerVersion());

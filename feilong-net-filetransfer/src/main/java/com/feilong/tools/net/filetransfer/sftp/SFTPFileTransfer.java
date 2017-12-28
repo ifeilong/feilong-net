@@ -16,6 +16,7 @@
 package com.feilong.tools.net.filetransfer.sftp;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 
@@ -23,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -182,7 +182,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
      */
     @Override
     protected Map<String, FileInfoEntity> getLsFileMap(String remotePath){
-        Map<String, FileInfoEntity> map = new HashMap<>();
+        Map<String, FileInfoEntity> map = newHashMap();
 
         try{
             @SuppressWarnings("unchecked")

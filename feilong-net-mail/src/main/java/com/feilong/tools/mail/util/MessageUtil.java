@@ -16,10 +16,10 @@
 package com.feilong.tools.mail.util;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +73,7 @@ public final class MessageUtil{
         int messagesLength = messages.length;
         LOGGER.info("messages length:[{}]", messagesLength);
         //---------------------------------------------------------------
-        List<MailInfo> list = new ArrayList<>();
+        List<MailInfo> list = newArrayList();
         for (int i = 0; i < messagesLength; ++i){
             Message message = messages[i];
 
@@ -148,7 +148,7 @@ public final class MessageUtil{
      */
     public static final Map<String, Object> getMapForLog(Message message){
         try{
-            Map<String, Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = newLinkedHashMap();
             map.put("from", getFromAddress(message));
             map.put("sentDate", message.getSentDate());
             map.put("size", FileUtil.formatSize(message.getSize()));

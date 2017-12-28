@@ -15,6 +15,7 @@
  */
 package com.feilong.tools.net.filetransfer.ftp;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 
@@ -22,7 +23,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -234,7 +234,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     @Override
     protected Map<String, FileInfoEntity> getLsFileMap(String remotePath){
         try{
-            Map<String, FileInfoEntity> map = new HashMap<>();
+            Map<String, FileInfoEntity> map = newHashMap();
             FTPFile[] ftpFiles = ftpClient.listFiles(remotePath);
             for (FTPFile ftpFile : ftpFiles){
                 map.put(ftpFile.getName(), buildFileInfoEntity(ftpFile));

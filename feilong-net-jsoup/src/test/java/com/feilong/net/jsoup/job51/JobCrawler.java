@@ -15,8 +15,9 @@
  */
 package com.feilong.net.jsoup.job51;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -54,7 +55,7 @@ public class JobCrawler{
             Document document = Jsoup.connect(enterprise_ShangHai).timeout(3000).get();
             //.searchPageNav
             Elements elements = document.select(".td2 a");
-            List<Enterprise> list = new ArrayList<>();
+            List<Enterprise> list = newArrayList();
             for (Element element : elements){
                 String enterpriseUrl = element.attr("href");
                 LOGGER.info(enterpriseUrl);

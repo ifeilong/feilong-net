@@ -16,9 +16,9 @@
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +58,7 @@ final class NameValuePairBuilder{
 
         //---------------------------------------------------------------
 
-        List<NameValuePair> params = new ArrayList<>();
+        List<NameValuePair> params = newArrayList();
 
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();

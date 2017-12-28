@@ -15,9 +15,10 @@
  */
 package com.feilong.tools.mail.ics;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -50,7 +51,7 @@ public class IcsBuilder{
         //T代表后面跟着时间，Z代表UTC统一时间
 
         ICalendar getiCalendar = mailSenderConfig.getiCalendar();
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
         map.put("uuid", UUID.randomUUID().toString());
         map.put("beginDate", toUTC(getiCalendar.getBeginDate()));
         map.put("endDate", toUTC(getiCalendar.getEndDate()));
@@ -64,29 +65,30 @@ public class IcsBuilder{
 
     public static String buildIcs(MailSenderConfig mailSenderConfig){
         StringBuffer buffer = new StringBuffer();
-        buffer.append("BEGIN:VCALENDAR\n" //
-                        + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" //
-                        + "VERSION:2.0\n" //
-                        + "METHOD:REQUEST\n" //
-                        + "BEGIN:VEVENT\n" //
-                        + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
-                        + "ORGANIZER:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
-                        + "DTSTART:20170322T060000Z\n" //
-                        + "DTEND:20170322T070000Z\n" //
-                        + "LOCATION:Conference room\n" //
-                        + "UID:" + UUID.randomUUID().toString() + "\n"//如果id相同的话，outlook会认为是同一个会议请求，所以使用uuid。  // 
-                        + "CATEGORIES:SuccessCentral Reminder\n" //
-                        + "DESCRIPTION:This the description of the meeting.<br>asd;flkjasdpfi\n\n" //
-                        + "SUMMARY:Test meeting request\n" //
-                        + "PRIORITY:5\n" //
-                        + "CLASS:PUBLIC\n"//
-                        + "BEGIN:VALARM\n" // 
-                        + "TRIGGER:-PT15M\n"//
-                        + "ACTION:DISPLAY\n" //
-                        + "DESCRIPTION:Reminder\n"//
-                        + "END:VALARM\n" //
-                        + "END:VEVENT\n"//
-                        + "END:VCALENDAR");
+        buffer.append(
+                        "BEGIN:VCALENDAR\n" //
+                                        + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" //
+                                        + "VERSION:2.0\n" //
+                                        + "METHOD:REQUEST\n" //
+                                        + "BEGIN:VEVENT\n" //
+                                        + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
+                                        + "ORGANIZER:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
+                                        + "DTSTART:20170322T060000Z\n" //
+                                        + "DTEND:20170322T070000Z\n" //
+                                        + "LOCATION:Conference room\n" //
+                                        + "UID:" + UUID.randomUUID().toString() + "\n"//如果id相同的话，outlook会认为是同一个会议请求，所以使用uuid。  // 
+                                        + "CATEGORIES:SuccessCentral Reminder\n" //
+                                        + "DESCRIPTION:This the description of the meeting.<br>asd;flkjasdpfi\n\n" //
+                                        + "SUMMARY:Test meeting request\n" //
+                                        + "PRIORITY:5\n" //
+                                        + "CLASS:PUBLIC\n"//
+                                        + "BEGIN:VALARM\n" // 
+                                        + "TRIGGER:-PT15M\n"//
+                                        + "ACTION:DISPLAY\n" //
+                                        + "DESCRIPTION:Reminder\n"//
+                                        + "END:VALARM\n" //
+                                        + "END:VEVENT\n"//
+                                        + "END:VCALENDAR");
 
         return buffer.toString();
     }

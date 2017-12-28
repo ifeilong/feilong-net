@@ -15,8 +15,9 @@
  */
 package com.feilong.tools.mail.util;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public final class InternetAddressUtil{
     public static final List<String> toUnicodeStringList(InternetAddress[] internetAddresses){
         Validate.notEmpty(internetAddresses, "internetAddresses can't be null/empty!");
 
-        List<String> list = new ArrayList<>();
+        List<String> list = newArrayList();
 
         for (InternetAddress internetAddress : internetAddresses){
             list.add(internetAddress.toUnicodeString());

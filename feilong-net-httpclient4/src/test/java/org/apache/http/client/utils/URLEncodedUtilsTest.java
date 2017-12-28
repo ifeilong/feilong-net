@@ -15,7 +15,9 @@
  */
 package org.apache.http.client.utils;
 
-import java.util.ArrayList;
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -23,8 +25,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  *
@@ -37,7 +37,7 @@ public class URLEncodedUtilsTest{
 
     @Test
     public final void test(){
-        List<NameValuePair> list = new ArrayList<>();
+        List<NameValuePair> list = newArrayList();
         list.add(new BasicNameValuePair("name", "jinxin"));
         list.add(new BasicNameValuePair("name1", "jinxin1"));
         list.add(new BasicNameValuePair("name2", "jinxin2"));
@@ -47,7 +47,7 @@ public class URLEncodedUtilsTest{
 
     @Test
     public final void test1(){
-        List<NameValuePair> list = new ArrayList<>();
+        List<NameValuePair> list = newArrayList();
         list.add(new BasicNameValuePair("name", "%"));
         LOGGER.debug(URLEncodedUtils.format(list, UTF8));
     }

@@ -15,7 +15,8 @@
  */
 package com.feilong.tools.mail;
 
-import java.util.HashMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Map;
 
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class HelloWorldMailSenderTest extends BaseMailSenderTest{
 
     @Test
     public void helloWorld(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
         String parseTemplateWithClasspathResourceLoader = new VelocityUtil()
                         .parseTemplateWithClasspathResourceLoader("hello world.vm", map);
 

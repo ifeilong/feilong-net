@@ -15,7 +15,8 @@
  */
 package com.feilong.tools.mail.util;
 
-import java.util.LinkedHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+
 import java.util.Map;
 
 import javax.mail.Folder;
@@ -47,7 +48,7 @@ public final class FolderUtil{
      *             the messaging exception
      */
     public static final Map<String, Object> getMapForLog(Folder folder) throws MessagingException{
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap();
         map.put("getName", folder.getName());
         map.put("getFullName", folder.getFullName());
         map.put("getMode", folder.getMode());

@@ -16,11 +16,11 @@
 package com.feilong.net.httpclient3.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.net.entity.HttpRequest.DEFAULT_USER_AGENT;
 import static org.apache.commons.httpclient.params.HttpMethodParams.RETRY_HANDLER;
 import static org.apache.commons.httpclient.params.HttpMethodParams.USER_AGENT;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.httpclient.Credentials;
@@ -98,7 +98,7 @@ public final class HttpMethodUtil{
      * @return the http method response attribute map for log
      */
     public static Map<String, Object> getHttpMethodResponseAttributeMapForLog(HttpMethod httpMethod,HttpClientConfig httpClientConfig){
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap();
 
         Object statusCode = null;
         try{
@@ -255,7 +255,7 @@ public final class HttpMethodUtil{
      * @return the http method attribute map for log
      */
     private static Map<String, Object> getHttpMethodRequestAttributeMapForLog(HttpMethod httpMethod){
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap();
         try{
             map.put("httpMethod.getName()", httpMethod.getName());
             map.put("httpMethod.getURI()", httpMethod.getURI().toString());
