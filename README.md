@@ -41,8 +41,8 @@ feilong-net jar你可以直接在 [仓库](https://github.com/venusdrogon/feilon
 	<dependencies>
 		....
 		<dependency>
-			<groupId>com.feilong.platform</groupId>
-			<artifactId>feilong-net</artifactId>
+			<groupId>com.feilong.net</groupId>
+			<artifactId>feilong-net-httpclient4</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 		....
