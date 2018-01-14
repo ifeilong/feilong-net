@@ -15,10 +15,8 @@
  */
 package com.feilong.tools.mail;
 
-import com.feilong.core.FeiLongVersion;
-
 /**
- * The Class MailHeader.
+ * 邮件相关header信息.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see javax.mail.Part#setHeader(String, String)
@@ -35,8 +33,10 @@ public final class MailHeader{
     /** 邮件客户端 版本. */
     public static final String X_MAILER                    = "X-mailer";
 
+    //---------------------------------------------------------------
+
     /** 邮件客户端 版本. */
-    public static final String X_MAILER_VALUE              = "FeiLong Mail Api " + FeiLongVersion.getVersion();
+    public static final String X_MAILER_VALUE              = "FeiLong Mail Api " + FeiLongMailVersion.getVersion();
 
     //---------------------------------------------------------------
 
