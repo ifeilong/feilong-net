@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer;
+package com.feilong.net.filetransfer;
 
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 
@@ -21,43 +21,35 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-/**
- * The Class SFTPFileTransferDownloadTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
+import com.feilong.net.filetransfer.FileTransfer;
+
+public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
 
     /** The file transfer. */
     @Autowired
-    @Qualifier("sftpFileTransfer")
+    @Qualifier("ftpFileTransfer")
     private FileTransfer fileTransfer;
 
-    //------------------------------------------------------------------------------------------
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.tools.net.filetransfer.FileTransferTest#download_file()
+    //---------------------------------------------------------------
+
+    /**
+     * 下载单个文件
      */
     @Override
     @Test
     public void downloadFile(){
-        String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML",
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-22_10-46-00.318-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160722-144626-073.XML" };
+        String remotePath = "/maven/settings.xml";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
-        fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
+        fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.tools.net.FileTransferTest#download_dir()
+    /**
+     * 下载整个目录
      */
     @Override
     @Test
     public void downloadDir(){
-        String remotePath = "/upload/Inbound/InventoryAdjustments/Archive";
+        String remotePath = "/webstore/InlineSales_Test/2011-07-05";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
     }
@@ -163,4 +155,5 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
                                  " " };
         fileTransfer.download("E:\\test\\1", remotePaths);
     }
+
 }

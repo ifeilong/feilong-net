@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer.ftp;
+package com.feilong.net.filetransfer.ftp;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
@@ -35,8 +35,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.tools.net.filetransfer.AbstractFileTransfer;
-import com.feilong.tools.net.filetransfer.FileTransferException;
+import com.feilong.net.filetransfer.AbstractFileTransfer;
+import com.feilong.net.filetransfer.FileTransferException;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

@@ -10,9 +10,9 @@
 	<util:properties id="p_ftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-ftp.properties"></util:properties>
 
 	<!-- ftp -->
-	<bean id="ftpFileTransfer" class="com.feilong.tools.net.filetransfer.ftp.FTPFileTransfer" scope="prototype">
+	<bean id="ftpFileTransfer" class="com.feilong.net.filetransfer.ftp.FTPFileTransfer" scope="prototype">
 		<property name="ftpFileTransferConfig">
-			<bean class="com.feilong.tools.net.filetransfer.ftp.FTPFileTransferConfig">
+			<bean class="com.feilong.net.filetransfer.ftp.FTPFileTransferConfig">
 				<property name="hostName" value="#{p_ftp['ftpFileTransfer.ftp.hostName']}" />
 				<property name="userName" value="#{p_ftp['ftpFileTransfer.ftp.userName']}" />
 				<property name="password">

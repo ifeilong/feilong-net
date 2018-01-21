@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer;
+package com.feilong.net.filetransfer;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.net.filetransfer.FileTransfer;
 
 /**
  * The Class SFTPUtilTest.

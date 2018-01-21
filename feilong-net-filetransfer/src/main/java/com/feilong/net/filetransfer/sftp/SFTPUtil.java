@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer.sftp;
+package com.feilong.net.filetransfer.sftp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 

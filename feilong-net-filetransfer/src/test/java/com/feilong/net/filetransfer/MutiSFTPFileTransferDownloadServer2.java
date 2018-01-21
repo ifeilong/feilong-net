@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer;
+package com.feilong.net.filetransfer;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -21,10 +21,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class MutiSFTPFileTransferDownloadServer1{
+import com.feilong.net.filetransfer.FileTransfer;
+
+public class MutiSFTPFileTransferDownloadServer2{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MutiSFTPFileTransferDownloadServer1.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MutiSFTPFileTransferDownloadServer2.class);
 
     /** The file transfer. */
     @Autowired
@@ -38,7 +40,7 @@ public class MutiSFTPFileTransferDownloadServer1{
                                  "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML" };
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
-
         LOGGER.info("end mutiSFTPFileTransferDownloadTest1");
     }
+
 }

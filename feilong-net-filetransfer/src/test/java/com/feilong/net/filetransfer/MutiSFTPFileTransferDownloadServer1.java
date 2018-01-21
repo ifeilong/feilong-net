@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer;
+package com.feilong.net.filetransfer;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-@ContextConfiguration(locations = { "classpath:spring/spring-sftp-adidas.xml" })
-public class SftpTest extends AbstractJUnit4SpringContextTests{
+import com.feilong.net.filetransfer.FileTransfer;
+
+public class MutiSFTPFileTransferDownloadServer1{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SftpTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MutiSFTPFileTransferDownloadServer1.class);
 
     /** The file transfer. */
     @Autowired
@@ -35,14 +34,13 @@ public class SftpTest extends AbstractJUnit4SpringContextTests{
     private FileTransfer        fileTransfer;
 
     @Test
-    public void test(){
-        LOGGER.debug("begin mutiSFTPFileTransferDownloadTest1");
+    public void downloadFile(){
+        LOGGER.info("begin mutiSFTPFileTransferDownloadTest1");
+        String[] remotePaths = {
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML" };
+        String localAbsoluteDirectoryPath = "E:\\test\\1";
+        fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
 
-        for (int i = 0, j = 3; i < j; ++i){
-            fileTransfer.getFileEntityMap("/Article Master/miadidas", "Product");
-        }
-
-        LOGGER.debug("end mutiSFTPFileTransferDownloadTest1");
+        LOGGER.info("end mutiSFTPFileTransferDownloadTest1");
     }
-
 }

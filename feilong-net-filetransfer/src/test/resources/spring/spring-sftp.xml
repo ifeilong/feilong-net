@@ -13,9 +13,9 @@
 	<util:properties id="p_sftp-sshConfig" location="classpath:config/fileTransfer-sftp-sshConfig.properties"></util:properties>
 
 	<!-- sftp scope="prototype" -->
-	<bean id="sftpFileTransfer" class="com.feilong.tools.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
+	<bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
 		<property name="sftpFileTransferConfig">
-			<bean class="com.feilong.tools.net.filetransfer.sftp.SFTPFileTransferConfig">
+			<bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig">
 				<property name="hostName" value="#{p_sftp['fileTransfer.sftp.hostName']}" />
 				<property name="userName" value="#{p_sftp['fileTransfer.sftp.userName']}" />
 				<property name="password">
@@ -29,7 +29,7 @@
 		</property>
 	</bean>
 
-	<bean class="com.feilong.tools.net.filetransfer.MutiSFTPFileTransferDownloadServer1" />
-	<bean class="com.feilong.tools.net.filetransfer.MutiSFTPFileTransferDownloadServer2" />
+	<bean class="com.feilong.net.filetransfer.MutiSFTPFileTransferDownloadServer1" />
+	<bean class="com.feilong.net.filetransfer.MutiSFTPFileTransferDownloadServer2" />
 
 </beans>

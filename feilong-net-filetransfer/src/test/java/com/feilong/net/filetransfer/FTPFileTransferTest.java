@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.net.filetransfer;
+package com.feilong.net.filetransfer;
 
 import java.util.Map;
 
@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.net.filetransfer.FileTransfer;
 
 /**
  * The Class FTPUtilTest.
