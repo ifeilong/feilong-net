@@ -22,22 +22,18 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.0</version>
 		</dependency>
 
+
 		<!-- <dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-			<version>1.5.2</version>
-			</dependency> -->
-
-		<!-- java mail -->
-		<!-- <dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
+			<version>1.6.0</version>
 			</dependency> -->
 
 
@@ -48,10 +44,10 @@
 			<version>${version.commons-email}</version>
 			</dependency> -->
 
-		<!-- velocity -->
+		<!--feilong-velocity -->
 		<dependency>
-			<groupId>com.feilong.platform.tools</groupId>
-			<artifactId>feilong-tools-velocity</artifactId>
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-velocity</artifactId>
 			<scope>test</scope>
 		</dependency>
 
