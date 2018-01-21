@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import com.feilong.net.mail.SessionFactory;
 
-public class EmailTest extends BaseMailSenderTest{
+public class EmailTest extends AbstractMailSenderTest{
 
     @Test
     public void testEmailTest() throws Exception{

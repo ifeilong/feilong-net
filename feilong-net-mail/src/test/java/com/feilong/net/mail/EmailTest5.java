@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import com.feilong.net.mail.SessionFactory;
 
-public class EmailTest5 extends BaseMailSenderTest{
+public class EmailTest5 extends AbstractMailSenderTest{
 
     @Test
     public void send() throws Exception{

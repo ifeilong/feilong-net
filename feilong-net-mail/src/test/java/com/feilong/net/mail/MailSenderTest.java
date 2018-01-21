@@ -39,7 +39,7 @@ import com.feilong.velocity.VelocityUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-public class MailSenderTest extends BaseMailSenderTest{
+public class MailSenderTest extends AbstractMailSenderTest{
 
     /**
      * Send mail1.

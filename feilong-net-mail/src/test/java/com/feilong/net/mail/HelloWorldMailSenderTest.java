@@ -29,7 +29,7 @@ import com.feilong.velocity.VelocityUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-public class HelloWorldMailSenderTest extends BaseMailSenderTest{
+public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
 
     @Test
     public void helloWorld(){

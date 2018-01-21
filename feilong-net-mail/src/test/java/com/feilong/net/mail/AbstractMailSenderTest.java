@@ -22,15 +22,10 @@ import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.After;
 import org.junit.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.net.mail.DefaultMailSender;
-import com.feilong.net.mail.MailSender;
 import com.feilong.net.mail.entity.MailSenderConfig;
 
 /**
@@ -39,13 +34,10 @@ import com.feilong.net.mail.entity.MailSenderConfig;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-public abstract class BaseMailSenderTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseMailSenderTest.class);
+public abstract class AbstractMailSenderTest{
 
     /** The mail sender config. */
-    protected MailSenderConfig  mailSenderConfig;
+    protected MailSenderConfig mailSenderConfig;
 
     /**
      * Before.
@@ -70,7 +62,7 @@ public abstract class BaseMailSenderTest{
 
         mailSenderConfig = BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
 
-        LOGGER.debug(JsonUtil.format(mailSenderConfig));
+        //LOGGER.debug(JsonUtil.format(mailSenderConfig));
     }
 
     /**

@@ -26,7 +26,7 @@ import com.feilong.net.mail.ics.ICalendarBuilder;
 import com.feilong.net.mail.ics.IcsBuilder;
 import com.feilong.net.mail.util.MimeType;
 
-public class Email1 extends BaseMailSenderTest{
+public class Email1 extends AbstractMailSenderTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(Email1.class);
