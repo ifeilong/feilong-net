@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
-public class MutiTest extends AbstractFileTransferTest{
+public class MultiTest extends AbstractFileTransferTest{
 
     @Autowired
     private MultiSFTPFileTransferDownloadServer1 mutiSFTPFileTransferDownloadTest1;
