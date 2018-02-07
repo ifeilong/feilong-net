@@ -27,10 +27,10 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 public class MutiTest extends AbstractFileTransferTest{
 
     @Autowired
-    private MutiSFTPFileTransferDownloadServer1 mutiSFTPFileTransferDownloadTest1;
+    private MultiSFTPFileTransferDownloadServer1 mutiSFTPFileTransferDownloadTest1;
 
     @Autowired
-    private MutiSFTPFileTransferDownloadServer2 mutiSFTPFileTransferDownloadTest2;
+    private MultiSFTPFileTransferDownloadServer2 mutiSFTPFileTransferDownloadTest2;
 
     @Test
     public void testMutiTest() throws InterruptedException{

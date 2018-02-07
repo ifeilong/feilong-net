@@ -29,9 +29,9 @@ import com.feilong.core.lang.ThreadUtil;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class MutiThreadGetResponseBodyAsStringGetTest{
+public class MultiThreadGetResponseBodyAsStringGetTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MutiThreadGetResponseBodyAsStringGetTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MultiThreadGetResponseBodyAsStringGetTest.class);
 
     @Test
     public void testGetResponseBodyAsString11(){

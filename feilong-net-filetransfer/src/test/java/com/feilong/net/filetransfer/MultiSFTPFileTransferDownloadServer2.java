@@ -23,10 +23,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.feilong.net.filetransfer.FileTransfer;
 
-public class MutiSFTPFileTransferDownloadServer2{
+public class MultiSFTPFileTransferDownloadServer2{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MutiSFTPFileTransferDownloadServer2.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MultiSFTPFileTransferDownloadServer2.class);
 
     /** The file transfer. */
     @Autowired
