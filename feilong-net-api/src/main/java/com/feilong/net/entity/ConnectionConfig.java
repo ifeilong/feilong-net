@@ -114,6 +114,31 @@ public final class ConnectionConfig{
     private String                       contentCharset = UTF8;
 
     //---------------------------------------------------------------
+    /**
+     * Instantiates a new connection config.
+     * 
+     * @since 1.11.0
+     */
+    public ConnectionConfig(){
+        super();
+    }
+
+    /**
+     * Instantiates a new connection config.
+     *
+     * @param userName
+     *            the user name
+     * @param password
+     *            the password
+     * @since 1.11.0
+     */
+    public ConnectionConfig(String userName, String password){
+        super();
+        this.userName = userName;
+        this.password = password;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
