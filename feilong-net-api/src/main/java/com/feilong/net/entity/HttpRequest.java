@@ -84,6 +84,21 @@ public class HttpRequest{
     }
 
     /**
+     * Instantiates a new http request.
+     *
+     * @param uri
+     *            the uri
+     * @param httpMethodType
+     *            the http method type
+     * @since 1.11.0
+     */
+    public HttpRequest(String uri, HttpMethodType httpMethodType){
+        super();
+        this.uri = uri;
+        this.httpMethodType = httpMethodType;
+    }
+
+    /**
      * The Constructor.
      *
      * @param uri
