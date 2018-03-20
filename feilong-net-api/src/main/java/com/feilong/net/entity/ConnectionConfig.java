@@ -35,7 +35,7 @@ public final class ConnectionConfig{
     //---------------------------------------------------------------
 
     /**
-     * HTTP标准规范中定义的认证模式的用户名.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -50,7 +50,7 @@ public final class ConnectionConfig{
     private String                       userName;
 
     /**
-     * HTTP标准规范中定义的认证模式的密码.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
@@ -278,7 +278,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式的用户名.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -295,7 +295,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式的用户名.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -313,7 +313,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式的密码.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
@@ -329,7 +329,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式的密码.
+     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
