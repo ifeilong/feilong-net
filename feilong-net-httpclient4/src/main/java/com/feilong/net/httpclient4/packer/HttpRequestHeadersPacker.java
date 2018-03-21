@@ -15,15 +15,19 @@
  */
 package com.feilong.net.httpclient4.packer;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 
 /**
@@ -31,11 +35,12 @@ import com.feilong.net.entity.HttpRequest;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
+ * @since 1.11.0 rename from HeadersPacker
  */
-public final class HeadersPacker{
+public final class HttpRequestHeadersPacker{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HeadersPacker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestHeadersPacker.class);
 
     //---------------------------------------------------------------
 
@@ -46,8 +51,31 @@ public final class HeadersPacker{
      *            the http uri request
      * @param headerMap
      *            请求header map, 如果 <code>headerMap</code> 是null或者empty,什么都不做<br>
+     * @param connectionConfig
+     *            the connection config
      */
-    public static void setHeaders(HttpUriRequest httpUriRequest,Map<String, String> headerMap){
+    public static void setHeaders(HttpUriRequest httpUriRequest,Map<String, String> headerMap,ConnectionConfig connectionConfig){
+        setDefaultHeader(httpUriRequest);
+
+        setBasicAuthenticationHeader(httpUriRequest, connectionConfig);
+
+        //---------------------------------------------------------------
+
+        setHeaderMap(httpUriRequest, headerMap);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 设置 header map.
+     *
+     * @param httpUriRequest
+     *            the http uri request
+     * @param headerMap
+     *            the header map
+     * @since 1.11.0
+     */
+    private static void setHeaderMap(HttpUriRequest httpUriRequest,Map<String, String> headerMap){
         if (isNullOrEmpty(headerMap)){
             LOGGER.trace("input [headerMap] is null or empty ,skip!");
             return;
@@ -65,12 +93,39 @@ public final class HeadersPacker{
         }
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 设置 basic authentication header.
+     *
+     * @param httpUriRequest
+     *            the http uri request
+     * @param connectionConfig
+     *            the connection config
+     * @since 1.11.0
+     */
+    private static void setBasicAuthenticationHeader(HttpUriRequest httpUriRequest,ConnectionConfig connectionConfig){
+        String userName = connectionConfig.getUserName();
+        String password = connectionConfig.getPassword();
+
+        if (isNotNullOrEmpty(userName) && isNotNullOrEmpty(password)){
+
+            String auth = userName + ":" + password;
+            String authHeader = "Basic " + new String(Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII"))));
+
+            httpUriRequest.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
+        }
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * 设置默认头.
-     * 
+     *
      * @param httpUriRequest
+     *            the new default header
      */
-    public static void setDefaultHeader(HttpUriRequest httpUriRequest){
+    private static void setDefaultHeader(HttpUriRequest httpUriRequest){
         httpUriRequest.setHeader(HttpHeaders.USER_AGENT, HttpRequest.DEFAULT_USER_AGENT);
         //httpUriRequest.setHeader("Connection", "keep-alive");
     }

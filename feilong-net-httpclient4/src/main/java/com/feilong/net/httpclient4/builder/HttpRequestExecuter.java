@@ -63,7 +63,7 @@ public final class HttpRequestExecuter{
 
         //---------------------------------------------------------------
         try{
-            return HttpRequestExecuter.execute(httpUriRequest);
+            return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
         }catch (SocketTimeoutException e){
             String pattern = "{},httpRequest:[{}],useConnectionConfig:[{}]";
             String message = Slf4jUtil.format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
@@ -88,8 +88,9 @@ public final class HttpRequestExecuter{
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    private static HttpResponse execute(HttpUriRequest httpUriRequest) throws ClientProtocolException,IOException{
-        HttpClient httpClient = HttpClientBuilder.build();
+    private static HttpResponse execute(HttpUriRequest httpUriRequest,ConnectionConfig connectionConfig)
+                    throws ClientProtocolException,IOException{
+        HttpClient httpClient = HttpClientBuilder.build(connectionConfig);
         return httpClient.execute(httpUriRequest);
     }
 }

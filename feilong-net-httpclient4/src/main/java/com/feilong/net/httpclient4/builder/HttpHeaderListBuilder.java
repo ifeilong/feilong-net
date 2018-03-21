@@ -41,6 +41,8 @@ final class HttpHeaderListBuilder{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpHeaderListBuilder.class);
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private HttpHeaderListBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

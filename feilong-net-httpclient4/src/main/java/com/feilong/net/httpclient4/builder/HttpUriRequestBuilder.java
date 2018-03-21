@@ -24,7 +24,7 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.httpurirequest.HttpUriRequestFactory;
-import com.feilong.net.httpclient4.packer.HeadersPacker;
+import com.feilong.net.httpclient4.packer.HttpRequestHeadersPacker;
 
 /**
  * 专门用来构造 {@link HttpUriRequest}.
@@ -69,11 +69,9 @@ public final class HttpUriRequestBuilder{
         }
 
         //---------------------------------------------------------------
-
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.buildHttpUriRequest(httpRequest, connectionConfig);
 
-        HeadersPacker.setDefaultHeader(httpUriRequest);
-        HeadersPacker.setHeaders(httpUriRequest, httpRequest.getHeaderMap());
+        HttpRequestHeadersPacker.setHeaders(httpUriRequest, httpRequest.getHeaderMap(), connectionConfig);
 
         return httpUriRequest;
     }

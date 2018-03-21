@@ -15,47 +15,14 @@
  */
 package org.apache.http.auth;
 
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
-
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.http.HttpHost;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.AuthCache;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.6
- */
 public class CredentialsTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CredentialsTest.class);
-
-    /**
-     * TestHttpClientUtilTest.
-     */
     @Test
     public void testHttpClientUtilTest12(){
-
         //任何用户认证的过程，都需要一系列的凭证来确定用户的身份。最简单的用户凭证可以是用户名和密码这种形式。UsernamePasswordCredentials这个类可以用来表示这种情况，这种凭据包含明文的用户名和密码。
         UsernamePasswordCredentials creds = new UsernamePasswordCredentials("user", "pwd");
         System.out.println(creds.getUserPrincipal().getName());
@@ -67,9 +34,6 @@ public class CredentialsTest{
         System.out.println(creds1.getPassword());
     }
 
-    /**
-     * TestCredentialsTest.
-     */
     @Test
     public void testCredentialsTest(){
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
@@ -83,69 +47,5 @@ public class CredentialsTest{
         System.out.println(credentialsProvider.getCredentials(new AuthScope("somehost", 8080, "realm", "basic")));
         System.out.println(credentialsProvider.getCredentials(new AuthScope("otherhost", 8080, "realm", "basic")));
         System.out.println(credentialsProvider.getCredentials(new AuthScope("otherhost", 8080, null, "ntlm")));
-
-    }
-
-    /**
-     * TestCredentialsTest.
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
-     */
-    @Test
-    public void testCredentialsTest5() throws ClientProtocolException,IOException{
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        HttpHost targetHost = new HttpHost("pts.adidas.com.cn", 443, "https");
-        HttpPost httpPost = new HttpPost("/j_spring_security_check");
-
-        List<NameValuePair> nameValuePairList = newArrayList();
-        nameValuePairList.add(new BasicNameValuePair("j_username", "xin.jin"));
-        nameValuePairList.add(new BasicNameValuePair("j_password", "Aa123456"));
-        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
-
-        HttpClientContext httpClientContext = buildHttpClientContext(targetHost);
-        CloseableHttpResponse closeableHttpResponse = httpclient.execute(targetHost, httpPost, httpClientContext);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(EntityUtils.toString(closeableHttpResponse.getEntity(), UTF8));
-        }
-    }
-
-    /**
-     * @return
-     * @since 1.10.6
-     */
-    public HttpClientContext buildHttpClientContext(HttpHost targetHost){
-
-        CredentialsProvider credentialsProvider = buildCredentialsProvider(targetHost);
-        // Lookup<AuthSchemeProvider> authRegistry = <...>
-        //    // 创建 AuthCache 对象
-        AuthCache authCache = new BasicAuthCache();
-        //    //创建 BasicScheme，并把它添加到 auth cache中
-        BasicScheme basicAuth = new BasicScheme();
-        authCache.put(targetHost, basicAuth);
-
-        // 把AutoCache添加到上下文中
-        HttpClientContext httpClientContext = HttpClientContext.create();
-        httpClientContext.setCredentialsProvider(credentialsProvider);
-        // context.setAuthSchemeRegistry(authRegistry);
-        // context.setAuthCache(authCache);
-
-        return httpClientContext;
-    }
-
-    /**
-     * @param targetHost
-     * @return
-     * @since 1.10.6
-     */
-    public CredentialsProvider buildCredentialsProvider(HttpHost targetHost){
-        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-
-        UsernamePasswordCredentials usernamePasswordCredentials = new UsernamePasswordCredentials("adidas", "ad20170731");
-        credentialsProvider.setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()), usernamePasswordCredentials);
-
-        return credentialsProvider;
     }
 }

@@ -16,13 +16,18 @@
 package com.feilong.net.httpclient4.builder;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+
+import com.feilong.net.entity.ConnectionConfig;
 
 /**
  * HttpClient 构造器.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * 
+ * @see org.apache.http.impl.client.HttpClients#createDefault()
+ * @see org.apache.http.impl.client.HttpClients#custom()
+ * @see org.apache.http.impl.client.HttpClientBuilder#create()
  * @since 1.10.6
  */
 class HttpClientBuilder{
@@ -41,14 +46,14 @@ class HttpClientBuilder{
      *
      * @return the closeable http client
      */
-    static HttpClient build(){
-        //TODO 处理 https
-        CloseableHttpClient createDefault = HttpClients.createDefault();
+    //TODO 处理 https
+    static HttpClient build(ConnectionConfig connectionConfig){
+        HttpClient httpClient = HttpClients.custom()//
+                        //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
+                        .build();
 
-        //        org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
-        //        customHttpClientBuilder.setSSLContext(sslContext);
-        //        customHttpClientBuilder.setConnectionManager(connManager);
-        //        CloseableHttpClient httpClient = customHttpClientBuilder.build();
-        return createDefault;
+        //customHttpClientBuilder.setSSLContext(sslContext);
+        //customHttpClientBuilder.setConnectionManager(connManager);
+        return httpClient;
     }
 }
