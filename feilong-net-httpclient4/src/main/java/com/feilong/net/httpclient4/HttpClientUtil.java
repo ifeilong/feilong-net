@@ -727,6 +727,8 @@ public final class HttpClientUtil{
         return getResponseBodyAsString(httpRequest);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 发送请求,获得请求的响应内容.
      * <h3>示例:</h3>
@@ -773,6 +775,44 @@ public final class HttpClientUtil{
         Validate.notNull(httpRequest, "httpRequest can't be null!");
         return getResponseBodyAsString(httpRequest, null);
     }
+
+    /**
+     * 发送请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            the uri
+     * @param requestParamMap
+     *            the request param map
+     * @param httpMethod
+     *            the method
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.11.0
+     */
+    public static String getResponseBodyAsString(String uri,Map<String, String> requestParamMap,String httpMethod){
+        Validate.notBlank(uri, "uri can't be blank!");
+        return getResponseBodyAsString(new HttpRequest(uri, requestParamMap, httpMethod), null);
+    }
+
+    /**
+     * 发送请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            the uri
+     * @param requestParamMap
+     *            the request param map
+     * @param httpMethodType
+     *            the http method type
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.11.0
+     */
+    public static String getResponseBodyAsString(String uri,Map<String, String> requestParamMap,HttpMethodType httpMethodType){
+        Validate.notBlank(uri, "uri can't be blank!");
+        return getResponseBodyAsString(new HttpRequest(uri, requestParamMap, httpMethodType), null);
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 发送请求,获得请求的响应内容.
