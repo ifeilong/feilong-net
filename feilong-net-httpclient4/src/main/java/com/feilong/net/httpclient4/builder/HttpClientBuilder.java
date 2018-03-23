@@ -48,12 +48,22 @@ class HttpClientBuilder{
      */
     //TODO 处理 https
     static HttpClient build(ConnectionConfig connectionConfig){
-        HttpClient httpClient = HttpClients.custom()//
-                        //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
-                        .build();
+
+        org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
 
         //customHttpClientBuilder.setSSLContext(sslContext);
         //customHttpClientBuilder.setConnectionManager(connManager);
-        return httpClient;
+
+        //        String signCert_path = "";
+        //        String signCert_password = "";
+        //        String signCert_type = "";
+        //
+        //        customHttpClientBuilder
+        //                        .setSSLSocketFactory(LayeredConnectionSocketFactoryBuilder.build(signCert_path, signCert_password, signCert_type));
+
+        return customHttpClientBuilder//
+                        //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
+                        .build();
     }
+
 }
