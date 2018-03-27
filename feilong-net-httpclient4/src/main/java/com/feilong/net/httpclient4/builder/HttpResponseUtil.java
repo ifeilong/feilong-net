@@ -27,6 +27,7 @@ import org.apache.http.util.EntityUtils;
 import com.feilong.net.UncheckedHttpException;
 
 /**
+ * {@link HttpResponse} 工具类.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6

@@ -48,7 +48,6 @@ class HttpClientBuilder{
      */
     //TODO 处理 https
     static HttpClient build(ConnectionConfig connectionConfig){
-
         org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
 
         //customHttpClientBuilder.setSSLContext(sslContext);
