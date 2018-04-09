@@ -15,11 +15,8 @@
  */
 package com.feilong.netpay.util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -32,6 +29,7 @@ import javax.net.ssl.SSLContext;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.ssl.SSLContexts;
 
+import com.feilong.net.KeyStoreBuilder;
 import com.feilong.net.ssl.SSLProtocol;
 
 /**
@@ -68,16 +66,12 @@ public class SSLConnectionSocketFactoryBuilder{
      *             the unrecoverable key exception
      */
     public static SSLConnectionSocketFactory build(String signCertPath,String signCertPassword,String signCertType)
-                    throws KeyStoreException,FileNotFoundException,IOException,NoSuchAlgorithmException,CertificateException,
-                    KeyManagementException,UnrecoverableKeyException{
-        KeyStore keyStore = buildKeyStore(signCertPath, signCertPassword, signCertType);
-
-        // Trust own CA and all self-signed certs
-        // 加载证书密码，默认为商户ID
-        SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, signCertPassword.toCharArray()).build();
+                    throws KeyStoreException,IOException,NoSuchAlgorithmException,CertificateException,KeyManagementException,
+                    UnrecoverableKeyException{
+        SSLContext sslContext = buildSSLContext(signCertPath, signCertPassword, signCertType);
         // Allow TLSv1 protocol only
         return new SSLConnectionSocketFactory(
-                        sslcontext,
+                        sslContext,
                         new String[] { SSLProtocol.TLSv1 },
                         null,
                         SSLConnectionSocketFactory.getDefaultHostnameVerifier());
@@ -85,35 +79,12 @@ public class SSLConnectionSocketFactoryBuilder{
 
     //---------------------------------------------------------------
 
-    /**
-     * Builds the key store.
-     *
-     * @param signCertPath
-     *            the sign cert path
-     * @param signCertPassword
-     *            the sign cert password
-     * @param signCertType
-     *            the sign cert type
-     * @return the key store
-     * @throws KeyStoreException
-     *             the key store exception
-     * @throws FileNotFoundException
-     *             the file not found exception
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @throws NoSuchAlgorithmException
-     *             the no such algorithm exception
-     * @throws CertificateException
-     *             the certificate exception
-     */
-    private static KeyStore buildKeyStore(String signCertPath,String signCertPassword,String signCertType)
-                    throws KeyStoreException,FileNotFoundException,IOException,NoSuchAlgorithmException,CertificateException{
-        //拼接证书的路径
-        KeyStore keyStore = KeyStore.getInstance(signCertType);
+    private static SSLContext buildSSLContext(String signCertPath,String signCertPassword,String signCertType) throws KeyStoreException,
+                    IOException,NoSuchAlgorithmException,CertificateException,KeyManagementException,UnrecoverableKeyException{
+        KeyStore keyStore = KeyStoreBuilder.build(signCertPath, signCertPassword, signCertType);
 
-        //加载本地的证书进行https加密传输
-        InputStream inputStream = new FileInputStream(new File(signCertPath));
-        keyStore.load(inputStream, signCertPassword.toCharArray()); //加载证书密码，默认为商户ID
-        return keyStore;
+        // Trust own CA and all self-signed certs
+        return SSLContexts.custom().loadKeyMaterial(keyStore, signCertPassword.toCharArray()).build();
     }
+
 }
