@@ -26,10 +26,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class MyTest{
+public class MyTestMain{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyTestMain.class);
 
     /**
      * The main method.

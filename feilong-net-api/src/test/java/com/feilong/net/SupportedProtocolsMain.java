@@ -26,7 +26,7 @@ import com.feilong.net.ssl.SSLProtocol;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
-public class SupportedProtocolsTest{
+public class SupportedProtocolsMain{
 
     public static void main(String[] args) throws Exception{
         SSLContext context = SSLContext.getInstance(SSLProtocol.SSL);
