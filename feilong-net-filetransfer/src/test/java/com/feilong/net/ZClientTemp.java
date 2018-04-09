@@ -30,10 +30,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ZClientTest{
+public class ZClientTemp{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ZClientTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZClientTemp.class);
 
     /**
      * Gets the files.
