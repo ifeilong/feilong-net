@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4.builder;
 
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClients;
 
 import com.feilong.net.entity.ConnectionConfig;
@@ -29,8 +30,9 @@ import com.feilong.net.entity.ConnectionConfig;
  * @see org.apache.http.impl.client.HttpClients#custom()
  * @see org.apache.http.impl.client.HttpClientBuilder#create()
  * @since 1.10.6
+ * @since 1.11.0 change class Access Modifiers
  */
-class HttpClientBuilder{
+public class HttpClientBuilder{
 
     /** Don't let anyone instantiate this class. */
     private HttpClientBuilder(){
@@ -44,25 +46,39 @@ class HttpClientBuilder{
     /**
      * 创造 {@link HttpClient}.
      *
+     * @param connectionConfig
+     *            the connection config
      * @return the closeable http client
      */
-    //TODO 处理 https
-    static HttpClient build(ConnectionConfig connectionConfig){
+    public static HttpClient build(ConnectionConfig connectionConfig){
+        return build(connectionConfig, null);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the.
+     *
+     * @param connectionConfig
+     *            the connection config
+     * @param layeredConnectionSocketFactory
+     *            the layered connection socket factory
+     * @return 如果 <code>layeredConnectionSocketFactory</code> 不是null,将会设置
+     *         {@link org.apache.http.impl.client.HttpClientBuilder#setSSLSocketFactory(LayeredConnectionSocketFactory)}<br>
+     */
+    public static HttpClient build(ConnectionConfig connectionConfig,LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
+
+        if (null != layeredConnectionSocketFactory){
+            customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
+        }
 
         //customHttpClientBuilder.setSSLContext(sslContext);
         //customHttpClientBuilder.setConnectionManager(connManager);
+        //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
 
-        //        String signCert_path = "";
-        //        String signCert_password = "";
-        //        String signCert_type = "";
-        //
-        //        customHttpClientBuilder
-        //                        .setSSLSocketFactory(LayeredConnectionSocketFactoryBuilder.build(signCert_path, signCert_password, signCert_type));
-
-        return customHttpClientBuilder//
-                        //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
-                        .build();
+        //---------------------------------------------------------------
+        return customHttpClientBuilder.build();
     }
 
 }

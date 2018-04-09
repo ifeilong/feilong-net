@@ -65,6 +65,8 @@ final class HttpEntityBuilder{
         return buildFormHttpEntity(httpRequest.getParamMap());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the form http entity.
      *
