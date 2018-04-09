@@ -27,6 +27,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 
+import com.feilong.net.ssl.SSLProtocol;
 import com.feilong.net.ssl.TrustAnyTrustManager;
 
 /**
@@ -132,8 +133,8 @@ class HttpsURLConnectionHelper{
      * 
      */
     private static SSLSocketFactory buildSSLSocketFactory() throws NoSuchAlgorithmException,KeyManagementException{
-        String tlsProtocol = "TLSv1.1";
-        //String tlsProtocol = "TLS";
+        String tlsProtocol = SSLProtocol.TLSv11;
+        //String tlsProtocol = SSLProtocol.TLS;
         SSLContext sslContext = SSLContext.getInstance(tlsProtocol);
 
         KeyManager[] keyManagers = null;

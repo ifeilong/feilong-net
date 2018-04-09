@@ -92,6 +92,8 @@ final class RequestConfigBuilder{
         builder.setConnectionRequestTimeout(1 * MILLISECOND_PER_SECONDS);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 设置代理.
      *

@@ -19,6 +19,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
+import com.feilong.net.ssl.SSLProtocol;
+
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -27,7 +29,7 @@ import javax.net.ssl.SSLSocketFactory;
 public class SupportedProtocolsTest{
 
     public static void main(String[] args) throws Exception{
-        SSLContext context = SSLContext.getInstance("TLS");
+        SSLContext context = SSLContext.getInstance(SSLProtocol.SSL);
         context.init(null, null, null);
 
         SSLSocketFactory factory = context.getSocketFactory();

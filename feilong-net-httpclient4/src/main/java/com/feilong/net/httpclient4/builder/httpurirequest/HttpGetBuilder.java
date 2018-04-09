@@ -59,6 +59,8 @@ final class HttpGetBuilder{
         return httpGet;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the uri.
      *
