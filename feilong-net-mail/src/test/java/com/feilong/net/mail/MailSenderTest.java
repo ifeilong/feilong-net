@@ -30,7 +30,6 @@ import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 import com.feilong.io.entity.FileInfoEntity;
-import com.feilong.net.mail.DefaultMailSender;
 import com.feilong.velocity.VelocityUtil;
 
 /**
@@ -123,7 +122,7 @@ public class MailSenderTest extends AbstractMailSenderTest{
         mailSenderConfig.setContent(textContent);
 
         String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
-        fileString = "E:\\Workspaces\\baozun\\BaozunSql\\train\\20150417Spring事务\\ppt-contents.png";
+        fileString = "E:\\Workspaces\\train\\20150417Spring事务\\ppt-contents.png";
         mailSenderConfig.setAttachFilePaths(fileString);
     }
 

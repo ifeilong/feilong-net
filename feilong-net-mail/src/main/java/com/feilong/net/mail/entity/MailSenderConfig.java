@@ -77,12 +77,12 @@ public class MailSenderConfig extends BaseConfig{
 
     //-----------------附件----------------------------------------------
 
-    /** 邮件附件的文件全路径, 比如 E:\Workspaces\baozun\BaozunSql\train\20150417Spring事务\ppt-contents.png. */
+    /** 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.png. */
     private String[]  attachFilePaths;
 
     //-----------------注意:这个参数 是 ...----------------------------------------------
     /**
-     * 设置 邮件附件的文件全路径, 比如 E:\Workspaces\baozun\BaozunSql\train\20150417Spring事务\ppt-contents.
+     * 设置 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.
      *
      * @param attachFilePaths
      *            the attachFilePaths to set
@@ -286,7 +286,7 @@ public class MailSenderConfig extends BaseConfig{
     }
 
     /**
-     * 获得 邮件附件的文件全路径, 比如 E:\Workspaces\baozun\BaozunSql\train\20150417Spring事务\ppt-contents.
+     * 获得 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.
      *
      * @return the attachFilePaths
      */

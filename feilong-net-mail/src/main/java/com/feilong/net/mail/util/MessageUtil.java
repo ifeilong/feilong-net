@@ -252,7 +252,7 @@ public final class MessageUtil{
     private static String doWithTextAll(Part part) throws MessagingException,IOException{
         //com.sun.mail.imap.IMAPMessage cannot be cast to javax.mail.internet.MimeBodyPart
 
-        //see 2016年9月7日(星期三) 下午5:21 yang.wang@baozun.cn email
+        //see 2016年9月7日(星期三) 下午5:21 yang.wang email
         Object content = part.getContent();
 
         String pattern = "content mimeType:[{}],match with:--->[{}],getContent value:[{}]";
