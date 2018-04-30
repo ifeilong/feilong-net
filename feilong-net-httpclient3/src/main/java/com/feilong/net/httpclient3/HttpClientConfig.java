@@ -79,6 +79,8 @@ public class HttpClientConfig extends HttpRequest{
         super(uri, paramMap, httpMethodType);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 一组包含安全规则和明文密码的凭据.这个实现对由HTTP标准规范中定义的标准认证模式是足够的.
      *

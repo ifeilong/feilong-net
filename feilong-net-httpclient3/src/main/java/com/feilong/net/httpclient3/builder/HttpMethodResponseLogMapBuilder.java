@@ -27,7 +27,7 @@ import com.feilong.net.httpclient3.HttpClientConfig;
  * The Class HttpMethodUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.5.4
+ * @since 1.11.1
  */
 public final class HttpMethodResponseLogMapBuilder{
 

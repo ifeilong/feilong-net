@@ -66,6 +66,8 @@ final class NameValuePairUtil{
         return nameValuePairs;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将nameValuePairs转成Map.
      *
@@ -78,6 +80,8 @@ final class NameValuePairUtil{
         if (isNullOrEmpty(nameValuePairs)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
         Map<String, String> map = new TreeMap<>();
         for (NameValuePair nameValuePair : nameValuePairs){
             map.put(nameValuePair.getName(), nameValuePair.getValue());
