@@ -49,14 +49,22 @@ public class HttpClientBuilder{
      * @see MultiThreadedHttpConnectionManager
      */
     static HttpClient build(){
-        return new HttpClient();
+        return buildDefault();
     }
 
     //---------------------------------------------------------------
 
-    static HttpClient build1(){
+    static HttpClient buildMulti(){
         //TODO 研究下  MultiThreadedHttpConnectionManager
         MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
+
+        //        connectionManager.setDefaultMaxConnectionsPerHost(32); // 2
+        //        connectionManager.setMaxTotalConnections(128); // 20
+
         return new HttpClient(connectionManager);
+    }
+
+    static HttpClient buildDefault(){
+        return new HttpClient();
     }
 }

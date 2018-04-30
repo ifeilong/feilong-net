@@ -203,6 +203,7 @@ public final class HttpMethodUtil{
      */
     private static void setAuthentication(HttpMethod httpMethod,HttpClientConfig httpClientConfig,HttpClient httpClient){
         UsernamePasswordCredentials usernamePasswordCredentials = httpClientConfig.getUsernamePasswordCredentials();
+
         // 设置认证
         if (isNotNullOrEmpty(usernamePasswordCredentials)){
             httpMethod.setDoAuthentication(true);
@@ -215,9 +216,10 @@ public final class HttpMethodUtil{
             // 1.1抢先认证(Preemptive Authentication)
             // 在这种模式时,HttpClient会主动将basic认证应答信息传给服务器,即使在某种情况下服务器可能返回认证失败的应答,
             // 这样做主要是为了减少连接的建立.
-
             HttpClientParams httpClientParams = new HttpClientParams();
             httpClientParams.setAuthenticationPreemptive(true);
+
+            //---------------------------------------------------------------
             httpClient.setParams(httpClientParams);
         }
     }

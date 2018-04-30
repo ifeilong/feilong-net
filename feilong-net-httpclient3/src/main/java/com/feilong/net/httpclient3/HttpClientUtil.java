@@ -124,6 +124,9 @@ public final class HttpClientUtil{
      */
     public static String getResponseBodyAsString(HttpClientConfig httpClientConfig){
         HttpMethod httpMethod = HttpMethodUtil.buildHttpMethod(httpClientConfig);
+
+        //---------------------------------------------------------------
+
         try{
             // 得到返回的数据
             String responseBodyAsString = httpMethod.getResponseBodyAsString();
@@ -132,11 +135,14 @@ public final class HttpClientUtil{
                 LOGGER.debug("getHttpMethodResponseAttributeMapForLog:{}", JsonUtil.format(map));
             }
             return responseBodyAsString;
+
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new UncheckedHttpException(e);
         }finally{
-            httpMethod.releaseConnection();// 释放连接
+
+            //对每一个HttpClient.executeMethod须有一个method.releaseConnection()与之匹配. 
+            httpMethod.releaseConnection();
         }
     }
 }
