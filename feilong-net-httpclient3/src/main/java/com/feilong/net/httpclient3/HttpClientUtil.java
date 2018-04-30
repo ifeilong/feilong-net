@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
+import com.feilong.net.httpclient3.builder.HttpMethodLogMapBuilder;
 import com.feilong.net.httpclient3.builder.HttpMethodUtil;
 
 /**
@@ -67,6 +68,8 @@ public final class HttpClientUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil.class);
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private HttpClientUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -90,6 +93,8 @@ public final class HttpClientUtil{
         return getResponseBodyAsString(uri, null, httpMethodType);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 response body as string.
      *
@@ -107,6 +112,8 @@ public final class HttpClientUtil{
         return getResponseBodyAsString(httpClientConfig);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the http method response body as string.
      *
@@ -118,11 +125,10 @@ public final class HttpClientUtil{
     public static String getResponseBodyAsString(HttpClientConfig httpClientConfig){
         HttpMethod httpMethod = HttpMethodUtil.buildHttpMethod(httpClientConfig);
         try{
-
             // 得到返回的数据
             String responseBodyAsString = httpMethod.getResponseBodyAsString();
             if (LOGGER.isDebugEnabled()){
-                Map<String, Object> map = HttpMethodUtil.getHttpMethodResponseAttributeMapForLog(httpMethod, httpClientConfig);
+                Map<String, Object> map = HttpMethodLogMapBuilder.build(httpMethod, httpClientConfig);
                 LOGGER.debug("getHttpMethodResponseAttributeMapForLog:{}", JsonUtil.format(map));
             }
             return responseBodyAsString;

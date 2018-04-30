@@ -25,11 +25,21 @@ import org.apache.commons.httpclient.NameValuePair;
 import com.feilong.net.HttpMethodType;
 
 /**
- * 
+ * The Class HttpMethodBuilder.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
 public class HttpMethodBuilder{
+
+    /** Don't let anyone instantiate this class. */
+    private HttpMethodBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 uri and params.
@@ -43,7 +53,7 @@ public class HttpMethodBuilder{
      * @return the http method
      * @since 1.0.9
      */
-    public static HttpMethod buildHttpMethod(String uri,Map<String, String> params,HttpMethodType httpMethodType){
+    public static HttpMethod build(String uri,Map<String, String> params,HttpMethodType httpMethodType){
         NameValuePair[] nameValuePairs = isNullOrEmpty(params) ? null : NameValuePairUtil.fromMap(params);
         switch (httpMethodType) {
             case GET: // 使用get方法

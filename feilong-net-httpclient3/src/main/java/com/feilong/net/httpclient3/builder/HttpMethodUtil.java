@@ -51,6 +51,8 @@ public final class HttpMethodUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpMethodUtil.class);
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private HttpMethodUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -73,8 +75,9 @@ public final class HttpMethodUtil{
             LOGGER.debug("[httpClientConfig]:{}", JsonUtil.format(httpClientConfig));
         }
 
+        //---------------------------------------------------------------
         HttpMethod httpMethod = HttpMethodBuilder
-                        .buildHttpMethod(httpClientConfig.getUri(), httpClientConfig.getParamMap(), httpClientConfig.getHttpMethodType());
+                        .build(httpClientConfig.getUri(), httpClientConfig.getParamMap(), httpClientConfig.getHttpMethodType());
 
         HttpMethodParams httpMethodParams = httpMethod.getParams();
         // TODO
@@ -84,48 +87,10 @@ public final class HttpMethodUtil{
         httpMethodParams.setParameter(RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
         //httpMethod.getParams().setContentCharset(charSet);
 
-        httpMethod = executeMethod(httpMethod, httpClientConfig);
-        return httpMethod;
+        return executeMethod(httpMethod, httpClientConfig);
     }
 
-    /**
-     * 返回信息LOGGER.
-     *
-     * @param httpMethod
-     *            the http method
-     * @param httpClientConfig
-     *            the http client config
-     * @return the http method response attribute map for log
-     */
-    public static Map<String, Object> getHttpMethodResponseAttributeMapForLog(HttpMethod httpMethod,HttpClientConfig httpClientConfig){
-        Map<String, Object> map = newLinkedHashMap();
-
-        Object statusCode = null;
-        try{
-            statusCode = httpMethod.getStatusCode();
-        }catch (Exception e){
-            statusCode = e.getClass().getName() + " " + e.getMessage();
-        }
-
-        String statusText = null;
-        try{
-            statusText = httpMethod.getStatusText();
-        }catch (Exception e){
-            statusText = e.getClass().getName() + " " + e.getMessage();
-        }
-
-        map.put("httpMethod.getRequestHeaders()-->map", NameValuePairUtil.toMap(httpMethod.getRequestHeaders()));
-
-        map.put("httpMethod.getStatusCode()", statusCode);
-        map.put("httpMethod.getStatusText()", statusText);
-        map.put("httpMethod.getStatusLine()", "" + httpMethod.getStatusLine());
-
-        map.put("httpMethod.getResponseHeaders()-->map", NameValuePairUtil.toMap(httpMethod.getResponseHeaders()));
-
-        map.put("httpMethod.getResponseFooters()", httpMethod.getResponseFooters());
-        map.put("httpClientConfig", httpClientConfig);
-        return map;
-    }
+    //---------------------------------------------------------------
 
     //---------------------------------------------------------------
 
@@ -139,11 +104,9 @@ public final class HttpMethodUtil{
      * @return the http method
      */
     private static HttpMethod executeMethod(HttpMethod httpMethod,HttpClientConfig httpClientConfig){
-        //默认使用的是 SimpleHttpConnectionManager
+        HttpClient httpClient = HttpClientBuilder.build();
 
-        //TODO 研究下  MultiThreadedHttpConnectionManager
-        HttpClient httpClient = new HttpClient();
-
+        //---------------------------------------------------------------
         // 认证
         setAuthentication(httpMethod, httpClientConfig, httpClient);
 
@@ -191,12 +154,14 @@ public final class HttpMethodUtil{
         }catch (Exception e){
             //SSL证书过期
             //PKIX path validation failed: java.security.cert.CertPathValidatorException: timestamp check failed
-            Map<String, Object> map = getHttpMethodResponseAttributeMapForLog(httpMethod, httpClientConfig);
+            Map<String, Object> map = HttpMethodLogMapBuilder.build(httpMethod, httpClientConfig);
             LOGGER.error(e.getClass().getName() + " HttpMethodResponseAttributeMapForLog:" + JsonUtil.format(map), e);
             throw new UncheckedHttpException(e);
         }
         return httpMethod;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 proxy.
@@ -215,6 +180,8 @@ public final class HttpMethodUtil{
             hostConfiguration.setProxy(hostName, httpClientConfig.getProxyPort());
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 authentication.
@@ -246,6 +213,8 @@ public final class HttpMethodUtil{
             httpClient.setParams(httpClientParams);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 请求信息LOGGER.
