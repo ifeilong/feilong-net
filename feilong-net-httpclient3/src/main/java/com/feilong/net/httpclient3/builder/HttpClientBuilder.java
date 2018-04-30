@@ -16,29 +16,47 @@
 package com.feilong.net.httpclient3.builder;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 
 /**
- * 
+ * 构造 {@link HttpClient}.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.1
  */
 public class HttpClientBuilder{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientBuilder.class);
+    /** Don't let anyone instantiate this class. */
+    private HttpClientBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     /**
-     * @return
-     * @since 1.11.1
+     * Builds the.
+     * 
+     * <p>
+     * 默认使用的是 {@link SimpleHttpConnectionManager}
+     * </p>
+     *
+     * @return the http client
+     * 
+     * @see SimpleHttpConnectionManager
+     * @see MultiThreadedHttpConnectionManager
      */
     static HttpClient build(){
+        return new HttpClient();
+    }
 
-        //默认使用的是 SimpleHttpConnectionManager
+    //---------------------------------------------------------------
 
+    static HttpClient build1(){
         //TODO 研究下  MultiThreadedHttpConnectionManager
-
-        HttpClient httpClient = new HttpClient();
-        return httpClient;
+        MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
+        return new HttpClient(connectionManager);
     }
 }

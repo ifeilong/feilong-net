@@ -29,10 +29,10 @@ import com.feilong.net.httpclient3.HttpClientConfig;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
-public final class HttpMethodLogMapBuilder{
+public final class HttpMethodResponseLogMapBuilder{
 
     /** Don't let anyone instantiate this class. */
-    private HttpMethodLogMapBuilder(){
+    private HttpMethodResponseLogMapBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
-import com.feilong.net.httpclient3.builder.HttpMethodLogMapBuilder;
+import com.feilong.net.httpclient3.builder.HttpMethodResponseLogMapBuilder;
 import com.feilong.net.httpclient3.builder.HttpMethodUtil;
 
 /**
@@ -128,7 +128,7 @@ public final class HttpClientUtil{
             // 得到返回的数据
             String responseBodyAsString = httpMethod.getResponseBodyAsString();
             if (LOGGER.isDebugEnabled()){
-                Map<String, Object> map = HttpMethodLogMapBuilder.build(httpMethod, httpClientConfig);
+                Map<String, Object> map = HttpMethodResponseLogMapBuilder.build(httpMethod, httpClientConfig);
                 LOGGER.debug("getHttpMethodResponseAttributeMapForLog:{}", JsonUtil.format(map));
             }
             return responseBodyAsString;

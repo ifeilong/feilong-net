@@ -16,7 +16,6 @@
 package com.feilong.net.httpclient3.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.net.entity.HttpRequest.DEFAULT_USER_AGENT;
 import static org.apache.commons.httpclient.params.HttpMethodParams.RETRY_HANDLER;
 import static org.apache.commons.httpclient.params.HttpMethodParams.USER_AGENT;
@@ -79,6 +78,19 @@ public final class HttpMethodUtil{
         HttpMethod httpMethod = HttpMethodBuilder
                         .build(httpClientConfig.getUri(), httpClientConfig.getParamMap(), httpClientConfig.getHttpMethodType());
 
+        //---------------------------------------------------------------
+
+        packHttpMethodParams(httpMethod);
+
+        return executeMethod(httpMethod, httpClientConfig);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param httpMethod
+     */
+    private static void packHttpMethodParams(HttpMethod httpMethod){
         HttpMethodParams httpMethodParams = httpMethod.getParams();
         // TODO
         httpMethodParams.setParameter(USER_AGENT, DEFAULT_USER_AGENT);
@@ -86,11 +98,7 @@ public final class HttpMethodUtil{
         // 使用系统提供的默认的恢复策略
         httpMethodParams.setParameter(RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
         //httpMethod.getParams().setContentCharset(charSet);
-
-        return executeMethod(httpMethod, httpClientConfig);
     }
-
-    //---------------------------------------------------------------
 
     //---------------------------------------------------------------
 
@@ -123,7 +131,7 @@ public final class HttpMethodUtil{
                 // HttpMethodParams httpMethodParams = httpMethod.getParams();
                 // LOGGER.debug("[httpMethod.getParams()]:{}", JsonUtil.format(httpMethodParams, excludes));
 
-                Map<String, Object> map = getHttpMethodRequestAttributeMapForLog(httpMethod);
+                Map<String, Object> map = HttpMethodRequestLogMapBuilder.build(httpMethod);
                 String[] excludes = new String[] { "values", "elements"
                         // "rawAuthority",
                         // "rawCurrentHierPath",
@@ -154,7 +162,7 @@ public final class HttpMethodUtil{
         }catch (Exception e){
             //SSL证书过期
             //PKIX path validation failed: java.security.cert.CertPathValidatorException: timestamp check failed
-            Map<String, Object> map = HttpMethodLogMapBuilder.build(httpMethod, httpClientConfig);
+            Map<String, Object> map = HttpMethodResponseLogMapBuilder.build(httpMethod, httpClientConfig);
             LOGGER.error(e.getClass().getName() + " HttpMethodResponseAttributeMapForLog:" + JsonUtil.format(map), e);
             throw new UncheckedHttpException(e);
         }
@@ -214,36 +222,4 @@ public final class HttpMethodUtil{
         }
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * 请求信息LOGGER.
-     * 
-     * @param httpMethod
-     *            the http method
-     * @return the http method attribute map for log
-     */
-    private static Map<String, Object> getHttpMethodRequestAttributeMapForLog(HttpMethod httpMethod){
-        Map<String, Object> map = newLinkedHashMap();
-        try{
-            map.put("httpMethod.getName()", httpMethod.getName());
-            map.put("httpMethod.getURI()", httpMethod.getURI().toString());
-            map.put("httpMethod.getPath()", httpMethod.getPath());
-            map.put("httpMethod.getQueryString()", httpMethod.getQueryString());
-
-            map.put("httpMethod.getRequestHeaders()", httpMethod.getRequestHeaders());
-
-            map.put("httpMethod.getDoAuthentication()", httpMethod.getDoAuthentication());
-            map.put("httpMethod.getFollowRedirects()", httpMethod.getFollowRedirects());
-            map.put("httpMethod.getHostAuthState()", httpMethod.getHostAuthState().toString());
-
-            // HttpMethodParams httpMethodParams = httpMethod.getParams();
-            // map.put("httpMethod.getParams()", httpMethodParams);
-            map.put("httpMethod.getProxyAuthState()", httpMethod.getProxyAuthState().toString());
-
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-        }
-        return map;
-    }
 }

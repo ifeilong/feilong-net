@@ -22,17 +22,23 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * 
+ * 构造 {@link GetMethod}.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
 public class GetMethodBuilder{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetMethodBuilder.class);
+    /** Don't let anyone instantiate this class. */
+    private GetMethodBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the get method.
@@ -42,13 +48,14 @@ public class GetMethodBuilder{
      * @param nameValuePairs
      *            the name value pairs
      * @return the http method
-     * @since 1.5.4
      */
     static HttpMethod buildGetMethod(String uri,NameValuePair[] nameValuePairs){
         //TODO 暂时还不支持 uri中含有参数且  nameValuePairs也有值的情况
         if (isNotNullOrEmpty(nameValuePairs) && StringUtils.contains(uri, "?")){
             throw new NotImplementedException("not implemented!");
         }
+
+        //---------------------------------------------------------------
 
         GetMethod getMethod = new GetMethod(uri);
         if (isNotNullOrEmpty(nameValuePairs)){
