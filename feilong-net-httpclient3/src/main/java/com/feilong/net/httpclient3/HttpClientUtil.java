@@ -84,6 +84,62 @@ public final class HttpClientUtil{
      *
      * @param uri
      *            the uri
+     * @return the response body as string
+     * @since 1.11.1
+     */
+    public static String get(String uri){
+        return getResponseBodyAsString(uri, null, HttpMethodType.GET);
+    }
+
+    /**
+     * 获得 response body as string.
+     *
+     * @param uri
+     *            the uri
+     * @param requestParamMap
+     *            the request param map
+     * @return the response body as string
+     * @since 1.11.1
+     */
+    public static String get(String uri,Map<String, String> requestParamMap){
+        return getResponseBodyAsString(uri, requestParamMap, HttpMethodType.GET);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 response body as string.
+     *
+     * @param uri
+     *            the uri
+     * @return the response body as string
+     * @since 1.11.1
+     */
+    public static String post(String uri){
+        return getResponseBodyAsString(uri, null, HttpMethodType.POST);
+    }
+
+    /**
+     * 获得 response body as string.
+     *
+     * @param uri
+     *            the uri
+     * @param requestParamMap
+     *            the request param map
+     * @return the response body as string
+     * @since 1.11.1
+     */
+    public static String post(String uri,Map<String, String> requestParamMap){
+        return getResponseBodyAsString(uri, requestParamMap, HttpMethodType.POST);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 response body as string.
+     *
+     * @param uri
+     *            the uri
      * @param httpMethodType
      *            the http method type
      * @return the response body as string
@@ -130,6 +186,8 @@ public final class HttpClientUtil{
         try{
             // 得到返回的数据
             String responseBodyAsString = httpMethod.getResponseBodyAsString();
+
+            //---------------------------------------------------------------
             if (LOGGER.isDebugEnabled()){
                 Map<String, Object> map = HttpMethodResponseLogMapBuilder.build(httpMethod, httpClientConfig);
                 LOGGER.debug("getHttpMethodResponseAttributeMapForLog:{}", JsonUtil.format(map));
@@ -140,7 +198,6 @@ public final class HttpClientUtil{
             LOGGER.error(e.getClass().getName(), e);
             throw new UncheckedHttpException(e);
         }finally{
-
             //对每一个HttpClient.executeMethod须有一个method.releaseConnection()与之匹配. 
             httpMethod.releaseConnection();
         }

@@ -6,9 +6,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
 
 	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-		<!-- The default target is System.out. -->
-		<!-- <param name="Target" value="System.out" /> -->
-		<param name="Threshold" value="debug" />
+		<param name="Threshold" value="info" />
 		<param name="encoding" value="UTF-8" />
 
 		<!-- 设置监视器输出方式 -->
@@ -20,15 +18,6 @@
 			<param name="LevelMin" value="debug" />
 			<param name="LevelMax" value="ERROR" />
 		</filter>
-	</appender>
-
-
-	<appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
-		<param name="File" value="${user.home}/feilong/logs/feilong/feilong-net-httpclient/log.log" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %t (%F:%L) [%M()] - %m%n" />
-		</layout>
 	</appender>
 
 	<category name="org.apache.commons.beanutils">
@@ -54,6 +43,5 @@
 	<root>
 		<level value="debug" />
 		<appender-ref ref="stdout" />
-		<appender-ref ref="logFile" />
 	</root>
 </log4j:configuration>

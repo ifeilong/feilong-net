@@ -34,6 +34,10 @@ public class HttpClientBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //    private static HttpClient httpClient1 = buildDefault();
+    //
+    //    private static HttpClient httpClient2 = buildMulti();
+
     //---------------------------------------------------------------
 
     /**
@@ -50,6 +54,8 @@ public class HttpClientBuilder{
      */
     static HttpClient build(){
         return buildDefault();
+        //return buildMulti();
+        // return httpClient2;
     }
 
     //---------------------------------------------------------------

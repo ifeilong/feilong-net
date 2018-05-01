@@ -51,6 +51,30 @@ public class HttpClientConfig extends HttpRequest{
     }
 
     /**
+     * Instantiates a new http client config.
+     *
+     * @param uri
+     *            the uri
+     * @since 1.11.1
+     */
+    public HttpClientConfig(String uri){
+        super(uri);
+    }
+
+    /**
+     * Instantiates a new http client config.
+     *
+     * @param uri
+     *            the uri
+     * @param httpMethodType
+     *            the http method type
+     * @since 1.11.1
+     */
+    public HttpClientConfig(String uri, HttpMethodType httpMethodType){
+        super(uri, httpMethodType);
+    }
+
+    /**
      * The Constructor.
      *
      * @param uri
