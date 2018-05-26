@@ -22,7 +22,6 @@ import java.net.SocketTimeoutException;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 
@@ -86,14 +85,11 @@ public final class HttpRequestExecuter{
      * @param connectionConfig
      *            the connection config
      * @return 如果 <code>httpUriRequest</code> 是null,抛出 {@link NullPointerException}<br>
-     * @throws ClientProtocolException
-     *             the client protocol exception
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      * @since 1.11.0 change method Access Modifiers
      */
-    public static HttpResponse execute(HttpUriRequest httpUriRequest,ConnectionConfig connectionConfig)
-                    throws ClientProtocolException,IOException{
+    public static HttpResponse execute(HttpUriRequest httpUriRequest,ConnectionConfig connectionConfig) throws IOException{
         Validate.notNull(httpUriRequest, "httpUriRequest can't be null!");
 
         HttpClient httpClient = HttpClientBuilder.build(connectionConfig);

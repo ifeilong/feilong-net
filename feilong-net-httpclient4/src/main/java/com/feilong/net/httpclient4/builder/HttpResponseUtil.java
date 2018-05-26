@@ -52,10 +52,8 @@ public final class HttpResponseUtil{
      * @param httpResponse
      *            the http response
      * @return the result string
-     * @throws UncheckedHttpException
-     *             the unchecked http exception
      */
-    public static String getResultString(HttpResponse httpResponse) throws UncheckedHttpException{
+    public static String getResultString(HttpResponse httpResponse){
         HttpEntity responseEntity = httpResponse.getEntity();
 
         try{

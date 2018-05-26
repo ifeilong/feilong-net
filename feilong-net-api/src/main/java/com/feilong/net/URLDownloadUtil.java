@@ -97,18 +97,27 @@ public final class URLDownloadUtil{
         Validate.notBlank(urlString, "urlString can't be null/empty!");
         Validate.notBlank(directoryName, "directoryName can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         Date beginDate = new Date();
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
         URL url = URLUtil.toURL(urlString);
 
+        //---------------------------------------------------------------
+
         InputStream inputStream = URLUtil.openStream(url);
 
         try{
             IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
-            LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
         }finally{
             IOUtils.closeQuietly(inputStream);
+        }
+
+        //---------------------------------------------------------------
+
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
         }
     }
 

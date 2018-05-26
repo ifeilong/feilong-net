@@ -93,6 +93,7 @@ public final class MessageUtil{
      *            the message
      * @return the mail info
      * @throws MessagingException
+     *             the messaging exception
      */
     private static final MailInfo toMailInfoList(Message message) throws MessagingException{
         String from = getFromAddress(message);
@@ -117,17 +118,17 @@ public final class MessageUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * To recipients.
      *
      * @param allRecipients
      *            the all recipients
      * @return the string[]
-     * @throws MessagingException
-     *             the messaging exception
      * @since 1.9.0
      */
-    private static String[] toRecipients(Address[] allRecipients) throws MessagingException{
+    private static String[] toRecipients(Address[] allRecipients){
         if (isNullOrEmpty(allRecipients)){
             return null;
         }
@@ -138,6 +139,8 @@ public final class MessageUtil{
         }
         return recipients;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 map for LOGGER.
@@ -171,6 +174,8 @@ public final class MessageUtil{
             throw new MailException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 from address.
@@ -237,6 +242,8 @@ public final class MessageUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Do with text all.
      *
@@ -260,6 +267,8 @@ public final class MessageUtil{
 
         return (String) content;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Do with multipart all.

@@ -59,6 +59,8 @@ public abstract class AbstractMailSender implements MailSender{
         CommandMap.setDefaultCommandMap(mailcapCommandMap);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 设置 header 信息.
      * 
@@ -100,6 +102,8 @@ public abstract class AbstractMailSender implements MailSender{
         message.setSentDate(new Date());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 设置邮件接受人群<br>
      * 支持 to cc bcc.
@@ -120,6 +124,8 @@ public abstract class AbstractMailSender implements MailSender{
         //bcc 密送
         setRecipients(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 邮件接收人.

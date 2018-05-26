@@ -23,7 +23,6 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
 
@@ -83,6 +82,8 @@ public final class URLConnectionBuilder{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Prepare connection.
      *
@@ -122,6 +123,8 @@ public final class URLConnectionBuilder{
         doWithRequestBody(httpURLConnection, httpRequest.getRequestBody());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Do with request body.
      *
@@ -131,12 +134,9 @@ public final class URLConnectionBuilder{
      *            the request body
      * @throws IOException
      *             Signals that an I/O exception has occurred.
-     * @throws UnsupportedEncodingException
-     *             the unsupported encoding exception
      * @since 1.10.4
      */
-    private static void doWithRequestBody(HttpURLConnection httpURLConnection,String requestBody)
-                    throws IOException,UnsupportedEncodingException{
+    private static void doWithRequestBody(HttpURLConnection httpURLConnection,String requestBody) throws IOException{
         if (isNullOrEmpty(requestBody)){
             return;
         }

@@ -24,7 +24,6 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 
-import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpHeader;
 
 /**
@@ -52,11 +51,9 @@ public final class HttpResponseBuilder{
      * @param httpResponse
      *            the http response
      * @return the com.feilong.net.entity. http response
-     * @throws UncheckedHttpException
-     *             the unchecked http exception
      * @since 1.10.6
      */
-    public static com.feilong.net.entity.HttpResponse build(Date beginDate,HttpResponse httpResponse) throws UncheckedHttpException{
+    public static com.feilong.net.entity.HttpResponse build(Date beginDate,HttpResponse httpResponse){
         long useTime = getIntervalTime(beginDate, new Date());
 
         StatusLine statusLine = httpResponse.getStatusLine();
