@@ -15,8 +15,6 @@
  */
 package com.feilong.net.httpclient4;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 /**
@@ -27,11 +25,11 @@ import org.junit.Test;
  */
 public class GetResponseStatusCodeTest{
 
-    @Test
-    public void testGetResponseStatusCode(){
-        String urlString = "http://www.baidu.com";
-        assertEquals(200, HttpClientUtil.getResponseStatusCode(urlString));
-    }
+    //    @Test
+    //    public void testGetResponseStatusCode(){
+    //        String urlString = "http://www.baidu.com";
+    //        assertEquals(200, HttpClientUtil.getResponseStatusCode(urlString));
+    //    }
 
     //---------------------------------------------------------------
 

@@ -15,9 +15,6 @@
  */
 package com.feilong.net.httpclient4;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 /**
@@ -28,11 +25,11 @@ import org.junit.Test;
  */
 public class GetTest{
 
-    @Test
-    public void testGetResponseBodyAsString(){
-        String urlString = "https://www.baidu.com/?a=1&b=2";
-        assertTrue(isNotNullOrEmpty(HttpClientUtil.get(urlString)));
-    }
+    //    @Test
+    //    public void testGetResponseBodyAsString(){
+    //        String urlString = "https://www.baidu.com/?a=1&b=2";
+    //        assertTrue(isNotNullOrEmpty(HttpClientUtil.get(urlString)));
+    //    }
 
     //---------------------------------------------------------------
 
