@@ -72,13 +72,15 @@ public final class HttpURLConnectionOpener{
 
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类的子类HttpURLConnection,
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
-        if (isNotNullOrEmpty(proxy)){
+        if (null != proxy){
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug("use proxy:{}", proxy.toString());
             }
 
             return (HttpURLConnection) url.openConnection(proxy);//proxy can't null,otherwise IllegalArgumentException
         }
+
+        //---------------------------------------------------------------
         // 每次调用此 URL 的协议处理程序的 openConnection 方法都打开一个新的连接.
         return (HttpURLConnection) url.openConnection();
     }

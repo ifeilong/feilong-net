@@ -224,7 +224,7 @@ public final class URLConnectionUtil{
     //---------------------------------------------------------------
 
     /**
-     * Read line with proxy.
+     * Read line.
      *
      * @param urlString
      *            the url string
@@ -236,7 +236,7 @@ public final class URLConnectionUtil{
     }
 
     /**
-     * Read line with proxy.
+     * Read line.
      *
      * @param urlString
      *            the url string
@@ -245,8 +245,10 @@ public final class URLConnectionUtil{
      * @return 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
      */
     public static String readLine(String urlString,ConnectionConfig connectionConfig){
+        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, new ConnectionConfig());
+
         InputStream inputStream = getInputStream(urlString, connectionConfig);
-        BufferedReader bufferedReader = InputStreamUtil.toBufferedReader(inputStream, connectionConfig.getContentCharset());
+        BufferedReader bufferedReader = InputStreamUtil.toBufferedReader(inputStream, useConnectionConfig.getContentCharset());
         return ReaderUtil.readLine(bufferedReader);
     }
 
