@@ -74,7 +74,7 @@ public final class HttpURLConnectionOpener{
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
         if (null != proxy){
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("use proxy:{}", proxy.toString());
+                LOGGER.debug("use proxy:{}", proxy);
             }
 
             return (HttpURLConnection) url.openConnection(proxy);//proxy can't null,otherwise IllegalArgumentException

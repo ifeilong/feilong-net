@@ -300,7 +300,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     @Override
     protected boolean rm(String remotePath){
         try{
-            LOGGER.info("remotePath is [not directory],deleteFile.....");
+            LOGGER.info("remotePath:[{}] is [not directory],deleteFile.....", remotePath);
             boolean flag = ftpClient.deleteFile(remotePath);
 
             if (flag){

@@ -23,6 +23,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpRequest;
 
@@ -62,9 +63,8 @@ class URIBuilderBuilder{
             URIBuilder uriBuilder = new URIBuilder(httpRequest.getUri());
 
             Map<String, String> paramMap = httpRequest.getParamMap();
-
             if (isNullOrEmpty(paramMap)){
-                LOGGER.trace("input [paramMap] is null or empty ,skip!");
+                LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest));
                 return uriBuilder;
             }
 
