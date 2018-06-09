@@ -46,11 +46,15 @@ public class HttpRequest{
     /** 请求method 类型,默认 {@link HttpMethodType#GET}. */
     private HttpMethodType      httpMethodType     = GET;
 
+    //---------------------------------------------------------------
+
     /** 请求参数. */
     private Map<String, String> paramMap;
 
     /** 请求头信息. */
     private Map<String, String> headerMap;
+
+    //---------------------------------------------------------------
 
     /**
      * 请求正文,比如 webservice 可以传递 xml/json数据体.

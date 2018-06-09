@@ -42,4 +42,18 @@ public class PostTest{
         String uri = "http://127.0.0.1:8084/post1";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
     }
+
+    @Test
+    public void testGetResponseBodyAsString122(){
+
+        //        "requestURL": "http://staging.mapemall.com/pay/redirect/doku", 
+        //        "requestMethod": "POST", 
+        //         "parameters": { 
+        //               "PAYMENTCHANNEL": ["01"]
+        //               (其他参数略去......)
+        //            }
+
+        String uri = "http://test.mapemall.com/pay/redirect/doku";
+        LOGGER.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
+    }
 }

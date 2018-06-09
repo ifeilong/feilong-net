@@ -39,7 +39,12 @@ public class HttpClientUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtilTest.class);
 
+    /**
+     * Gets the http method with execute 1.
+     *
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void getHttpMethodWithExecute1(){
         String uri = "http://127.0.0.1:6666/template.txt?sign=123456";
         uri = "http://sitemanager.underarmour.tw/brand-uastory.css";
@@ -48,7 +53,12 @@ public class HttpClientUtilTest{
         LOGGER.debug("responseBodyAsString:{}", responseBodyAsString);
     }
 
+    /**
+     * Gets the http method with execute 122.
+     *
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void getHttpMethodWithExecute122(){
         String uri = "http://localhost:8222/json1";
 
@@ -59,7 +69,12 @@ public class HttpClientUtilTest{
         LOGGER.debug("BackWarnEntity:{}", bean);
     }
 
+    /**
+     * Gets the http method with execute.
+     *
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void getHttpMethodWithExecute(){
         String uri = "http://www.google.com.hk/search?client=aff-cs-360se&forid=1&ie=utf-8&oe=UTF-8&q=enumeration";
         uri = "http://www.d9cn.org/d9cnbook/50/50537/10967924.html";
@@ -75,6 +90,10 @@ public class HttpClientUtilTest{
         LOGGER.debug("print httpMethod.getResponseHeaders()=======================");
     }
 
+    /**
+     * Test fund.
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void testFund(){
         String uri = "http://www.howbuy.com/fund/ajax/board/index.htm?glrm=&keyword=&radio=2&orderField=jjjz&orderType=asc&cat=All&level=";
@@ -101,6 +120,7 @@ public class HttpClientUtilTest{
      * Testenclosing_type.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testenclosing_type(){
         String aString = "22222<input  type=\"checkbox\"  value=\"161015\"/>3333";
         LOGGER.debug(aString.replaceAll("<input  type=\"checkbox\"  value=\"\\d{6}\"/>", ""));
