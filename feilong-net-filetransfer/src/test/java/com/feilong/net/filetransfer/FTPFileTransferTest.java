@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.net.filetransfer.FileTransfer;
 
 /**
  * The Class FTPUtilTest.
@@ -139,7 +138,7 @@ public class FTPFileTransferTest extends FileTransferTest{
      * Delete_not_exist1.
      */
     @Test
-    public void delete_not_exist1() throws Exception{
+    public void delete_not_exist1(){
         String remoteAbsolutePath = "/";
         fileTransfer.delete(remoteAbsolutePath);
     }
