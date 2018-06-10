@@ -15,8 +15,6 @@
  */
 package com.feilong.net;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
 import com.feilong.io.SpecialFolder;
@@ -31,8 +29,6 @@ public class URLDownloadUtilTest{
     /**
      * Down.
      * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
      */
     @Test
     public void down(){

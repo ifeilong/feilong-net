@@ -105,8 +105,6 @@ public class HttpUtils{
      * @param enc
      *            编码
      * @return 响应结果
-     * @throws IOException
-     *             IO异常
      */
     public static String URLPost(String url,Map<String, String> params,String enc){
 
@@ -152,8 +150,6 @@ public class HttpUtils{
      * @param enc
      *            编码
      * @return 响应结果
-     * @throws IOException
-     *             IO异常
      */
     public static String URLGet(String url,Map<String, String> params,String enc){
 
@@ -202,8 +198,6 @@ public class HttpUtils{
      * @param enc
      *            编码
      * @return 响应结果
-     * @throws IOException
-     *             IO异常
      */
     public static String doGetReq(String url){
 

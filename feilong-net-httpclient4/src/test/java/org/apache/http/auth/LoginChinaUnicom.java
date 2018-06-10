@@ -21,7 +21,6 @@ public class LoginChinaUnicom{
      * @throws Exception
      */
     public static void main(String[] args) throws Exception{
-
         String name = "中国联通手机号码";
         String pwd = "手机服务密码";
 

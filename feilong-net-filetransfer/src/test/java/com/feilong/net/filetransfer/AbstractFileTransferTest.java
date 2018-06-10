@@ -18,6 +18,9 @@ package com.feilong.net.filetransfer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+/**
+ * The Class AbstractFileTransferTest.
+ */
 @ContextConfiguration(value = { "classpath*:spring/spring-fileTransfer.xml" })
 public abstract class AbstractFileTransferTest extends AbstractJUnit4SpringContextTests{
 

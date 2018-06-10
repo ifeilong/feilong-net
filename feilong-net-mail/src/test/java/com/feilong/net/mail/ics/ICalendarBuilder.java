@@ -27,16 +27,20 @@ import org.slf4j.LoggerFactory;
 import com.feilong.net.mail.ICalendar;
 
 /**
- * 
+ * The Class ICalendarBuilder.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
  */
 public class ICalendarBuilder{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ICalendarBuilder.class);
 
     /**
-     * @return
+     * Builds the.
+     *
+     * @return the i calendar
      * @since 1.10.2
      */
     public static ICalendar build(){

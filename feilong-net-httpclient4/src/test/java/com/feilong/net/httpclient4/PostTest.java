@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The Class PostTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.2.1 2015年6月6日 下午11:04:42
@@ -29,20 +30,32 @@ import org.slf4j.LoggerFactory;
  */
 public class PostTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PostTest.class);
 
+    /**
+     * Test get response body as string.
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
         LOGGER.debug(HttpClientUtil.get(uri));
     }
 
+    /**
+     * Test get response body as string 1.
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
     }
 
+    /**
+     * Test get response body as string 122.
+     */
     @Test
     public void testGetResponseBodyAsString122(){
 
