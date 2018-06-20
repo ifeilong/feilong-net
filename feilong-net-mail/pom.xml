@@ -19,7 +19,6 @@
 		<dependency>
 			<groupId>com.feilong.platform</groupId>
 			<artifactId>feilong-io</artifactId>
-			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- -->
