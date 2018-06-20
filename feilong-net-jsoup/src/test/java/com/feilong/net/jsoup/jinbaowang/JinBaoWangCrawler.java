@@ -82,7 +82,7 @@ public class JinBaoWangCrawler{
         Date now = new Date();
         String timestamp = DateUtil.toString(now, TIMESTAMP);
         //        try{
-        //            CSVUtil.write(directoryName + "/" + timestamp + ".csv", columnTitles, dataList);
+        //            CSVUtil.write(directoryName + File.separator  + timestamp + ".csv", columnTitles, dataList);
         //            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(directoryName + "/" + timestamp + ".obj"));
         //            out.writeObject(skuCodeAndImagesMap);
         //            out.close();

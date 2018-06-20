@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,24 +97,16 @@ public final class URLDownloadUtil{
         Validate.notBlank(directoryName, "directoryName can't be null/empty!");
 
         //---------------------------------------------------------------
-
         Date beginDate = new Date();
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
         URL url = URLUtil.toURL(urlString);
 
         //---------------------------------------------------------------
-
         InputStream inputStream = URLUtil.openStream(url);
-
-        try{
-            IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
-        }finally{
-            IOUtils.closeQuietly(inputStream);
-        }
+        IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
 
         //---------------------------------------------------------------
-
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
         }
