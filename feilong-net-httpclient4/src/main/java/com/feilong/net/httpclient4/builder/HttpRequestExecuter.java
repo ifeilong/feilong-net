@@ -15,6 +15,7 @@
  */
 package com.feilong.net.httpclient4.builder;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.IOException;
@@ -65,14 +66,47 @@ public final class HttpRequestExecuter{
         try{
             return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
         }catch (SocketTimeoutException e){
-            String pattern = "{},httpRequest:[{}],useConnectionConfig:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
-            throw new UncheckedHttpException(message, e);
+
+            StringBuilder sb = new StringBuilder();
+            //            sb.append("pls check:").append(lineSeparator());
+            //            sb.append("1.wangluo");
+            //            sb.append("2.can not ");
+
+            throw new UncheckedHttpException(buildMessage(e, sb.toString(), httpRequest, useConnectionConfig), e);
         }catch (Exception e){
-            String pattern = "{},httpRequest:[{}],useConnectionConfig:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
-            throw new UncheckedHttpException(message, e);
+            throw new UncheckedHttpException(buildMessage(e, "", httpRequest, useConnectionConfig), e);
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the message.
+     *
+     * @param e
+     *            the e
+     * @param httpRequest
+     *            the http request
+     * @param useConnectionConfig
+     *            the use connection config
+     * @return the string
+     * @since 1.11.4
+     */
+    private static String buildMessage(Exception e,String handlerMessage,HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
+        if (isNullOrEmpty(handlerMessage)){
+            String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
+            return Slf4jUtil.format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
+        }
+
+        //---------------------------------------------------------------
+
+        String pattern = "[{}],[{}],httpRequest:[{}],useConnectionConfig:[{}]";
+        return Slf4jUtil.format(
+                        pattern,
+                        e.getMessage(),
+                        handlerMessage,
+                        JsonUtil.format(httpRequest),
+                        JsonUtil.format(useConnectionConfig));
     }
 
     //---------------------------------------------------------------
