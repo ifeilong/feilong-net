@@ -21,6 +21,8 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
+import javax.net.ssl.SSLException;
+
 import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -65,13 +67,22 @@ public final class HttpRequestExecuter{
         //---------------------------------------------------------------
         try{
             return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
-        }catch (SocketTimeoutException e){
-
+        }
+        //链接超时
+        catch (SocketTimeoutException e){
             StringBuilder sb = new StringBuilder();
             //            sb.append("pls check:").append(lineSeparator());
             //            sb.append("1.wangluo");
             //            sb.append("2.can not ");
 
+            throw new UncheckedHttpException(buildMessage(e, sb.toString(), httpRequest, useConnectionConfig), e);
+        }
+        //https://www.cnblogs.com/sunny08/p/8038440.html
+        catch (SSLException e){
+            StringBuilder sb = new StringBuilder();
+            //            sb.append("pls check:").append(lineSeparator());
+            //            sb.append("1.wangluo");
+            //            sb.append("2.can not ");
             throw new UncheckedHttpException(buildMessage(e, sb.toString(), httpRequest, useConnectionConfig), e);
         }catch (Exception e){
             throw new UncheckedHttpException(buildMessage(e, "", httpRequest, useConnectionConfig), e);

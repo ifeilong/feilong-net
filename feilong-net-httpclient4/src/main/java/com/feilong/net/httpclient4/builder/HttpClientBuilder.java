@@ -15,11 +15,20 @@
  */
 package com.feilong.net.httpclient4.builder;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.net.entity.ConnectionConfig;
+import com.feilong.net.ssl.SSLProtocol;
 
 /**
  * HttpClient 构造器.
@@ -33,6 +42,11 @@ import com.feilong.net.entity.ConnectionConfig;
  * @since 1.11.0 change class Access Modifiers
  */
 public class HttpClientBuilder{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientBuilder.class);
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpClientBuilder(){
@@ -69,11 +83,7 @@ public class HttpClientBuilder{
     public static HttpClient build(ConnectionConfig connectionConfig,LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
 
-        if (null != layeredConnectionSocketFactory){
-            customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
-        }
-
-        //customHttpClientBuilder.setSSLContext(sslContext);
+        setSSL(layeredConnectionSocketFactory, customHttpClientBuilder);
         //customHttpClientBuilder.setConnectionManager(connManager);
         //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
 
@@ -81,4 +91,30 @@ public class HttpClientBuilder{
         return customHttpClientBuilder.build();
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * @param layeredConnectionSocketFactory
+     * @param customHttpClientBuilder
+     * @throws RuntimeException
+     * @since 1.11.4
+     */
+    private static void setSSL(
+                    LayeredConnectionSocketFactory layeredConnectionSocketFactory,
+                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder) throws RuntimeException{
+        if (null != layeredConnectionSocketFactory){
+            customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
+        }
+
+        //---------------------------------------------------------------
+
+        try{
+
+            SSLContext sslContext = SSLContexts.custom().setProtocol(SSLProtocol.TLSv12).build();
+            customHttpClientBuilder.setSSLContext(sslContext);
+        }catch (KeyManagementException | NoSuchAlgorithmException e){
+            LOGGER.error("", e);
+            throw new RuntimeException(e);
+        }
+    }
 }
