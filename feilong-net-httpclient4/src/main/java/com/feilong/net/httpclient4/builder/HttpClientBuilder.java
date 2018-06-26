@@ -94,9 +94,14 @@ public class HttpClientBuilder{
     //---------------------------------------------------------------
 
     /**
+     * 设置 SSL.
+     *
      * @param layeredConnectionSocketFactory
+     *            the layered connection socket factory
      * @param customHttpClientBuilder
+     *            the custom http client builder
      * @throws RuntimeException
+     *             the runtime exception
      * @since 1.11.4
      */
     private static void setSSL(
@@ -109,12 +114,16 @@ public class HttpClientBuilder{
         //---------------------------------------------------------------
 
         try{
-
+            //WARN: setProtocol since  4.4.7
             SSLContext sslContext = SSLContexts.custom().setProtocol(SSLProtocol.TLSv12).build();
             customHttpClientBuilder.setSSLContext(sslContext);
         }catch (KeyManagementException | NoSuchAlgorithmException e){
             LOGGER.error("", e);
             throw new RuntimeException(e);
+        }catch (java.lang.NoSuchMethodError e){
+            LOGGER.warn(
+                            "pls update your [org.apache.httpcomponents:httpclient] version >= [4.4.7],otherwise cannot use setProtocol method",
+                            e);
         }
     }
 }
