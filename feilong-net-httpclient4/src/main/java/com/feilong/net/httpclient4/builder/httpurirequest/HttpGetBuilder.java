@@ -75,7 +75,7 @@ final class HttpGetBuilder{
             URIBuilder uriBuilder = URIBuilderBuilder.builder(httpRequest);
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = Slf4jUtil.format("httpRequest:[{}],[{}]", JsonUtil.format(httpRequest), e.getMessage());
+            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
     }

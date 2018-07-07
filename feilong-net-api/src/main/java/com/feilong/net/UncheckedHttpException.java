@@ -15,7 +15,7 @@
  */
 package com.feilong.net;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.DefaultRuntimeException;
 
 /**
  * Un checked HttpException.
@@ -23,24 +23,12 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.3
  */
-public final class UncheckedHttpException extends RuntimeException{
+public final class UncheckedHttpException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
 
     //---------------------------------------------------------------
-
-    /**
-     * Instantiates a new http client exception.
-     *
-     * @param messagePattern
-     *            the message pattern
-     * @param args
-     *            the args
-     */
-    public UncheckedHttpException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
-    }
 
     /**
      * Instantiates a new http client exception.
@@ -61,6 +49,6 @@ public final class UncheckedHttpException extends RuntimeException{
      *            the cause
      */
     public UncheckedHttpException(Throwable cause){
-        super(cause.getMessage(), cause);
+        super(cause);
     }
 }

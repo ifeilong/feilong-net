@@ -15,7 +15,7 @@
  */
 package com.feilong.net.filetransfer;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.DefaultRuntimeException;
 
 /**
  * 文件传输遇到的异常.
@@ -23,7 +23,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.1
  */
-public final class FileTransferException extends RuntimeException{
+public final class FileTransferException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
@@ -39,7 +39,7 @@ public final class FileTransferException extends RuntimeException{
      *            the args
      */
     public FileTransferException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
+        super(messagePattern, args);
     }
 
     /**
@@ -51,25 +51,7 @@ public final class FileTransferException extends RuntimeException{
      *            the cause
      */
     public FileTransferException(String message, Throwable cause){
-        super(buildMessage(message, cause), cause);
+        super(message, cause);
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Builds the message.
-     *
-     * @param message
-     *            the message
-     * @param cause
-     *            the cause
-     * @return the string
-     * @since 1.10.4
-     */
-    private static String buildMessage(String message,Throwable cause){
-        if (null == message){
-            return cause.getMessage();
-        }
-        return message + ",error message:[" + cause.getMessage() + "]";
-    }
 }

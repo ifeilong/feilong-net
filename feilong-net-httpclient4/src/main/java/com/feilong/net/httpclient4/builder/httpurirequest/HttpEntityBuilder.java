@@ -87,7 +87,7 @@ final class HttpEntityBuilder{
         try{
             return new UrlEncodedFormEntity(nameValuePairList, UTF8);
         }catch (UnsupportedEncodingException e){
-            String message = Slf4jUtil.format("paramMap:[{}],[{}]", JsonUtil.format(paramMap), e.getMessage());
+            String message = Slf4jUtil.format("paramMap:[{}]", JsonUtil.format(paramMap));
             throw new UncheckedHttpException(message, e);
         }
     }

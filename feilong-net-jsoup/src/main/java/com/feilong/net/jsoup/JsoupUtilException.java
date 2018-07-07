@@ -15,13 +15,15 @@
  */
 package com.feilong.net.jsoup;
 
+import com.feilong.core.DefaultRuntimeException;
+
 /**
  * 使用 jsoup出现的异常.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
-public final class JsoupUtilException extends RuntimeException{
+public final class JsoupUtilException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;

@@ -15,7 +15,7 @@
  */
 package com.feilong.net.mail.exception;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.DefaultRuntimeException;
 
 /**
  * The Class MailException.
@@ -23,22 +23,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-public class MailException extends RuntimeException{
+public class MailException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
-
-    /**
-     * Instantiates a new mail exception.
-     *
-     * @param messagePattern
-     *            the message pattern
-     * @param args
-     *            the args
-     */
-    public MailException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
-    }
 
     /**
      * Instantiates a new mail exception.

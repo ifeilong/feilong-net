@@ -282,8 +282,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             tryCd(remoteDirectory);
             return true;
         }catch (Exception e){
-            String message = Slf4jUtil.format("can't cd:[{}],[{}]", remoteDirectory, e.getMessage());
-            LOGGER.error(message);
+            String message = Slf4jUtil.format("can't cd:[{}]", remoteDirectory);
             throw new FileTransferException(message, e);
         }
     }

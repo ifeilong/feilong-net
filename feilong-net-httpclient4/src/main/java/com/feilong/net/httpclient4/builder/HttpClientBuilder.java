@@ -27,6 +27,7 @@ import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.ssl.SSLProtocol;
 
@@ -106,7 +107,7 @@ public class HttpClientBuilder{
      */
     private static void setSSL(
                     LayeredConnectionSocketFactory layeredConnectionSocketFactory,
-                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder) throws RuntimeException{
+                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder){
         if (null != layeredConnectionSocketFactory){
             customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
         }
@@ -118,8 +119,7 @@ public class HttpClientBuilder{
             SSLContext sslContext = SSLContexts.custom().setProtocol(SSLProtocol.TLSv12).build();
             customHttpClientBuilder.setSSLContext(sslContext);
         }catch (KeyManagementException | NoSuchAlgorithmException e){
-            LOGGER.error("", e);
-            throw new RuntimeException(e);
+            throw new UncheckedHttpException(e);
         }catch (java.lang.NoSuchMethodError e){
             LOGGER.warn(
                             "pls update your [org.apache.httpcomponents:httpclient] version >= [4.4.7],otherwise cannot use setProtocol method",

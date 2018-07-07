@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.IOException;
@@ -32,7 +33,6 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 专门发送请求 <code>httpUriRequest</code> .
@@ -106,18 +106,13 @@ public final class HttpRequestExecuter{
     private static String buildMessage(Exception e,String handlerMessage,HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
         if (isNullOrEmpty(handlerMessage)){
             String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
-            return Slf4jUtil.format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
+            return format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
         }
 
         //---------------------------------------------------------------
 
         String pattern = "[{}],[{}],httpRequest:[{}],useConnectionConfig:[{}]";
-        return Slf4jUtil.format(
-                        pattern,
-                        e.getMessage(),
-                        handlerMessage,
-                        JsonUtil.format(httpRequest),
-                        JsonUtil.format(useConnectionConfig));
+        return format(pattern, e.getMessage(), handlerMessage, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
     }
 
     //---------------------------------------------------------------
