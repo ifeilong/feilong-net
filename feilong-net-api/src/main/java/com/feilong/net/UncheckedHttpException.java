@@ -61,6 +61,6 @@ public final class UncheckedHttpException extends RuntimeException{
      *            the cause
      */
     public UncheckedHttpException(Throwable cause){
-        super(cause);
+        super(cause.getMessage(), cause);
     }
 }

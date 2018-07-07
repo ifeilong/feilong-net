@@ -59,7 +59,7 @@ public final class HttpResponseUtil{
         try{
             return EntityUtils.toString(responseEntity, DEFAULT_CHARSET);
         }catch (ParseException | IOException e){
-            throw new UncheckedHttpException(e);
+            throw new UncheckedHttpException(e.getMessage(), e);
         }
     }
 }

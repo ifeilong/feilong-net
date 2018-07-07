@@ -22,7 +22,6 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,6 +39,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.net.jsoup.JsoupUtil;
 import com.feilong.net.jsoup.JsoupUtilException;
@@ -102,7 +102,7 @@ public class JinBaoWangCrawler{
      */
     public static Map<String, List<String>> convertObjectToMap(String objPath){
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(objPath));
+            ObjectInputStream in = new ObjectInputStream(FileUtil.getFileInputStream(objPath));
             @SuppressWarnings("unchecked")
             Map<String, List<String>> skuCodeAndImagesMap = (Map<String, List<String>>) in.readObject();
             in.close();

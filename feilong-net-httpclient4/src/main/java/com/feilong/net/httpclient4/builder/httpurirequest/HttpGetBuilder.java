@@ -23,8 +23,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpRequest;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class HttpGetBuilder.
@@ -73,7 +75,8 @@ final class HttpGetBuilder{
             URIBuilder uriBuilder = URIBuilderBuilder.builder(httpRequest);
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            throw new UncheckedHttpException(e);
+            String message = Slf4jUtil.format("httpRequest:[{}],[{}]", JsonUtil.format(httpRequest), e.getMessage());
+            throw new UncheckedHttpException(message, e);
         }
     }
 }

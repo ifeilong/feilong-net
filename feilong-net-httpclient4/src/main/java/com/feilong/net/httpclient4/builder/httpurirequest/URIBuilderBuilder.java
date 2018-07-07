@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpRequest;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class URIBuilderBuilder.
@@ -81,7 +82,8 @@ class URIBuilderBuilder{
 
             return uriBuilder;
         }catch (Exception e){
-            throw new UncheckedHttpException(e);
+            String message = Slf4jUtil.format("httpRequest:[{}],[{}]", JsonUtil.format(httpRequest), e.getMessage());
+            throw new UncheckedHttpException(message, e);
         }
     }
 }
