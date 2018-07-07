@@ -33,6 +33,7 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
@@ -335,7 +336,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
      */
     @Override
     protected boolean downRemoteSingleFile(String remoteSingleFile,String filePath){
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        try (FileOutputStream fileOutputStream = FileUtil.getFileOutputStream(filePath);
                         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream)){
 
             boolean success = ftpClient.retrieveFile(remoteSingleFile, bufferedOutputStream);

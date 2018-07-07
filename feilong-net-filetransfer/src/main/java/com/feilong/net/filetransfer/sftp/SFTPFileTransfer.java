@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
@@ -343,7 +344,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
      */
     @Override
     protected boolean downRemoteSingleFile(String remoteSingleFile,String filePath){
-        try (OutputStream outputStream = new FileOutputStream(filePath)){//use try-with-resources
+        try (OutputStream outputStream = FileUtil.getFileOutputStream(filePath)){//use try-with-resources
             channelSftp.get(remoteSingleFile, outputStream);
             return true;
         }catch (SftpException | IOException e){
