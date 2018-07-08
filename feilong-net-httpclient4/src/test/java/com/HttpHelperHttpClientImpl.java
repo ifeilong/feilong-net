@@ -20,6 +20,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.ssl.SSLContextBuilder;
 import com.feilong.net.ssl.SSLProtocol;
 
@@ -39,8 +40,7 @@ public class HttpHelperHttpClientImpl{
             HttpEntity httpEntity = readToHttpEntity(url, heads);
             return EntityUtils.toString(httpEntity);
         }catch (ParseException | IOException e){
-            LOGGER.error("", e);
-            throw new RuntimeException(e);
+            throw new UncheckedHttpException(e);
         }
     }
 
