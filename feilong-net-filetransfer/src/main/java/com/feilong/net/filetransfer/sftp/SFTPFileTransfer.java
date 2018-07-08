@@ -21,7 +21,6 @@ import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
