@@ -81,16 +81,6 @@ public class JinBaoWangCrawler{
         }
         Date now = new Date();
         String timestamp = DateUtil.toString(now, TIMESTAMP);
-        //        try{
-        //            CSVUtil.write(directoryName + File.separator  + timestamp + ".csv", columnTitles, dataList);
-        //            ObjectOutputStream out = new ObjectOutputStream(FileUtil.getFileOutputStream(directoryName + "/" + timestamp + ".obj"));
-        //            out.writeObject(skuCodeAndImagesMap);
-        //            out.close();
-        //        }catch (FileNotFoundException e){
-        //            throw new UncheckedIOException(e);
-        //        }catch (IOException e){
-        //            throw new UncheckedIOException(e);
-        //        }
     }
 
     /**

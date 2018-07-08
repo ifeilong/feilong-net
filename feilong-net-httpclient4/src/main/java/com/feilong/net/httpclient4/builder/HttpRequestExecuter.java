@@ -75,7 +75,7 @@ public final class HttpRequestExecuter{
             //            sb.append("1.wangluo");
             //            sb.append("2.can not ");
 
-            throw new UncheckedHttpException(buildMessage(e, sb.toString(), httpRequest, useConnectionConfig), e);
+            throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
         }
         //https://www.cnblogs.com/sunny08/p/8038440.html
         catch (SSLException e){
@@ -83,9 +83,9 @@ public final class HttpRequestExecuter{
             //            sb.append("pls check:").append(lineSeparator());
             //            sb.append("1.wangluo");
             //            sb.append("2.can not ");
-            throw new UncheckedHttpException(buildMessage(e, sb.toString(), httpRequest, useConnectionConfig), e);
+            throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
         }catch (Exception e){
-            throw new UncheckedHttpException(buildMessage(e, "", httpRequest, useConnectionConfig), e);
+            throw new UncheckedHttpException(buildMessage("", httpRequest, useConnectionConfig), e);
         }
     }
 
@@ -94,8 +94,8 @@ public final class HttpRequestExecuter{
     /**
      * Builds the message.
      *
-     * @param e
-     *            the e
+     * @param handlerMessage
+     *            the handler message
      * @param httpRequest
      *            the http request
      * @param useConnectionConfig
@@ -103,16 +103,16 @@ public final class HttpRequestExecuter{
      * @return the string
      * @since 1.11.4
      */
-    private static String buildMessage(Exception e,String handlerMessage,HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
+    private static String buildMessage(String handlerMessage,HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
         if (isNullOrEmpty(handlerMessage)){
-            String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
-            return format(pattern, e.getMessage(), JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
+            String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
+            return format(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
         }
 
         //---------------------------------------------------------------
 
-        String pattern = "[{}],[{}],httpRequest:[{}],useConnectionConfig:[{}]";
-        return format(pattern, e.getMessage(), handlerMessage, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
+        String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
+        return format(pattern, handlerMessage, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
     }
 
     //---------------------------------------------------------------
