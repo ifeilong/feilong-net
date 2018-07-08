@@ -37,6 +37,8 @@ import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
 import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
 
+import net.sf.json.processors.JsonValueProcessor;
+
 /**
  * 基于 HttpClient4 的工具类.
  *
@@ -478,13 +480,12 @@ public final class HttpClientUtil{
         //---------------------------------------------------------------
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "request:[{}],useConnectionConfig:[{}],response:[{}]",
-                            JsonUtil.format(httpRequest),
-                            JsonUtil.format(useConnectionConfig),
-                            JsonUtil.format(
-                                            resultResponse,
-                                            new JavaToJsonConfig(toMap("resultString", new StringOverLengthJsonValueProcessor()))));
+            String pattern = "request:[{}],useConnectionConfig:[{}],response:[{}]";
+            String response = JsonUtil.format(
+                            resultResponse,
+                            new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor())));
+
+            LOGGER.info(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig), response);
         }
 
         return resultResponse;
