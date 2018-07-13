@@ -10,17 +10,12 @@
 	<artifactId>feilong-net-jsoup</artifactId>
 	<name>feilong-net-jsoup</name>
 
-	<properties>
-		<version.jsoup>1.11.2</version.jsoup>
-	</properties>
-
 	<dependencies>
 
 		<!-- jsoup -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>${version.jsoup}</version>
 		</dependency>
 
 		<dependency>

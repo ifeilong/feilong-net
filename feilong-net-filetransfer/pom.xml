@@ -12,7 +12,6 @@
 	<description>feilong-net-filetransfer</description>
 
 	<properties>
-		<version.jsch>0.1.54</version.jsch>
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
 	</properties>
 
@@ -28,7 +27,6 @@
 		<dependency>
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
-			<version>${version.jsch}</version>
 		</dependency>
 
 		<!-- -->
