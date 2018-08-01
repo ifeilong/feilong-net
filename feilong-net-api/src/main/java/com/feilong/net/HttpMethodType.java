@@ -18,7 +18,7 @@ package com.feilong.net;
 import com.feilong.core.lang.EnumUtil;
 
 /**
- * http请求方法,目前仅支持通用的get和post 其他不支持.
+ * http请求方法.
  * 
  * <h3>get && post区别:</h3>
  * 
@@ -126,11 +126,82 @@ import com.feilong.core.lang.EnumUtil;
  */
 public enum HttpMethodType{
 
-    /** get方式. */
+    /**
+     * get方式.
+     * 
+     * @since http0.9
+     */
     GET("get"),
 
-    /** post方式. */
-    POST("post");
+    /**
+     * post方式.
+     * 
+     * @since http1.0
+     */
+    POST("post"),
+
+    //---------------------------------------------------------------
+
+    /**
+     * put方式.
+     * 
+     * <p>
+     * The PUT method requests that the enclosed entity be stored under the supplied Request-URI. <br>
+     * If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one
+     * residing on the origin server.
+     * </p>
+     * 
+     * <p>
+     * PUT方法请求服务器去把请求里的实体存储在请求URI（Request-URI）标识下。
+     * </p>
+     * 
+     * <ul>
+     * <li>如果请求URI（Request-URI）指定的的资源已经在源服务器上存在，那么此请求里的实体应该被当作是源服务器此URI所指定资源实体的修改版本</li>
+     * <li>如果请求URI（Request-URI）指定的资源不存在，并且此URI被用户代理（user agent，译注：用户代理可认为是客户浏览器）定义为一个新资源，那么源服务器就应该根据请求里的实体创建一个此URI所标识下的资源。</li>
+     * <li>如果一个新的资源被创建了，源服务器必须能向用户代理（user agent）发送201（已创建）响应。</li>
+     * <li>如果已存在的资源被改变了，那么源服务器应该发送200（Ok）或者204（无内容）响应。</li>
+     * <li>如果资源不能根据请求URI创建或者改变，一个合适的错误响应应该给出以反应问题的性质</li>
+     * <li>实体的接收者不能忽略任何它不理解的Content-*（如：Content-Range）头域，并且必须返回501（没有被实现）响应</li>
+     * </ul>
+     * 
+     * <p>
+     * 如果请求穿过一个缓存（cache），并且此请求URI（Request-URI）指示了一个或多个当前缓存的实体，那么这些实体应该被看作是旧的。<span style="color:red">PUT方法的响应不应该被缓存</span>。
+     * </p>
+     * 
+     * <h3>POST方法和PUT方法请求最根本的区别:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * POST方法和PUT方法请求最根本的区别:<span style="color:green">请求URI（Request-URI）的含义不同</span>。
+     * </p>
+     * 
+     * <p>
+     * POST请求里的URI指示一个能处理请求实体的资源（译注：此资源可能是一段程序，如jsp里的servlet）<br>
+     * 此资源可能是一个数据接收过程，一个网关（gateway，译注：网关和代理服务器的区别是：网关可以进行协议转换，而代理服务器不能，只是起代理的作用，比如缓存服务器其实就是一个代理服务器），或者一个单独接收注释的实体。<br>
+     * 而PUT方法请求里有一个实体一一用户代理知道URI意指什么，并且服务器不能把此请求应用于其他URI指定的资源。<br>
+     * 如果服务器期望请求被应用于一个不同的URI，那么它必须发送301（永久移动了）响应；用户代理可以自己决定是否重定向请求。
+     * 一个独立的资源可能会被许多不同的URI指定。<br>
+     * 
+     * 如：一篇文章可能会有一个URI指定当前版本，此URI区别于其文章其他特殊版本的URI。<br>
+     * 这种情况下，一个通用URI的PUT请求可能会导致其资源的其他URI被源服务器定义。
+     * 
+     * </p>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>HTTP/1.1没有定义PUT方法对源服务器的状态影响</li>
+     * <li>PUT请求必须遵循8.2节中的消息传输要求</li>
+     * <li>除非特别指出，PUT方法请求里的实体头域应该被用于资源的创建或修改</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.12.5
+     * @since http1.1
+     */
+    PUT("put");
 
     //---------------------------------------------------------------
 

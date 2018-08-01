@@ -20,24 +20,22 @@ import org.junit.Test;
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
  */
-public class GetResponseStatusCodeTest{
+public class PutTest{
 
     @Test(expected = NullPointerException.class)
-    public void testGetResponseStatusCodeNull(){
-        HttpClientUtil.getResponseStatusCode((String) null);
+    public void testPutNull(){
+        HttpClientUtil.put((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseStatusCodeEmpty(){
-        HttpClientUtil.getResponseStatusCode("");
+    public void testPutEmpty(){
+        HttpClientUtil.put("");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseStatusCodeBlank(){
-        HttpClientUtil.getResponseStatusCode(" ");
+    public void testPutBlank(){
+        HttpClientUtil.put(" ");
     }
 
 }

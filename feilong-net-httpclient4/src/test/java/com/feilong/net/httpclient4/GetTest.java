@@ -25,26 +25,18 @@ import org.junit.Test;
  */
 public class GetTest{
 
-    //    @Test
-    //    public void testGetResponseBodyAsString(){
-    //        String urlString = "https://www.baidu.com/?a=1&b=2";
-    //        assertTrue(isNotNullOrEmpty(HttpClientUtil.get(urlString)));
-    //    }
-
-    //---------------------------------------------------------------
-
     @Test(expected = NullPointerException.class)
-    public void testGetResponseBodyAsStringNull(){
+    public void testGetNull(){
         HttpClientUtil.get((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseBodyAsStringEmpty(){
+    public void testGetEmpty(){
         HttpClientUtil.get("");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseBodyAsStringBlank(){
+    public void testGetBlank(){
         HttpClientUtil.get(" ");
     }
 

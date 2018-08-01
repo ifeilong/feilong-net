@@ -69,7 +69,7 @@ public final class HttpUriRequestBuilder{
         }
 
         //---------------------------------------------------------------
-        HttpUriRequest httpUriRequest = HttpUriRequestFactory.buildHttpUriRequest(httpRequest, connectionConfig);
+        HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);
 
         HttpRequestHeadersPacker.setHeaders(httpUriRequest, httpRequest.getHeaderMap(), connectionConfig);
 

@@ -45,12 +45,7 @@ public class Snippet{
 
     private static CookieStore cookieStore = new BasicCookieStore();
 
-    /**
-     * initialize a instance of the httpClient depending on your own request
-     */
-
     //    在该代码中分别设置了网络代理，重试处理，对于请求的keepalive时间，指定cookiestore用于保存cookie。
-    //    
     //    
     //    retryHandler:代码里给了两种方式。第一个是简便的用于设置重试，第一个参数为最大重试次数，第二个参数为请求在幂等情况下是否重试。第二种方式详细的规定了在发生了什么exception个下重试，以及幂等和重试次数下的重试情况。
     //    routePlanner:httpClient支持代理。新建一个httphost对象传给一个routeplanner对象即可。httphost的构造方法中可以指定代理ip和端口

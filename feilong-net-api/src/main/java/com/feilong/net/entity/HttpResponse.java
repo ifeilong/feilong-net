@@ -16,7 +16,7 @@
 package com.feilong.net.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 /**
  * 得到的 http response 结果信息.
@@ -27,21 +27,25 @@ import java.util.List;
 public class HttpResponse implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1116415641000552013L;
+    private static final long   serialVersionUID = 1116415641000552013L;
 
     //---------------------------------------------------------------
 
     /** 响应的状态码,比如 200 , 404. */
-    private int               statusCode;
+    private int                 statusCode;
 
     /** 响应的结果字符串. */
-    private String            resultString;
+    private String              resultString;
 
-    /** 响应头信息. */
-    private List<HttpHeader>  headerList;
+    /**
+     * 响应头信息.
+     * 
+     * @since 1.12.5 change to map
+     */
+    private Map<String, String> headerMap;
 
     /** 耗时时间,精确到<span style="color:red">毫秒</span>. */
-    private long              useTime;
+    private long                useTime;
 
     //---------------------------------------------------------------
 
@@ -105,20 +109,21 @@ public class HttpResponse implements Serializable{
     /**
      * 获得 响应头信息.
      *
-     * @return the headerList
+     * @return the headerMap
+     * @since 1.12.5
      */
-    public List<HttpHeader> getHeaderList(){
-        return headerList;
+    public Map<String, String> getHeaderMap(){
+        return headerMap;
     }
 
     /**
      * 设置 响应头信息.
      *
-     * @param headerList
-     *            the headerList to set
+     * @param headerMap
+     *            the headerMap to set
+     * @since 1.12.5
      */
-    public void setHeaderList(List<HttpHeader> headerList){
-        this.headerList = headerList;
+    public void setHeaderMap(Map<String, String> headerMap){
+        this.headerMap = headerMap;
     }
-
 }

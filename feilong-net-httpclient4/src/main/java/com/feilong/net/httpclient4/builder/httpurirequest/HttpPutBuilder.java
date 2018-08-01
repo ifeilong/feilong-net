@@ -15,24 +15,23 @@
  */
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
-import org.apache.commons.lang3.NotImplementedException;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 
-import com.feilong.net.HttpMethodType;
-import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 
 /**
- * A factory for creating {@link HttpUriRequest} objects.
+ * The Class HttpPutBuilder.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.6
+ * @since 1.12.5
  */
-public class HttpUriRequestFactory{
+final class HttpPutBuilder{
 
     /** Don't let anyone instantiate this class. */
-    private HttpUriRequestFactory(){
+    private HttpPutBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -41,33 +40,22 @@ public class HttpUriRequestFactory{
     //---------------------------------------------------------------
 
     /**
-     * 基于 <code>httpRequest</code> 和 <code>connectionConfig</code> 构造 {@link HttpUriRequest}.
-     * 
+     * Builds the http post.
+     *
      * @param httpRequest
      *            the http request
-     * @param connectionConfig
-     *            the connection config
+     * @param requestConfig
+     *            the request config
      * @return the http uri request
      */
-    public static HttpUriRequest create(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
+    static HttpUriRequest build(HttpRequest httpRequest,RequestConfig requestConfig){
+        HttpEntity httpEntity = HttpEntityBuilder.build(httpRequest);
 
         //---------------------------------------------------------------
-        HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
+        HttpPut httpPut = new HttpPut(httpRequest.getUri());
+        httpPut.setEntity(httpEntity);
+        httpPut.setConfig(requestConfig);
 
-        switch (httpMethodType) {
-            case GET:
-                return HttpGetBuilder.build(httpRequest, requestConfig);
-
-            case POST:
-                return HttpPostBuilder.build(httpRequest, requestConfig);
-
-            //since 1.12.5
-            case PUT:
-                return HttpPutBuilder.build(httpRequest, requestConfig);
-
-            default:
-                throw new NotImplementedException(httpMethodType + " is not implemented!");
-        }
+        return httpPut;
     }
 }

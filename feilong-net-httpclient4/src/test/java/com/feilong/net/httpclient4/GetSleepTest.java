@@ -15,7 +15,11 @@
  */
 package com.feilong.net.httpclient4;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -23,21 +27,14 @@ import org.junit.Test;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class GetResponseStatusCodeTest{
+public class GetSleepTest{
 
-    @Test(expected = NullPointerException.class)
-    public void testGetResponseStatusCodeNull(){
-        HttpClientUtil.getResponseStatusCode((String) null);
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetSleepTest.class);
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseStatusCodeEmpty(){
-        HttpClientUtil.getResponseStatusCode("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetResponseStatusCodeBlank(){
-        HttpClientUtil.getResponseStatusCode(" ");
+    @Test
+    public void testGetResponseBodyAsString11(){
+        String uri = "http://127.0.0.1:8084/sleep?name=jinxin&age=18";
+        LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
     }
 
 }

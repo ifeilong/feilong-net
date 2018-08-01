@@ -34,7 +34,7 @@ import com.feilong.net.entity.HttpRequest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * The Class HttpEntityBuilder.
+ * {@link HttpEntity} 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
@@ -58,7 +58,6 @@ final class HttpEntityBuilder{
      */
     static HttpEntity build(HttpRequest httpRequest){
         String requestBody = httpRequest.getRequestBody();
-
         if (isNotNullOrEmpty(requestBody)){
             return new StringEntity(requestBody, UTF8);
         }
@@ -83,7 +82,6 @@ final class HttpEntityBuilder{
 
         //---------------------------------------------------------------
         List<NameValuePair> nameValuePairList = NameValuePairBuilder.build(paramMap);
-
         try{
             return new UrlEncodedFormEntity(nameValuePairList, UTF8);
         }catch (UnsupportedEncodingException e){

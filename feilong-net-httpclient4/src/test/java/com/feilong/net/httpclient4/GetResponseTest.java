@@ -25,16 +25,6 @@ import org.junit.Test;
  */
 public class GetResponseTest{
 
-    //    @Test
-    //    public void testGetHttpResponse(){
-    //        String urlString = "http://localhost:8081/member/login";
-    //        urlString = "http://www.baidu.com";
-    //
-    //        HttpClientUtil.getHttpResponse(urlString);
-    //    }
-
-    //---------------------------------------------------------------
-
     @Test(expected = NullPointerException.class)
     public void testGetHttpResponseNull(){
         HttpClientUtil.getHttpResponse((String) null);

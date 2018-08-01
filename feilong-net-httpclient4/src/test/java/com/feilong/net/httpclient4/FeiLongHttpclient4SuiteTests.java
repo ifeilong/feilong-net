@@ -25,6 +25,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetTest.class,
                 GetResponseStatusCodeTest.class,
                 GetResponseTest.class,
+
+                PutTest.class,
+                PutWithParamsTest.class,
         //                
 })
 public class FeiLongHttpclient4SuiteTests{

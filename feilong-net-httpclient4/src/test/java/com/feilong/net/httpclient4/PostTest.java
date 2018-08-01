@@ -58,14 +58,12 @@ public class PostTest{
      */
     @Test
     public void testGetResponseBodyAsString122(){
-
         //        "requestURL": "http://staging.mapemall.com/pay/redirect/doku", 
         //        "requestMethod": "POST", 
         //         "parameters": { 
         //               "PAYMENTCHANNEL": ["01"]
         //               (其他参数略去......)
         //            }
-
         String uri = "http://test.mapemall.com/pay/redirect/doku";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
     }

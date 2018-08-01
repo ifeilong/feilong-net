@@ -44,7 +44,6 @@ public class MultiThreadGetResponseBodyAsStringGetTest{
 
             }
         }, 20);
-
     }
 
 }

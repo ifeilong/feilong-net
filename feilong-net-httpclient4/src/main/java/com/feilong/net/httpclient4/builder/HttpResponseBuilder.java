@@ -18,13 +18,9 @@ package com.feilong.net.httpclient4.builder;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 
 import java.util.Date;
-import java.util.List;
 
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-
-import com.feilong.net.entity.HttpHeader;
 
 /**
  * The Class HttpResponseBuilder.
@@ -54,21 +50,16 @@ public final class HttpResponseBuilder{
      * @since 1.10.6
      */
     public static com.feilong.net.entity.HttpResponse build(Date beginDate,HttpResponse httpResponse){
-        long useTime = getIntervalTime(beginDate, new Date());
-
         StatusLine statusLine = httpResponse.getStatusLine();
 
-        Header[] allHeaders = httpResponse.getAllHeaders();
-        List<HttpHeader> httpHeaderList = HttpHeaderListBuilder.build(allHeaders);
-
         //---------------------------------------------------------------
+        com.feilong.net.entity.HttpResponse result = new com.feilong.net.entity.HttpResponse();
+        result.setStatusCode(statusLine.getStatusCode());
+        //since 1.12.5
+        result.setHeaderMap(HttpHeaderMapBuilder.build(httpResponse.getAllHeaders()));
+        result.setResultString(HttpResponseUtil.getResultString(httpResponse));
+        result.setUseTime(getIntervalTime(beginDate, new Date()));
 
-        com.feilong.net.entity.HttpResponse httpResponse2 = new com.feilong.net.entity.HttpResponse();
-        httpResponse2.setStatusCode(statusLine.getStatusCode());
-        httpResponse2.setHeaderList(httpHeaderList);
-        httpResponse2.setResultString(HttpResponseUtil.getResultString(httpResponse));
-        httpResponse2.setUseTime(useTime);
-
-        return httpResponse2;
+        return result;
     }
 }

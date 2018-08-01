@@ -63,5 +63,4 @@ public class RequestBodyTest{
         httpRequest.setRequestBody(JsonUtil.format(httpRequest, 0, 0));
         LOGGER.debug(HttpClientUtil.getResponseBodyAsString(httpRequest));
     }
-
 }
