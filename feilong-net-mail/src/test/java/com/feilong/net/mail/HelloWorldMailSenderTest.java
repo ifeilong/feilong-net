@@ -34,7 +34,7 @@ public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
     @Test
     public void helloWorld(){
         Map<String, Object> map = newHashMap();
-        String parseTemplateWithClasspathResourceLoader = new VelocityUtil()
+        String parseTemplateWithClasspathResourceLoader = VelocityUtil.INSTANCE
                         .parseTemplateWithClasspathResourceLoader("hello world.vm", map);
 
         mailSenderConfig.setSubject("hello world");

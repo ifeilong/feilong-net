@@ -60,7 +60,7 @@ public class IcsBuilder{
         map.put("now", toUTC(new Date()));
         map.put("summary", getiCalendar.getSummary());
 
-        return new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        return VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
     }
 
     public static String buildIcs(MailSenderConfig mailSenderConfig){

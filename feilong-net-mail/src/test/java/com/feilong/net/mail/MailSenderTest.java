@@ -118,7 +118,7 @@ public class MailSenderTest extends AbstractMailSenderTest{
 
         //---------------------------------------------------------------
 
-        String textContent = new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
+        String textContent = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
         mailSenderConfig.setContent(textContent);
 
         String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
