@@ -1,4 +1,4 @@
-package com;
+package com.feilong.temp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 

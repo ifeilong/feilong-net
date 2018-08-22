@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4.temp;
+package com.feilong.test;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
@@ -29,31 +29,14 @@ import com.feilong.net.httpclient4.HttpClientUtil;
  * @version 1.2.1 2015年6月6日 下午11:04:42
  * @since 1.2.1
  */
-public class PutTestTemp{
+public class GetSleepTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PutTestTemp.class);
-
-    @Test
-    public void testPut(){
-        String uri = "http://127.0.0.1:8085";
-        LOGGER.debug(HttpClientUtil.put(uri));
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetSleepTest.class);
 
     @Test
-    public void testPut1(){
-        String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.put(uri));
+    public void testGetResponseBodyAsString11(){
+        String uri = "http://127.0.0.1:8084/sleep?name=jinxin&age=18";
+        LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
     }
 
-    @Test
-    public void testPut11(){
-        String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
-        LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
-    }
-
-    @Test
-    public void testPut121(){
-        String uri = "http://127.0.0.1:8085";
-        LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
-    }
 }
