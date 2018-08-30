@@ -59,7 +59,7 @@ class URIBuilderBuilder{
      *            the http request
      * @return the URI builder
      */
-    static URIBuilder builder(HttpRequest httpRequest){
+    static URIBuilder build(HttpRequest httpRequest){
         try{
             URIBuilder uriBuilder = new URIBuilder(httpRequest.getUri());
 
@@ -68,21 +68,35 @@ class URIBuilderBuilder{
                 LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest));
                 return uriBuilder;
             }
-
-            //-------------set params--------------------------------------------------
-            for (Map.Entry<String, String> entry : paramMap.entrySet()){
-                String key = entry.getKey();
-                String value = entry.getValue();
-
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
-                }
-                uriBuilder.setParameter(key, value);
-            }
-            return uriBuilder;
+            return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
             String message = format("httpRequest:[{}]", JsonUtil.format(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * set params
+     *
+     * @param uriBuilder
+     *            the uri builder
+     * @param paramMap
+     *            the param map
+     * @return the URI builder
+     * @since 1.12.9
+     */
+    private static URIBuilder buildWithParameters(URIBuilder uriBuilder,Map<String, String> paramMap){
+        for (Map.Entry<String, String> entry : paramMap.entrySet()){
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
+            }
+            uriBuilder.setParameter(key, value);
+        }
+        return uriBuilder;
     }
 }

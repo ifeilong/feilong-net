@@ -61,28 +61,19 @@ public final class HttpRequestExecuter{
      */
     public static HttpResponse execute(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
-
         HttpUriRequest httpUriRequest = HttpUriRequestBuilder.build(httpRequest, useConnectionConfig);
 
         //---------------------------------------------------------------
         try{
             return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
-        }
-        //链接超时
-        catch (SocketTimeoutException e){
+        }catch (SocketTimeoutException e){ //链接超时
             StringBuilder sb = new StringBuilder();
             //            sb.append("pls check:").append(lineSeparator());
             //            sb.append("1.wangluo");
             //            sb.append("2.can not ");
-
             throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
-        }
-        //https://www.cnblogs.com/sunny08/p/8038440.html
-        catch (SSLException e){
+        }catch (SSLException e){//https://www.cnblogs.com/sunny08/p/8038440.html
             StringBuilder sb = new StringBuilder();
-            //            sb.append("pls check:").append(lineSeparator());
-            //            sb.append("1.wangluo");
-            //            sb.append("2.can not ");
             throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
         }catch (Exception e){
             throw new UncheckedHttpException(buildMessage("", httpRequest, useConnectionConfig), e);
@@ -110,7 +101,6 @@ public final class HttpRequestExecuter{
         }
 
         //---------------------------------------------------------------
-
         String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
         return format(pattern, handlerMessage, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
     }

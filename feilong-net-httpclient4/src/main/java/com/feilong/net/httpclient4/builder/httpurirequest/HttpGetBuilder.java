@@ -72,7 +72,7 @@ final class HttpGetBuilder{
      */
     private static URI buildUri(HttpRequest httpRequest){
         try{
-            URIBuilder uriBuilder = URIBuilderBuilder.builder(httpRequest);
+            URIBuilder uriBuilder = URIBuilderBuilder.build(httpRequest);
             return uriBuilder.build();
         }catch (URISyntaxException e){
             String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest));

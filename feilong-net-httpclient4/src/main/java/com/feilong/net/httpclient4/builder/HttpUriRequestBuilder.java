@@ -67,12 +67,10 @@ public final class HttpUriRequestBuilder{
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("httpRequest info:[{}]", JsonUtil.format(httpRequest));
         }
-
         //---------------------------------------------------------------
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);
 
         HttpRequestHeadersPacker.setHeaders(httpUriRequest, httpRequest.getHeaderMap(), connectionConfig);
-
         return httpUriRequest;
     }
 
