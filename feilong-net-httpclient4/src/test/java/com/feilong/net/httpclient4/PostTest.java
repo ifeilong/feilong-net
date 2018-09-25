@@ -21,6 +21,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.io.entity.MimeType;
+import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.net.HttpMethodType;
+import com.feilong.net.entity.HttpRequest;
+
 /**
  * The Class PostTest.
  *
@@ -66,5 +71,18 @@ public class PostTest{
         //            }
         String uri = "http://test.mapemall.com/pay/redirect/doku";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
+    }
+
+    @Test
+    public void testGetResponseBodyAsString122222(){
+        String uri = "http://127.0.0.1:8223/consumestest";
+
+        HttpRequest httpRequest = new HttpRequest(uri, HttpMethodType.POST);
+        httpRequest.setHeaderMap(toMap("Content-Type", MimeType.JSON.getMime()));
+
+        httpRequest.setRequestBody(JsonUtil.format(toMap("name", "feilong"), 0, 0));
+
+        String result = HttpClientUtil.getResponseBodyAsString(httpRequest);
+        LOGGER.debug(result);
     }
 }
