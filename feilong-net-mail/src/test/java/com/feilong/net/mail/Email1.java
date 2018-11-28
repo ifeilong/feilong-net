@@ -14,22 +14,16 @@ import javax.mail.util.ByteArrayDataSource;
 
 import org.junit.After;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.net.mail.DefaultMailSender;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.ics.ICalendarBuilder;
 import com.feilong.net.mail.ics.IcsBuilder;
 import com.feilong.net.mail.util.MimeType;
 
 public class Email1 extends AbstractMailSenderTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Email1.class);
 
     @Test
     public void send() throws Exception{

@@ -37,7 +37,7 @@ public class MultiSFTPFileTransferDownloadServer1{
     public void downloadFile(){
         LOGGER.info("begin mutiSFTPFileTransferDownloadTest1");
         String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML" };
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_feilong_20160715-154626-073.XML" };
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
 

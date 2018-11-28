@@ -45,8 +45,8 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Test
     public void downloadFile(){
         String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML",
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-22_10-46-00.318-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160722-144626-073.XML" };
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_feilong_20160715-154626-073.XML",
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-22_10-46-00.318-INVENTORY_ADJUSTMENTS_3PL_feilong_20160722-144626-073.XML" };
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
     }
@@ -132,7 +132,7 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Test(expected = NullPointerException.class)
     public void downloadEmptyWithNullRemotePath(){
         String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML",
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_feilong_20160715-154626-073.XML",
                                  null };
         fileTransfer.download("E:\\test\\1", remotePaths);
     }
@@ -146,7 +146,7 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Test(expected = IllegalArgumentException.class)
     public void downloadEmptyWithEmptyRemotePath(){
         String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML",
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_feilong_20160715-154626-073.XML",
                                  "" };
         fileTransfer.download("E:\\test\\1", remotePaths);
 
@@ -161,7 +161,7 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Test(expected = IllegalArgumentException.class)
     public void downloadEmptyWithBlankRemotePath(){
         String[] remotePaths = {
-                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_BAOZUN_20160715-154626-073.XML",
+                                 "/upload/Inbound/InventoryAdjustments/Archive/2016-07-15_11-58-58.389-INVENTORY_ADJUSTMENTS_3PL_feilong_20160715-154626-073.XML",
                                  " " };
         fileTransfer.download("E:\\test\\1", remotePaths);
     }
