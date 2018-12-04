@@ -49,6 +49,8 @@ public abstract class BaseConfig implements SessionConfig{
     /** 是否需要身份验证,默认 true. */
     private boolean isValidate     = true;
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 登录邮件发送服务器的用户名.
      *

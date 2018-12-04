@@ -28,6 +28,8 @@ public class MailException extends DefaultRuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new mail exception.
      *

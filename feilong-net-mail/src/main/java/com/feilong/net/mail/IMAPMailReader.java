@@ -48,11 +48,15 @@ public class IMAPMailReader implements MailReader{
     /** The Constant LOGGER. */
     private static final Logger LOGGER      = LoggerFactory.getLogger(IMAPMailReader.class);
 
+    //---------------------------------------------------------------
+
     /** imap or pop3. */
     private static final String PROTOCOL    = "imap";
 
     /** The folder name. */
     private static final String FOLDER_NAME = "INBOX";
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -63,6 +67,8 @@ public class IMAPMailReader implements MailReader{
     public List<MailInfo> getMailInfoList(MailReaderConfig mailReaderConfig){
         return getMailInfoList(mailReaderConfig, null, null);
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -101,6 +107,8 @@ public class IMAPMailReader implements MailReader{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Close.
      *
@@ -119,6 +127,8 @@ public class IMAPMailReader implements MailReader{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Close.
      *
@@ -136,6 +146,8 @@ public class IMAPMailReader implements MailReader{
             throw new MailReaderException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 folder.
@@ -156,6 +168,8 @@ public class IMAPMailReader implements MailReader{
         }
         return folder;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 messages.

@@ -15,18 +15,23 @@
  */
 package com.feilong.net.mail.util;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Address;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeUtility;
 
 import org.apache.commons.lang3.Validate;
 
 /**
- * The Class InternetAddressUtil.<br>
+ * The Class InternetAddressUtil.
  * 
  * <pre class="code">
  * name&lt;xxx@xxx.com.cn&gt;
@@ -46,12 +51,40 @@ import org.apache.commons.lang3.Validate;
  */
 public final class InternetAddressUtil{
 
+    /** The Constant CHARSET_PERSONAL. */
+    private static final String CHARSET_PERSONAL = UTF8;
+
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private InternetAddressUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * To address array.
+     *
+     * @param addresseArray
+     *            the addresse array
+     * @return the address[]
+     * @throws AddressException
+     *             the address exception
+     * @since 1.13.0
+     */
+    public static Address[] toAddressArray(String[] addresseArray) throws AddressException{
+        final int length = addresseArray.length;
+        Address[] addresses = new InternetAddress[length];
+        for (int i = 0; i < length; ++i){
+            addresses[i] = new InternetAddress(addresseArray[i]);
+        }
+        return addresses;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 将nameAndEmail map转成 InternetAddress数组.
@@ -69,9 +102,9 @@ public final class InternetAddressUtil{
     public static final InternetAddress[] toInternetAddressArray(Map<String, String> nameAndEmailMap,String charset)
                     throws UnsupportedEncodingException{
         Validate.notEmpty(nameAndEmailMap, "nameAndEmailMap can't be null/empty!");
+        //---------------------------------------------------------------
 
         InternetAddress[] internetAddresses = new InternetAddress[nameAndEmailMap.size()];
-
         int i = 0;
         for (Map.Entry<String, String> entry : nameAndEmailMap.entrySet()){
             String name = entry.getKey();
@@ -83,8 +116,10 @@ public final class InternetAddressUtil{
         return internetAddresses;
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 将 internetAddresses 数组 转成 toUnicodeString方法 list
+     * 将 internetAddresses 数组 转成 toUnicodeString方法 list.
      *
      * @param internetAddresses
      *            the internet addresses
@@ -93,11 +128,42 @@ public final class InternetAddressUtil{
     public static final List<String> toUnicodeStringList(InternetAddress[] internetAddresses){
         Validate.notEmpty(internetAddresses, "internetAddresses can't be null/empty!");
 
+        //---------------------------------------------------------------
         List<String> list = newArrayList();
-
         for (InternetAddress internetAddress : internetAddresses){
             list.add(internetAddress.toUnicodeString());
         }
         return list;
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * To from address.
+     *
+     * @param personal
+     *            the personal
+     * @param fromAddress
+     *            the from address
+     * @return the address
+     * @throws UnsupportedEncodingException
+     *             the unsupported encoding exception
+     * @throws AddressException
+     *             the address exception
+     * @since 1.13.0
+     */
+    public static Address buildFromAddress(String personal,String fromAddress) throws UnsupportedEncodingException,AddressException{
+        // 设置邮件消息的发送者
+        if (isNotNullOrEmpty(personal)){
+            //the encoding to be used. Currently supported values are "B" and "Q". 
+            //If this parameter is null, then the "Q" encoding is used if most of characters to be encoded are in the ASCII charset, 
+            //otherwise "B" encoding is used.
+            //B为base64方式
+            String encoding = "b";
+            String encodeText = MimeUtility.encodeText(personal, CHARSET_PERSONAL, encoding);
+            return new InternetAddress(fromAddress, encodeText);
+        }
+        return new InternetAddress(fromAddress);
+    }
+
 }

@@ -71,6 +71,8 @@ public class MailSenderTest extends AbstractMailSenderTest{
         mailSenderConfig.setContent(textContent);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Send mail with attach.
      */
@@ -113,7 +115,7 @@ public class MailSenderTest extends AbstractMailSenderTest{
 
         //---------------------------------------------------------------
         Map<String, Object> contextKeyValues = newHashMap();
-        contextKeyValues.put("PREFIX_CONTENTID", DefaultMailSender.PREFIX_CONTENTID);
+        contextKeyValues.put("PREFIX_CONTENTID", AttachmentSetter.PREFIX_CONTENTID);
         contextKeyValues.put("fileInfoEntityList", fileInfoEntityList);
 
         //---------------------------------------------------------------

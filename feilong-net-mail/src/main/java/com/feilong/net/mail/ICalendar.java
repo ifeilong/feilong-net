@@ -34,6 +34,8 @@ public class ICalendar{
 
     private String summary;
 
+    //---------------------------------------------------------------
+
     /**
      * @return the beginDate
      */

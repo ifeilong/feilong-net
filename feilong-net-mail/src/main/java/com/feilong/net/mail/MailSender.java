@@ -19,7 +19,7 @@ import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.exception.MailSenderException;
 
 /**
- * The Interface MailSender.
+ * 邮件发送器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see com.feilong.net.mail.entity.MailSenderConfig

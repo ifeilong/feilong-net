@@ -26,6 +26,8 @@ public final class MailSenderException extends MailException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1497121458572671491L;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      *

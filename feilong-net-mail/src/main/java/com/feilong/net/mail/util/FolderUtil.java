@@ -38,6 +38,8 @@ public final class FolderUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 map for LOGGER.
      *

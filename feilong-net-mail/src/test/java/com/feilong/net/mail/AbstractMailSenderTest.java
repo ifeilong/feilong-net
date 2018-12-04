@@ -39,6 +39,8 @@ public abstract class AbstractMailSenderTest{
     /** The mail sender config. */
     protected MailSenderConfig mailSenderConfig;
 
+    //---------------------------------------------------------------
+
     /**
      * Before.
      */
@@ -47,8 +49,11 @@ public abstract class AbstractMailSenderTest{
         loadMailSenderConfig();
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 
+     * Load mail sender config.
+     *
      * @since 1.10.0
      */
     private void loadMailSenderConfig(){
@@ -65,6 +70,19 @@ public abstract class AbstractMailSenderTest{
         //LOGGER.debug(JsonUtil.format(mailSenderConfig));
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * Gets the config file.
+     *
+     * @return the config file
+     */
+    protected String getConfigFile(){
+        return "/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties";
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * After.
      */
@@ -74,7 +92,4 @@ public abstract class AbstractMailSenderTest{
         mailSender.sendMail(mailSenderConfig);
     }
 
-    protected String getConfigFile(){
-        return "/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties";
-    }
 }

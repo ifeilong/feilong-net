@@ -16,7 +16,7 @@
 package com.feilong.net.mail.util;
 
 /**
- * 多用途互联网邮件扩展(MIME,Multipurpose Internet Mail Extensions)是一个互联网标准,它扩展了电子邮件标准
+ * 多用途互联网邮件扩展(MIME,Multipurpose Internet Mail Extensions)是一个互联网标准,它扩展了电子邮件标准.
  * 
  * <blockquote>
  * <p>
@@ -188,13 +188,15 @@ package com.feilong.net.mail.util;
  * @see com.feilong.io.entity.MimeType
  * @since 1.2.0
  */
-public class MimeType{
+public final class MimeType{
 
     /** <code>{@value}</code>. */
     public static final String TEXT_ALL              = "text/*";
 
     /** <code>{@value}</code>. */
     public static final String TEXT_HTML             = com.feilong.io.entity.MimeType.HTML.getMime();
+
+    //---------------------------------------------------------------
 
     /** <code>{@value}</code>. */
     public static final String MULTIPART_ALL         = "multipart/*";
@@ -216,6 +218,8 @@ public class MimeType{
      * @see <a href="https://rsync.tools.ietf.org/html/rfc5545">Internet Calendaring and Scheduling Core Object Specification(iCalendar)</a>
      */
     public static final String TYPE_ICS              = "text/calendar;method=REQUEST;charset=\"UTF-8\"";
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private MimeType(){

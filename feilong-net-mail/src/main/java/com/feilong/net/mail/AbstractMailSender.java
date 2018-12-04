@@ -15,17 +15,12 @@
  */
 package com.feilong.net.mail;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-
 import java.util.Date;
 
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
-import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.entity.Priority;
@@ -44,7 +39,7 @@ import com.feilong.net.mail.entity.Priority;
 public abstract class AbstractMailSender implements MailSender{
 
     /**
-     * 设置 default command map.<br>
+     * 设置 default command map.
      * <p>
      * 解决 bug javax.activation.UnsupportedDataTypeException: no object DCH for MIME type multipart/related;
      * </p>
@@ -102,51 +97,4 @@ public abstract class AbstractMailSender implements MailSender{
         message.setSentDate(new Date());
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * 设置邮件接受人群<br>
-     * 支持 to cc bcc.
-     *
-     * @param message
-     *            the message
-     * @param mailSenderConfig
-     *            the new recipients
-     * @throws MessagingException
-     *             the messaging exception
-     */
-    protected static void setRecipients(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
-        // 创建邮件的接收者地址,并设置到邮件消息中
-        // Message.RecipientType.TO属性表示接收者的类型为TO
-        setRecipients(message, Message.RecipientType.TO, mailSenderConfig.getTos());
-        //cc 抄送
-        setRecipients(message, Message.RecipientType.CC, mailSenderConfig.getCcs());
-        //bcc 密送
-        setRecipients(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 设置 邮件接收人.
-     *
-     * @param message
-     *            the message
-     * @param recipientType
-     *            the recipient type
-     * @param addresseArray
-     *            the addresse array
-     * @throws MessagingException
-     *             the messaging exception
-     */
-    protected static void setRecipients(Message message,RecipientType recipientType,String[] addresseArray) throws MessagingException{
-        if (isNotNullOrEmpty(addresseArray)){
-            final int length = addresseArray.length;
-            Address[] addresses = new InternetAddress[length];
-            for (int i = 0; i < length; ++i){
-                addresses[i] = new InternetAddress(addresseArray[i]);
-            }
-            message.setRecipients(recipientType, addresses);
-        }
-    }
 }
