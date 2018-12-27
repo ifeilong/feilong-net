@@ -40,7 +40,7 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * 通用的文件传输 .
+ * 通用的文件传输.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
@@ -55,7 +55,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransfer#download(java.lang.String, java.lang.String[])
+     * @see com.feilong.net.filetransfer.FileTransfer#download(java.lang.String, java.lang.String[])
      */
     @Override
     public void download(String localAbsoluteDirectoryPath,String...remotePaths){
@@ -80,10 +80,12 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransfer#upload(java.lang.String, java.lang.String[])
+     * @see com.feilong.net.filetransfer.FileTransfer#upload(java.lang.String, java.lang.String[])
      */
     @Override
     public boolean upload(String remoteDirectory,String...batchLocalFileFullPaths){
@@ -117,6 +119,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         return false;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 如果远程目录不存在,那么级联创建.
      *
@@ -148,6 +152,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Try cd.
      *
@@ -159,15 +165,16 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     protected abstract void tryCd(String remoteDirectory) throws Exception;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransfer#getFileEntityMap(java.lang.String, java.lang.String[])
+     * @see com.feilong.net.filetransfer.FileTransfer#getFileEntityMap(java.lang.String, java.lang.String[])
      */
     @Override
     public Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames){
         Validate.notBlank(remotePath, "remotePath can't be blank!");
-        Validate.notEmpty(fileNames, "fileNames can't be null/empty!");
 
         //---------------------------------------------------------------
         boolean isConnectSuccess = connect();
@@ -178,15 +185,18 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         //---------------------------------------------------------------
         Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
         Map<String, FileInfoEntity> fileEntityMap = MapUtil.getSubMap(lsFileMap, fileNames);
+
+        //---------------------------------------------------------------
         disconnect();
         return fileEntityMap;
-
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.tools.net.filetransfer.FileTransfer#delete(java.lang.String[])
+     * @see com.feilong.net.filetransfer.FileTransfer#delete(java.lang.String[])
      */
     @Override
     public boolean delete(String...remoteAbsolutePaths){
@@ -270,6 +280,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     protected abstract Map<String, FileInfoEntity> getLsFileMap(String remotePath);
 
+    //---------------------------------------------------------------
+
     /**
      * 切换远程操作目录.
      *
@@ -286,6 +298,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             throw new FileTransferException(message, e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 创建远程文件夹.
@@ -321,6 +335,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @return true, if _down remote single file
      */
     protected abstract boolean downRemoteSingleFile(String remoteSingleFile,String filePath);
+
     //---------------------------------------------------------------
 
     /**
@@ -357,6 +372,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
         return isSuccess;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 不关闭连接下载.
@@ -401,6 +418,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         return isSuccess;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Log after down remote single file.
      *
@@ -421,15 +440,30 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
+     * Builds the result string.
+     *
      * @param isSuccess
-     * @return
+     *            the is success
+     * @return the string
      * @since 1.10.4
      */
     protected String buildResultString(boolean isSuccess){
         return isSuccess ? "success" : "fail!!";
     }
 
+    /**
+     * Log info or error.
+     *
+     * @param isSuccess
+     *            the is success
+     * @param messagePattern
+     *            the message pattern
+     * @param args
+     *            the args
+     */
     protected void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
         if (LOGGER.isInfoEnabled()){
             String message = Slf4jUtil.format(messagePattern, args);
@@ -441,6 +475,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 递归传递文件夹/文件.
@@ -482,6 +518,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         return isSuccess;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Do with file.
      *
@@ -506,6 +544,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         IOUtils.closeQuietly(fileInputStream);
         return isSuccess;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Do with directory.
@@ -534,6 +574,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             uploadDontClose(childrenFile.getAbsolutePath(), remoteDirectory + "/" + localFileName);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 是否存在同名且同类型的文件.
@@ -567,6 +609,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         return isExistsSameNameAndTypeFile(file, fileName, fileInfoEntity);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Checks if is exists same name and type file.
      *
@@ -594,6 +638,8 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         }
         return false;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 文件夹 和文件 拼接路径.

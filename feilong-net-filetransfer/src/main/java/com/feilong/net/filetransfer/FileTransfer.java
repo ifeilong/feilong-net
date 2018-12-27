@@ -146,10 +146,12 @@ public interface FileTransfer{
      * 
      * @param remoteAbsolutePaths
      *            一组文件,绝对路径 <br>
-     *            不能为 null或者empty,否则 {@link IllegalArgumentException}<br>
      *            任意一个值 null或者empty, {@link IllegalArgumentException}<br>
      *            任意一个值= / , {@link IllegalArgumentException} 危险!!
-     * @return 删除成功返回true,否则false<br>
+     * @return 如果 <code>remoteAbsolutePaths</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>remoteAbsolutePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         删除成功返回true,否则false<br>
      *         不支持 删除全部 危险<br>
      *         一旦有一个文件 null或者empty抛错
      */
@@ -163,7 +165,9 @@ public interface FileTransfer{
      *            远程地址
      * @param fileNames
      *            文件名称组
-     * @return 如果fileNames 有文件不在 remotePath 路径下面, 则返回的map中这条数据的value 是null
+     * @return 如果 <code>remotePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>remotePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>fileNames</code> 是null 或者是 <code>fileNames</code> 是empty,那么返回这个 <code>remotePath</code> 下面所有的文件<br>
      */
     Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames);
 }
