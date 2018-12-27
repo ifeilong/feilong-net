@@ -167,7 +167,7 @@ public interface FileTransfer{
      *            文件名称组
      * @return 如果 <code>remotePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>remotePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>fileNames</code> 是null 或者是 <code>fileNames</code> 是empty,那么返回这个 <code>remotePath</code> 下面所有的文件<br>
+     *         如果 <code>fileNames</code> 是null 或者是 empty,那么返回这个 <code>remotePath</code> 下面所有的文件<br>
      */
     Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames);
 }
