@@ -17,12 +17,6 @@ package com.feilong.net.httpclient4;
 
 import org.junit.Test;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
- */
 public class GetTest{
 
     @Test(expected = NullPointerException.class)

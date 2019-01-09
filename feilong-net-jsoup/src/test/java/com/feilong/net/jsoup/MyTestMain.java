@@ -21,22 +21,10 @@ import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * The Class MyTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class MyTestMain{
 
-    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MyTestMain.class);
 
-    /**
-     * The main method.
-     * 
-     * @param args
-     *            the arguments
-     */
     public static void main(String[] args){
         // 直接从字符串中输入 HTML 文档
         String html = "<html><head><title> 开源中国社区 </title></head>" + "<body><p> 这里是 jsoup 项目的相关文章 </p></body></html>";

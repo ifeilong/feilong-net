@@ -41,6 +41,13 @@ public class GetTestTemp{
 
     //---------------------------------------------------------------
     @Test
+    public void testGetResponseBodyAsString1111(){
+        String uri = "https://www.ralphlauren.cn/myOrderDetail/118121214525987701216.html";
+
+        LOGGER.debug(HttpClientUtil.get(uri));
+    }
+
+    @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
 

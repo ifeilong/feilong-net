@@ -34,20 +34,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
-import com.feilong.net.jsoup.JsoupUtil;
-import com.feilong.net.jsoup.JsoupUtilException;
 
-/**
- * The Class JsoupUtilTest.
- */
 public class JsoupUtilTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsoupUtilTest.class);
 
-    /**
-     * TestJsoupUtilTest.
-     */
     @Test
     public void testJsoupUtilTest(){
         String xml = " <config>\n" + "        <Request name=\"ValidateEmailRequest\">\n"
@@ -75,12 +67,6 @@ public class JsoupUtilTest{
 
     }
 
-    /**
-     * 获得 document.
-     *
-     * @throws JsoupUtilException
-     *             the jsoup util exception
-     */
     @Test
     public void getDocument() throws JsoupUtilException{
         String urlString = "http://www.suimeng.com/files/article/html/76/76841/";
