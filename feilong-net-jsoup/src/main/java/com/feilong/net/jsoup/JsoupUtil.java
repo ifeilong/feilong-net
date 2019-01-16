@@ -68,6 +68,47 @@ public final class JsoupUtil{
         return getDocument(urlString, DEFAULT_USER_AGENT);
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * Parse HTML into a Document. As no base URI is specified, absolute URL detection relies on the HTML including a
+     * {@code <base href>} tag.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 比如
+     * 
+     * <pre>
+    {@code
+    <form id = "pay_form" action="https://gateway.test.95516.com/gateway/api/frontTransReq.do" method="post">
+     * <input type="hidden" name="bizType" id="bizType" value="000201"/>
+     * <input type="hidden" name="signMethod" id="signMethod" value="01"/>
+     * <input type="hidden" name="txnAmt" id="txnAmt" value="100"/>
+     * <input type="hidden" name="orderDesc" id="orderDesc" value="reebok 香港官方商城商品"/>
+     * </form>
+    }
+     * </pre>
+     * 
+     * 可以将这个字符串 转成 {@link Document}
+     * 
+     * </blockquote>
+     *
+     * @param html
+     *            the html
+     * @return 如果 <code>html</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.13.0
+     */
+    public static Document parse(String html){
+        Validate.notNull(html, "html can't be null!");
+
+        //---------------------------------------------------------------
+        return Jsoup.parse(html);
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * 通过url 获得文档.
      * 
@@ -91,6 +132,8 @@ public final class JsoupUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the elements by select.
      * 
@@ -98,35 +141,42 @@ public final class JsoupUtil{
      *            the url
      * @param selectQuery
      *            the select query
-     * @return the elements by select
-     * @throws JsoupUtilException
-     *             the jsoup util exception
+     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>selectQuery</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>selectQuery</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getDocument(String)
      * @see org.jsoup.nodes.Element#select(String)
      */
     public static Elements getElementsBySelect(String url,String selectQuery){
-        Validate.notEmpty(url);
-        Validate.notEmpty(selectQuery);
+        Validate.notBlank(url);
+        Validate.notBlank(selectQuery);
+        //---------------------------------------------------------------
         Document document = getDocument(url);
         return document.select(selectQuery);
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * getElementById.
-     * 
+     * Gets the element by id.
+     *
      * @param url
      *            the url
      * @param id
      *            the id
-     * @return getElementById
-     * @throws JsoupUtilException
-     *             the jsoup util exception
+     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>id</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>id</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getDocument(String)
      * @see org.jsoup.nodes.Element#getElementById(String)
      */
     public static Element getElementById(String url,String id){
-        Validate.notEmpty(url);
-        Validate.notEmpty(id);
+        Validate.notBlank(url);
+        Validate.notBlank(id);
+
+        //---------------------------------------------------------------
         Document document = getDocument(url);
         return document.getElementById(id);
     }
