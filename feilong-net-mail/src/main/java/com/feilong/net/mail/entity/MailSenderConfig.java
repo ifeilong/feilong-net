@@ -31,8 +31,11 @@ public class MailSenderConfig extends BaseConfig{
     //---------------------------------------------------------------
 
     /**
-     * 邮件发送者的地址.<br>
+     * 邮件发送者的地址.
+     * 
+     * <p>
      * example:huanyuansp@126.com
+     * </p>
      */
     private String    fromAddress;
 
@@ -113,8 +116,10 @@ public class MailSenderConfig extends BaseConfig{
     }
 
     /**
-     * 获得 邮件发送者的地址.<br>
+     * 获得 邮件发送者的地址.
+     * <p>
      * example:huanyuansp@126.com
+     * </p>
      *
      * @return the fromAddress
      */
@@ -123,8 +128,10 @@ public class MailSenderConfig extends BaseConfig{
     }
 
     /**
-     * 设置 邮件发送者的地址.<br>
+     * 设置 邮件发送者的地址.
+     * <p>
      * example:huanyuansp@126.com
+     * </p>
      * 
      * @param fromAddress
      *            the fromAddress to set
@@ -167,7 +174,7 @@ public class MailSenderConfig extends BaseConfig{
      * @param tos
      *            the tos to set
      */
-    public void setTos(String[] tos){
+    public void setTos(String...tos){
         this.tos = tos;
     }
 
@@ -186,7 +193,7 @@ public class MailSenderConfig extends BaseConfig{
      * @param ccs
      *            the ccs to set
      */
-    public void setCcs(String[] ccs){
+    public void setCcs(String...ccs){
         this.ccs = ccs;
     }
 
@@ -205,7 +212,7 @@ public class MailSenderConfig extends BaseConfig{
      * @param bccs
      *            the bccs to set
      */
-    public void setBccs(String[] bccs){
+    public void setBccs(String...bccs){
         this.bccs = bccs;
     }
 
@@ -293,6 +300,8 @@ public class MailSenderConfig extends BaseConfig{
     public String[] getAttachFilePaths(){
         return attachFilePaths;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * @return the iCalendar
