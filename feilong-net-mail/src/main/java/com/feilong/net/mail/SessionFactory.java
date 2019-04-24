@@ -101,8 +101,8 @@ class SessionFactory{
      */
     private static Properties buildProperties(SessionConfig sessionConfig){
         Properties properties = new Properties();
-        properties.put("mail.smtp.host", sessionConfig.getMailServerHost());
-        properties.put("mail.smtp.port", sessionConfig.getMailServerPort());
+        properties.put("mail.smtp.host", sessionConfig.getServerHost());
+        properties.put("mail.smtp.port", sessionConfig.getServerPort());
         properties.put("mail.smtp.auth", sessionConfig.getIsValidate() ? "true" : "false");
 
         //    Caused by: com.sun.mail.smtp.SMTPSendFailedException: 530 5.7.0 Must issue a STARTTLS command first

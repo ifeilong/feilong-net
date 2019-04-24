@@ -16,7 +16,7 @@
 package com.feilong.net.mail.entity;
 
 /**
- * The Interface SessionConfig.
+ * 和 session 相关的配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
@@ -30,6 +30,8 @@ public interface SessionConfig{
      */
     String getUserName();
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 登录邮件发送服务器的密码.
      *
@@ -37,19 +39,25 @@ public interface SessionConfig{
      */
     String getPassword();
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 发送邮件的服务器的IP.
      *
      * @return the mailServerHost
+     * @since 1.13.2 rename from mailServerHost
      */
-    String getMailServerHost();
+    String getServerHost();
 
     /**
      * 获得 邮件服务的端口 默认25.
      *
      * @return the mailServerPort
+     * @since 1.13.2 rename from mailServerPort
      */
-    String getMailServerPort();
+    String getServerPort();
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 是否debug 输出.

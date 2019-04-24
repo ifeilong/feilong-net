@@ -16,7 +16,7 @@
 package com.feilong.net.mail.entity;
 
 /**
- * The Class BaseConfig.
+ * 父类配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
@@ -24,37 +24,52 @@ package com.feilong.net.mail.entity;
 public abstract class BaseConfig implements SessionConfig{
 
     /**
-     * 发送邮件的服务器的IP. <br>
+     * 发送邮件的服务器的IP.
+     * 
+     * <p>
      * example:smtp.126.com
+     * </p>
+     * 
+     * @since 1.13.2 rename from mailServerHost
      */
-    private String  mailServerHost;
-
-    /** 邮件服务的端口 默认25. */
-    private String  mailServerPort = "25";
+    private String  serverHost;
 
     /**
-     * 登录邮件发送服务器的用户名.<br>
+     * 邮件服务的端口 默认25.
+     * 
+     * @since 1.13.2 rename from mailServerPort
      */
-    private String  userName;
-
-    /**
-     * 登录邮件发送服务器的密码.<br>
-     * example:******.
-     */
-    private String  password;
-
-    /** 是否debug 输出. */
-    private boolean isDebug        = false;
-
-    /** 是否需要身份验证,默认 true. */
-    private boolean isValidate     = true;
+    private String  serverPort = "25";
 
     //---------------------------------------------------------------
 
+    /** 登录邮件发送服务器的用户名. */
+    private String  userName;
+
     /**
-     * 获得 登录邮件发送服务器的用户名.
-     *
-     * @return the userName
+     * 登录邮件发送服务器的密码.
+     * <p>
+     * example:******.
+     * </p>
+     */
+    private String  password;
+
+    //---------------------------------------------------------------
+
+    /** 是否debug 输出. */
+    private boolean isDebug    = false;
+
+    //---------------------------------------------------------------
+
+    /** 是否需要身份验证,默认 true. */
+    private boolean isValidate = true;
+
+    //---------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.net.mail.entity.SessionConfig#getUserName()
      */
     @Override
     public String getUserName(){
@@ -71,10 +86,12 @@ public abstract class BaseConfig implements SessionConfig{
         this.userName = userName;
     }
 
-    /**
-     * 获得 登录邮件发送服务器的密码.
-     *
-     * @return the password
+    //---------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.net.mail.entity.SessionConfig#getPassword()
      */
     @Override
     public String getPassword(){
@@ -91,45 +108,51 @@ public abstract class BaseConfig implements SessionConfig{
         this.password = password;
     }
 
-    /**
-     * 获得 发送邮件的服务器的IP.
-     *
-     * @return the mailServerHost
+    //---------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.net.mail.entity.SessionConfig#getServerHost()
      */
     @Override
-    public String getMailServerHost(){
-        return mailServerHost;
+    public String getServerHost(){
+        return serverHost;
     }
 
     /**
      * 设置 发送邮件的服务器的IP.
      *
-     * @param mailServerHost
-     *            the mailServerHost to set
+     * @param serverHost
+     *            the new 发送邮件的服务器的IP
      */
-    public void setMailServerHost(String mailServerHost){
-        this.mailServerHost = mailServerHost;
+    public void setServerHost(String serverHost){
+        this.serverHost = serverHost;
     }
 
-    /**
-     * 获得 邮件服务的端口 默认25.
-     *
-     * @return the mailServerPort
+    //---------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.net.mail.entity.SessionConfig#getServerPort()
      */
     @Override
-    public String getMailServerPort(){
-        return mailServerPort;
+    public String getServerPort(){
+        return serverPort;
     }
 
     /**
      * 设置 邮件服务的端口 默认25.
      *
-     * @param mailServerPort
-     *            the mailServerPort to set
+     * @param serverPort
+     *            the new 邮件服务的端口 默认25
      */
-    public void setMailServerPort(String mailServerPort){
-        this.mailServerPort = mailServerPort;
+    public void setServerPort(String serverPort){
+        this.serverPort = serverPort;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 是否debug 输出.
@@ -150,6 +173,8 @@ public abstract class BaseConfig implements SessionConfig{
     public void setIsDebug(boolean isDebug){
         this.isDebug = isDebug;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 是否需要身份验证,默认 true.

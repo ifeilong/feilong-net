@@ -82,7 +82,7 @@ public class IMAPMailReader implements MailReader{
             LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.format(mailReaderConfig), JsonUtil.format(searchTerm));
         }
 
-        String mailServerHost = mailReaderConfig.getMailServerHost();
+        String mailServerHost = mailReaderConfig.getServerHost();
         String userName = mailReaderConfig.getUserName();
         String password = mailReaderConfig.getPassword();
 
