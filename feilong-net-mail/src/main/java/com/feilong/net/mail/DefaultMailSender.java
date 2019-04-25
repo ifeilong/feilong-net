@@ -39,6 +39,7 @@ import com.feilong.net.mail.setter.AttachmentSetter;
 import com.feilong.net.mail.setter.HeaderSetter;
 import com.feilong.net.mail.setter.RecipientsSetter;
 import com.feilong.net.mail.util.InternetAddressUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 邮件发送器.
@@ -137,9 +138,9 @@ public final class DefaultMailSender extends AbstractMailSender{
 
         try{
             setMessageAttribute(message, mailSenderConfig);
-        }catch (UnsupportedEncodingException | MessagingException e){
-            LOGGER.error("", e);
-            throw new MailSenderException(e);
+        }catch (MessagingException e){
+            //since 1.13.2 update exception message
+            throw new MailSenderException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSenderConfig)), e);
         }
 
         return message;
@@ -242,8 +243,8 @@ public final class DefaultMailSender extends AbstractMailSender{
      * @see #setRecipients(Message, MailSenderConfig)
      * @see #setHeaders(Message, MailSenderConfig)
      */
-    private static void setMessageAttribute(Message message,MailSenderConfig mailSenderConfig)
-                    throws UnsupportedEncodingException,MessagingException{
+    private static void setMessageAttribute(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
+
         message.setFrom(InternetAddressUtil.buildFromAddress(mailSenderConfig.getPersonal(), mailSenderConfig.getFromAddress()));
 
         // 设置邮件接受人群
@@ -256,5 +257,6 @@ public final class DefaultMailSender extends AbstractMailSender{
 
         //header信息
         HeaderSetter.setHeaders(message, mailSenderConfig);
+
     }
 }

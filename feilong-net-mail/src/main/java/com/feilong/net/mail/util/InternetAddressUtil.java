@@ -30,6 +30,9 @@ import javax.mail.internet.MimeUtility;
 
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.DefaultRuntimeException;
+import com.feilong.tools.slf4j.Slf4jUtil;
+
 /**
  * The Class InternetAddressUtil.
  * 
@@ -145,25 +148,31 @@ public final class InternetAddressUtil{
      *            the personal
      * @param fromAddress
      *            the from address
-     * @return the address
-     * @throws UnsupportedEncodingException
-     *             the unsupported encoding exception
-     * @throws AddressException
-     *             the address exception
+     * @return 如果 <code>fromAddress</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fromAddress</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.13.0
      */
-    public static Address buildFromAddress(String personal,String fromAddress) throws UnsupportedEncodingException,AddressException{
-        // 设置邮件消息的发送者
-        if (isNotNullOrEmpty(personal)){
-            //the encoding to be used. Currently supported values are "B" and "Q". 
-            //If this parameter is null, then the "Q" encoding is used if most of characters to be encoded are in the ASCII charset, 
-            //otherwise "B" encoding is used.
-            //B为base64方式
-            String encoding = "b";
-            String encodeText = MimeUtility.encodeText(personal, CHARSET_PERSONAL, encoding);
-            return new InternetAddress(fromAddress, encodeText);
+    public static Address buildFromAddress(String personal,String fromAddress){
+        Validate.notBlank(fromAddress, "fromAddress can't be blank!");
+
+        //---------------------------------------------------------------
+
+        try{
+            // 设置邮件消息的发送者
+            if (isNotNullOrEmpty(personal)){
+                //the encoding to be used. Currently supported values are "B" and "Q". 
+                //If this parameter is null, then the "Q" encoding is used if most of characters to be encoded are in the ASCII charset, 
+                //otherwise "B" encoding is used.
+                //B为base64方式
+                String encoding = "b";
+                String encodeText = MimeUtility.encodeText(personal, CHARSET_PERSONAL, encoding);
+                return new InternetAddress(fromAddress, encodeText);
+            }
+            return new InternetAddress(fromAddress);
+        }catch (AddressException | UnsupportedEncodingException e){
+            //since 1.13.2
+            throw new DefaultRuntimeException(Slf4jUtil.format("personal:[{}],fromAddress:[{}]", personal, fromAddress), e);
         }
-        return new InternetAddress(fromAddress);
     }
 
 }

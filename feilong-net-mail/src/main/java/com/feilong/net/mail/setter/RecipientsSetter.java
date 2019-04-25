@@ -18,10 +18,13 @@ package com.feilong.net.mail.setter;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.util.InternetAddressUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class RecipientsSetter.
@@ -42,31 +45,38 @@ public final class RecipientsSetter{
      *            the message
      * @param mailSenderConfig
      *            the new recipients
-     * @throws MessagingException
-     *             the messaging exception
      */
-    public static void setRecipients(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
+    public static void setRecipients(Message message,MailSenderConfig mailSenderConfig){
         // 创建邮件的接收者地址,并设置到邮件消息中
         // Message.RecipientType.TO属性表示接收者的类型为TO
-        String[] tos = mailSenderConfig.getTos();
-        if (isNotNullOrEmpty(tos)){
-            message.setRecipients(Message.RecipientType.TO, InternetAddressUtil.toAddressArray(tos));
-        }
-
-        //---------------------------------------------------------------
-
+        set(message, Message.RecipientType.TO, mailSenderConfig.getTos());
         //cc 抄送
-        String[] ccs = mailSenderConfig.getCcs();
-        if (isNotNullOrEmpty(ccs)){
-            message.setRecipients(Message.RecipientType.CC, InternetAddressUtil.toAddressArray(ccs));
-        }
-
-        //---------------------------------------------------------------
-
+        set(message, Message.RecipientType.CC, mailSenderConfig.getCcs());
         //bcc 密送
-        String[] bccs = mailSenderConfig.getBccs();
-        if (isNotNullOrEmpty(bccs)){
-            message.setRecipients(Message.RecipientType.BCC, InternetAddressUtil.toAddressArray(bccs));
+        set(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 设置.
+     *
+     * @param message
+     *            the message
+     * @param recipientType
+     *            the recipient type
+     * @param addressArray
+     *            the address array
+     */
+    private static void set(Message message,RecipientType recipientType,String[] addressArray){
+        try{
+            if (isNotNullOrEmpty(addressArray)){
+                message.setRecipients(recipientType, InternetAddressUtil.toAddressArray(addressArray));
+            }
+        }catch (MessagingException e){
+            //since 1.13.2
+            throw new DefaultRuntimeException(Slf4jUtil.format("addressArray:[{}],recipientType:[{}]", addressArray, recipientType), e);
         }
+
     }
 }
