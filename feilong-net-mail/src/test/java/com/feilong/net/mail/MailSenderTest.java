@@ -53,6 +53,8 @@ public class MailSenderTest extends AbstractMailSenderTest{
         mailSenderConfig.setContent(textContent);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Send mail.
      */
@@ -61,6 +63,8 @@ public class MailSenderTest extends AbstractMailSenderTest{
         String textContent = "<html><body><hr/><div style='boder:1px #000 solid;color:red'>今天天气不错</div></body></html>";
         mailSenderConfig.setContent(textContent);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test send text mail.
@@ -127,5 +131,4 @@ public class MailSenderTest extends AbstractMailSenderTest{
         fileString = "E:\\Workspaces\\train\\20150417Spring事务\\ppt-contents.png";
         mailSenderConfig.setAttachFilePaths(fileString);
     }
-
 }

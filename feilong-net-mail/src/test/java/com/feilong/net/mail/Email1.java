@@ -57,10 +57,14 @@ public class Email1 extends AbstractMailSenderTest{
         return messageBodyPart;
     }
 
+    //---------------------------------------------------------------
+
     @Override
     protected String getConfigFile(){
-        return "/Users/feilong/Development/DataCommon/Files/Java/config/mail-baozun.properties";
+        return "mail-baozun.properties";
     }
+
+    //---------------------------------------------------------------
 
     @Override
     @After

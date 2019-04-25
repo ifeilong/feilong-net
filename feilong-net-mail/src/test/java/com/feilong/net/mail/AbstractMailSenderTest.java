@@ -28,16 +28,15 @@ import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.net.mail.entity.MailSenderConfig;
 
-/**
- * The Class MailSenderTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.9
- */
 public abstract class AbstractMailSenderTest{
 
+    /** The Constant folder. */
+    private static final String folder = "/Users/feilong/Development/DataCommon/Files/Java/config/";
+
+    //---------------------------------------------------------------
+
     /** The mail sender config. */
-    protected MailSenderConfig mailSenderConfig;
+    protected MailSenderConfig  mailSenderConfig;
 
     //---------------------------------------------------------------
 
@@ -57,14 +56,16 @@ public abstract class AbstractMailSenderTest{
      * @since 1.10.0
      */
     private void loadMailSenderConfig(){
-        mailSenderConfig = new MailSenderConfig();
-        ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(getConfigFile()));
+        ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(folder + getConfigFile()));
 
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { '@' };
         arrayConverter.setAllowedChars(allowedChars);
         ConvertUtils.register(arrayConverter, String[].class);
 
+        //---------------------------------------------------------------
+
+        mailSenderConfig = new MailSenderConfig();
         mailSenderConfig = BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
 
         //LOGGER.debug(JsonUtil.format(mailSenderConfig));
@@ -78,7 +79,7 @@ public abstract class AbstractMailSenderTest{
      * @return the config file
      */
     protected String getConfigFile(){
-        return "/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties";
+        return "mail-feilongtestemail.properties";
     }
 
     //---------------------------------------------------------------

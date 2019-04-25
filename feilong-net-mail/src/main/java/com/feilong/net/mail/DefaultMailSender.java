@@ -15,7 +15,6 @@
  */
 package com.feilong.net.mail;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.UnsupportedEncodingException;
@@ -246,7 +245,7 @@ public final class DefaultMailSender extends AbstractMailSender{
 
         // 设置邮件接受人群
         // 支持 to cc bcc
-        setRecipients(message, mailSenderConfig);
+        RecipientsSetter.setRecipients(message, mailSenderConfig);
 
         //---------------------------------------------------------------
         // 设置邮件消息的主题
@@ -255,39 +254,4 @@ public final class DefaultMailSender extends AbstractMailSender{
         //header信息
         setHeaders(message, mailSenderConfig);
     }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 设置邮件接受人群.
-     * 
-     * <p>
-     * 支持 to cc bcc.
-     * </p>
-     *
-     * @param message
-     *            the message
-     * @param mailSenderConfig
-     *            the new recipients
-     * @throws MessagingException
-     *             the messaging exception
-     */
-    static void setRecipients(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
-        // 创建邮件的接收者地址,并设置到邮件消息中
-        // Message.RecipientType.TO属性表示接收者的类型为TO
-        if (isNotNullOrEmpty(mailSenderConfig.getTos())){
-            message.setRecipients(Message.RecipientType.TO, InternetAddressUtil.toAddressArray(mailSenderConfig.getTos()));
-        }
-
-        //cc 抄送
-        if (isNotNullOrEmpty(mailSenderConfig.getCcs())){
-            message.setRecipients(Message.RecipientType.CC, InternetAddressUtil.toAddressArray(mailSenderConfig.getCcs()));
-        }
-
-        //bcc 密送
-        if (isNotNullOrEmpty(mailSenderConfig.getBccs())){
-            message.setRecipients(Message.RecipientType.BCC, InternetAddressUtil.toAddressArray(mailSenderConfig.getBccs()));
-        }
-    }
-
 }

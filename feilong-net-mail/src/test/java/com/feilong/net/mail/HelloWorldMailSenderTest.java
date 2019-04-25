@@ -23,38 +23,24 @@ import org.junit.Test;
 
 import com.feilong.velocity.VelocityUtil;
 
-/**
- * The Class MailSenderTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.9
- */
 public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
 
     @Test
     public void helloWorld(){
         Map<String, Object> map = newHashMap();
-        String parseTemplateWithClasspathResourceLoader = VelocityUtil.INSTANCE
-                        .parseTemplateWithClasspathResourceLoader("hello world.vm", map);
+
+        String content = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader("hello world.vm", map);
 
         mailSenderConfig.setSubject("hello world");
-        mailSenderConfig.setContent(parseTemplateWithClasspathResourceLoader);
+        mailSenderConfig.setContent(content);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.tools.mail.BaseMailSenderTest#getConfigFile()
-     */
+    //---------------------------------------------------------------
+
     @Override
     protected String getConfigFile(){
-        String folder = "/Users/feilong/Development/DataCommon/Files/Java/config";
-
-        String file = "";
-        // file ="/mail-adidas-test.properties";
-        //file = "/mail-bztest-test.properties";
-        file = "/mail-feilongtestemail.properties";
-
-        return folder + file;
+        //return "mail-adidas-test.properties";
+        //return "mail-bztest-test.properties";
+        return "mail-feilongtestemail.properties";
     }
 }

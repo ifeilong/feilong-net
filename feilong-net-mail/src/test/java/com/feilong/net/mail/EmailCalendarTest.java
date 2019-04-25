@@ -16,9 +16,7 @@ import javax.mail.util.ByteArrayDataSource;
 
 import org.junit.Test;
 
-import com.feilong.net.mail.SessionFactory;
-
-public class EmailTest extends AbstractMailSenderTest{
+public class EmailCalendarTest extends AbstractMailSenderTest{
 
     @Test
     public void testEmailTest() throws Exception{
@@ -38,6 +36,8 @@ public class EmailTest extends AbstractMailSenderTest{
         message.setFrom(new InternetAddress(from));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject("Outlook Meeting Request Using JavaMail");
+
+        //---------------------------------------------------------------
 
         StringBuffer sb = new StringBuffer();
 
@@ -75,6 +75,8 @@ public class EmailTest extends AbstractMailSenderTest{
                         "END:VEVENT\n" + //
                         "END:VCALENDAR");
 
+        //---------------------------------------------------------------
+
         // Create the message part
         BodyPart messageBodyPart = new MimeBodyPart();
 
@@ -82,6 +84,8 @@ public class EmailTest extends AbstractMailSenderTest{
         messageBodyPart.setHeader("Content-Class", "urn:content-  classes:calendarmessage");
         messageBodyPart.setHeader("Content-ID", "calendar_message");
         messageBodyPart.setDataHandler(new DataHandler(new ByteArrayDataSource(buffer.toString(), "text/calendar")));// very important
+
+        //---------------------------------------------------------------
 
         // Create a Multipart
         Multipart multipart = new MimeMultipart();
@@ -91,6 +95,8 @@ public class EmailTest extends AbstractMailSenderTest{
 
         // Put parts in message
         message.setContent(multipart);
+
+        //---------------------------------------------------------------
 
         // send message
         Transport.send(message);
