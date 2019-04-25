@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail;
+package com.feilong.net.mail.setter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
@@ -32,10 +32,11 @@ import com.feilong.io.FilenameUtil;
 import com.feilong.io.entity.MimeType;
 
 /**
- * The Class AttachmentSetter.
+ * 设置附件.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0
+ * @since 1.13.2 move package
  */
 public final class AttachmentSetter{
 

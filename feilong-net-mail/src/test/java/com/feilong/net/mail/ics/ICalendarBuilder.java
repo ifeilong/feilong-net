@@ -24,7 +24,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.net.mail.ICalendar;
+import com.feilong.net.mail.entity.ICalendar;
 
 /**
  * The Class ICalendarBuilder.

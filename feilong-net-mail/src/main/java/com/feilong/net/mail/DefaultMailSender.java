@@ -35,6 +35,9 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.exception.MailSenderException;
+import com.feilong.net.mail.setter.AttachmentSetter;
+import com.feilong.net.mail.setter.HeaderSetter;
+import com.feilong.net.mail.setter.RecipientsSetter;
 import com.feilong.net.mail.util.InternetAddressUtil;
 
 /**
@@ -252,6 +255,6 @@ public final class DefaultMailSender extends AbstractMailSender{
         message.setSubject(mailSenderConfig.getSubject());
 
         //header信息
-        setHeaders(message, mailSenderConfig);
+        HeaderSetter.setHeaders(message, mailSenderConfig);
     }
 }

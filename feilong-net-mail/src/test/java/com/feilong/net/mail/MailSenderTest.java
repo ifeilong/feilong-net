@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 import com.feilong.io.entity.FileInfoEntity;
+import com.feilong.net.mail.setter.AttachmentSetter;
 import com.feilong.velocity.VelocityUtil;
 
 /**

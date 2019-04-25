@@ -15,8 +15,6 @@
  */
 package com.feilong.net.mail.entity;
 
-import com.feilong.net.mail.ICalendar;
-
 /**
  * 邮件发送配置.
  * 

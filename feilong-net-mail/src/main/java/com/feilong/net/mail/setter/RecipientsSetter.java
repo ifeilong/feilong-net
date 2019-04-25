@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail;
+package com.feilong.net.mail.setter;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
