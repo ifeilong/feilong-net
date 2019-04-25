@@ -32,7 +32,7 @@ import com.feilong.net.mail.entity.SessionConfig;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-class SessionFactory{
+public class SessionFactory{
 
     /** Don't let anyone instantiate this class. */
     private SessionFactory(){

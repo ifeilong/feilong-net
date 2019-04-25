@@ -57,12 +57,12 @@ public final class AttachmentSetter{
      * @since 1.1.1
      */
     public static void setAttachment(MimeMultipart mimeMultipart,String[] attachFilePaths) throws MessagingException{
-
         // html
         if (isNullOrEmpty(attachFilePaths)){
             return;// nothing to do
         }
-        // ***************以HTML格式发送邮件 带附件的邮件图片********************************************************
+
+        //-------------------以HTML格式发送邮件 带附件的邮件图片--------------------------------------------
 
         List<byte[]> attachList = newArrayList();
         List<String> attachFileNames = newArrayList();

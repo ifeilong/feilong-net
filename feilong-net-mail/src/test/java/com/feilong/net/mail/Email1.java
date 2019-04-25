@@ -18,9 +18,11 @@ import org.junit.Test;
 import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.net.mail.builer.MessageBuilder;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.ics.ICalendarBuilder;
 import com.feilong.net.mail.ics.IcsBuilder;
+import com.feilong.net.mail.util.MessageSendUtil;
 import com.feilong.net.mail.util.MimeType;
 
 public class Email1 extends AbstractMailSenderTest{
@@ -29,12 +31,12 @@ public class Email1 extends AbstractMailSenderTest{
     public void send() throws Exception{
         mailSenderConfig.setiCalendar(ICalendarBuilder.build());
 
-        Message message = DefaultMailSender.buildMessage(mailSenderConfig);
+        Message message = MessageBuilder.buildMessage(mailSenderConfig);
 
         if (null != mailSenderConfig.getiCalendar()){
             message.setContent(buildContent(mailSenderConfig));
         }
-        DefaultMailSender.send(message);
+        MessageSendUtil.send(message);
     }
 
     static Multipart buildContent(MailSenderConfig mailSenderConfig) throws MessagingException,IOException{

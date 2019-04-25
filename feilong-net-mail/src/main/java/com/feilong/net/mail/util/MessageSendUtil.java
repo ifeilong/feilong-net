@@ -13,31 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail;
+package com.feilong.net.mail.util;
 
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+
+import com.feilong.net.mail.exception.MailSenderException;
 
 /**
- * 邮件发送器.
+ * The Class MessageSendUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see javax.mail.Message
- * @see javax.mail.Session
- * @see javax.mail.Transport#send(javax.mail.Message)
- * @see "org.springframework.mail.MailSender"
- * @see "org.springframework.mail.javamail.JavaMailSenderImpl"
- * @since 1.1.1
+ * @since 1.13.2
  */
-public abstract class AbstractMailSender implements MailSender{
+public class MessageSendUtil{
 
     /**
-     * 设置 default command map.
-     * <p>
-     * 解决 bug javax.activation.UnsupportedDataTypeException: no object DCH for MIME type multipart/related;
-     * </p>
+     * Send.
+     *
+     * @param message
+     *            the message
+     * @since 1.10.2
      */
-    protected static void setDefaultCommandMap(){
+    public static void send(Message message){
+
+        setDefaultCommandMap();
+
+        //---------------------------------------------------------------
+        try{
+            // 发送邮件
+            Transport.send(message);
+        }catch (MessagingException e){
+            throw new MailSenderException(e);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    private static void setDefaultCommandMap(){
         MailcapCommandMap mailcapCommandMap = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
         mailcapCommandMap.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
         mailcapCommandMap.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
@@ -46,5 +62,4 @@ public abstract class AbstractMailSender implements MailSender{
         mailcapCommandMap.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
         CommandMap.setDefaultCommandMap(mailcapCommandMap);
     }
-
 }

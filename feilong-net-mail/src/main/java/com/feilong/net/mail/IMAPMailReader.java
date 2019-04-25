@@ -82,12 +82,16 @@ public class IMAPMailReader implements MailReader{
             LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.format(mailReaderConfig), JsonUtil.format(searchTerm));
         }
 
+        //---------------------------------------------------------------
+
         String mailServerHost = mailReaderConfig.getServerHost();
         String userName = mailReaderConfig.getUserName();
         String password = mailReaderConfig.getPassword();
 
         // 根据邮件会话属性和密码验证器构造一个发送邮件的session
         Session session = SessionFactory.createSession(mailReaderConfig);
+
+        //---------------------------------------------------------------
 
         Store store = null;
         Folder folder = null;
