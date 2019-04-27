@@ -72,4 +72,5 @@ public interface SessionConfig{
      * @return the isValidate
      */
     boolean getIsValidate();
+
 }

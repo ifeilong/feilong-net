@@ -31,7 +31,7 @@ public class Email1 extends AbstractMailSenderTest{
     public void send() throws Exception{
         mailSenderConfig.setiCalendar(ICalendarBuilder.build());
 
-        Message message = MessageBuilder.buildMessage(mailSenderConfig);
+        Message message = MessageBuilder.build(mailSenderConfig);
 
         if (null != mailSenderConfig.getiCalendar()){
             message.setContent(buildContent(mailSenderConfig));

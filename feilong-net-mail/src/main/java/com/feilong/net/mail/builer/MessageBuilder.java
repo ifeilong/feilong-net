@@ -50,7 +50,7 @@ public class MessageBuilder{
      * @return the message
      * @since 1.10.2
      */
-    public static Message buildMessage(MailSenderConfig mailSenderConfig){
+    public static Message build(MailSenderConfig mailSenderConfig){
         // 根据session创建一个邮件消息
 
         // 根据邮件会话属性和密码验证器构造一个发送邮件的session
@@ -91,14 +91,17 @@ public class MessageBuilder{
      * @param message
      *            the message
      * @param mailSenderConfig
-     *            属性
+     *            the mail sender config
      * @throws MessagingException
      *             the messaging exception
-     * @see #setRecipients(Message, MailSenderConfig)
-     * @see #setHeaders(Message, MailSenderConfig)
+     * @see RecipientsSetter#setRecipients(Message, MailSenderConfig)
+     * @see HeaderSetter#setHeaders(Message, MailSenderConfig)
      */
     private static void setMessageAttribute(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
-
+        //mail.smtp.from  String  Email address to use for SMTP MAIL command. 
+        //This sets the envelope return address. 
+        //Defaults to msg.getFrom() or InternetAddress.getLocalAddress(). 
+        //NOTE: mail.smtp.user was previously used for this.
         message.setFrom(InternetAddressUtil.buildFromAddress(mailSenderConfig.getPersonal(), mailSenderConfig.getFromAddress()));
 
         // 设置邮件接受人群
@@ -111,7 +114,6 @@ public class MessageBuilder{
 
         //header信息
         HeaderSetter.setHeaders(message, mailSenderConfig);
-
     }
 
 }

@@ -66,7 +66,7 @@ public final class DefaultMailSender implements MailSender{
         }
 
         //---------------------------------------------------------------
-        Message message = MessageBuilder.buildMessage(mailSenderConfig);
+        Message message = MessageBuilder.build(mailSenderConfig);
         MessageSendUtil.send(message);
     }
 
