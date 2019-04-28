@@ -33,6 +33,8 @@ public class MyTestMain{
         String unsafe = "<p><a href='http://www.oschina.net/' onclick='stealCookies()'>  开源中国社区 </a></p>";
         String safe = Jsoup.clean(unsafe, Whitelist.basic());
         LOGGER.debug(safe);
+
+        LOGGER.debug(doc.text());
         // 输出 : 
         // <p><a href="http://www.oschina.net/" rel="nofollow"> 开源中国社区 </a></p> 
     }
