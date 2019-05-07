@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.jsonlib.JsonUtil;
@@ -32,6 +33,7 @@ import com.feilong.json.jsonlib.JsonUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
+@ContextConfiguration(value = { "classpath*:spring/spring-ftp.xml" })
 public class FTPFileTransferTest extends FileTransferTest{
 
     /** The Constant LOGGER. */

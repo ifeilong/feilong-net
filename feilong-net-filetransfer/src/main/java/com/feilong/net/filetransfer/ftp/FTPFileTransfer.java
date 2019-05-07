@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -75,6 +76,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     /** The Constant LOGGER. */
     private static final Logger   LOGGER = LoggerFactory.getLogger(FTPFileTransfer.class);
 
+    //---------------------------------------------------------------
+
     /** The ftp file transfer config. */
     private FTPFileTransferConfig ftpFileTransferConfig;
 
@@ -92,20 +95,30 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     protected boolean connect(){
         try{
             // 连接
-            ftpClient.connect(ftpFileTransferConfig.getHostName());
-            LOGGER.debug("connect hostName:[{}]", ftpFileTransferConfig.getHostName());
+            String hostName = ftpFileTransferConfig.getHostName();
+            Validate.notBlank(hostName, "hostName can't be blank!");
 
-            boolean loginResult = ftpClient.login(ftpFileTransferConfig.getUserName(), ftpFileTransferConfig.getPassword());
+            //---------------------------------------------------------------
+            ftpClient.connect(hostName);
+            LOGGER.debug("connect hostName:[{}]", hostName);
 
-            String message = Slf4jUtil.format("login:[{}],params:[{}]~~~", loginResult, JsonUtil.format(ftpFileTransferConfig));
+            String userName = ftpFileTransferConfig.getUserName();
+            String password = ftpFileTransferConfig.getPassword();
+            boolean loginResult = ftpClient.login(userName, password);
+
+            String message = Slf4jUtil.format(
+                            "login:[{}],params:[{}],port:[{}]~~~",
+                            loginResult,
+                            JsonUtil.format(ftpFileTransferConfig),
+                            ftpClient.getDefaultPort());
             LOGGER.debug(message);
 
+            //---------------------------------------------------------------
             if (!loginResult){
                 throw new FileTransferException(message);
             }
 
             //---------------------------------------------------------------
-
             int replyCode = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(replyCode)){
                 LOGGER.error("FTP 服务拒绝连接！ReplyCode is:{},will ftpClient.disconnect()", replyCode);
@@ -114,7 +127,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
 
             //---------------------------------------------------------------
-
             // 设置 本机被动模式 这个到不用在login之后执行, 因为它只改变FTPClient实例的内部属性.
             ftpClient.enterLocalPassiveMode();
 
@@ -124,6 +136,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
 
             String systemName = ftpClient.getSystemType();
             LOGGER.debug("ftpClient systemName:[{}]", systemName);
+
+            //---------------------------------------------------------------
 
             // 设置FTP客服端的配置--一般可以不设置 
             // FTPClientConfig ftpConfig = new FTPClientConfig(FTPClientConfig.SYST_UNIX);
@@ -136,10 +150,11 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             LOGGER.info("connect:[{}]", true);
             return true;
         }catch (IOException e){
-            LOGGER.error("", e);
             throw new FileTransferException("connect exception", e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -155,7 +170,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
                 ftpClient.disconnect();
 
                 //---------------------------------------------------------------
-
                 if (LOGGER.isInfoEnabled()){
                     LOGGER.info(StringUtils.center("ftpClient disconnect...", 50, "------"));
                 }
@@ -165,6 +179,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -181,6 +197,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             throw new FileTransferException(StringUtils.trim(ftpClient.getReplyString().trim()));
         }
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -204,6 +222,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -224,8 +244,9 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
-
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -248,6 +269,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the file info entity.
      *
@@ -264,6 +287,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         fileInfoEntity.setLastModified(ftpFile.getTimestamp().getTimeInMillis());
         return fileInfoEntity;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -293,6 +318,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -317,6 +344,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         }
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -328,6 +357,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         // 经测试如果remotePath 不存在返回false ,如果是文件返回false
         return cd(remotePath);
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

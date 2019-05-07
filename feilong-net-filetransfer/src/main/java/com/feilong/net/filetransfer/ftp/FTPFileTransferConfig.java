@@ -15,6 +15,8 @@
  */
 package com.feilong.net.filetransfer.ftp;
 
+import com.feilong.json.SensitiveWords;
+
 /**
  * The Class FTPFileTransferConfig.
  *
@@ -30,7 +32,10 @@ public class FTPFileTransferConfig{
     private String userName = "anonymous";
 
     /** 密码,默认 anonymous. */
+    @SensitiveWords
     private String password = "anonymous";
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 the host name.
@@ -88,5 +93,4 @@ public class FTPFileTransferConfig{
     public void setPassword(String password){
         this.password = password;
     }
-
 }
