@@ -20,12 +20,6 @@
 		</filter>
 	</appender>
 
-	<category name="loxia.support.json">
-		<priority value="info" />
-	</category>
-	<category name="loxia.support.json.JsonPrintUtil">
-		<priority value="debug" />
-	</category>
 	<category name="org.springframework">
 		<priority value="info" />
 	</category>
