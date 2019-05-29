@@ -13,7 +13,6 @@
 	<description>feilong-net-parent</description>
 	<packaging>pom</packaging>
 
-
 	<!-- 软件配置管理,如cvs 和svn -->
 	<!-- The scm url must start with 'scm:' -->
 	<scm>
@@ -38,6 +37,12 @@
 		<dependency>
 			<groupId>com.feilong.platform</groupId>
 			<artifactId>feilong-io</artifactId>
+		</dependency>
+
+		<!-- commons-net -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
 		</dependency>
 
 		<!-- **********************log日志************************************ -->
