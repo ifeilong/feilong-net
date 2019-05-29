@@ -61,8 +61,8 @@ public class SSLContextBuilder{
         try{
             return SSLContextUtils.createSSLContext(
                             defaultIfNullOrEmpty(protocol, SSLProtocol.TLS),
-                            (KeyManager) TrustManagerUtils.getAcceptAllTrustManager(),
-                            null);
+                            null,
+                            TrustManagerUtils.getAcceptAllTrustManager());
         }catch (Exception e){
             throw new UncheckedHttpException(e);
         }
