@@ -15,11 +15,13 @@
  */
 package com.feilong.net.ssl;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
+import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
 
+import org.apache.commons.net.util.SSLContextUtils;
 import org.apache.commons.net.util.TrustManagerUtils;
 
 import com.feilong.net.UncheckedHttpException;
@@ -32,6 +34,7 @@ import com.feilong.net.UncheckedHttpException;
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see org.apache.commons.net.util.SSLContextUtils
  * @since 1.10.6
  */
 public class SSLContextBuilder{
@@ -52,17 +55,14 @@ public class SSLContextBuilder{
      *            the protocol
      * @return the SSL context
      * @see SSLProtocol
+     * @see org.apache.commons.net.util.SSLContextUtils#createSSLContext(String, KeyManager[], TrustManager[])
      */
     public static SSLContext build(String protocol){
         try{
-            SSLContext sslContext = SSLContext.getInstance(defaultIfNullOrEmpty(protocol, SSLProtocol.TLS));
-
-            sslContext.init(//
-                            null,
-                            toArray(TrustManagerUtils.getAcceptAllTrustManager()),
+            return SSLContextUtils.createSSLContext(
+                            defaultIfNullOrEmpty(protocol, SSLProtocol.TLS),
+                            (KeyManager) TrustManagerUtils.getAcceptAllTrustManager(),
                             null);
-
-            return sslContext;
         }catch (Exception e){
             throw new UncheckedHttpException(e);
         }
