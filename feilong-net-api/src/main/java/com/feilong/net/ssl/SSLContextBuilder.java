@@ -15,10 +15,12 @@
  */
 package com.feilong.net.ssl;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
+
+import org.apache.commons.net.util.TrustManagerUtils;
 
 import com.feilong.net.UncheckedHttpException;
 
@@ -55,7 +57,10 @@ public class SSLContextBuilder{
         try{
             SSLContext sslContext = SSLContext.getInstance(defaultIfNullOrEmpty(protocol, SSLProtocol.TLS));
 
-            sslContext.init(null, new TrustManager[] { TrustAnyTrustManager.INSTANCE }, null);
+            sslContext.init(//
+                            null,
+                            toArray(TrustManagerUtils.getAcceptAllTrustManager()),
+                            null);
 
             return sslContext;
         }catch (Exception e){
