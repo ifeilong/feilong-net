@@ -40,6 +40,24 @@ import com.feilong.json.jsonlib.JsonUtil;
 public class HttpClientUtil4Test{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil4Test.class);
+    //    "fullEncodedUrl": "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934",
+    //    "requestBody": "",
+    //    "httpMethodType": "GET",
+    //    "paramMap":         {
+    //        "storeId": "9",
+    //        "secret": "991d110bc99aa4c9f151525f49eb6934"
+    //    },
+    //    "headerMap": null,
+    //    "uri": "https://cps.wecommerce.com.cn/cps/broker/getToken"
+
+    @Test
+    public void testGetResponseBodyAsString1(){
+        String uri = "";
+        //uri = "https://www.adidas.com.cn/error-traffic-control";
+        uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
+
+        LOGGER.debug(HttpClientUtil.get(uri));
+    }
 
     @Test
     public void testGetResponseBodyAsString(){
@@ -82,10 +100,7 @@ public class HttpClientUtil4Test{
             String cookie = header.getValue();
             httpGet.releaseConnection();
 
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info(cookie);
-            }
+            LOGGER.info(cookie);
         }
     }
-
 }
