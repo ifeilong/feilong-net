@@ -15,21 +15,15 @@
  */
 package com.feilong.net.httpclient4.builder;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
-
-import javax.net.ssl.SSLException;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 
-import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
@@ -66,43 +60,9 @@ public final class HttpRequestExecuter{
         //---------------------------------------------------------------
         try{
             return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
-        }catch (SocketTimeoutException e){ //链接超时
-            StringBuilder sb = new StringBuilder();
-            //            sb.append("pls check:").append(lineSeparator());
-            //            sb.append("1.wangluo");
-            //            sb.append("2.can not ");
-            throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
-        }catch (SSLException e){//https://www.cnblogs.com/sunny08/p/8038440.html
-            StringBuilder sb = new StringBuilder();
-            throw new UncheckedHttpException(buildMessage(sb.toString(), httpRequest, useConnectionConfig), e);
         }catch (Exception e){
-            throw new UncheckedHttpException(buildMessage("", httpRequest, useConnectionConfig), e);
+            throw new UncheckedHttpException(HttpRequestExecuterExceptionMessageBuilder.build(httpRequest, useConnectionConfig, e), e);
         }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Builds the message.
-     *
-     * @param handlerMessage
-     *            the handler message
-     * @param httpRequest
-     *            the http request
-     * @param useConnectionConfig
-     *            the use connection config
-     * @return the string
-     * @since 1.11.4
-     */
-    private static String buildMessage(String handlerMessage,HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
-        if (isNullOrEmpty(handlerMessage)){
-            String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-            return format(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
-        }
-
-        //---------------------------------------------------------------
-        String pattern = "[{}],httpRequest:[{}],useConnectionConfig:[{}]";
-        return format(pattern, handlerMessage, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
     }
 
     //---------------------------------------------------------------
