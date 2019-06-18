@@ -16,7 +16,6 @@
 package com.feilong.net.jsoup.jinbaowang;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.DatePattern.TIMESTAMP;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
@@ -25,7 +24,6 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
@@ -79,8 +76,6 @@ public class JinBaoWangCrawler{
                 }
             }
         }
-        Date now = new Date();
-        String timestamp = DateUtil.toString(now, TIMESTAMP);
     }
 
     /**
@@ -117,7 +112,7 @@ public class JinBaoWangCrawler{
      *             the IO exception
      */
     public static List<String> getCodeList(String filePath) throws IOException{
-        String content = IOReaderUtil.readFileToString(filePath, UTF8);
+        String content = IOReaderUtil.readToString(filePath, UTF8);
         // 将内容以换行符转成数组
         String[] codeRows = StringUtil.split(content, "\r\n");
         if (isNotNullOrEmpty(codeRows)){

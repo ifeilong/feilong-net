@@ -16,6 +16,7 @@
 package com.feilong.net;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.io.File;
 import java.io.InputStream;
@@ -97,7 +98,7 @@ public final class URLDownloadUtil{
         Validate.notBlank(directoryName, "directoryName can't be null/empty!");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        Date beginDate = now();
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
         URL url = URLUtil.toURL(urlString);

@@ -18,7 +18,7 @@ package com.feilong.net.filetransfer.ftp;
 import com.feilong.json.SensitiveWords;
 
 /**
- * The Class FTPFileTransferConfig.
+ * ftp 文件传输的配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.1

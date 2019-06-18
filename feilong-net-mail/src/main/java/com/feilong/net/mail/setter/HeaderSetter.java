@@ -15,7 +15,7 @@
  */
 package com.feilong.net.mail.setter;
 
-import java.util.Date;
+import static com.feilong.core.date.DateUtil.now;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -82,7 +82,7 @@ public class HeaderSetter{
         //---------------------------------------------------------------
 
         // 设置邮件消息发送的时间
-        message.setSentDate(new Date());
+        message.setSentDate(now());
     }
 
 }

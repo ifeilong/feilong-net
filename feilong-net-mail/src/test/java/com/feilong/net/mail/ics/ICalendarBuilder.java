@@ -17,9 +17,8 @@ package com.feilong.net.mail.ics;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.date.DateUtil.getTime;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.toDate;
-
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +47,7 @@ public class ICalendarBuilder{
 
         iCalendar.setBeginDate(toDate("2017-03-13 20:00:00.000", COMMON_DATE_AND_TIME_WITH_MILLISECOND));
         iCalendar.setEndDate(toDate("2017-03-13 21:00:00.000", COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        iCalendar.setDescription("测试" + getTime(new Date()));
+        iCalendar.setDescription("测试" + getTime(now()));
         iCalendar.setLocation("云立方9楼水星");
         iCalendar.setSummary("培训测试");
         return iCalendar;

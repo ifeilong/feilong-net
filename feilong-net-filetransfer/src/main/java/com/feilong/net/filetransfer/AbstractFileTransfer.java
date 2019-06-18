@@ -17,6 +17,7 @@ package com.feilong.net.filetransfer;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -406,7 +407,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 isSuccess = downloadDontClose(remotePath + "/" + key, filePath);
             }
         }else{
-            Date beginDate = new Date();
+            Date beginDate = now();
 
             // 下载到本地的文件路径
             LOGGER.trace("remotePath:[{}] will be download to [{}]", remotePath, filePath);

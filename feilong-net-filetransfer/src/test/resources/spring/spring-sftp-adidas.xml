@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 
-	<bean class="com.feilong.net.filetransfer.MutiSFTPFileTransferDownloadServer1" />
-	<bean class="com.feilong.net.filetransfer.MutiSFTPFileTransferDownloadServer2" />
+	<bean class="com.feilong.net.filetransfer.MultiSFTPFileTransferDownloadServer1" />
+	<bean class="com.feilong.net.filetransfer.MultiSFTPFileTransferDownloadServer2" />
 
 </beans>

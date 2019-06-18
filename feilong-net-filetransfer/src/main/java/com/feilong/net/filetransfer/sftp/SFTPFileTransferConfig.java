@@ -18,7 +18,7 @@ package com.feilong.net.filetransfer.sftp;
 import java.util.Properties;
 
 /**
- * The Class SFTPFileTransferConfig.
+ * sftp 文件传输的配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.1
@@ -37,11 +37,15 @@ public class SFTPFileTransferConfig{
     /** The port. */
     private Integer    port           = 22;
 
+    //---------------------------------------------------------------
+
     /** The ssh config. */
     private Properties sshConfig;
 
     /** The connect timeout. */
     private int        sessionTimeout = 0;
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 主机名.

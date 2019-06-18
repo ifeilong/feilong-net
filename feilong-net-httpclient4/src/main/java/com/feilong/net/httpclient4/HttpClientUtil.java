@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.date.DateUtil.now;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Date;
@@ -473,7 +474,7 @@ public final class HttpClientUtil{
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        Date beginDate = now();
         HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
         com.feilong.net.entity.HttpResponse resultResponse = HttpResponseBuilder.build(beginDate, httpResponse);
 

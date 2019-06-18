@@ -18,6 +18,7 @@ package com.feilong.net.jsoup;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Date;
@@ -157,7 +158,7 @@ public class CopyrightTest{
 
         final Map<String, String> map = newLinkedHashMap();
 
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         ThreadUtil.execute(list, 5, new PartitionRunnableBuilder<String>(){
 

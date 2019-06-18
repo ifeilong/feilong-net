@@ -15,6 +15,7 @@
  */
 package com.feilong.net.mail.ics;
 
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.util.Calendar;
@@ -57,7 +58,7 @@ public class IcsBuilder{
         map.put("endDate", toUTC(getiCalendar.getEndDate()));
         map.put("description", getiCalendar.getDescription());
         map.put("location", getiCalendar.getLocation());
-        map.put("now", toUTC(new Date()));
+        map.put("now", toUTC(now()));
         map.put("summary", getiCalendar.getSummary());
 
         return VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);

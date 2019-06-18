@@ -17,12 +17,12 @@ package com.feilong.net.mail;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.FILE;
 import static org.apache.commons.lang3.SystemUtils.USER_HOME;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public class MailSenderTest extends AbstractMailSenderTest{
     @Test
     public void sendMail1() throws IOException{
         String path = USER_HOME + "/feilong/train/1201单元测试/generalRegulation/generalRegulation-20141125194610.html";
-        String textContent = IOReaderUtil.readFileToString(path, UTF8);
+        String textContent = IOReaderUtil.readToString(path, UTF8);
         mailSenderConfig.setContent(textContent);
     }
 
@@ -89,7 +89,7 @@ public class MailSenderTest extends AbstractMailSenderTest{
         FileInfoEntity fileInfoEntity = new FileInfoEntity();
 
         fileInfoEntity.setFileType(FILE);
-        fileInfoEntity.setLastModified(new Date().getTime());
+        fileInfoEntity.setLastModified(now().getTime());
         fileInfoEntity.setName("nikestore_china_cancel20130910.csv");
         fileInfoEntity.setSize(25655L);
 
@@ -97,21 +97,21 @@ public class MailSenderTest extends AbstractMailSenderTest{
         FileInfoEntity fileInfoEntity2 = new FileInfoEntity();
 
         fileInfoEntity2.setFileType(FILE);
-        fileInfoEntity2.setLastModified(new Date().getTime());
+        fileInfoEntity2.setLastModified(now().getTime());
         fileInfoEntity2.setName("nikestore_china_revenue20131022.csv");
         fileInfoEntity2.setSize(25655L);
 
         //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity3 = new FileInfoEntity();
         fileInfoEntity3.setFileType(FILE);
-        fileInfoEntity3.setLastModified(new Date().getTime());
+        fileInfoEntity3.setLastModified(now().getTime());
         fileInfoEntity3.setName("nikestore_china_return20131022.csv");
         fileInfoEntity3.setSize(25655L);
 
         //---------------------------------------------------------------
         FileInfoEntity fileInfoEntity4 = new FileInfoEntity();
         fileInfoEntity4.setFileType(FILE);
-        fileInfoEntity4.setLastModified(new Date().getTime());
+        fileInfoEntity4.setLastModified(now().getTime());
         fileInfoEntity4.setName("nikestore_china_demand20130910.csv");
         fileInfoEntity4.setSize(25655L);
 

@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4.builder;
 
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.util.Date;
 
@@ -58,7 +59,7 @@ public final class HttpResponseBuilder{
         //since 1.12.5
         result.setHeaderMap(HttpHeaderMapBuilder.build(httpResponse.getAllHeaders()));
         result.setResultString(HttpResponseUtil.getResultString(httpResponse));
-        result.setUseTime(getIntervalTime(beginDate, new Date()));
+        result.setUseTime(getIntervalTime(beginDate, now()));
 
         return result;
     }
