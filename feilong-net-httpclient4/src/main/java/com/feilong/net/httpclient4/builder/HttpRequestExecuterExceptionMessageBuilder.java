@@ -35,7 +35,7 @@ import com.feilong.net.entity.HttpRequest;
  * http 请求执行异常 message 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.13.3
+ * @since 1.14.0
  */
 public class HttpRequestExecuterExceptionMessageBuilder{
 
@@ -49,7 +49,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
      *
      * @return the string
      * @since 1.11.4
-     * @since 1.13.3 rename from buildMessage
+     * @since 1.14.0 rename from buildMessage
      */
     static String build(HttpRequest httpRequest,ConnectionConfig useConnectionConfig,Exception e){
         String handlerMessage = buildHandlerMessage(e);
@@ -68,7 +68,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
     /**
      * @param e
      * @return
-     * @since 1.13.3
+     * @since 1.14.0
      */
     //XXX 留坑
     private static String buildHandlerMessage(Exception e){
