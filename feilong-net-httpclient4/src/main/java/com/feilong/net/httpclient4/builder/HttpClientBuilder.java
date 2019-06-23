@@ -97,7 +97,6 @@ public class HttpClientBuilder{
         if (null != layeredConnectionSocketFactory){
             customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
         }
-
         //---------------------------------------------------------------
         // SSLContext sslContext = buildHttpClient4SSLContext();
         //这代码比上面简洁
