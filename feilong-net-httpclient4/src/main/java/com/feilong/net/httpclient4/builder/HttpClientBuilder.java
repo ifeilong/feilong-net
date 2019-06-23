@@ -15,19 +15,12 @@
  */
 package com.feilong.net.httpclient4.builder;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.ssl.SSLProtocol;
 
@@ -43,11 +36,6 @@ import com.feilong.net.ssl.SSLProtocol;
  * @since 1.11.0 change class Access Modifiers
  */
 public class HttpClientBuilder{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientBuilder.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpClientBuilder(){
@@ -101,8 +89,6 @@ public class HttpClientBuilder{
      *            the layered connection socket factory
      * @param customHttpClientBuilder
      *            the custom http client builder
-     * @throws RuntimeException
-     *             the runtime exception
      * @since 1.11.4
      */
     private static void setSSL(
@@ -113,17 +99,9 @@ public class HttpClientBuilder{
         }
 
         //---------------------------------------------------------------
-
-        try{
-            //WARN: setProtocol since  4.4.7
-            SSLContext sslContext = SSLContexts.custom().setProtocol(SSLProtocol.TLSv12).build();
-            customHttpClientBuilder.setSSLContext(sslContext);
-        }catch (KeyManagementException | NoSuchAlgorithmException e){
-            throw new UncheckedHttpException(e);
-        }catch (java.lang.NoSuchMethodError e){
-            LOGGER.warn(
-                            "pls update your [org.apache.httpcomponents:httpclient] version >= [4.4.7],otherwise cannot use setProtocol method",
-                            e);
-        }
+        // SSLContext sslContext = buildHttpClient4SSLContext();
+        //这代码比上面简洁
+        SSLContext sslContext = com.feilong.net.ssl.SSLContextBuilder.build(SSLProtocol.TLSv12);
+        customHttpClientBuilder.setSSLContext(sslContext);
     }
 }
