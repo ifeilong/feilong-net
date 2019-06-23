@@ -21,7 +21,7 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * The Class TrustAnyTrustManager.
+ * 信任所有的证书.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "weibo4j.model.MySSLSocketFactory.TrustAnyTrustManager"
