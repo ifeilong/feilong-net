@@ -17,8 +17,6 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.ssl.SSLContextBuilder;
@@ -28,9 +26,6 @@ import com.feilong.net.ssl.SSLProtocol;
  * Created by xianze.zxz on 2016/10/6.
  */
 public class HttpHelperHttpClientImpl{
-
-    /** The Constant log. */
-    private static final Logger        LOGGER     = LoggerFactory.getLogger(HttpHelperHttpClientImpl.class);
 
     //创建http client
     private static CloseableHttpClient httpClient = createHttpsClient();
