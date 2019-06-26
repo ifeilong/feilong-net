@@ -80,12 +80,16 @@ public class HttpRequestExecuterExceptionMessageBuilder{
             return EMPTY;
         }
 
+        //---------------------------------------------------------------
+
         //https://www.cnblogs.com/sunny08/p/8038440.html
         if (ClassUtil.isInstance(e, SSLException.class)){
             return EMPTY;
         }
         return EMPTY;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Common message.
@@ -107,6 +111,8 @@ public class HttpRequestExecuterExceptionMessageBuilder{
         //带 httpPropertiesMap的
         return format("{},http system properties:[{}]", commonResult, JsonUtil.format(httpPropertiesMap));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 构造和 http 相关的属性.
