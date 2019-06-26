@@ -61,7 +61,8 @@ class URIBuilderBuilder{
      */
     static URIBuilder build(HttpRequest httpRequest){
         try{
-            URIBuilder uriBuilder = new URIBuilder(httpRequest.getUri());
+            String uri = httpRequest.getUri();
+            URIBuilder uriBuilder = new URIBuilder(uri);
 
             Map<String, String> paramMap = httpRequest.getParamMap();
             if (isNullOrEmpty(paramMap)){

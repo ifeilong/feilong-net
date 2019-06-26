@@ -28,6 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 PutTest.class,
                 PutWithParamsTest.class,
+
+                HttpClientUtilUriSpaceTest.class,
         //                
 })
 public class FeiLongHttpclient4SuiteTests{
