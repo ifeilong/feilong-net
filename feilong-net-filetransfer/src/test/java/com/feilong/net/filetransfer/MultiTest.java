@@ -15,14 +15,16 @@
  */
 package com.feilong.net.filetransfer;
 
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
+import com.feilong.core.lang.ThreadUtil;
 
 public class MultiTest extends AbstractFileTransferTest{
 
@@ -33,7 +35,7 @@ public class MultiTest extends AbstractFileTransferTest{
     private MultiSFTPFileTransferDownloadServer2 mutiSFTPFileTransferDownloadTest2;
 
     @Test
-    public void testMutiTest() throws InterruptedException{
+    public void testMutiTest(){
 
         addTimerTask(new TimerTask(){
 
@@ -52,7 +54,7 @@ public class MultiTest extends AbstractFileTransferTest{
         });
 
         //睡眠5分钟
-        Thread.sleep(MILLISECOND_PER_MINUTE * 5);
+        ThreadUtil.sleep(MILLISECOND_PER_MINUTE * 5);
     }
 
     private void addTimerTask(TimerTask timerTask){
