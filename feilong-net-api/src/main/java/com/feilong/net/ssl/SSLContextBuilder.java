@@ -27,14 +27,15 @@ import org.apache.commons.net.util.TrustManagerUtils;
 import com.feilong.net.UncheckedHttpException;
 
 /**
- * The Class SSLContextBuilder.
+ * 用来构造 {@link SSLContext},SSL全称是 Secure Sockets Layer 安全套接层协议层.
  * 
  * <p>
- * SSL的英文全称是“Secure Sockets Layer”，中文名为“安全套接层协议层 ”，它是网景（Netscape）公司提出的基于 WEB 应用的安全协议。
+ * 它是网景（Netscape）公司提出的基于 WEB 应用的安全协议。
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.net.util.SSLContextUtils
+ * @see javax.net.ssl.X509TrustManager
  * @since 1.10.6
  */
 public class SSLContextBuilder{
@@ -56,6 +57,7 @@ public class SSLContextBuilder{
      * @return the SSL context
      * @see SSLProtocol
      * @see org.apache.commons.net.util.SSLContextUtils#createSSLContext(String, KeyManager[], TrustManager[])
+     * @see org.apache.commons.net.util.TrustManagerUtils#getAcceptAllTrustManager()
      */
     public static SSLContext build(String protocol){
         try{
