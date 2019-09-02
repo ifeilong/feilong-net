@@ -26,6 +26,7 @@ import javax.net.ssl.X509TrustManager;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "weibo4j.model.MySSLSocketFactory.TrustAnyTrustManager"
  * @see org.apache.commons.net.util.TrustManagerUtils
+ * @see javax.net.ssl.HostnameVerifier
  * @deprecated pls use org.apache.commons.net.util.TrustManagerUtils#getAcceptAllTrustManager()
  */
 @Deprecated
@@ -37,6 +38,16 @@ public class TrustAnyTrustManager implements X509TrustManager{
 
     //---------------------------------------------------------------
 
+    /**
+     * Check client trusted.
+     *
+     * @param x509Certificate
+     *            the x 509 certificate
+     * @param authType
+     *            the auth type
+     * @throws CertificateException
+     *             the certificate exception
+     */
     /*
      * (non-Javadoc)
      * 
@@ -46,6 +57,16 @@ public class TrustAnyTrustManager implements X509TrustManager{
     public void checkClientTrusted(X509Certificate[] x509Certificate,String authType) throws CertificateException{
     }
 
+    /**
+     * Check server trusted.
+     *
+     * @param x509Certificate
+     *            the x 509 certificate
+     * @param authType
+     *            the auth type
+     * @throws CertificateException
+     *             the certificate exception
+     */
     /*
      * (non-Javadoc)
      * 
@@ -55,6 +76,11 @@ public class TrustAnyTrustManager implements X509TrustManager{
     public void checkServerTrusted(X509Certificate[] x509Certificate,String authType) throws CertificateException{
     }
 
+    /**
+     * Gets the accepted issuers.
+     *
+     * @return the accepted issuers
+     */
     /*
      * (non-Javadoc)
      * 

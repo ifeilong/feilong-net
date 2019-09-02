@@ -30,7 +30,7 @@ public final class ConnectionConfig{
 
     /** Static instance. */
     // the static instance works for all types
-    public static final ConnectionConfig INSTANCE       = new ConnectionConfig();
+    public static final ConnectionConfig INSTANCE                = new ConnectionConfig();
 
     //---------------------------------------------------------------
 
@@ -90,7 +90,7 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int                          connectTimeout = 20 * MILLISECOND_PER_SECONDS;
+    private int                          connectTimeout          = 20 * MILLISECOND_PER_SECONDS;
 
     /**
      * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
@@ -106,12 +106,24 @@ public final class ConnectionConfig{
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    private int                          readTimeout    = 20 * MILLISECOND_PER_SECONDS;
+    private int                          readTimeout             = 20 * MILLISECOND_PER_SECONDS;
 
     //---------------------------------------------------------------
 
     /** 内容的字符集. */
-    private String                       contentCharset = UTF8;
+    private String                       contentCharset          = UTF8;
+
+    /**
+     * 是否关闭 HostnameVerifier essentially turns hostname 校验.
+     * 
+     * <p>
+     * 默认 true 表示关闭
+     * </p>
+     * 
+     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @since 2.0.0
+     */
+    private boolean                      turnOffHostnameVerifier = true;
 
     //---------------------------------------------------------------
     /**
@@ -138,6 +150,17 @@ public final class ConnectionConfig{
         this.password = password;
     }
 
+    /**
+     * Instantiates a new connection config.
+     *
+     * @param turnOffHostnameVerifier
+     *            the turn off hostname verifier
+     * @since 2.0.0
+     */
+    public ConnectionConfig(boolean turnOffHostnameVerifier){
+        super();
+        this.turnOffHostnameVerifier = turnOffHostnameVerifier;
+    }
     //---------------------------------------------------------------
 
     /**
@@ -343,5 +366,36 @@ public final class ConnectionConfig{
      */
     public void setPassword(String password){
         this.password = password;
+    }
+
+    /**
+     * 是否关闭 HostnameVerifier essentially turns hostname 校验.
+     * 
+     * <p>
+     * 默认 true 表示关闭
+     * </p>
+     *
+     * @return the turnOffHostnameVerifier
+     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @since 2.0.0
+     */
+    public boolean getTurnOffHostnameVerifier(){
+        return turnOffHostnameVerifier;
+    }
+
+    /**
+     * 是否关闭 HostnameVerifier essentially turns hostname 校验.
+     * 
+     * <p>
+     * 默认 true 表示关闭
+     * </p>
+     *
+     * @param turnOffHostnameVerifier
+     *            the turnOffHostnameVerifier to set
+     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @since 2.0.0
+     */
+    public void setTurnOffHostnameVerifier(boolean turnOffHostnameVerifier){
+        this.turnOffHostnameVerifier = turnOffHostnameVerifier;
     }
 }

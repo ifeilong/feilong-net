@@ -19,6 +19,7 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.HttpClients;
 
 import com.feilong.net.entity.ConnectionConfig;
@@ -72,7 +73,7 @@ public class HttpClientBuilder{
     public static HttpClient build(ConnectionConfig connectionConfig,LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
 
-        setSSL(layeredConnectionSocketFactory, customHttpClientBuilder);
+        setSSL(connectionConfig, layeredConnectionSocketFactory, customHttpClientBuilder);
         //customHttpClientBuilder.setConnectionManager(connManager);
         //.setDefaultCredentialsProvider(CredentialsProviderBuilder.build(AuthScope.ANY, userName, password))//
 
@@ -85,13 +86,18 @@ public class HttpClientBuilder{
     /**
      * 设置 SSL.
      *
+     * @param connectionConfig
+     *            the connection config
      * @param layeredConnectionSocketFactory
      *            the layered connection socket factory
      * @param customHttpClientBuilder
      *            the custom http client builder
+     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @see javax.net.ssl.HostnameVerifier
      * @since 1.11.4
      */
     private static void setSSL(
+                    ConnectionConfig connectionConfig,
                     LayeredConnectionSocketFactory layeredConnectionSocketFactory,
                     org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder){
         if (null != layeredConnectionSocketFactory){
@@ -102,5 +108,12 @@ public class HttpClientBuilder{
         //这代码比上面简洁
         SSLContext sslContext = com.feilong.net.ssl.SSLContextBuilder.build(SSLProtocol.TLSv12);
         customHttpClientBuilder.setSSLContext(sslContext);
+
+        //---------------------------------------------------------------
+        //since 2.0.0
+        if (connectionConfig.getTurnOffHostnameVerifier()){
+            customHttpClientBuilder.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+        }
     }
+
 }
