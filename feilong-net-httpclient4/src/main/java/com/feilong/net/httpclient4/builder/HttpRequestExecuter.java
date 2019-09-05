@@ -59,7 +59,7 @@ public final class HttpRequestExecuter{
 
         //---------------------------------------------------------------
         try{
-            return HttpRequestExecuter.execute(httpUriRequest, connectionConfig);
+            return execute(httpUriRequest, connectionConfig);
         }catch (Exception e){
             throw new UncheckedHttpException(HttpRequestExecuterExceptionMessageBuilder.build(httpRequest, useConnectionConfig, e), e);
         }
