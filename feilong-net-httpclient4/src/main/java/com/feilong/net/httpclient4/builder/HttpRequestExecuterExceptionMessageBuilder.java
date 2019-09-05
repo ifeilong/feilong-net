@@ -41,12 +41,13 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
     /**
      * Builds the message.
-     * 
+     *
      * @param httpRequest
      *            the http request
      * @param useConnectionConfig
      *            the use connection config
-     *
+     * @param e
+     *            the e
      * @return the string
      * @since 1.11.4
      * @since 1.14.0 rename from buildMessage
@@ -66,8 +67,11 @@ public class HttpRequestExecuterExceptionMessageBuilder{
     //---------------------------------------------------------------
 
     /**
+     * 构造不同异常,特殊友好提示.
+     *
      * @param e
-     * @return
+     *            the e
+     * @return the string
      * @since 1.14.0
      */
     //XXX 留坑
@@ -81,7 +85,6 @@ public class HttpRequestExecuterExceptionMessageBuilder{
         }
 
         //---------------------------------------------------------------
-
         //https://www.cnblogs.com/sunny08/p/8038440.html
         if (ClassUtil.isInstance(e, SSLException.class)){
             return EMPTY;
@@ -103,11 +106,14 @@ public class HttpRequestExecuterExceptionMessageBuilder{
     private static String commonMessage(HttpRequest httpRequest,ConnectionConfig useConnectionConfig){
         Map<String, String> httpPropertiesMap = buildHttpPropertiesMap();
 
+        //---------------------------------------------------------------
         String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-        String commonResult = format(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
+        String commonResult = format(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig, true));
         if (isNullOrEmpty(httpPropertiesMap)){
             return commonResult;
         }
+
+        //---------------------------------------------------------------
         //带 httpPropertiesMap的
         return format("{},http system properties:[{}]", commonResult, JsonUtil.format(httpPropertiesMap));
     }
