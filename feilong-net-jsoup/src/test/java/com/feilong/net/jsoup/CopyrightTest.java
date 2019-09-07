@@ -31,15 +31,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.PartitionRunnableBuilder;
-import com.feilong.core.lang.PartitionThreadEntity;
 import com.feilong.core.lang.ThreadUtil;
+import com.feilong.core.lang.thread.PartitionPerHandler;
+import com.feilong.core.lang.thread.PartitionThreadEntity;
 import com.feilong.core.util.SortUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 
-/**
- * The Class JsoupUtilTest.
- */
 public class CopyrightTest{
 
     /** The Constant log. */
@@ -160,22 +157,20 @@ public class CopyrightTest{
 
         Date beginDate = now();
 
-        ThreadUtil.execute(list, 5, new PartitionRunnableBuilder<String>(){
+        execute1(list, noList, map);
+
+        LOGGER.debug("[{}],use time: [{}]", JsonUtil.format(SortUtil.sortMapByValueAsc(map)), formatDuration(beginDate));
+    }
+
+    private void execute1(List<String> list,final List<String> noList,final Map<String, String> map){
+        ThreadUtil.execute(list, 5, new PartitionPerHandler<String>(){
 
             @Override
-            public Runnable build(final List<String> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
-
-                return new Runnable(){
-
-                    @Override
-                    public void run(){
-                        map.putAll(handle(perBatchList, noList));
-                    }
-                };
+            public void handle(List<String> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
+                map.putAll(CopyrightTest.this.handle(perBatchList, noList));
             }
         });
 
-        LOGGER.debug("[{}],use time: [{}]", JsonUtil.format(SortUtil.sortMapByValueAsc(map)), formatDuration(beginDate));
     }
 
     private Map<String, String> handle(List<String> list,List<String> noList){

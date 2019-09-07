@@ -33,20 +33,6 @@ public class GetTestTemp{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GetTestTemp.class);
 
-    //    @Test
-    //    public void testGetResponseBodyAsString(){
-    //        String urlString = "https://www.baidu.com/?a=1&b=2";
-    //        assertTrue(isNotNullOrEmpty(HttpClientUtil.get(urlString)));
-    //    }
-
-    //---------------------------------------------------------------
-    @Test
-    public void testGetResponseBodyAsString1111(){
-        String uri = "https://www.ralphlauren.cn/myOrderDetail/118121214525987701216.html";
-
-        LOGGER.debug(HttpClientUtil.get(uri));
-    }
-
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
