@@ -34,20 +34,13 @@ import org.junit.Test;
 
 public class EmailCalendarTest2 extends AbstractMailSenderTest{
 
-    /**
-     * Send.
-     *
-     * @throws Exception
-     *             the exception
-     */
     @Test
     public void send() throws Exception{
         mailSenderConfig.setContent("hello hahaha");
 
         //---------------------------------------------------------------
-
         String fromEmail = "feilongtestemail@163.com";
-        String toEmail = "xin.jin@baozun.cn";
+        String toEmail = "xin.jin@baozun.com";
         Session session = SessionFactory.createSession(mailSenderConfig);
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(fromEmail));
@@ -55,7 +48,6 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
         message.setSubject("Outlook Meeting Request Using JavaMail");
 
         //---------------------------------------------------------------
-
         BodyPart messageBodyPart = new MimeBodyPart();
         // 测试下来如果不这么转换的话，会以纯文本的形式发送过去，  
         //如果没有method=REQUEST;charset=\"UTF-8\"，outlook会议附件的形式存在，而不是直接打开就是一个会议请求  
@@ -76,17 +68,11 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
         message.setContent(multipart);
 
         //---------------------------------------------------------------
-
         Transport.send(message);
     }
 
     //---------------------------------------------------------------
 
-    /**
-     * @param toEmail
-     * @return
-     * @since 1.13.2
-     */
     private String buildContent(String toEmail){
         StringBuffer buffer = new StringBuffer();
         buffer.append(

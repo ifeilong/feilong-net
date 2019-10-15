@@ -20,9 +20,8 @@ public class EmailCalendarTest extends AbstractMailSenderTest{
 
     @Test
     public void testEmailTest() throws Exception{
-
         String from = "feilongtestemail@163.com";
-        String to = "xin.jin@baozun.cn";
+        String to = "xin.jin@baozun.com";
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.163.com");
 

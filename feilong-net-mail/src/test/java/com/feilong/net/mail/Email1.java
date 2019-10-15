@@ -33,7 +33,6 @@ public class Email1 extends AbstractMailSenderTest{
         mailSenderConfig.setiCalendar(ICalendarBuilder.build());
 
         Message message = MessageBuilder.build(mailSenderConfig);
-
         if (null != mailSenderConfig.getiCalendar()){
             message.setContent(buildContent(mailSenderConfig));
         }
@@ -64,7 +63,7 @@ public class Email1 extends AbstractMailSenderTest{
 
     @Override
     protected String getConfigFile(){
-        return "mail-baozun.properties";
+        return "mail-bz.properties";
     }
 
     //---------------------------------------------------------------
