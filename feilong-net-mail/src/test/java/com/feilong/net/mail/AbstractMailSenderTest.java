@@ -31,12 +31,14 @@ import com.feilong.net.mail.entity.MailSenderConfig;
 public abstract class AbstractMailSenderTest{
 
     /** The Constant folder. */
-    private static final String folder = "/Users/feilong/Development/DataCommon/Files/Java/config/";
+    private static final String folder  = "/Users/feilong/Development/DataCommon/Files/Java/config/";
 
     //---------------------------------------------------------------
 
     /** The mail sender config. */
     protected MailSenderConfig  mailSenderConfig;
+
+    static final String         toEmail = "xin.jin@baozun.com";
 
     //---------------------------------------------------------------
 

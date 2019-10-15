@@ -21,7 +21,6 @@ public class EmailCalendarTest extends AbstractMailSenderTest{
     @Test
     public void testEmailTest() throws Exception{
         String from = "feilongtestemail@163.com";
-        String to = "xin.jin@baozun.com";
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.163.com");
 
@@ -33,6 +32,7 @@ public class EmailCalendarTest extends AbstractMailSenderTest{
         message.addHeaderLine("component=VEVENT");
 
         message.setFrom(new InternetAddress(from));
+        String to = AbstractMailSenderTest.toEmail;
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject("Outlook Meeting Request Using JavaMail");
 

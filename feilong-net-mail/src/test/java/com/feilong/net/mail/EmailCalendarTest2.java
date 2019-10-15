@@ -40,7 +40,6 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
 
         //---------------------------------------------------------------
         String fromEmail = "feilongtestemail@163.com";
-        String toEmail = "xin.jin@baozun.com";
         Session session = SessionFactory.createSession(mailSenderConfig);
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(fromEmail));
