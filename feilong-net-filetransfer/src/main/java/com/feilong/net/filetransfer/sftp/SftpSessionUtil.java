@@ -39,6 +39,8 @@ class SftpSessionUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the session pretty string.
      *
@@ -48,10 +50,11 @@ class SftpSessionUtil{
      */
     static final String buildSessionPrettyString(Session session){
         Validate.notNull(session, "session can't be null!");
-        Validate.isTrue(session.isConnected(), "session must Connected");
 
         return Slf4jUtil.format("{}@{}:{}", session.getUserName(), session.getHost(), session.getPort());
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the map for log.
@@ -70,7 +73,6 @@ class SftpSessionUtil{
         map.put("timeout", session.getTimeout());
 
         //map.put("userInfo", session.getUserInfo());
-
         return map;
     }
 }

@@ -38,7 +38,6 @@ import com.feilong.net.filetransfer.FileTransferException;
 import com.feilong.tools.slf4j.Slf4jUtil;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.ChannelSftp.LsEntry;
-import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
@@ -114,14 +113,13 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.connect();
 
             //---------------------------------------------------------------
-
             boolean isSuccess = channelSftp.isConnected();
 
             logAfterConnected(isSuccess, session);
 
             //---------------------------------------------------------------
             return isSuccess;
-        }catch (JSchException e){
+        }catch (Exception e){
             String message = Slf4jUtil.format("sftpFileTransferConfig:{}", JsonUtil.format(sftpFileTransferConfig));
             LOGGER.error(message, e);
             throw new FileTransferException(message, e);
