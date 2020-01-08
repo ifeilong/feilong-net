@@ -16,6 +16,7 @@
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.apache.commons.lang3.Validate;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpUriRequest;
 
@@ -54,6 +55,9 @@ public class HttpUriRequestFactory{
 
         //---------------------------------------------------------------
         HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
+
+        //since 2.0.3
+        Validate.notNull(httpMethodType, "httpMethodType can't be null!,%s", httpRequest.getFullEncodedUrl());
 
         switch (httpMethodType) {
             case GET:
