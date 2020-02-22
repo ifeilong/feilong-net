@@ -21,7 +21,7 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import com.feilong.core.TimeInterval;
 
 /**
- * 链接的一些参数,比如超时时间,代理等等.
+ * 连接参数配置,比如超时时间,代理等等.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.3.0
@@ -31,6 +31,45 @@ public final class ConnectionConfig{
     /** Static instance. */
     // the static instance works for all types
     public static final ConnectionConfig INSTANCE                = new ConnectionConfig();
+
+    //---------------------------------------------------------------
+
+    /**
+     * 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,会引发 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
+     */
+    private int                          connectTimeout          = 20 * MILLISECOND_PER_SECONDS;
+
+    /**
+     * 读超时时间,在建立连接后从 Input流读入时的超时时间,<span style="color:red">以毫秒为单位</span>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
+     * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
+     */
+    private int                          readTimeout             = 20 * MILLISECOND_PER_SECONDS;
+
+    //---------------------------------------------------------------
+
+    /** 内容的字符集. */
+    private String                       contentCharset          = UTF8;
 
     //---------------------------------------------------------------
 
@@ -68,50 +107,15 @@ public final class ConnectionConfig{
     private String                       proxyAddress;
 
     /**
-     * 代理端口 <br>
+     * 代理端口.
+     * <p>
      * A valid port value is between 0 ~ 65535. <br>
      * A port number of zero will let the system pick up an ephemeral port in a bind operation.
+     * </p>
      */
     private Integer                      proxyPort;
 
     //---------------------------------------------------------------
-
-    /**
-     * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
-     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
-     */
-    private int                          connectTimeout          = 20 * MILLISECOND_PER_SECONDS;
-
-    /**
-     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
-     * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
-     */
-    private int                          readTimeout             = 20 * MILLISECOND_PER_SECONDS;
-
-    //---------------------------------------------------------------
-
-    /** 内容的字符集. */
-    private String                       contentCharset          = UTF8;
 
     /**
      * 是否关闭 HostnameVerifier essentially turns hostname 校验.
@@ -120,7 +124,7 @@ public final class ConnectionConfig{
      * 默认 true 表示关闭
      * </p>
      * 
-     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @see "org.apache.http.conn.ssl.NoopHostnameVerifier"
      * @since 2.0.0
      */
     private boolean                      turnOffHostnameVerifier = true;
@@ -164,78 +168,78 @@ public final class ConnectionConfig{
     //---------------------------------------------------------------
 
     /**
-     * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
+     * 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
-     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,会引发 {@link java.net.SocketTimeoutException}.</li>
      * </ol>
      * </blockquote>
      *
-     * @return the 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位)
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
+     * @return the 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>)
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
      */
     public int getConnectTimeout(){
         return connectTimeout;
     }
 
     /**
-     * 该值将在打开到此 URLConnection引用的资源的通信链接时超时值(以毫秒为单位).
+     * 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
-     * <li>如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,会引发 {@link java.net.SocketTimeoutException}.</li>
      * </ol>
      * </blockquote>
      *
      * @param connectTimeout
-     *            the connectTimeout to set
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
+     *            the new 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>)
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
      */
     public void setConnectTimeout(int connectTimeout){
         this.connectTimeout = connectTimeout;
     }
 
     /**
-     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
+     * 读超时时间,在建立连接后从 Input流读入时的超时时间,<span style="color:red">以毫秒为单位</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
      * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
      * </ol>
      * </blockquote>
      *
-     * @return the 将读超时设置为指定的超时值,以毫秒为单位
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
+     * @return the 读超时时间,在建立连接后从 Input流读入时的超时时间,<span style="color:red">以毫秒为单位</span>
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
      */
     public int getReadTimeout(){
         return readTimeout;
     }
 
     /**
-     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
+     * 读超时时间,在建立连接后从 Input流读入时的超时时间,<span style="color:red">以毫秒为单位</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>默认 1分钟 {@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
-     * <li>超时时间为零表示无穷大超时.</li>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
      * <li>如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.</li>
      * </ol>
      * </blockquote>
      *
      * @param readTimeout
-     *            the readTimeout to set
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
+     *            the new 读超时时间,在建立连接后从 Input流读入时的超时时间,<span style="color:red">以毫秒为单位</span>
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
      */
     public void setReadTimeout(int readTimeout){
         this.readTimeout = readTimeout;
@@ -280,9 +284,12 @@ public final class ConnectionConfig{
     }
 
     /**
-     * 获得 代理端口 <br>
-     * A valid port value is between 0 ~ 65535.
-     *
+     * 代理端口.
+     * <p>
+     * A valid port value is between 0 ~ 65535. <br>
+     * A port number of zero will let the system pick up an ephemeral port in a bind operation.
+     * </p>
+     * 
      * @return the proxyPort
      */
     public Integer getProxyPort(){
@@ -290,8 +297,11 @@ public final class ConnectionConfig{
     }
 
     /**
-     * 设置 代理端口 <br>
-     * A valid port value is between 0 ~ 65535.
+     * 代理端口.
+     * <p>
+     * A valid port value is between 0 ~ 65535. <br>
+     * A port number of zero will let the system pick up an ephemeral port in a bind operation.
+     * </p>
      *
      * @param proxyPort
      *            the proxyPort to set
@@ -368,6 +378,8 @@ public final class ConnectionConfig{
         this.password = password;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 是否关闭 HostnameVerifier essentially turns hostname 校验.
      * 
@@ -376,7 +388,7 @@ public final class ConnectionConfig{
      * </p>
      *
      * @return the turnOffHostnameVerifier
-     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @see "org.apache.http.conn.ssl.NoopHostnameVerifier"
      * @since 2.0.0
      */
     public boolean getTurnOffHostnameVerifier(){
@@ -392,7 +404,7 @@ public final class ConnectionConfig{
      *
      * @param turnOffHostnameVerifier
      *            the turnOffHostnameVerifier to set
-     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @see "org.apache.http.conn.ssl.NoopHostnameVerifier"
      * @since 2.0.0
      */
     public void setTurnOffHostnameVerifier(boolean turnOffHostnameVerifier){
