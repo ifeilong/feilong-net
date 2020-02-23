@@ -74,7 +74,7 @@ public final class ConnectionConfig{
     //---------------------------------------------------------------
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
+     * Http Basic Authentication 基本认证的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -89,7 +89,7 @@ public final class ConnectionConfig{
     private String                       userName;
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
+     * Http Basic Authentication 基本认证的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
@@ -143,9 +143,9 @@ public final class ConnectionConfig{
      * Instantiates a new connection config.
      *
      * @param userName
-     *            the user name
+     *            Http Basic Authentication 基本认证用户名
      * @param password
-     *            the password
+     *            Http Basic Authentication 基本认证密码
      * @since 1.11.0
      */
     public ConnectionConfig(String userName, String password){
@@ -311,7 +311,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
+     * Http Basic Authentication 基本认证的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -328,7 +328,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的用户名.
+     * Http Basic Authentication 基本认证的用户名.
      * 
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
@@ -346,7 +346,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
+     * Http Basic Authentication 基本认证的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
@@ -362,7 +362,7 @@ public final class ConnectionConfig{
     }
 
     /**
-     * HTTP标准规范中定义的认证模式(即Http Basic Authentication 基本认证)的密码.
+     * Http Basic Authentication 基本认证的密码.
      * <p>
      * 暂时不支持 微软的windows系统使用的一种凭据
      * </p>
