@@ -20,6 +20,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import org.apache.http.HttpHost;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
 
@@ -43,7 +44,7 @@ final class RequestConfigBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the.
+     * Builds the {@link RequestConfig}.
      *
      * @param httpRequest
      *            the http request
@@ -52,21 +53,25 @@ final class RequestConfigBuilder{
      * @return the request config
      * @see Builder
      * @see RequestConfig
-     * @see <a href="http://blog.csdn.net/senblingbling/article/details/43916851">httpclient 超时时间 等待时间 响应时间</a>
+     * @see org.apache.http.client.config.CookieSpecs
      */
     static RequestConfig build(ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
-        Builder builder = RequestConfig.custom(); //RequestConfig.DEFAULT;
+        Builder requestConfigBuilder = RequestConfig.custom(); //RequestConfig.DEFAULT;
 
         //设置超时时间
-        setTimeout(builder, useConnectionConfig);
+        setTimeout(requestConfigBuilder, useConnectionConfig);
 
         //设置代理
-        setProxy(builder, useConnectionConfig);
+        setProxy(requestConfigBuilder, useConnectionConfig);
 
-        return builder.build();
+        //---------------------------------------------------------------
+        //since 2.0.3
+        requestConfigBuilder.setCookieSpec(CookieSpecs.IGNORE_COOKIES);
+
+        return requestConfigBuilder.build();
     }
 
     //---------------------------------------------------------------
@@ -74,22 +79,30 @@ final class RequestConfigBuilder{
     /**
      * 设置超时时间.
      *
-     * @param builder
+     * @param requestConfigBuilder
      *            the builder
      * @param useConnectionConfig
      *            the use connection config
+     * @see <a href="http://blog.csdn.net/senblingbling/article/details/43916851">httpclient 超时时间 等待时间 响应时间</a>
      */
-    private static void setTimeout(Builder builder,ConnectionConfig useConnectionConfig){
-        //FIXME
-        //请求获取数据的超时时间，单位毫秒。 如果访问一个接口，多少时间内无法返回数据，就直接放弃此次调用。
-        builder.setSocketTimeout(useConnectionConfig.getReadTimeout());
+    private static void setTimeout(Builder requestConfigBuilder,ConnectionConfig useConnectionConfig){
+        //设置从connect Manager获取Connection 超时时间，单位毫秒
+        //从连接池中获取连接的超时时间
 
-        //设置连接超时时间，单位毫秒。
-        builder.setConnectTimeout(useConnectionConfig.getConnectTimeout());
+        //    Caused by: org.apache.http.conn.ConnectionPoolTimeoutException: Timeout waiting for connection from pool
+        //        at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.leaseConnection(PoolingHttpClientConnectionManager.java:314)
+        requestConfigBuilder.setConnectionRequestTimeout(1 * MILLISECOND_PER_SECONDS);
 
-        //设置从connect Manager获取Connection 超时时间，单位毫秒。
-        //这个属性是新加的属性，因为目前版本是可以共享连接池的。
-        builder.setConnectionRequestTimeout(1 * MILLISECOND_PER_SECONDS);
+        //---------------------------------------------------------------
+        //与服务器连接超时时间
+        //httpclient会创建一个异步线程用以创建socket连接，此处设置该socket的连接超时时间
+        //单位毫秒
+        requestConfigBuilder.setConnectTimeout(useConnectionConfig.getConnectTimeout());
+
+        //请求获取数据的超时时间，单位毫秒
+        //socket读数据超时时间：从服务器获取响应数据的超时时间
+        //访问一个接口，多少时间内无法返回数据，就直接放弃此次调用
+        requestConfigBuilder.setSocketTimeout(useConnectionConfig.getReadTimeout());
     }
 
     //---------------------------------------------------------------
@@ -97,19 +110,19 @@ final class RequestConfigBuilder{
     /**
      * 设置代理.
      *
-     * @param builder
+     * @param requestConfigBuilder
      *            the builder
      * @param connectionConfig
      *            the connection config
      */
-    private static void setProxy(Builder builder,ConnectionConfig connectionConfig){
+    private static void setProxy(Builder requestConfigBuilder,ConnectionConfig connectionConfig){
         String proxyAddress = connectionConfig.getProxyAddress();
         Integer proxyPort = connectionConfig.getProxyPort();
 
         boolean isNeedProxy = isNotNullOrEmpty(proxyAddress) && isNotNullOrEmpty(proxyPort);
         if (isNeedProxy){
             HttpHost proxy = new HttpHost(proxyAddress, proxyPort);
-            builder.setProxy(proxy);
+            requestConfigBuilder.setProxy(proxy);
         }
     }
 }
