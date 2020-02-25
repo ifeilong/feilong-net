@@ -16,10 +16,13 @@
 package com.feilong.net.httpclient4.callback;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +32,8 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
-import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
+import com.feilong.net.httpclient4.builder.HttpHeaderMapBuilder;
+import com.feilong.net.httpclient4.builder.HttpResponseUtil;
 
 import net.sf.json.processors.JsonValueProcessor;
 
@@ -73,7 +77,7 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
 
-        com.feilong.net.entity.HttpResponse resultResponse = HttpResponseBuilder.build(beginDate, httpResponse);
+        com.feilong.net.entity.HttpResponse resultResponse = build(beginDate, httpResponse);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
@@ -86,5 +90,29 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
         }
 
         return resultResponse;
+    }
+
+    /**
+     * Builds the.
+     *
+     * @param beginDate
+     *            the begin date
+     * @param httpResponse
+     *            the http response
+     * @return the com.feilong.net.entity. http response
+     * @since 1.10.6
+     */
+    private static com.feilong.net.entity.HttpResponse build(Date beginDate,HttpResponse httpResponse){
+        StatusLine statusLine = httpResponse.getStatusLine();
+
+        //---------------------------------------------------------------
+        com.feilong.net.entity.HttpResponse result = new com.feilong.net.entity.HttpResponse();
+        result.setStatusCode(statusLine.getStatusCode());
+        //since 1.12.5
+        result.setHeaderMap(HttpHeaderMapBuilder.build(httpResponse.getAllHeaders()));
+        result.setResultString(HttpResponseUtil.getResultString(httpResponse));
+        result.setUseTime(getIntervalTime(beginDate, now()));
+
+        return result;
     }
 }

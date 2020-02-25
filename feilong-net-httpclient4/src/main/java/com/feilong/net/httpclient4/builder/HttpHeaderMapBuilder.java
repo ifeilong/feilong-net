@@ -35,7 +35,7 @@ import com.feilong.formatter.FormatterUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.5
  */
-final class HttpHeaderMapBuilder{
+public final class HttpHeaderMapBuilder{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpHeaderMapBuilder.class);

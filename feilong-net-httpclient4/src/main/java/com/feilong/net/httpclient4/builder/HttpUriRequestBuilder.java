@@ -64,8 +64,8 @@ public final class HttpUriRequestBuilder{
         Validate.notBlank(uri, "uri can't be blank!");
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("httpRequest info:[{}]", JsonUtil.format(httpRequest));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("httpRequest info:[{}],connectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
         }
         //---------------------------------------------------------------
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);
