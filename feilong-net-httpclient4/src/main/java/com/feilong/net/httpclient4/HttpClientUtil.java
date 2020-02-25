@@ -15,30 +15,17 @@
  */
 package com.feilong.net.httpclient4;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.date.DateUtil.now;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.json.jsonlib.JavaToJsonConfig;
-import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.json.jsonlib.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.HttpRequestExecuter;
-import com.feilong.net.httpclient4.builder.HttpResponseBuilder;
-import com.feilong.net.httpclient4.builder.HttpResponseUtil;
-
-import net.sf.json.processors.JsonValueProcessor;
+import com.feilong.net.httpclient4.callback.HttpResponseResultCallback;
+import com.feilong.net.httpclient4.callback.ResponseBodyAsStringResultCallback;
+import com.feilong.net.httpclient4.callback.StatusCodeResultCallback;
 
 /**
  * 基于 HttpClient4 的工具类.
@@ -52,11 +39,6 @@ import net.sf.json.processors.JsonValueProcessor;
  * @since 1.10.6
  */
 public final class HttpClientUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpClientUtil(){
@@ -186,24 +168,7 @@ public final class HttpClientUtil{
      */
     public static int getResponseStatusCode(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
-
-        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
-
-        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
-        StatusLine statusLine = httpResponse.getStatusLine();
-
-        int statusCode = statusLine.getStatusCode();
-
-        //---------------------------------------------------------------
-
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
-                            "httpRequest:[{}],connectionConfig:[{}],statusCode:[{}]",
-                            JsonUtil.format(httpRequest),
-                            JsonUtil.format(useConnectionConfig),
-                            statusCode);
-        }
-        return statusCode;
+        return HttpRequestExecuter.execute(httpRequest, connectionConfig, StatusCodeResultCallback.INSTANCE);
     }
 
     //---------------------------getHttpResponse------------------------------------
@@ -470,26 +435,7 @@ public final class HttpClientUtil{
      */
     public static com.feilong.net.entity.HttpResponse getHttpResponse(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
-
-        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
-
-        //---------------------------------------------------------------
-        Date beginDate = now();
-        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, useConnectionConfig);
-        com.feilong.net.entity.HttpResponse resultResponse = HttpResponseBuilder.build(beginDate, httpResponse);
-
-        //---------------------------------------------------------------
-
-        if (LOGGER.isInfoEnabled()){
-            String pattern = "request:[{}],useConnectionConfig:[{}],response:[{}]";
-            String response = JsonUtil.format(
-                            resultResponse,
-                            new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor())));
-
-            LOGGER.info(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig), response);
-        }
-
-        return resultResponse;
+        return HttpRequestExecuter.execute(httpRequest, connectionConfig, HttpResponseResultCallback.INSTANCE);
     }
 
     //----------------------getResponseBodyAsString-----------------------------------------
@@ -901,7 +847,7 @@ public final class HttpClientUtil{
      * @param requestParamMap
      *            the request param map
      * @param httpMethod
-     *            the method
+     *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
      * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.11.0
@@ -979,21 +925,7 @@ public final class HttpClientUtil{
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
-
-        ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
-
-        HttpResponse httpResponse = HttpRequestExecuter.execute(httpRequest, connectionConfig);
-        String resultString = HttpResponseUtil.getResultString(httpResponse);
-
-        //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "request:[{}],useConnectionConfig:[{}],resultString:[{}]",
-                            JsonUtil.format(httpRequest),
-                            JsonUtil.format(useConnectionConfig),
-                            StringOverLengthJsonValueProcessor.format(resultString, 1000));
-        }
-        return resultString;
+        return HttpRequestExecuter.execute(httpRequest, connectionConfig, ResponseBodyAsStringResultCallback.INSTANCE);
     }
 
 }

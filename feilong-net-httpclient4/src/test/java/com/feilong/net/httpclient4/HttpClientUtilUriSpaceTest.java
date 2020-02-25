@@ -16,12 +16,22 @@
 package com.feilong.net.httpclient4;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpClientUtilUriSpaceTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtilUriSpaceTest.class);
+
+    //---------------------------------------------------------------
 
     @Test
     public void test(){
         String uri = "https://www.baidu.com/item/BA8 900";
         HttpClientUtil.get(uri);
+
+        LOGGER.info("get over");
+
     }
 }
