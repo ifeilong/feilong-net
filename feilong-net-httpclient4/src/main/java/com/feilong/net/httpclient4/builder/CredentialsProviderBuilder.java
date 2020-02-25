@@ -22,7 +22,7 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 
 /**
- * The Class CredentialsProviderBuilder.
+ * 用来构造 {@link CredentialsProvider}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
