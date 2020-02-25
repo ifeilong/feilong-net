@@ -131,7 +131,7 @@ public class HttpRequest{
      * @param paramMap
      *            the param map
      * @param httpMethodType
-     *            the http method type
+     *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
      * @since 1.5.4
      */
     public HttpRequest(String uri, Map<String, String> paramMap, String httpMethodType){

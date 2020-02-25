@@ -235,8 +235,8 @@ public enum HttpMethodType{
      * 传入一个 字符串的 HTTP method,比如 get,得到 {@link HttpMethodType#GET}.
      *
      * @param methodValue
-     *            the method value
-     * @return the by method value ignore case
+     *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
+     * @return 如果遍历所有枚举值,找不到枚举值的属性method的值是 methodValue,那么返回null
      * @see EnumUtil#getEnumByPropertyValueIgnoreCase(Class, String, Object)
      * @since 1.0.8
      */
