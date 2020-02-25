@@ -15,24 +15,31 @@
  */
 package com.feilong.net.httpclient4.callback;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.util.MapUtil.newTreeMap;
+import static java.util.Collections.emptyMap;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.formatter.FormatterUtil;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
-import com.feilong.net.httpclient4.builder.HttpHeaderMapBuilder;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
 
 import net.sf.json.processors.JsonValueProcessor;
@@ -92,6 +99,8 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
         return resultResponse;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the.
      *
@@ -109,10 +118,40 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
         com.feilong.net.entity.HttpResponse result = new com.feilong.net.entity.HttpResponse();
         result.setStatusCode(statusLine.getStatusCode());
         //since 1.12.5
-        result.setHeaderMap(HttpHeaderMapBuilder.build(httpResponse.getAllHeaders()));
+        result.setHeaderMap(convert(httpResponse.getAllHeaders()));
         result.setResultString(HttpResponseUtil.getResultString(httpResponse));
         result.setUseTime(getIntervalTime(beginDate, now()));
 
         return result;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 用来将 Header[] 转成 Map<String, String>.
+     *
+     * @param allHeaders
+     *            the all headers
+     * @return 如果 <code>allHeaders</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     */
+    private static Map<String, String> convert(Header[] allHeaders){
+        if (isNullOrEmpty(allHeaders)){
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
+        Map<String, String> map = newTreeMap();
+        for (Header header : allHeaders){
+            String name = header.getName();
+            if (isNotNullOrEmpty(name)){
+                map.put(name, header.getValue());
+            }
+        }
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(FormatterUtil.formatToSimpleTable(map));
+        }
+        return map;
     }
 }
