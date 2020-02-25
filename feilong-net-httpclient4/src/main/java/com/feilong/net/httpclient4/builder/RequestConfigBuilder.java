@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4.builder.httpurirequest;
+package com.feilong.net.httpclient4.builder;
 
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
@@ -32,7 +32,7 @@ import com.feilong.net.entity.ConnectionConfig;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
  */
-final class RequestConfigBuilder{
+public final class RequestConfigBuilder{
 
     /** Don't let anyone instantiate this class. */
     private RequestConfigBuilder(){
@@ -46,8 +46,6 @@ final class RequestConfigBuilder{
     /**
      * Builds the {@link RequestConfig}.
      *
-     * @param httpRequest
-     *            the http request
      * @param connectionConfig
      *            the connection config
      * @return the request config
@@ -55,7 +53,7 @@ final class RequestConfigBuilder{
      * @see RequestConfig
      * @see org.apache.http.client.config.CookieSpecs
      */
-    static RequestConfig build(ConnectionConfig connectionConfig){
+    public static RequestConfig build(ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
@@ -70,6 +68,9 @@ final class RequestConfigBuilder{
         //---------------------------------------------------------------
         //since 2.0.3
         requestConfigBuilder.setCookieSpec(CookieSpecs.IGNORE_COOKIES);
+
+        //requestConfigBuilder.setContentCompressionEnabled(contentCompressionEnabled)
+        //requestConfigBuilder.setAuthenticationEnabled(true);
 
         return requestConfigBuilder.build();
     }

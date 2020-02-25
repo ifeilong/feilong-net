@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4.builder;
+package com.feilong.net.httpclient4.packer;
 
 import javax.net.ssl.SSLContext;
 
@@ -53,7 +53,7 @@ public final class SSLPacker{
      * @see org.apache.http.conn.ssl.NoopHostnameVerifier
      * @see javax.net.ssl.HostnameVerifier
      */
-    static void pack(
+    public static void pack(
                     org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
                     ConnectionConfig connectionConfig,
                     LayeredConnectionSocketFactory layeredConnectionSocketFactory){

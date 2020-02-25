@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.httpclient4.builder.RequestConfigBuilder;
 
 /**
  * A factory for creating {@link HttpUriRequest} objects.
