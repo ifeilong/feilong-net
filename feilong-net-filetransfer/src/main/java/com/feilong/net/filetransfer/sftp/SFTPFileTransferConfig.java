@@ -17,27 +17,15 @@ package com.feilong.net.filetransfer.sftp;
 
 import java.util.Properties;
 
+import com.feilong.net.filetransfer.AbstractFileTransferConfig;
+
 /**
  * sftp 文件传输的配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.1
  */
-public class SFTPFileTransferConfig{
-
-    /** 主机名. */
-    private String     hostName;
-
-    /** 用户名. */
-    private String     userName;
-
-    /** 密码. */
-    private String     password;
-
-    /** The port. */
-    private Integer    port           = 22;
-
-    //---------------------------------------------------------------
+public class SFTPFileTransferConfig extends AbstractFileTransferConfig{
 
     /** The ssh config. */
     private Properties sshConfig;
@@ -46,82 +34,6 @@ public class SFTPFileTransferConfig{
     private int        sessionTimeout = 0;
 
     //---------------------------------------------------------------
-
-    /**
-     * 获得 主机名.
-     *
-     * @return the hostName
-     */
-    public String getHostName(){
-        return hostName;
-    }
-
-    /**
-     * 设置 主机名.
-     *
-     * @param hostName
-     *            the hostName to set
-     */
-    public void setHostName(String hostName){
-        this.hostName = hostName;
-    }
-
-    /**
-     * 获得 用户名.
-     *
-     * @return the userName
-     */
-    public String getUserName(){
-        return userName;
-    }
-
-    /**
-     * 设置 用户名.
-     *
-     * @param userName
-     *            the userName to set
-     */
-    public void setUserName(String userName){
-        this.userName = userName;
-    }
-
-    /**
-     * 获得 密码.
-     *
-     * @return the password
-     */
-    public String getPassword(){
-        return password;
-    }
-
-    /**
-     * 设置 密码.
-     *
-     * @param password
-     *            the password to set
-     */
-    public void setPassword(String password){
-        this.password = password;
-    }
-
-    /**
-     * 获得 the port.
-     *
-     * @return the port
-     */
-    public Integer getPort(){
-        return port;
-    }
-
-    /**
-     * 设置 the port.
-     *
-     * @param port
-     *            the port to set
-     */
-    public void setPort(Integer port){
-        this.port = port;
-    }
 
     /**
      * 获得 the ssh config.

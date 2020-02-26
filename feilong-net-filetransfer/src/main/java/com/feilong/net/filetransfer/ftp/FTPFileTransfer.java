@@ -18,6 +18,7 @@ package com.feilong.net.filetransfer.ftp;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -99,7 +100,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             Validate.notBlank(hostName, "hostName can't be blank!");
 
             //---------------------------------------------------------------
-            ftpClient.connect(hostName);
+            ftpClient.connect(hostName, defaultIfNull(ftpFileTransferConfig.getPort(), 21));
             LOGGER.debug("connect hostName:[{}]", hostName);
 
             String userName = ftpFileTransferConfig.getUserName();
@@ -149,8 +150,10 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             // 没有异常则 确定成功
             LOGGER.info("connect:[{}]", true);
             return true;
-        }catch (IOException e){
-            throw new FileTransferException("connect exception", e);
+        }catch (Exception e){
+            String message = Slf4jUtil.format("ftpFileTransferConfig:{}", JsonUtil.format(ftpFileTransferConfig));
+            LOGGER.error(message, e);
+            throw new FileTransferException(message, e);
         }
     }
 

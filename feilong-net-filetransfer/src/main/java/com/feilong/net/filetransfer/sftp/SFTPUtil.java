@@ -16,6 +16,7 @@
 package com.feilong.net.filetransfer.sftp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -66,7 +67,7 @@ class SFTPUtil{
         Session session = jsch.getSession(
                         sftpFileTransferConfig.getUserName(),
                         sftpFileTransferConfig.getHostName(),
-                        sftpFileTransferConfig.getPort());
+                        defaultIfNull(sftpFileTransferConfig.getPort(), 22));
 
         //---------------------------------------------------------------
         session.setPassword(sftpFileTransferConfig.getPassword());

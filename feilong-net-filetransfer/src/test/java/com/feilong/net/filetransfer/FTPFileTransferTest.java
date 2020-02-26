@@ -62,7 +62,7 @@ public class FTPFileTransferTest extends FileTransferTest{
     @Override
     @Test
     public void upload() throws Exception{
-        String singleLocalFileFullPath = "E:\\1.txt";
+        String singleLocalFileFullPath = "/Users/feilong/Downloads/接口.png";
         fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
     }
 
