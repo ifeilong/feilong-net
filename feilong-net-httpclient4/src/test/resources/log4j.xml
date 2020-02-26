@@ -26,6 +26,9 @@
 	<logger name="com.feilong">
 		<level value="debug" />
 	</logger>
+	<logger name="com.feilong.core.lang.ThreadUtil">
+		<level value="info" />
+	</logger>
 
 	<category name="org.apache.commons.beanutils">
 		<priority value="info" />
