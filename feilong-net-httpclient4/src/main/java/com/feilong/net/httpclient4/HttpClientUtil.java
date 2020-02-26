@@ -96,7 +96,6 @@ public final class HttpClientUtil{
      * 默认 {@link HttpMethodType#GET} 请求
      * </p>
      * 
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -119,7 +118,6 @@ public final class HttpClientUtil{
      * </pre>
      * 
      * </blockquote>
-     *
      *
      * @param urlString
      *            the url string
@@ -778,14 +776,55 @@ public final class HttpClientUtil{
      *            the uri
      * @param requestBody
      *            the request body
-     * @return the string
-     * 
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.10.7
      */
     public static String post(String uri,String requestBody){
+        return post(uri, requestBody, null);
+    }
+
+    /**
+     * 发送 Post 请求,并且设置 RequestBody ,以及 headerMap,获得请求的响应内容.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如天气预报请求数据
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * private static String getResult(String city){
+     *     String soap = buildSoapString(city);
+     * 
+     *     Map<String, String> mapUseEntrys = toMapUseEntrys(
+     *                     Pair.of("Content-Type", "text/xml; charset=utf-8"), //
+     *                     Pair.of("SOAPAction", SOAP_ACTION));
+     *     return HttpClientUtil.post(URL_WEATHER_SERVICE, soap, mapUseEntrys);
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param uri
+     *            the uri
+     * @param requestBody
+     *            the request body
+     * @param headerMap
+     *            the header map
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 2.0.3
+     */
+    public static String post(String uri,String requestBody,Map<String, String> headerMap){
         Validate.notBlank(uri, "uri can't be blank!");
 
         HttpRequest httpRequest = new HttpRequest(uri, null, HttpMethodType.POST);
+        httpRequest.setHeaderMap(headerMap);
         httpRequest.setRequestBody(requestBody);
         return getResponseBodyAsString(httpRequest);
     }
@@ -832,7 +871,7 @@ public final class HttpClientUtil{
      * 
      * @param httpRequest
      *            the http request
-     * @return the response body as string
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String getResponseBodyAsString(HttpRequest httpRequest){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
