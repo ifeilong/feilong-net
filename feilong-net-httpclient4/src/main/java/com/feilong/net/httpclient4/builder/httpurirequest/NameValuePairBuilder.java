@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 /**
- * The Class NameValuePairBuilder.
+ * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>} 的构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
@@ -43,11 +44,11 @@ final class NameValuePairBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the.
+     * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>}.
      *
      * @param paramMap
      *            the param map
-     * @return the list
+     * @return 如果 <code>paramMap</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see org.apache.http.NameValuePair
      * @see org.apache.http.message.BasicNameValuePair
      */
@@ -57,15 +58,12 @@ final class NameValuePairBuilder{
         }
 
         //---------------------------------------------------------------
-
         List<NameValuePair> params = newArrayList();
-
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
             params.add(new BasicNameValuePair(key, value));
         }
-
         return params;
     }
 }

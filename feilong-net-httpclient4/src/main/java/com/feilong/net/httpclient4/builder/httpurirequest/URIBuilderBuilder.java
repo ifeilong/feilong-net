@@ -29,7 +29,7 @@ import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.HttpRequest;
 
 /**
- * The Class URIBuilderBuilder.
+ * 将{@link HttpRequest} 转成 {@link URIBuilder} 的构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href=
@@ -53,7 +53,7 @@ class URIBuilderBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builder.
+     * 将{@link HttpRequest} 转成 {@link URIBuilder} 的构造器.
      *
      * @param httpRequest
      *            the http request
@@ -92,7 +92,6 @@ class URIBuilderBuilder{
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-
             if (LOGGER.isTraceEnabled()){
                 LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
             }
