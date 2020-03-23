@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4;
+package com.feilong.temp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.net.httpclient4.HttpClientUtil;
 
 /**
  *

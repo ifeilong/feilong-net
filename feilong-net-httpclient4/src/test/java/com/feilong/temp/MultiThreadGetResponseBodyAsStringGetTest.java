@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4;
+package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
@@ -22,13 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ThreadUtil;
+import com.feilong.net.httpclient4.HttpClientUtil;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
- */
 public class MultiThreadGetResponseBodyAsStringGetTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MultiThreadGetResponseBodyAsStringGetTest.class);

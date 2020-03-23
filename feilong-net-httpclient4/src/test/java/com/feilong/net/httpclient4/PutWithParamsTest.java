@@ -17,10 +17,6 @@ package com.feilong.net.httpclient4;
 
 import org.junit.Test;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class PutWithParamsTest{
 
     @Test(expected = NullPointerException.class)
