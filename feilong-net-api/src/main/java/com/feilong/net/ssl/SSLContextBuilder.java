@@ -27,10 +27,10 @@ import org.apache.commons.net.util.TrustManagerUtils;
 import com.feilong.net.UncheckedHttpException;
 
 /**
- * 用来构造 {@link SSLContext},SSL全称是 Secure Sockets Layer 安全套接层协议层.
+ * 用来构造 {@link SSLContext}, SSL全称是Secure Sockets Layer安全套接层协议层.
  * 
  * <p>
- * 它是网景（Netscape）公司提出的基于 WEB 应用的安全协议。
+ * 它是网景（Netscape）公司提出的基于 WEB 应用的安全协议
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -50,11 +50,11 @@ public class SSLContextBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the.
+     * 构造 {@link SSLContext}.
      *
      * @param protocol
-     *            the protocol
-     * @return the SSL context
+     *            协议,参见 {@link SSLProtocol} ,如果 <code>protocol</code> 是null或者empty,那么默认使用 {@link SSLProtocol#TLS}
+     * @return 如果 <code>protocol</code> 是null或者empty,那么默认使用 {@link SSLProtocol#TLS}<br>
      * @see SSLProtocol
      * @see org.apache.commons.net.util.SSLContextUtils#createSSLContext(String, KeyManager[], TrustManager[])
      * @see org.apache.commons.net.util.TrustManagerUtils#getAcceptAllTrustManager()
