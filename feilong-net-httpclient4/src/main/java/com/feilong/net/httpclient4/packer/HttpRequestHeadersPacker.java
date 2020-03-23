@@ -69,7 +69,6 @@ public final class HttpRequestHeadersPacker{
         setBasicAuthenticationHeader(httpUriRequest, connectionConfig);
 
         //---------------------------------------------------------------
-
         setHeaderMap(httpUriRequest, headerMap);
     }
 
@@ -118,7 +117,6 @@ public final class HttpRequestHeadersPacker{
         String password = connectionConfig.getPassword();
 
         if (isNotNullOrEmpty(userName) && isNotNullOrEmpty(password)){
-
             String auth = userName + ":" + password;
             String authHeader = "Basic " + new String(Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII"))));
 
