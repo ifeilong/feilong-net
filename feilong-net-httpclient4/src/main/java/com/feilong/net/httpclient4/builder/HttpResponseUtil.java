@@ -47,7 +47,7 @@ public final class HttpResponseUtil{
     //---------------------------------------------------------------
 
     /**
-     * Gets the result string.
+     * 从{@link HttpResponse}中提取result 字符串 .
      *
      * @param httpResponse
      *            the http response

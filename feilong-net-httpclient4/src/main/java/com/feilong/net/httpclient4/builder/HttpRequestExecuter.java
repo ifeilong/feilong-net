@@ -65,7 +65,6 @@ public final class HttpRequestExecuter{
         Validate.notNull(resultCallback, "resultCallback can't be null!");
 
         //---------------------------------------------------------------
-
         Date beginDate = now();
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
         HttpUriRequest httpUriRequest = HttpUriRequestBuilder.build(httpRequest, useConnectionConfig);
