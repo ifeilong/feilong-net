@@ -36,6 +36,7 @@ import com.feilong.net.httpclient4.builder.HttpResponseUtil;
  */
 public class ResponseBodyAsStringResultCallback implements ResultCallback<String>{
 
+    /** The Constant LOGGER. */
     private static final Logger                            LOGGER   = LoggerFactory.getLogger(ResponseBodyAsStringResultCallback.class);
 
     /** Static instance. */

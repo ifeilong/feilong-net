@@ -28,7 +28,7 @@ import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 
 /**
- * 通常用来解析接口返回 状态码 的 {@link ResultCallback}.
+ * 通常用来解析接口返回状态码的 {@link ResultCallback}.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 2.0.3
@@ -51,7 +51,6 @@ public class StatusCodeResultCallback implements ResultCallback<Integer>{
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
         StatusLine statusLine = httpResponse.getStatusLine();
-
         int statusCode = statusLine.getStatusCode();
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){

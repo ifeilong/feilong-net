@@ -60,22 +60,6 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
     public static final HttpResponseResultCallback INSTANCE = new HttpResponseResultCallback();
 
     //---------------------------------------------------------------
-
-    /**
-     * On.
-     *
-     * @param httpRequest
-     *            the http request
-     * @param httpUriRequest
-     *            the http uri request
-     * @param httpResponse
-     *            the http response
-     * @param useConnectionConfig
-     *            the use connection config
-     * @param beginDate
-     *            the begin date
-     * @return the com.feilong.net.entity. http response
-     */
     @Override
     public com.feilong.net.entity.HttpResponse on(
                     HttpRequest httpRequest,
@@ -83,9 +67,7 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
-
         com.feilong.net.entity.HttpResponse resultResponse = build(beginDate, httpResponse);
-
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String pattern = "request:[{}],useConnectionConfig:[{}],response:[{}]";
@@ -95,7 +77,6 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
 
             LOGGER.info(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig), response);
         }
-
         return resultResponse;
     }
 
