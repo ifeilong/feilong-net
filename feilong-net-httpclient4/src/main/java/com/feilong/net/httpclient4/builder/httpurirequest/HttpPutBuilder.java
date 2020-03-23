@@ -23,7 +23,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.entity.HttpRequest;
 
 /**
- * The Class HttpPutBuilder.
+ * 用来构造 {@link HttpPut}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.5
@@ -40,7 +40,7 @@ final class HttpPutBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the http post.
+     * 构造 {@link HttpPut}.
      *
      * @param httpRequest
      *            the http request

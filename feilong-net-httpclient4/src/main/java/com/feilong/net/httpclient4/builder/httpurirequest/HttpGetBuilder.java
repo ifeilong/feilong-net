@@ -29,7 +29,7 @@ import com.feilong.net.entity.HttpRequest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * The Class HttpGetBuilder.
+ * 用来构造 {@link HttpGet}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.6
@@ -46,7 +46,7 @@ final class HttpGetBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the http get.
+     * 构造 {@link HttpGet}.
      *
      * @param httpRequest
      *            the http request
@@ -64,7 +64,7 @@ final class HttpGetBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the uri.
+     * 基于 {@link HttpRequest} 来构造 {@link URI}.
      *
      * @param httpRequest
      *            the http request
