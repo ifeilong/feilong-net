@@ -25,6 +25,7 @@ import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.entity.Priority;
 
 /**
+ * 专门用来设置header.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
@@ -69,7 +70,6 @@ public class HeaderSetter{
             message.addHeader(MailHeader.X_PRIORITY, priority.getLevelValue());
         }
 
-        //---------------------------------------------------------------
         // 是否需要回执
         if (mailSenderConfig.getIsNeedReturnReceipt()){
             message.setHeader(MailHeader.DISPOSITION_NOTIFICATION_TO, "1");
@@ -78,8 +78,6 @@ public class HeaderSetter{
         //---------------------------------------------------------------
         // 邮件客户端
         message.setHeader(MailHeader.X_MAILER, MailHeader.X_MAILER_VALUE);
-
-        //---------------------------------------------------------------
 
         // 设置邮件消息发送的时间
         message.setSentDate(now());

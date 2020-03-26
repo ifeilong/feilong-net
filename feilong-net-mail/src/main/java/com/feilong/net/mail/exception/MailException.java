@@ -18,7 +18,7 @@ package com.feilong.net.mail.exception;
 import com.feilong.core.DefaultRuntimeException;
 
 /**
- * The Class MailException.
+ * 通用的邮件相关异常.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2

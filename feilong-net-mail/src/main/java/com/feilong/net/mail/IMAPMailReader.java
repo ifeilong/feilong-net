@@ -38,7 +38,7 @@ import com.feilong.net.mail.util.FolderUtil;
 import com.feilong.net.mail.util.MessageUtil;
 
 /**
- * The Class MailReaderUtil.
+ * IMAP模式来读取邮件.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9

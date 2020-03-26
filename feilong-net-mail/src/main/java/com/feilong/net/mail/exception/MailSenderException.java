@@ -16,7 +16,7 @@
 package com.feilong.net.mail.exception;
 
 /**
- * 邮件发送失败异常.
+ * 邮件发送出现的异常.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9

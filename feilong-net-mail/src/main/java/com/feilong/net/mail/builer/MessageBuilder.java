@@ -31,7 +31,7 @@ import com.feilong.net.mail.util.InternetAddressUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * The Class MessageBuilder.
+ * 专门用来构造 {@link Message}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
