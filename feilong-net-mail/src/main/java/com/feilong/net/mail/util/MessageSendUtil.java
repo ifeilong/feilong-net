@@ -24,7 +24,7 @@ import javax.mail.Transport;
 import com.feilong.net.mail.exception.MailSenderException;
 
 /**
- * The Class MessageSendUtil.
+ * 专门用来发送邮件.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
@@ -32,7 +32,7 @@ import com.feilong.net.mail.exception.MailSenderException;
 public class MessageSendUtil{
 
     /**
-     * Send.
+     * 发送.
      *
      * @param message
      *            the message

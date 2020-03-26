@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
@@ -127,9 +128,12 @@ public final class AttachmentSetter{
      * @param mimeType
      *            the mime type
      * @return the data handler
+     * @see FileDataSource
+     * @see ByteArrayDataSource
      * @since 1.8.2
      */
     private static DataHandler buildDataHandler(byte[] data,String mimeType){
+        //FileDataSource
         ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(data, mimeType);
         return new DataHandler(byteArrayDataSource);
     }
