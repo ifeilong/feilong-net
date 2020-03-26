@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail.util;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.internet.InternetAddress;
@@ -23,14 +25,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.feilong.core.CharsetType.UTF8;
-
-/**
- * The Class InternetAddressUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.8
- */
 public class InternetAddressUtilTest{
 
     /** The Constant LOGGER. */

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail;
+package com.feilong.net.mail.ics;
 
 import java.util.UUID;
 
@@ -31,6 +31,9 @@ import javax.mail.util.ByteArrayDataSource;
 
 import org.junit.After;
 import org.junit.Test;
+
+import com.feilong.net.mail.AbstractMailSenderTest;
+import com.feilong.net.mail.SessionFactory;
 
 public class EmailCalendarTest2 extends AbstractMailSenderTest{
 

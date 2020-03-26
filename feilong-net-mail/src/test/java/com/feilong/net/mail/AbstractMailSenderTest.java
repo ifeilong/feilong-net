@@ -38,25 +38,16 @@ public abstract class AbstractMailSenderTest{
     /** The mail sender config. */
     protected MailSenderConfig  mailSenderConfig;
 
-    static final String         toEmail = "xin.jin@baozun.com";
+    public static final String  toEmail = "xin.jin@baozun.com";
 
     //---------------------------------------------------------------
 
-    /**
-     * Before.
-     */
     @Before
     public void before(){
         loadMailSenderConfig();
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Load mail sender config.
-     *
-     * @since 1.10.0
-     */
     private void loadMailSenderConfig(){
         ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(folder + getConfigFile()));
 
@@ -69,26 +60,16 @@ public abstract class AbstractMailSenderTest{
 
         mailSenderConfig = new MailSenderConfig();
         mailSenderConfig = BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
-
-        //LOGGER.debug(JsonUtil.format(mailSenderConfig));
     }
 
     //---------------------------------------------------------------
 
-    /**
-     * Gets the config file.
-     *
-     * @return the config file
-     */
     protected String getConfigFile(){
         return "mail-feilongtestemail.properties";
     }
 
     //---------------------------------------------------------------
 
-    /**
-     * After.
-     */
     @After
     public void after(){
         MailSender mailSender = new DefaultMailSender();

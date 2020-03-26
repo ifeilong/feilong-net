@@ -49,7 +49,7 @@ public final class AttachmentSetter{
      * 设置附件.
      *
      * @param mimeMultipart
-     *            the mime multipart
+     *            MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
      * @param attachFilePaths
      *            the attach file paths
      * @throws MessagingException
@@ -64,15 +64,15 @@ public final class AttachmentSetter{
 
         //-------------------以HTML格式发送邮件 带附件的邮件图片--------------------------------------------
 
-        List<byte[]> attachList = newArrayList();
+        //附件文件名字
         List<String> attachFileNames = newArrayList();
+        List<byte[]> attachList = newArrayList();
 
         for (String attachFilePath : attachFilePaths){
             attachFileNames.add(FilenameUtil.getFileName(attachFilePath));
             attachList.add(FileUtil.toByteArray(new File(attachFilePath)));
         }
 
-        // MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
         //---------------------------------------------------------------
         System.setProperty("mail.mime.encodefilename", "true");
 
@@ -120,7 +120,7 @@ public final class AttachmentSetter{
     //---------------------------------------------------------------
 
     /**
-     * Builds the data handler.
+     * 构造 {@link DataHandler}.
      *
      * @param data
      *            the data

@@ -1,4 +1,4 @@
-package com.feilong.net.mail;
+package com.feilong.net.mail.ics;
 
 import static com.feilong.core.date.DateUtil.now;
 
@@ -19,10 +19,9 @@ import org.junit.Test;
 import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.net.mail.AbstractMailSenderTest;
 import com.feilong.net.mail.builer.MessageBuilder;
 import com.feilong.net.mail.entity.MailSenderConfig;
-import com.feilong.net.mail.ics.ICalendarBuilder;
-import com.feilong.net.mail.ics.IcsBuilder;
 import com.feilong.net.mail.util.MessageSendUtil;
 import com.feilong.net.mail.util.MimeType;
 

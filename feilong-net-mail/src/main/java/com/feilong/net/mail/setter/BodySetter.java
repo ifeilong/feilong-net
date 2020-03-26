@@ -26,7 +26,7 @@ import javax.mail.internet.MimeMultipart;
 import com.feilong.net.mail.entity.MailSenderConfig;
 
 /**
- * The Class BodySetter.
+ * 设置 BodyPart.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
@@ -99,7 +99,6 @@ public class BodySetter{
         // 创建一个包含HTML内容的MimeBodyPart
         BodyPart bodyPart = new MimeBodyPart();
         // 设置HTML内容
-        // 设置邮件消息的主要内容
         bodyPart.setContent(mailSenderConfig.getContent(), mailSenderConfig.getContentMimeType());
 
         return bodyPart;

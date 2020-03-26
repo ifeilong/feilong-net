@@ -23,10 +23,10 @@ import javax.mail.Folder;
 import javax.mail.MessagingException;
 
 /**
- * The Class FolderUtil.
+ * 和 {@link javax.mail.Folder} 相关工具类.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+ * @see "HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Explorer/Shell Folders"
  * @since 1.0.9
  */
 public final class FolderUtil{

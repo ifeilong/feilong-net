@@ -1,4 +1,4 @@
-package com.feilong.net.mail;
+package com.feilong.net.mail.ics;
 
 import java.util.Properties;
 
@@ -15,6 +15,9 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.junit.Test;
+
+import com.feilong.net.mail.AbstractMailSenderTest;
+import com.feilong.net.mail.SessionFactory;
 
 public class EmailCalendarTest extends AbstractMailSenderTest{
 

@@ -26,12 +26,6 @@ import com.feilong.io.IOReaderUtil;
 
 public class MailSenderTest extends AbstractMailSenderTest{
 
-    /**
-     * Send mail1.
-     *
-     * @throws IOException
-     *             the IO exception
-     */
     @Test
     public void sendMail1() throws IOException{
         String path = USER_HOME + "/feilong/train/1201单元测试/generalRegulation/generalRegulation-20141125194610.html";
@@ -41,9 +35,6 @@ public class MailSenderTest extends AbstractMailSenderTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Send mail.
-     */
     @Test
     public void sendMail(){
         String textContent = "<html><body><hr/><div style='boder:1px #000 solid;color:red'>今天天气不错</div></body></html>";
@@ -51,10 +42,6 @@ public class MailSenderTest extends AbstractMailSenderTest{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Test send text mail.
-     */
     @Test
     public void testSendTextMail(){
         String textContent = "测试回执";

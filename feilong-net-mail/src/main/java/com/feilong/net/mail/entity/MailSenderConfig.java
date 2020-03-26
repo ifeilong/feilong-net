@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail.entity;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 /**
  * 邮件发送配置.
  * 
@@ -91,7 +93,7 @@ public class MailSenderConfig extends BaseConfig{
     private String    subject;
 
     /** 邮件的文本内容. */
-    private String    content;
+    private String    content              = EMPTY;
 
     /** MIME type of this object. */
     private String    contentMimeType      = "text/html; charset=gb2312";
@@ -346,6 +348,8 @@ public class MailSenderConfig extends BaseConfig{
     public void setiCalendar(ICalendar iCalendar){
         this.iCalendar = iCalendar;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * mail.smtp.ssl.enable SSL 开关.
