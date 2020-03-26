@@ -27,7 +27,7 @@ import com.feilong.net.mail.builer.SessionPropertiesBuilder;
 import com.feilong.net.mail.entity.SessionConfig;
 
 /**
- * {@link javax.mail.Session}
+ * 根据邮件会话属性和密码验证器构造邮件的{@link javax.mail.Session}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
@@ -44,7 +44,7 @@ public class SessionFactory{
     //---------------------------------------------------------------
 
     /**
-     * 根据邮件会话属性和密码验证器构造一个发送邮件的session.
+     * 根据邮件会话属性和密码验证器构造邮件的{@link javax.mail.Session}.
      * 
      * @param sessionConfig
      *            mailSenderInfo
