@@ -21,13 +21,16 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.conn.ssl.TrustAllStrategy;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.net.UncheckedHttpException;
+import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.ssl.SSLProtocol;
 
 /**
@@ -38,6 +41,28 @@ import com.feilong.net.ssl.SSLProtocol;
 public class HttpClient4SSLContextBuilder{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient4SSLContextBuilder.class);
+
+    //customHttpClientBuilder.setConnectionManager(buildConnectionManager(connectionConfig));
+    /**
+     * 
+     * @return
+     * @since 2.0.3
+     * @see "org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor#createDefaultHttpClient()"
+     * @see org.apache.http.impl.conn.PoolingHttpClientConnectionManager#PoolingHttpClientConnectionManager(org.apache.http.conn.HttpClientConnectionOperator,
+     *      org.apache.http.conn.HttpConnectionFactory, long, java.util.concurrent.TimeUnit)
+     */
+    static HttpClientConnectionManager buildConnectionManager(ConnectionConfig connectionConfig){
+        PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
+        //设置最大连接数
+        poolingHttpClientConnectionManager.setMaxTotal(100);
+        //设置每个路由基础的连接
+        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(5);
+
+        //HttpHost httpHost = new HttpHost(hostname, port);
+        //        // 设置目标主机对应的路由的最大连接数，会覆盖setDefaultMaxPerRoute设置的默认值
+        //poolingHttpClientConnectionManager.setMaxPerRoute(new HttpRoute(httpHost), maxRoute);
+        return poolingHttpClientConnectionManager;
+    }
 
     static SSLContext buildHttpClient4SSLContext(){
 
