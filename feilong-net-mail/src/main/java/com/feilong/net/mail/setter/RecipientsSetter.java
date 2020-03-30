@@ -21,6 +21,8 @@ import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.util.InternetAddressUtil;
@@ -51,9 +53,38 @@ public final class RecipientsSetter{
         // Message.RecipientType.TO属性表示接收者的类型为TO
         set(message, Message.RecipientType.TO, mailSenderConfig.getTos());
         //cc 抄送
-        set(message, Message.RecipientType.CC, mailSenderConfig.getCcs());
+        String[] cc = buildCC(mailSenderConfig.getCcs(), mailSenderConfig.getFromAddress(), mailSenderConfig.getIsDefaultCcSelf());
+        set(message, Message.RecipientType.CC, cc);
         //bcc 密送
         set(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 解决 163邮箱 554 DT:SPM smtp12异常问题.
+     *
+     * @param ccs
+     *            the ccs
+     * @param fromAddress
+     *            the from address
+     * @param isDefaultCcSelf
+     *            the is default cc self
+     * @return the string[]
+     * @since 2.0.3
+     */
+    private static String[] buildCC(String[] ccs,String fromAddress,boolean isDefaultCcSelf){
+        //如果默认不追加自己,那么直接返回 ccs 不管里面有没有自己
+        if (!isDefaultCcSelf){
+            return ccs;
+        }
+        //---------------------------------------------------------------
+        //如果cc已经有了自己, 那么直接返回cc
+        if (ArrayUtils.contains(ccs, fromAddress)){
+            return ccs;
+        }
+        //如果没有自己, 那么追加一个
+        return ArrayUtils.add(ccs, fromAddress);
     }
 
     //---------------------------------------------------------------

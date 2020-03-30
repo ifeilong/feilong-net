@@ -58,6 +58,21 @@ public class MailSenderConfig extends BaseConfig{
     //---------------------------------------------------------------
 
     /**
+     * 是否默认抄送给自己.
+     * 
+     * <p>
+     * 有时候163邮件发送会提示 554 DT:SPM smtp12 <br>
+     * 原来这时因为网易将发的邮件当成了垃圾邮件！这时候你只要在发邮件的时候抄送上自己，就再也不会报这个错误了！
+     * </p>
+     *
+     * @see <a href="https://blog.csdn.net/jerry11112/article/details/81213162">彻底解决 163邮箱转发邮件提示报错554 DT:SPM smtp12</a>
+     * @since 2.0.3
+     */
+    private boolean   isDefaultCcSelf      = true;
+
+    //---------------------------------------------------------------
+
+    /**
      * 邮件发送者的地址.
      * 
      * <p>
@@ -417,6 +432,42 @@ public class MailSenderConfig extends BaseConfig{
      */
     public void setIsSmtpStarttlsEnable(boolean isSmtpStarttlsEnable){
         this.isSmtpStarttlsEnable = isSmtpStarttlsEnable;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 是否默认抄送给自己.
+     * 
+     * <p>
+     * 有时候163邮件发送会提示 554 DT:SPM smtp12 <br>
+     * 原来这时因为网易将发的邮件当成了垃圾邮件！这时候你只要在发邮件的时候抄送上自己，就再也不会报这个错误了！
+     * </p>
+     *
+     * @return the isDefaultCcSelf
+     * @see <a href="https://blog.csdn.net/jerry11112/article/details/81213162">彻底解决 163邮箱转发邮件提示报错554 DT:SPM smtp12</a>
+     * @since 2.0.3
+     */
+    public boolean getIsDefaultCcSelf(){
+        return isDefaultCcSelf;
+    }
+
+    /**
+     * 是否默认抄送给自己.
+     * 
+     * <p>
+     * 有时候163邮件发送会提示 554 DT:SPM smtp12 <br>
+     * 原来这时因为网易将发的邮件当成了垃圾邮件！这时候你只要在发邮件的时候抄送上自己，就再也不会报这个错误了！
+     * </p>
+     *
+     * @param isDefaultCcSelf
+     *            the new 是否默认抄送给自己
+     * @return the isDefaultCcSelf
+     * @see <a href="https://blog.csdn.net/jerry11112/article/details/81213162">彻底解决 163邮箱转发邮件提示报错554 DT:SPM smtp12</a>
+     * @since 2.0.3
+     */
+    public void setIsDefaultCcSelf(boolean isDefaultCcSelf){
+        this.isDefaultCcSelf = isDefaultCcSelf;
     }
 
 }
