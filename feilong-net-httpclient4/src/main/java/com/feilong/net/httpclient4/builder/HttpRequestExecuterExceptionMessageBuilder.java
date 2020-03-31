@@ -39,6 +39,15 @@ import com.feilong.net.entity.HttpRequest;
  */
 public class HttpRequestExecuterExceptionMessageBuilder{
 
+    /** Don't let anyone instantiate this class. */
+    private HttpRequestExecuterExceptionMessageBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Builds the message.
      *
@@ -127,11 +136,11 @@ public class HttpRequestExecuterExceptionMessageBuilder{
      */
     private static Map<String, String> buildHttpPropertiesMap(){
         Map<String, String> propertiesMap = SystemUtil.getPropertiesMap();
-        //        "http.nonProxyHosts": "local|*.local|169.254/16|*.169.254/16",
-        //    "java.protocol.handler.pkgs": "com.sun.net.ssl.internal.www.protocol",
-        //        "javax.net.ssl.trustStore": "/Users/feilong/workspace/feilong/feilong-net/feilong-net-httpclient4/src/test/java/ami***uat.keystore",
-        //        "javax.net.ssl.trustStorePassword": "ami***t",
-        //        "socksNonProxyHosts": "local|*.local|169.254/16|*.169.254/16",
+        //"http.nonProxyHosts": "local|*.local|169.254/16|*.169.254/16",
+        //"java.protocol.handler.pkgs": "com.sun.net.ssl.internal.www.protocol",
+        //"javax.net.ssl.trustStore": "/Users/feilong/workspace/feilong/feilong-net/feilong-net-httpclient4/src/test/java/ami***uat.keystore",
+        //"javax.net.ssl.trustStorePassword": "ami***t",
+        //"socksNonProxyHosts": "local|*.local|169.254/16|*.169.254/16",
         return MapUtil.getSubMap(
                         propertiesMap,
                         "http.nonProxyHosts",
