@@ -62,7 +62,7 @@ public final class DefaultMailSender implements MailSender{
         //---------------------------------------------------------------
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("mailSenderConfig:{}", JsonUtil.format(mailSenderConfig, new String[] { "attachList" }));
+            LOGGER.debug("mailSenderConfig:{}", JsonUtil.format(mailSenderConfig));
         }
 
         //---------------------------------------------------------------
