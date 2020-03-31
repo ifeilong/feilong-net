@@ -24,11 +24,9 @@ import org.junit.Test;
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.util.RandomUtil;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-/**
- * The Class HttpClientCodeTest.
- */
-public class HttpClientCodeTest{
+public class HttpClientCodeTest extends AbstractTest{
 
     @Test
     public void test(){

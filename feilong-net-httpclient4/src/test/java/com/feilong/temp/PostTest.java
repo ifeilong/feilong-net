@@ -18,23 +18,16 @@ package com.feilong.temp;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-public class PostTest{
+public class PostTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PostTest.class);
-
-    /**
-     * Test get response body as string.
-     */
     @SuppressWarnings("static-method")
     @Test
     public void testGetResponseBodyAsString(){

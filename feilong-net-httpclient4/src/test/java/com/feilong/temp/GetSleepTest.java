@@ -18,20 +18,11 @@ package com.feilong.temp;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
- */
-public class GetSleepTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetSleepTest.class);
+public class GetSleepTest extends AbstractTest{
 
     @Test
     public void testGetResponseBodyAsString11(){

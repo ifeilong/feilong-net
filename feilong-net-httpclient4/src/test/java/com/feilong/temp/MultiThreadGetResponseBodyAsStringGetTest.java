@@ -18,15 +18,12 @@ package com.feilong.temp;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-public class MultiThreadGetResponseBodyAsStringGetTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(MultiThreadGetResponseBodyAsStringGetTest.class);
+public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
 
     @Test
     public void testGetResponseBodyAsString11(){

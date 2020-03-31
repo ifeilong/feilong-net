@@ -31,14 +31,9 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
- */
-public class HttpClientUtil4Test{
+public class HttpClientUtil4Test extends AbstractTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil4Test.class);
     //    "fullEncodedUrl": "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934",

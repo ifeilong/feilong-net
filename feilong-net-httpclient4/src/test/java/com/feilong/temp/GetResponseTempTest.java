@@ -22,14 +22,9 @@ import org.junit.Test;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.2.1 2015年6月6日 下午11:04:42
- * @since 1.2.1
- */
-public class GetResponseTempTest{
+public class GetResponseTempTest extends AbstractTest{
 
     @Test
     public void testGetResponseStatusCode(){
@@ -51,5 +46,4 @@ public class GetResponseTempTest{
         HttpRequest httpRequest = new HttpRequest(uri, HttpMethodType.PUT);
         HttpClientUtil.getHttpResponse(httpRequest, null);
     }
-
 }
