@@ -46,6 +46,10 @@
 		<priority value="info" />
 	</category>
 
+	<category name="org.apache.http.conn.ssl.SSLConnectionSocketFactory">
+		<priority value="info" />
+	</category>
+
 
 	<!-- httpclient -->
 
