@@ -16,15 +16,10 @@
 package com.feilong.net.httpclient4;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class HttpClientUtilUriSpaceTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtilUriSpaceTest.class);
-
-    //---------------------------------------------------------------
+public class HttpClientUtilUriSpaceTest extends AbstractTest{
 
     @Test
     public void test(){
