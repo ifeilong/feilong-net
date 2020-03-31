@@ -18,10 +18,28 @@ package com.feilong.net.entity;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
+import javax.net.ssl.HostnameVerifier;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
 
 /**
  * 连接参数配置,比如超时时间,代理等等.
+ * 
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>对于httpclient4, 专门有2个参数 {@link #setMaxConnPerRoute(int)} 针对一个域名,同时正在使用的最多的连接数 和 {@link #setMaxConnTotal(int)} 同时间正在用的最多连接数</li>
+ * <li>默认提供了2个重要的超时参数, 20s的连接超时,你可以通过 {@link #setConnectTimeout(int)} 来修改,20s的读取超时,你可以通过 {@link #setReadTimeout(int)} 来修改</li>
+ * <li>默认编码字符集是 {@link CharsetType#UTF8},你也可以通过设置 {@link #setContentCharset(String)} 来修改</li>
+ * <li>默认是关闭{@link HostnameVerifier}校验的,如果你有需要,你可以通过设置 {@link #setTurnOffHostnameVerifier(boolean)} 来修改</li>
+ * <li>如果你的系统访问外部系统需要代理, 可以设置 {@link #setProxyAddress(String)}和 {@link #setProxyPort(Integer)}</li>
+ * <li>如果你的系统访问外部系统需要basic权限认证, 可以设置 {@link #setUserName(String)}和 {@link #setPassword(String)}</li>
+ * </ol>
+ * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.3.0
@@ -65,6 +83,30 @@ public final class ConnectionConfig{
      * @see TimeInterval#MILLISECOND_PER_SECONDS
      */
     private int                          readTimeout             = 20 * MILLISECOND_PER_SECONDS;
+
+    //---------------------------------------------------------------
+
+    /**
+     * 针对一个域名,同时正在使用的最多的连接数.
+     * 
+     * <p>
+     * httpclient4,系统默认是2, feilong 设置为2000
+     * </p>
+     * 
+     * @since 2.0.3
+     */
+    private int                          maxConnPerRoute         = 2000;
+
+    /**
+     * 同时间正在用的最多连接数.
+     * 
+     * <p>
+     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * </p>
+     * 
+     * @since 2.0.3
+     */
+    private int                          maxConnTotal            = 8000;
 
     //---------------------------------------------------------------
 
@@ -152,6 +194,51 @@ public final class ConnectionConfig{
         super();
         this.userName = userName;
         this.password = password;
+    }
+
+    /**
+     * 打开到 URLConnection资源的通信连接时超时值 (<span style="color:red">以毫秒为单位</span>).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认 20秒</li>
+     * <li>0 表示无穷大超时.</li>
+     * <li>如果在建立连接之前超时期满,会引发 {@link java.net.SocketTimeoutException}.</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param connectTimeout
+     *            the connect timeout
+     * @see TimeInterval#MILLISECOND_PER_SECONDS
+     * @since 2.0.3
+     */
+    public ConnectionConfig(int connectTimeout){
+        super();
+        this.connectTimeout = connectTimeout;
+    }
+
+    /**
+     * Instantiates a new connection config.
+     *
+     * @param maxConnPerRoute
+     *            针对一个域名,同时正在使用的最多的连接数.
+     * 
+     *            <p>
+     *            httpclient4,系统默认是2, feilong 设置为2000
+     *            </p>
+     * @param maxConnTotal
+     *            同时间正在用的最多连接数.
+     * 
+     *            <p>
+     *            httpclient4 ,系统默认是20, feilong 设置为8000
+     *            </p>
+     * @since 2.0.3
+     */
+    public ConnectionConfig(int maxConnPerRoute, int maxConnTotal){
+        super();
+        this.maxConnPerRoute = maxConnPerRoute;
+        this.maxConnTotal = maxConnTotal;
     }
 
     /**
@@ -409,5 +496,132 @@ public final class ConnectionConfig{
      */
     public void setTurnOffHostnameVerifier(boolean turnOffHostnameVerifier){
         this.turnOffHostnameVerifier = turnOffHostnameVerifier;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 针对一个域名,同时正在使用的最多的连接数.
+     * 
+     * <p>
+     * httpclient4,系统默认是2, feilong 设置为2000
+     * </p>
+     * 
+     * @return the maxConnPerRoute
+     * @since 2.0.3
+     */
+    public int getMaxConnPerRoute(){
+        return maxConnPerRoute;
+    }
+
+    /**
+     * 针对一个域名,同时正在使用的最多的连接数.
+     * 
+     * <p>
+     * httpclient4,系统默认是2, feilong 设置为2000
+     * </p>
+     * 
+     * @param maxConnPerRoute
+     *            the maxConnPerRoute to set
+     * @since 2.0.3
+     */
+    public void setMaxConnPerRoute(int maxConnPerRoute){
+        this.maxConnPerRoute = maxConnPerRoute;
+    }
+
+    /**
+     * 同时间正在用的最多连接数.
+     * 
+     * <p>
+     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * </p>
+     * 
+     * @return the maxConnTotal
+     * @since 2.0.3
+     */
+    public int getMaxConnTotal(){
+        return maxConnTotal;
+    }
+
+    /**
+     * 同时间正在用的最多连接数.
+     * 
+     * <p>
+     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * </p>
+     * 
+     * @param maxConnTotal
+     *            the maxConnTotal to set
+     * @since 2.0.3
+     */
+    public void setMaxConnTotal(int maxConnTotal){
+        this.maxConnTotal = maxConnTotal;
+    }
+
+    //---------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        }
+        if (obj == this){
+            return true;
+        }
+        if (obj.getClass() != getClass()){
+            return false;
+        }
+
+        //---------------------------------------------------------------
+
+        ConnectionConfig t = (ConnectionConfig) obj;
+        EqualsBuilder equalsBuilder = new EqualsBuilder();
+
+        return equalsBuilder //
+                        .append(this.connectTimeout, t.getConnectTimeout())//
+                        .append(this.readTimeout, t.getReadTimeout())//
+
+                        .append(this.turnOffHostnameVerifier, t.getTurnOffHostnameVerifier())//
+                        .append(this.contentCharset, t.getContentCharset())//
+
+                        .append(this.userName, t.getUserName())//
+                        .append(this.password, t.getPassword())//
+
+                        .append(this.proxyAddress, t.getProxyAddress())//
+                        .append(this.proxyPort, t.getProxyPort())//
+
+                        .append(this.maxConnPerRoute, t.getMaxConnPerRoute())//
+                        .append(this.maxConnTotal, t.getMaxConnTotal())//
+                        .isEquals();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode(){
+        HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);
+        return hashCodeBuilder//
+                        .append(connectTimeout)//
+                        .append(readTimeout)//
+                        .append(turnOffHostnameVerifier)//
+                        .append(contentCharset)//
+
+                        .append(userName)//
+                        .append(password)//
+
+                        .append(proxyAddress)//
+                        .append(proxyPort)//
+
+                        .append(maxConnPerRoute)//
+                        .append(maxConnTotal)//
+                        .toHashCode();
+
     }
 }

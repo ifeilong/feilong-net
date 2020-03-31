@@ -40,7 +40,7 @@ public class HttpClientMutiTest extends AbstractTest{
             @Override
             public void handle(List<String> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
                 for (String url : perBatchList){
-                    LOGGER.info(string, 0, url, getResponseStatusCode(url, conconfig));
+                    LOGGER.info(string, partitionThreadEntity.getBatchNumber(), url, getResponseStatusCode(url, conconfig));
                 }
             }
         });
