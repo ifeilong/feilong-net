@@ -15,7 +15,7 @@ import com.feilong.test.AbstractTest;
  * @Date: 2019/8/15 00:04
  * @Description: 测试httpclient
  */
-public class MyHttpClientTest2 extends AbstractTest{
+public class HttpClientSingleThreadTest extends AbstractTest{
 
     @Test
     public void run(){
@@ -26,7 +26,7 @@ public class MyHttpClientTest2 extends AbstractTest{
         ConnectionConfig conconfig = new ConnectionConfig(200, 400);
 
         String string = "=======================[{}],{}    code:{}===============================";
-        for (int i = 0; i < 1; i++){
+        for (int i = 0; i < 100; i++){
             String url = "";
             if (i > 25){
                 url = "https://www.baidu.com";

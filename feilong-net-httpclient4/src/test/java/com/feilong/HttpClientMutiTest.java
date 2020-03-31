@@ -21,9 +21,9 @@ import com.feilong.test.AbstractTest;
  * @Date: 2019/8/15 00:04
  * @Description: 测试httpclient
  */
-public class MyHttpClientMutiTest extends AbstractTest{
+public class HttpClientMutiTest extends AbstractTest{
 
-    //---------------------------------------------------------------
+    final int j = 400;
 
     @Test
     public void run(){
@@ -50,9 +50,9 @@ public class MyHttpClientMutiTest extends AbstractTest{
 
     private List<String> build(){
         List<String> list = newArrayList();
-        for (int i = 0; i < 1800; i++){
+        for (int i = 0; i < j; i++){
             String url = "";
-            if (i > 500){
+            if (i > 200){
                 url = "https://www.baidu.com";
             }else{
                 url = "https://www.hao123.com";

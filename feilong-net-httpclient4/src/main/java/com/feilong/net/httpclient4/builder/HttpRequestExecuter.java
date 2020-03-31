@@ -97,12 +97,13 @@ public final class HttpRequestExecuter{
         Validate.notNull(httpUriRequest, "httpUriRequest can't be null!");
 
         //---------------------------------------------------------------
+        HttpClient httpClient = HttpClientBuilder.build(useConnectionConfig);
+
         try{
-            HttpClient httpClient = HttpClientBuilder.build(useConnectionConfig);
             return httpClient.execute(httpUriRequest);
         }catch (Exception e){
             httpUriRequest.abort();
-            String message = HttpRequestExecuterExceptionMessageBuilder.build(httpRequest, useConnectionConfig, e);
+            String message = HttpRequestExecuterExceptionMessageBuilder.build(httpClient, httpRequest, useConnectionConfig, e);
             throw new UncheckedHttpException(message, e);
         }finally{
             //不能直接abort,否则内容查不出来

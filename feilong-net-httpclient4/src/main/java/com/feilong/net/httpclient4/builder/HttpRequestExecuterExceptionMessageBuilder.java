@@ -24,6 +24,8 @@ import java.util.Map;
 
 import javax.net.ssl.SSLException;
 
+import org.apache.http.client.HttpClient;
+
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
@@ -51,6 +53,8 @@ public class HttpRequestExecuterExceptionMessageBuilder{
     /**
      * Builds the message.
      *
+     * @param httpClient
+     *            the http client
      * @param httpRequest
      *            the http request
      * @param useConnectionConfig
@@ -61,8 +65,8 @@ public class HttpRequestExecuterExceptionMessageBuilder{
      * @since 1.11.4
      * @since 1.14.0 rename from buildMessage
      */
-    static String build(HttpRequest httpRequest,ConnectionConfig useConnectionConfig,Exception e){
-        String handlerMessage = buildHandlerMessage(e);
+    static String build(HttpClient httpClient,HttpRequest httpRequest,ConnectionConfig useConnectionConfig,Exception e){
+        String handlerMessage = buildHandlerMessage(e, useConnectionConfig);
 
         String result = commonMessage(httpRequest, useConnectionConfig);
         if (isNullOrEmpty(handlerMessage)){
@@ -80,17 +84,18 @@ public class HttpRequestExecuterExceptionMessageBuilder{
      *
      * @param e
      *            the e
+     * @param useConnectionConfig
+     *            the use connection config
      * @return the string
      * @since 1.14.0
      */
     //XXX 留坑
-    private static String buildHandlerMessage(Exception e){
+    private static String buildHandlerMessage(Exception e,ConnectionConfig useConnectionConfig){
         if (ClassUtil.isInstance(e, SocketTimeoutException.class)){ //链接超时
-            //StringBuilder sb = new StringBuilder();
-            //            sb.append("pls check:").append(lineSeparator());
-            //            sb.append("1.wangluo");
-            //            sb.append("2.can not ");
-            return EMPTY;
+            StringBuilder sb = new StringBuilder();
+            sb.append("current ConnectTimeout:").append(useConnectionConfig.getConnectTimeout());
+            sb.append(",ReadTimeout:").append(useConnectionConfig.getReadTimeout());
+            return sb.toString();
         }
 
         //---------------------------------------------------------------
