@@ -914,6 +914,22 @@ public final class HttpClientUtil{
         return getResponseBodyAsString(new HttpRequest(uri, requestParamMap, httpMethodType), null);
     }
 
+    /**
+     * 发送请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            the uri
+     * @param connectionConfig
+     *            the connection config
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 2.0.3
+     */
+    public static String getResponseBodyAsString(String uri,ConnectionConfig connectionConfig){
+        Validate.notBlank(uri, "uri can't be blank!");
+        return getResponseBodyAsString(new HttpRequest(uri), connectionConfig);
+    }
+
     //---------------------------------------------------------------
 
     /**
