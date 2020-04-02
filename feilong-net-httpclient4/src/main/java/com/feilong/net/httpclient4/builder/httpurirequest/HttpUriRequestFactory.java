@@ -15,15 +15,25 @@
  */
 package com.feilong.net.httpclient4.builder.httpurirequest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.Validate;
-import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URIBuilder;
 
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.HttpMethodType;
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.RequestConfigBuilder;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * A factory for creating {@link HttpUriRequest} objects.
@@ -50,29 +60,73 @@ public class HttpUriRequestFactory{
      * @param connectionConfig
      *            the connection config
      * @return the http uri request
+     * @see RequestConfigBuilder
      */
     public static HttpUriRequest create(HttpRequest httpRequest,ConnectionConfig connectionConfig){
-        RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
+        HttpRequestBase httpRequestBase = create(httpRequest);
+        // RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
+        //httpRequestBase.setConfig(requestConfig);
+        return httpRequestBase;
+    }
 
-        //---------------------------------------------------------------
+    //---------------------------------------------------------------
+
+    /**
+     * 创建.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the http request base
+     */
+    private static HttpRequestBase create(HttpRequest httpRequest){
         HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
-
         //since 2.0.3
         Validate.notNull(httpMethodType, "httpMethodType can't be null!,%s", httpRequest.getFullEncodedUrl());
 
         switch (httpMethodType) {
             case GET:
-                return HttpGetBuilder.build(httpRequest, requestConfig);
+                return buildGet(httpRequest);
 
             case POST:
-                return HttpPostBuilder.build(httpRequest, requestConfig);
+                return buildPost(httpRequest);
 
             //since 1.12.5
             case PUT:
-                return HttpPutBuilder.build(httpRequest, requestConfig);
+                return buildPut(httpRequest);
 
             default:
                 throw new NotImplementedException(httpMethodType + " is not implemented!");
         }
+    }
+
+    //---------------------------------------------------------------
+
+    private static HttpGet buildGet(HttpRequest httpRequest){
+        URIBuilder uriBuilder = URIBuilderBuilder.build(httpRequest);
+        try{
+            URI buildUri = uriBuilder.build();
+            return new HttpGet(buildUri);
+        }catch (URISyntaxException e){
+            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest));
+            throw new UncheckedHttpException(message, e);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    private static HttpPost buildPost(HttpRequest httpRequest){
+        HttpPost httpPost = new HttpPost(httpRequest.getUri());
+        httpPost.setEntity(HttpEntityBuilder.build(httpRequest));
+        // httpPost.setConfig(requestConfig);
+        return httpPost;
+    }
+
+    //---------------------------------------------------------------
+
+    private static HttpPut buildPut(HttpRequest httpRequest){
+        HttpPut httpPut = new HttpPut(httpRequest.getUri());
+        httpPut.setEntity(HttpEntityBuilder.build(httpRequest));
+        //        httpPut.setConfig(requestConfig);
+        return httpPut;
     }
 }
