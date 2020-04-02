@@ -73,7 +73,7 @@ public final class HttpRequestExecuter{
         //---------------------------------------------------------------
         //回手掏
         T t = resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
-        httpUriRequest.abort();
+        //httpUriRequest.abort();
         return t;
     }
 
@@ -91,7 +91,6 @@ public final class HttpRequestExecuter{
      * @return 如果 <code>httpUriRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.11.0 change method Access Modifiers
      * @since 2.0.3 change method Access Modifiers to private
-     * 
      */
     private static HttpResponse execute(HttpRequest httpRequest,HttpUriRequest httpUriRequest,ConnectionConfig useConnectionConfig){
         Validate.notNull(httpUriRequest, "httpUriRequest can't be null!");
