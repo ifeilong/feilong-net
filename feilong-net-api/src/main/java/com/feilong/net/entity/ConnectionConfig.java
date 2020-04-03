@@ -41,6 +41,26 @@ import com.feilong.core.TimeInterval;
  * </ol>
  * </blockquote>
  * 
+ * <h3>关于 {@link #setMaxConnPerRoute(int)},{@link #setMaxConnTotal(int)}</h3>
+ * <blockquote>
+ * 
+ * <dl>
+ * <dt>{@link <a href=
+ * "https://github.com/funaiy/captcha-java-demo/blob/master/src/main/java/com/netease/is/nc/sdk/utils/HttpClient4Utils.java">网易易盾</a>}</dt>
+ * <dd>默认是 20,20</dd>
+ * 
+ * <dt>{@link <a href="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor">spring</a>}</dt>
+ * <dd>默认是 5,10</dd>
+ * 
+ * <dt>{@link <a href="org.apache.solr.client.solrj.impl.HttpClientUtil#createClient">solr7</a>}</dt>
+ * <dd>10000,10000</dd>
+ * 
+ * <dt>{@link <a href="com.aliyun.oss.common.comm.DefaultServiceClient.createHttpClientConnectionManager()">ali oss</a>}</dt>
+ * <dd>1024,1024</dd>
+ * </dl>
+ * 
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.3.0
  */
@@ -90,23 +110,27 @@ public final class ConnectionConfig{
      * 针对一个域名,同时正在使用的最多的连接数.
      * 
      * <p>
-     * httpclient4,系统默认是2, feilong 设置为2000
+     * httpclient4,系统默认是2, feilong 设置为200
      * </p>
-     * 
+     *
+     * @see "org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"
+     * @see "org.apache.solr.client.solrj.impl.HttpClientUtil.createClient(SolrParams, PoolingHttpClientConnectionManager, boolean, HttpRequestExecutor)"
      * @since 2.0.3
      */
-    private int                          maxConnPerRoute         = 2000;
+    private int                          maxConnPerRoute         = 200;
 
     /**
      * 同时间正在用的最多连接数.
      * 
      * <p>
-     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * httpclient4 ,系统默认是20, feilong 设置为1000
      * </p>
-     * 
+     *
+     * @see "org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"
+     * @see "org.apache.solr.client.solrj.impl.HttpClientUtil.createClient(SolrParams, PoolingHttpClientConnectionManager, boolean, HttpRequestExecutor)"
      * @since 2.0.3
      */
-    private int                          maxConnTotal            = 8000;
+    private int                          maxConnTotal            = 1000;
 
     //---------------------------------------------------------------
 
@@ -225,13 +249,13 @@ public final class ConnectionConfig{
      *            针对一个域名,同时正在使用的最多的连接数.
      * 
      *            <p>
-     *            httpclient4,系统默认是2, feilong 设置为2000
+     *            httpclient4,系统默认是2, feilong 设置为200
      *            </p>
      * @param maxConnTotal
      *            同时间正在用的最多连接数.
      * 
      *            <p>
-     *            httpclient4 ,系统默认是20, feilong 设置为8000
+     *            httpclient4 ,系统默认是20, feilong 设置为1000
      *            </p>
      * @since 2.0.3
      */
@@ -504,7 +528,7 @@ public final class ConnectionConfig{
      * 针对一个域名,同时正在使用的最多的连接数.
      * 
      * <p>
-     * httpclient4,系统默认是2, feilong 设置为2000
+     * httpclient4,系统默认是2, feilong 设置为200
      * </p>
      * 
      * @return the maxConnPerRoute
@@ -518,7 +542,7 @@ public final class ConnectionConfig{
      * 针对一个域名,同时正在使用的最多的连接数.
      * 
      * <p>
-     * httpclient4,系统默认是2, feilong 设置为2000
+     * httpclient4,系统默认是2, feilong 设置为200
      * </p>
      * 
      * @param maxConnPerRoute
@@ -533,7 +557,7 @@ public final class ConnectionConfig{
      * 同时间正在用的最多连接数.
      * 
      * <p>
-     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * httpclient4 ,系统默认是20, feilong 设置为1000
      * </p>
      * 
      * @return the maxConnTotal
@@ -547,7 +571,7 @@ public final class ConnectionConfig{
      * 同时间正在用的最多连接数.
      * 
      * <p>
-     * httpclient4 ,系统默认是20, feilong 设置为8000
+     * httpclient4 ,系统默认是20, feilong 设置为1000
      * </p>
      * 
      * @param maxConnTotal
@@ -559,6 +583,13 @@ public final class ConnectionConfig{
     }
 
     //---------------------------------------------------------------
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     /*
      * (non-Javadoc)
      * 
@@ -599,6 +630,11 @@ public final class ConnectionConfig{
                         .isEquals();
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     /*
      * (non-Javadoc)
      * 
