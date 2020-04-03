@@ -127,14 +127,15 @@ import com.feilong.core.lang.EnumUtil;
 public enum HttpMethodType{
 
     /**
-     * get方式.
+     * get方式,求获取Request-URI所标识的资源.
      * 
      * @since http0.9
      */
     GET("get"),
 
     /**
-     * post方式.
+     * post方式,向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。
+     * POST请求可能会导致新的资源的建立和/或已有资源的修改.
      * 
      * @since http1.0
      */
@@ -143,7 +144,7 @@ public enum HttpMethodType{
     //---------------------------------------------------------------
 
     /**
-     * put方式.
+     * put方式,向指定资源位置上传其最新内容（全部更新，操作幂等）.
      * 
      * <p>
      * The PUT method requests that the enclosed entity be stored under the supplied Request-URI. <br>
