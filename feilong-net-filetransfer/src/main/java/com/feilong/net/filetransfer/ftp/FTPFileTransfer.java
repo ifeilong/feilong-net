@@ -152,7 +152,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return true;
         }catch (Exception e){
             String message = Slf4jUtil.format("ftpFileTransferConfig:{}", JsonUtil.format(ftpFileTransferConfig));
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -177,7 +176,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
                     LOGGER.info(StringUtils.center("ftpClient disconnect...", 50, "------"));
                 }
             }catch (IOException e){
-                LOGGER.error("", e);
                 throw new FileTransferException("disconnect exception", e);
             }
         }
@@ -220,7 +218,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return flag;
         }catch (IOException e){
             String message = Slf4jUtil.format("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -244,7 +241,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return flag;
         }catch (IOException e){
             String message = Slf4jUtil.format("can't upload fileInputStream,toFileName:[{}]", toFileName);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -267,7 +263,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return map;
         }catch (IOException e){
             String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -316,7 +311,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return flag;
         }catch (IOException e){
             String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -342,7 +336,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return flag;
         }catch (IOException e){
             String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }
@@ -378,7 +371,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             return success;
         }catch (IOException e){
             String message = Slf4jUtil.format("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
-            LOGGER.error(message, e);
             throw new FileTransferException(message, e);
         }
     }

@@ -218,7 +218,6 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             try{
                 return deleteDontClose(remoteAbsolutePaths);
             }catch (Exception e){
-                LOGGER.error(e.getClass().getName(), e);
                 throw new FileTransferException("deleteDontClose exception", e);
             }finally{
                 disconnect();
