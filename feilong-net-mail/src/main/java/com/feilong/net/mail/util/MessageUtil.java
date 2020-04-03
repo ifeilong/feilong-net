@@ -113,8 +113,7 @@ public final class MessageUtil{
             mailInfo.setSubject(subject);
             return mailInfo;
         }catch (Exception e){
-            LOGGER.error(Slf4jUtil.format("from:[{}],subject:[{}]", from, subject), e);
-            throw new MailException(e);
+            throw new MailException(Slf4jUtil.format("from:[{}],subject:[{}]", from, subject), e);
         }
     }
 
@@ -170,7 +169,6 @@ public final class MessageUtil{
             map.put("getReplyTo", message.getReplyTo());
             return map;
         }catch (Exception e){
-            LOGGER.error("", e);
             throw new MailException(e);
         }
     }
@@ -190,7 +188,6 @@ public final class MessageUtil{
             Address[] from = message.getFrom();
             return getAddress(from[0]);
         }catch (Exception e){
-            LOGGER.error("", e);
             throw new MailException(e);
         }
     }
@@ -237,7 +234,6 @@ public final class MessageUtil{
                 return null;
             }
         }catch (Exception e){
-            LOGGER.error("", e);
             throw new MailException(e);
         }
     }

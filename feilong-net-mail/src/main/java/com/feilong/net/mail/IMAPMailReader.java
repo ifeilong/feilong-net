@@ -126,7 +126,6 @@ public class IMAPMailReader implements MailReader{
                 store.close();
             }
         }catch (MessagingException e){
-            LOGGER.error("", e);
             throw new MailReaderException(e);
         }
     }
@@ -146,7 +145,6 @@ public class IMAPMailReader implements MailReader{
                 folder.close(false); // Close connection 
             }
         }catch (MessagingException e){
-            LOGGER.error("", e);
             throw new MailReaderException(e);
         }
     }
