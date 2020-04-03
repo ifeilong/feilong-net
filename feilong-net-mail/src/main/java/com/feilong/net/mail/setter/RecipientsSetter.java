@@ -80,7 +80,7 @@ public final class RecipientsSetter{
      * @param isDefaultCcSelf
      *            the is default cc self
      * @return the string[]
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static String[] buildCC(String[] ccs,String fromAddress,boolean isDefaultCcSelf){
         //如果默认不追加自己,那么直接返回 ccs 不管里面有没有自己

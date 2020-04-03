@@ -818,7 +818,7 @@ public final class HttpClientUtil{
      *            the header map
      * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String post(String uri,String requestBody,Map<String, String> headerMap){
         Validate.notBlank(uri, "uri can't be blank!");
@@ -923,7 +923,7 @@ public final class HttpClientUtil{
      *            the connection config
      * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String getResponseBodyAsString(String uri,ConnectionConfig connectionConfig){
         Validate.notBlank(uri, "uri can't be blank!");

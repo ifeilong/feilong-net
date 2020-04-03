@@ -48,7 +48,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * 用来解析 全数据 {@link com.feilong.net.entity.HttpResponse} 的 {@link ResultCallback}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 2.0.3
+ * @since 2.1.0
  */
 public class HttpResponseResultCallback implements ResultCallback<com.feilong.net.entity.HttpResponse>{
 

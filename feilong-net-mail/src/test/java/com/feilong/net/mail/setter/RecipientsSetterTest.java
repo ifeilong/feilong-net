@@ -30,7 +30,7 @@ import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
  * 
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 2.0.3
+ * @since 2.1.0
  * @see com.feilong.net.mail.setter.RecipientsSetter#buildCC(String[], String, boolean)
  */
 public class RecipientsSetterTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String[]>{

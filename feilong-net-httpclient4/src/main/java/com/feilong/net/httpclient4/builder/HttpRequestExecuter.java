@@ -59,7 +59,7 @@ public final class HttpRequestExecuter{
      * @param resultCallback
      *            the call
      * @return 如果 <code>resultCallback</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static <T> T execute(HttpRequest httpRequest,ConnectionConfig connectionConfig,ResultCallback<T> resultCallback){
         Validate.notNull(resultCallback, "resultCallback can't be null!");
@@ -90,7 +90,7 @@ public final class HttpRequestExecuter{
      *            the connection config
      * @return 如果 <code>httpUriRequest</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.11.0 change method Access Modifiers
-     * @since 2.0.3 change method Access Modifiers to private
+     * @since 2.1.0 change method Access Modifiers to private
      */
     private static HttpResponse execute(HttpRequest httpRequest,HttpUriRequest httpUriRequest,ConnectionConfig useConnectionConfig){
         Validate.notNull(httpUriRequest, "httpUriRequest can't be null!");

@@ -21,7 +21,7 @@ import com.feilong.json.SensitiveWords;
  * The Class AbstractFileTransferConfig.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 2.0.3
+ * @since 2.1.0
  */
 public abstract class AbstractFileTransferConfig{
 

@@ -115,7 +115,7 @@ public final class ConnectionConfig{
      *
      * @see "org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"
      * @see "org.apache.solr.client.solrj.impl.HttpClientUtil.createClient(SolrParams, PoolingHttpClientConnectionManager, boolean, HttpRequestExecutor)"
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private int                          maxConnPerRoute         = 200;
 
@@ -128,7 +128,7 @@ public final class ConnectionConfig{
      *
      * @see "org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"
      * @see "org.apache.solr.client.solrj.impl.HttpClientUtil.createClient(SolrParams, PoolingHttpClientConnectionManager, boolean, HttpRequestExecutor)"
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private int                          maxConnTotal            = 1000;
 
@@ -235,7 +235,7 @@ public final class ConnectionConfig{
      * @param connectTimeout
      *            the connect timeout
      * @see TimeInterval#MILLISECOND_PER_SECONDS
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public ConnectionConfig(int connectTimeout){
         super();
@@ -257,7 +257,7 @@ public final class ConnectionConfig{
      *            <p>
      *            httpclient4 ,系统默认是20, feilong 设置为1000
      *            </p>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public ConnectionConfig(int maxConnPerRoute, int maxConnTotal){
         super();
@@ -532,7 +532,7 @@ public final class ConnectionConfig{
      * </p>
      * 
      * @return the maxConnPerRoute
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public int getMaxConnPerRoute(){
         return maxConnPerRoute;
@@ -547,7 +547,7 @@ public final class ConnectionConfig{
      * 
      * @param maxConnPerRoute
      *            the maxConnPerRoute to set
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public void setMaxConnPerRoute(int maxConnPerRoute){
         this.maxConnPerRoute = maxConnPerRoute;
@@ -561,7 +561,7 @@ public final class ConnectionConfig{
      * </p>
      * 
      * @return the maxConnTotal
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public int getMaxConnTotal(){
         return maxConnTotal;
@@ -576,7 +576,7 @@ public final class ConnectionConfig{
      * 
      * @param maxConnTotal
      *            the maxConnTotal to set
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public void setMaxConnTotal(int maxConnTotal){
         this.maxConnTotal = maxConnTotal;

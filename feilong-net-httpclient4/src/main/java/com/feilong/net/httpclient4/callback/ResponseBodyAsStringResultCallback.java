@@ -32,7 +32,7 @@ import com.feilong.net.httpclient4.builder.HttpResponseUtil;
  * 通常用来解析接口返回的字符串 的 {@link ResultCallback}.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 2.0.3
+ * @since 2.1.0
  */
 public class ResponseBodyAsStringResultCallback implements ResultCallback<String>{
 

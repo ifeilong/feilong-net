@@ -31,7 +31,7 @@ import com.feilong.net.entity.HttpRequest;
  * 通常用来解析接口返回状态码的 {@link ResultCallback}.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 2.0.3
+ * @since 2.1.0
  */
 public class StatusCodeResultCallback implements ResultCallback<Integer>{
 

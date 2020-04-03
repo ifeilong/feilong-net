@@ -66,7 +66,7 @@ public final class RequestConfigBuilder{
         setProxy(requestConfigBuilder, useConnectionConfig);
 
         //---------------------------------------------------------------
-        //since 2.0.3
+        //since 2.1.0
         requestConfigBuilder.setCookieSpec(CookieSpecs.IGNORE_COOKIES);
 
         //requestConfigBuilder.setContentCompressionEnabled(contentCompressionEnabled)

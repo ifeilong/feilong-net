@@ -53,7 +53,7 @@ public class HttpClientBuilder{
     /**
      * 设置缓存
      * 
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static Map<ConnectionConfig, HttpClient> CACHE  = newConcurrentHashMap(10);
 
@@ -73,7 +73,7 @@ public class HttpClientBuilder{
      * @param connectionConfig
      *            the connection config
      * @return the closeable http client
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static HttpClient build(ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
@@ -124,7 +124,7 @@ public class HttpClientBuilder{
         //---------------------------------------------------------------
         //see org.apache.http.impl.client.HttpClientBuilder#build()
 
-        //since 2.0.3
+        //since 2.1.0
         int maxConnPerRoute = useConnectionConfig.getMaxConnPerRoute();
         if (maxConnPerRoute > 0){
             //Assigns maximum connection per route value.
@@ -141,7 +141,7 @@ public class HttpClientBuilder{
             customHttpClientBuilder.setMaxConnTotal(maxConnTotal);
         }
         //---------------------------------------------------------------
-        //since 2.0.3
+        //since 2.1.0
         //since httpclient 4.4
         //适用于 复用连接的时候使用
         customHttpClientBuilder.evictExpiredConnections()//

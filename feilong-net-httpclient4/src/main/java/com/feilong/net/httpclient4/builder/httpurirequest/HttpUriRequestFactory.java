@@ -80,7 +80,7 @@ public class HttpUriRequestFactory{
      */
     private static HttpRequestBase create(HttpRequest httpRequest){
         HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
-        //since 2.0.3
+        //since 2.1.0
         Validate.notNull(httpMethodType, "httpMethodType can't be null!,%s", httpRequest.getFullEncodedUrl());
 
         switch (httpMethodType) {
