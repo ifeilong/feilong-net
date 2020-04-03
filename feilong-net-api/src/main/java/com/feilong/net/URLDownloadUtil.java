@@ -19,6 +19,7 @@ import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
@@ -29,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 专注于下载的工具类.
@@ -104,13 +106,13 @@ public final class URLDownloadUtil{
         URL url = URLUtil.toURL(urlString);
 
         //---------------------------------------------------------------
-        InputStream inputStream = URLUtil.openStream(url);
-        IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
-
-        //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
+        try (InputStream inputStream = URLUtil.openStream(url)){
+            IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
             LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
+        }catch (IOException e){
+            throw new UncheckedHttpException(Slf4jUtil.format("urlString:[{}],directoryName:[{}]", urlString, directoryName), e);
         }
+
     }
 
     //---------------------------------------------------------------
