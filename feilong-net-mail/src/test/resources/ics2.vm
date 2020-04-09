@@ -9,7 +9,7 @@ METHOD:REQUEST
 BEGIN:VEVENT##事件开始
 
 ##ORGANIZER;CN=feilongtestemail:MAILTO:feilongtestemail@163.com
-##ATTENDEE;CN=xin.jin;ROLE=Attendee;RSVP=True:MAILTO:xin.jin@baozun.cn
+##ATTENDEE;CN=xin.jin;ROLE=Attendee;RSVP=True:MAILTO:venusdrogon@163.com
 DTSTART:${beginDate}##事件起始时间 20170228T053000Z
 
 DTEND:${endDate}##事件结束时间
