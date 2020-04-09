@@ -50,7 +50,7 @@ public class MailAttachFileSenderTest extends AbstractMailSenderTest{
         mailSenderConfig.setContent(VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues));
 
         //  String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
-        String fileString = "/Users/feilong/workspace/baozun/BaozunSql/train/2014/1205单元测试/ppt-contents.png";
+        String fileString = "/Users/feilong/DataFixed/Material/头像avatar/飞龙.png";
         // mailSenderConfig.setAttachFilePaths(fileString);
     }
 

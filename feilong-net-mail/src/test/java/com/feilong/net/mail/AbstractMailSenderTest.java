@@ -38,7 +38,7 @@ public abstract class AbstractMailSenderTest{
     /** The mail sender config. */
     protected MailSenderConfig  mailSenderConfig;
 
-    public static final String  toEmail = "xin.jin@baozun.com";
+    public static final String  toEmail = "venusdrogon@163.com";
 
     //---------------------------------------------------------------
 
